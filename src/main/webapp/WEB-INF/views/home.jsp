@@ -20,6 +20,7 @@ http://www.tooplate.com/view/2082-pure-mix
    ================================================== -->
 <title>Pure Mix - HTML CSS Template</title>
 <%@ include file="include/header.jsp" %>
+<%@ include file="include/template.jsp" %>
 </head>
 <body>
 
