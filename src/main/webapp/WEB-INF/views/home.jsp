@@ -27,12 +27,8 @@ http://www.tooplate.com/view/2082-pure-mix
 	<!-- Preloader section
 ================================================== -->
 	<div class="preloader">
-
 		<div class="sk-spinner sk-spinner-pulse"></div>
-
 	</div>
-
-
 	<!-- Navigation section
 ================================================== -->
 	<div class="nav-container">
@@ -41,18 +37,14 @@ http://www.tooplate.com/view/2082-pure-mix
 			<div class="navbar">
 				<div class="container">
 					<div class="row">
-
 						<div class="brand">
 							<a href="index.html">Pure Mix</a>
 						</div>
-
 						<div class="navicon">
 							<div class="menu-container">
-
 								<div class="circle dark inline">
 									<i class="icon ion-navicon"></i>
 								</div>
-
 								<div class="list-menu">
 									<i class="icon ion-close-round close-iframe"></i>
 									<div class="intro-inner">
@@ -67,7 +59,6 @@ http://www.tooplate.com/view/2082-pure-mix
 
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
