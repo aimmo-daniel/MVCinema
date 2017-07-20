@@ -22,6 +22,7 @@
 		<!-- location="리소스의 상대경로 mapping="url pattern" **모든하위디렉토리 경로 -->
 	<resources location="/WEB-INF/views/include/" mapping="/include/**" />
 	<resources location="/WEB-INF/views/template/" mapping="/template/**" />
+    <resources location="/WEB-INF/views/insang/" mapping="/admin/**"/>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
