@@ -11,7 +11,6 @@ http://www.tooplate.com/view/2082-pure-mix
 
 -->
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="keywords" content="">
   <meta name="description" content="">
@@ -22,20 +21,20 @@ http://www.tooplate.com/view/2082-pure-mix
 
   <!-- Bootstrap CSS
    ================================================== -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="${path}/admin/template/css/bootstrap.min.css">
 
   <!-- Animate CSS
    ================================================== -->
-  <link rel="stylesheet" href="css/animate.min.css">
+  <link rel="stylesheet" href="${path}/admin/template/css/animate.min.css">
 
   <!-- Font Icons CSS
    ================================================== -->
-  <link rel="stylesheet" href="css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/ionicons.min.css">
+  <link rel="stylesheet" href="${path}/admin/template/css/font-awesome.min.css">
+  <link rel="stylesheet" href="${path}/admin/template/css/ionicons.min.css">
 
   <!-- Main CSS
    ================================================== -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="${path}/admin/template/css/style.css">
 
   <!-- Google web font 
    ================================================== --> 
@@ -208,10 +207,10 @@ http://www.tooplate.com/view/2082-pure-mix
 
 <!-- Javascript 
 ================================================== -->
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="js/custom.js"></script>
+<script src="${path}/admin/template/js/jquery.js"></script>
+<script src="${path}/admin/template/js/bootstrap.min.js"></script>
+<script src="${path}/admin/template/js/wow.min.js"></script>
+<script src="${path}/admin/template/js/custom.js"></script>
 
 </body>
 </html>
