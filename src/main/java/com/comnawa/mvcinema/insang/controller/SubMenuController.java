@@ -1,11 +1,19 @@
 package com.comnawa.mvcinema.insang.controller;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.comnawa.mvcinema.insang.service.TheaterService;
 
 @Controller
 @RequestMapping("/subMenu/*")
 public class SubMenuController {
+  
+  @Inject
+  TheaterService theaterService;
   
   @RequestMapping("member.do")
   public String member(){
@@ -28,8 +36,11 @@ public class SubMenuController {
   }
   
   @RequestMapping("/theater/add.do")
-  public String theater_add(){
-    return "/insang/submenu/sub_theater/theater_add";
+  public ModelAndView theater_add(){
+    ModelAndView mav= new ModelAndView();
+    mav.addObject("theaterList",theaterService.getTheaterList());
+    mav.setViewName("/insang/submenu/sub_theater/theater_add");
+    return mav;
   }
   
   @RequestMapping("/theater/sit.do")

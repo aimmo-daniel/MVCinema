@@ -32,7 +32,7 @@
           </label>
         </div>
 
-        <div class="wow fadeInUp col-md-7 col-sm-7" data-wow-delay="0.3s" id="sub_theater_contents">
+        <div class="wow fadeInUp col-md-8 col-sm-8" data-wow-delay="0.3s" id="sub_theater_contents">
         </div>
 
       </div>

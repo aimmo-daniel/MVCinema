@@ -70,6 +70,14 @@ function sub_theater_loadSub(choice){
     }
   })
 }
+function sub_theater_add_addTheater(id, action){
+  var target= document.getElementById(id);
+  if (action== 'over'){
+    target.style.color='green';
+  } else {
+  	target.style.color='gray';  
+  }
+}
 </script>
 </head>
 <body>

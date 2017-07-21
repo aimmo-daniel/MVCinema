@@ -9,6 +9,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <select id="login" resultType="com.comnawa.mvcinema.insang.model.dto.AdminDTO">
     select id from admin where id=#{id} and passwd=#{passwd}
   </select>
+  
+  <select id="getTheaterList" resultType="com.comnawa.mvcinema.insang.model.dto.TheaterDTO">
+    select idx, name, seat_max, preview from theater order by idx
+  </select>
 
 </mapper>
 
