@@ -36,7 +36,7 @@ function loadSubMenu(select){
     success: function(result){
       if (select.indexOf("_")!= -1){
         switch (select){
-        case 'theater_add':
+        case 'theater_addTheater':
           $("#sub_theater_contents").html(result);
           break;
         }

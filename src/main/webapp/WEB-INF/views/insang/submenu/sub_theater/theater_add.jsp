@@ -36,7 +36,7 @@
   </c:if>
   
   <div style="padding-left: 10%;" class="wow fadeInUp" data-wow-delay="0.7s">
-    <a href="#theater_add">
+    <a href="#theater_addTheater">
       <label for="sub_theater_add_addTheater"
         onmouseover="sub_theater_add_addTheater('sub_theater_add_addTheater', 'over')"
         onmouseout="sub_theater_add_addTheater('sub_theater_add_addTheater', 'out')"

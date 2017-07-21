@@ -35,7 +35,7 @@ public class SubMenuController {
     return "/insang/submenu/theater";
   }
   
-  @RequestMapping("theater_add.do")
+  @RequestMapping("theater_addTheater.do")
   public String theater_add_add(){
     return "/insang/submenu/sub_theater/theater_add_add";
   }
