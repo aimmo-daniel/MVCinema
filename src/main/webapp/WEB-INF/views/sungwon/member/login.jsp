@@ -44,11 +44,13 @@
 												name=password id="password"></td>
 									</tr>
 									<tr>
-										<td colspan="2" style="padding-top: 20px;"><input type="button"
-												class="btn btn-default"
-												style="width: 200px; height: 40px; margin-bottom: 5px;" value="로그인">
-											<!--  
-											<br><b class="text text-danger">아이디또는 비밀번호가 일치하지않습니다.</b> --></td>
+										<td colspan="2" style="padding-top: 20px;">
+											<button class="btn btn-default"
+												style="width: 200px; height: 40px; margin-bottom: 5px;">
+												<span class="glyphicon glyphicon-off"></span>&nbsp;로그인
+											</button> <!--  
+											<br><b class="text text-danger">아이디또는 비밀번호가 일치하지않습니다.</b> -->
+										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -61,15 +63,15 @@
 	</section>
 	<br>
 	<section>
-		<div align="center" class="wow fadeInUp" data-wow-delay="0.5s"> 
-			<a href="${path}/member/signup_page.do" class="btn btn-default" role="button">회원가입</a> <a href="#"
-				class="btn btn-default" role="button"><span class="glyphicon glyphicon-search" aria-hidden="true" ></span> 아이디/비밀번호찾기</a>
+		<div align="center" class="wow fadeInUp" data-wow-delay="0.5s">
+			<a href="${path}/member/signup_page.do" class="btn btn-default" role="button"><span
+				class="glyphicon glyphicon-user"></span>&nbsp;회원가입</a> <a href="#"
+				class="btn btn-default" role="button"><span
+				class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;아이디/비밀번호찾기</a>
 		</div>
 		<hr>
-		<span class="glyphicons glyphicons-search"></span>
-		<i class="icon-search"></i>
-		<p >Copyright © 2016 Your
-			Company Name - Designed by Tooplate</p>
+		<span class="glyphicons glyphicons-search"></span> <i class="icon-search"></i>
+		<p>Copyright © 2016 Your Company Name - Designed by Tooplate</p>
 	</section>
 </body>
 </html>

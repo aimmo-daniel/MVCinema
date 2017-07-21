@@ -15,7 +15,7 @@
 
 <!-- Main CSS
    ================================================== -->
-<link rel="stylesheet" href="${path}/sungwon/etc/css/style.css">
+<link rel="stylesheet" href="${path}/sungwon/etc/css/style.css?v=1">
 
 <!-- Javascript 
 ================================================== -->
