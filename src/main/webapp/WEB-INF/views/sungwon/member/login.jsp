@@ -63,7 +63,7 @@
 	<section>
 		<div align="center" class="wow fadeInUp" data-wow-delay="0.5s"> 
 			<a href="${path}/member/signup_page.do" class="btn btn-default" role="button">회원가입</a> <a href="#"
-				class="btn btn-default" role="button">아이디/비밀번호찾기</a>
+				class="btn btn-default" role="button"><span class="glyphicon glyphicon-search" aria-hidden="true" ></span> 아이디/비밀번호찾기</a>
 		</div>
 		<hr>
 		<span class="glyphicons glyphicons-search"></span>

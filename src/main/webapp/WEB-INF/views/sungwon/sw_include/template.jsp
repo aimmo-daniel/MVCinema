@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!-- Bootstrap CSS
    ================================================== -->
-<link rel="stylesheet" href="${path}/sungwon/etc/css/bootstrap.min.css">
+<link rel="stylesheet" href="${path}/sungwon/etc/css/bootstrap.min.css?v=1">
 
 <!-- Animate CSS
    ================================================== -->
