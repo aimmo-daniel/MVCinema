@@ -32,7 +32,8 @@ http://www.tooplate.com/view/2082-pure-mix
 	</div>
 	<!-- Navigation section
 ================================================== -->
-	<div class="nav-container">
+<%@ include file="sangjin/sj_include/loginbar.jsp" %>
+<%-- 	<div class="nav-container">
 		<nav class="nav-inner transparent">
 
 			<div class="navbar">
@@ -42,6 +43,9 @@ http://www.tooplate.com/view/2082-pure-mix
 							<a href="index.html">Pure Mix</a>
 						</div>
 						<div class="navicon">
+						<div style="padding-top:12px; padding-right: 5px;"> 
+							<a class="btn btn-default" role="button" href="${path}/member/login_page.do">로그인</a>
+					 	</div>
 							<div class="menu-container">
 								<div class="circle dark inline">
 									<i class="icon ion-navicon"></i>
@@ -66,7 +70,7 @@ http://www.tooplate.com/view/2082-pure-mix
 
 		</nav>
 	</div>
-
+ --%>
 
 	<!-- Header section
 ================================================== -->
