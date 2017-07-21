@@ -3,61 +3,45 @@
 <html lang="en">
 <%@ include file="../../include/header.jsp"%>
 <head>
-<!--
-
-Template 2082 Pure Mix
-
-http://www.tooplate.com/view/2082-pure-mix
-
--->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="keywords" content="">
 <meta name="description" content="">
-
-<!-- Site title
-   ================================================== -->
-<title>Pure Mix - Contact</title>
-
-<!-- Bootstrap CSS
-   ================================================== -->
-<link rel="stylesheet" href="${path}/admin/template/css/bootstrap.min.css">
-
-<!-- Animate CSS
-   ================================================== -->
-<link rel="stylesheet" href="${path}/admin/template/css/animate.min.css">
-
-<!-- Font Icons CSS
-   ================================================== -->
-<link rel="stylesheet" href="${path}/admin/template/css/font-awesome.min.css">
-<link rel="stylesheet" href="${path}/admin/template/css/ionicons.min.css">
-
-<!-- Main CSS
-   ================================================== -->
-<link rel="stylesheet" href="${path}/admin/template/css/style.css">
-
-<!-- Google web font 
-   ================================================== -->
+<title>MVCinema AdminPage</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="${path}/admin/resources/template/css/bootstrap.min.css">
+<!-- Animate CSS -->
+<link rel="stylesheet" href="${path}/admin/resources/template/css/animate.min.css">
+<!-- Font Icons CSS -->
+<link rel="stylesheet" href="${path}/admin/resources/template/css/font-awesome.min.css">
+<link rel="stylesheet" href="${path}/admin/resources/template/css/ionicons.min.css">
+<!-- Main CSS -->
+<link rel="stylesheet" href="${path}/admin/resources/template/css/style.css">
+<!-- Google web font --> 
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'>
-<style>
-.zzo_subMenu {
-  list-style-type: none;
+<!-- ZZO loginpage StyleSheet -->
+<link rel="stylesheet" href="${path}/admin/resources/template/css/zzo_style_login.css">
+<script>
+$(function(){
+  document.location.href=document.location.href.split('#')[0]+"#admin";
+})
+$(window).bind('hashchange',function(){
+  var menuName= document.location.hash.split('#')[1];
+  loadSubMenu(menuName);
+})
+function loadSubMenu(select){
+  $.ajax({
+    url: "${path}/subMenu/"+select+".do",
+    success: function(result){
+      $("#zzo_contents").html(result);
+    }
+  });
 }
-.zzo_subMenu li {
-  display: inline;
-  padding-right: 6%;
-  font-size: 20px;
-}
-.zzo_section {
-  margin: 5%;
-}
-</style>
+</script>
 </head>
 <body>
 
-
-  <!-- Preloader section
-================================================== -->
+  <!-- Preloader section -->
   <div class="preloader">
 
     <div class="sk-spinner sk-spinner-pulse"></div>
@@ -65,8 +49,7 @@ http://www.tooplate.com/view/2082-pure-mix
   </div>
 
 
-  <!-- Navigation section
-================================================== -->
+  <!-- Navigation section -->
   <div class="nav-container">
     <nav class="nav-inner transparent">
 
@@ -75,7 +58,7 @@ http://www.tooplate.com/view/2082-pure-mix
           <div class="row">
 
             <div class="brand">
-              <a href="${path}/admin/login.do">ADMIN PAGE</a>
+              <a href="${path}/admin/resources/loginpage.do">ADMIN PAGE</a>
             </div>
 
             <div class="navicon">
@@ -108,8 +91,7 @@ http://www.tooplate.com/view/2082-pure-mix
   </div>
 
 
-  <!-- Header section
-================================================== -->
+  <!-- Header section -->
   <section id="header" class="header-four">
     <div class="container">
       <div class="row">
@@ -120,18 +102,18 @@ http://www.tooplate.com/view/2082-pure-mix
                    <h3 class="wow fadeInUp" data-wow-delay="0.9s">Vestibulum at aliquam lorem</h3> -->
             <c:if test="${sessionScope.dto.id== null}">       
               <form name="form1" id="form1" method="post" action="${path}/admin/login.do">
-                <table class="wow fadeIn" data-wow-delay="1.2s" style="width:100%; font-size: 20px; margin-left: 1%; margin-right: 2%;">
+                <table class="wow fadeIn" data-wow-delay="1.2s" style="width:100%; font-size: 20px; margin-right: 2%;">
                   <tr>
-                    <td style="padding: 2%;"><b>I D</b></td>
+                    <td style="padding: 2%;"><label for="inputId"><b>I D</b></label></td>
                     <td style="padding: 2%;">
                       <input type="text" name="id" id="inputId" style="width: 70%;" tabindex="1">
                     </td>
                     <td rowspan="2" style="padding-right: 2%; text-align: center;">
-                      <button class="btn btn-info" style="height: 95%; width: 100%;" tabindex="3">Login</button>
+                      <button class="btn btn-default" style="height: 95%; width: 100%; font-size: 18px;" tabindex="3">Login</button>
                     </td>
                   </tr>
                   <tr style="height: 30%;">
-                    <td style="padding: 2%;"><b>P W</b></td>
+                    <td style="padding: 2%;"><label for="inputPw"><b>P W</b></label></td>
                     <td style="padding: 2%;">
                       <input type="password" name="passwd" id="inputPw" style="width: 70%;" tabindex="2">
                     </td>
@@ -147,7 +129,7 @@ http://www.tooplate.com/view/2082-pure-mix
                   </td>
                   <td style="padding-right: 10%;">
                     <button type="button" class="btn btn-info"
-                      style="width: 100%;" onclick="location.href='${path}/admin/logout.do'">LogOut</button>
+                      style="width: 100%; font-size: 18px;" onclick="location.href='${path}/admin/logout.do'">LogOut</button>
                   </td>
                 </tr>
               </table>
@@ -161,8 +143,7 @@ http://www.tooplate.com/view/2082-pure-mix
   </section>
 
 
-  <!-- Contact section
-================================================== -->
+  <!-- Contact section -->
 
   <div class="zzo_section">
     <div class="container">
@@ -170,16 +151,16 @@ http://www.tooplate.com/view/2082-pure-mix
         <c:if test="${sessionScope.dto.id!= null}">
           <ul class="zzo_subMenu" align="center">
             <li>
-              <a href="#"><b>상영관 관리</b></a>
+              <a href="#theater"><b>상영관 관리</b></a>
             </li>
             <li>
-              <a href="#"><b>회원 관리</b></a>
+              <a href="#member"><b>회원 관리</b></a>
             </li>
             <li>
-              <a href="#"><b>영화 관리</b></a>
+              <a href="#movie"><b>영화 관리</b></a>
             </li>
             <li>
-              <a href="#"><b>매출 확인</b></a>
+              <a href="#option"><b>매출 확인</b></a>
             </li>
           </ul>
         </c:if>
@@ -187,7 +168,7 @@ http://www.tooplate.com/view/2082-pure-mix
     </div>
   </div>
 
-
+  <div id="zzo_contents"></div>
 
 
 
@@ -261,33 +242,31 @@ http://www.tooplate.com/view/2082-pure-mix
   </section> -->
 
 
-  <!-- Footer section
-================================================== -->
+  <!-- Footer section -->
   <footer>
     <div class="container">
       <div class="row">
 
         <div class="col-md-12 col-sm-12">
           <p class="wow fadeInUp" data-wow-delay="0.3s">Copyright © 2016 Your Company Name - Designed by Tooplate</p>
-          <ul class="social-icon wow fadeInUp" data-wow-delay="0.6s">
+          <!-- <ul class="social-icon wow fadeInUp" data-wow-delay="0.6s">
             <li><a href="#" class="fa fa-facebook"></a></li>
             <li><a href="#" class="fa fa-twitter"></a></li>
             <li><a href="#" class="fa fa-dribbble"></a></li>
             <li><a href="#" class="fa fa-behance"></a></li>
             <li><a href="#" class="fa fa-google-plus"></a></li>
-          </ul>
+          </ul> -->
         </div>
 
       </div>
     </div>
   </footer>
 
-  <!-- Javascript 
-================================================== -->
-  <script src="${path}/admin/template/js/jquery.js"></script>
-  <script src="${path}/admin/template/js/bootstrap.min.js"></script>
-  <script src="${path}/admin/template/js/wow.min.js"></script>
-  <script src="${path}/admin/template/js/custom.js"></script>
+  <!-- Javascript -->
+  <script src="${path}/admin/resources/template/js/jquery.js"></script>
+  <script src="${path}/admin/resources/template/js/bootstrap.min.js"></script>
+  <script src="${path}/admin/resources/template/js/wow.min.js"></script>
+  <script src="${path}/admin/resources/template/js/custom.js"></script>
 
 </body>
 </html>

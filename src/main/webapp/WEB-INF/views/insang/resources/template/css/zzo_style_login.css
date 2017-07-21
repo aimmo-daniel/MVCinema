@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+.zzo_subMenu {
+  list-style-type: none;
+}
+.zzo_subMenu li {
+  display: inline;
+  padding-right: 6%;
+  font-size: 20px;
+}
+.zzo_section {
+  margin: 5%;
+}

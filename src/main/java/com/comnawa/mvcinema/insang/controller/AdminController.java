@@ -33,13 +33,13 @@ public class AdminController {
       map.put("name", "관리자");
       session.setAttribute("dto", map);
     }
-    return "insang/login/admin_login";
+    return "redirect:/admin/loginpage.do";
   }
   
   @RequestMapping("logout.do")
   public String login(HttpSession session){
     session.removeAttribute("dto");
-    return "insang/login/admin_login";
+    return "redirect:/admin/loginpage.do";
   }
   
 }
