@@ -15,7 +15,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="brand">
-							<a href="index=.html">MVCinema</a>
+							<a href="${path}">MVCinema</a>
 						</div>
 					</div>
 				</div>
@@ -71,7 +71,8 @@
 		</div>
 		<hr>
 		<span class="glyphicons glyphicons-search"></span> <i class="icon-search"></i>
-		<p>Copyright © 2016 Your Company Name - Designed by Tooplate</p>
 	</section>
+	
+	<%@ include file="../sw_include/footer_menu.jsp" %>
 </body>
 </html>
