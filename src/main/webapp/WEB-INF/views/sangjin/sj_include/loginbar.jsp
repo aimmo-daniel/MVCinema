@@ -11,7 +11,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="brand">
-						<a href="index.html">Pure Mix</a>
+						<a href="index.html">MVCINEMA</a>
 					</div>
 					<div class="navicon">
 						<c:choose>
