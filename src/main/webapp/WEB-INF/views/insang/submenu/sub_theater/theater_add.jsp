@@ -24,33 +24,28 @@
   
   <c:if test="${theaterList != null}">
     <c:forEach var="row" items="${theaterList}">
-      <form name="form1" id="form1" method="post" action="#">
-        <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.2s">
-          <div class="blog-thumb">
-            <a href="single-post.html">
-              <img src="images/blog-img3.jpg" class="img-responsive" alt="좌석표">
-            </a> 
-            <a href="single-post.html">
-              <h1>${row.name}</h1>
-            </a>
-            <p>${row.preview}</p>
-            <a href="single-post.html" class="btn btn-default">좌석배치</a>
-            <input type="hidden" value="${row.idx}">
-          </div>
+      <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.2s" style="margin-bottom: 100px; margin-top:20px;"
+        onclick="testtt();">
+        <div class="blog-thumb">
+          <img src="images/blog-img3.jpg" class="img-responsive" alt="좌석표">
+          <h1>${row.name}</h1>
+          <p>${row.preview}</p>
         </div>
-      </form>
+      </div>
     </c:forEach>
   </c:if>
   
-  <div style="padding-top: 50%; padding-left: 10%;" class="wow fadeInUp" data-wow-delay="0.7s">
-    <label for="sub_theater_add_addTheater"
-      onmouseover="sub_theater_add_addTheater('sub_theater_add_addTheater', 'over')"
-      onmouseout="sub_theater_add_addTheater('sub_theater_add_addTheater', 'out')"
-      onclick="">
-      <p id="sub_theater_add_addTheater" style="color: gray;">
-        상영관 추가하기
-      </p>
-    </label>
+  <div style="padding-left: 10%;" class="wow fadeInUp" data-wow-delay="0.7s">
+    <a href="#theater_add">
+      <label for="sub_theater_add_addTheater"
+        onmouseover="sub_theater_add_addTheater('sub_theater_add_addTheater', 'over')"
+        onmouseout="sub_theater_add_addTheater('sub_theater_add_addTheater', 'out')"
+        onclick="">
+        <p id="sub_theater_add_addTheater" style="color: gray;">
+          상영관 추가하기
+        </p>
+      </label>
+    </a>
   </div>
 
 </body>

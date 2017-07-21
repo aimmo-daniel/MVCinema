@@ -35,6 +35,11 @@ public class SubMenuController {
     return "/insang/submenu/theater";
   }
   
+  @RequestMapping("theater_add.do")
+  public String theater_add_add(){
+    return "/insang/submenu/sub_theater/theater_add_add";
+  }
+  
   @RequestMapping("/theater/add.do")
   public ModelAndView theater_add(){
     ModelAndView mav= new ModelAndView();

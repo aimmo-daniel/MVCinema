@@ -34,14 +34,22 @@ function loadSubMenu(select){
   $.ajax({
     url: "${path}/subMenu/"+select+".do",
     success: function(result){
-      $("#zzo_contents").html(result);
+      if (select.indexOf("_")!= -1){
+        switch (select){
+        case 'theater_add':
+          $("#sub_theater_contents").html(result);
+          break;
+        }
+      } else {
+        $("#zzo_contents").html(result);
+      }
     }
   });
 }
 function fnMove(){
   var offset = $("#zzo_section").offset();
   console.log(offset);
-  $('html, body').animate({scrollTop : offset.top-100}, 1000);
+  $('html, body').animate({scrollTop : offset.top-100}, 300);
 }
 function sub_theater(choice, value1, value2, value3){
   
@@ -77,6 +85,9 @@ function sub_theater_add_addTheater(id, action){
   } else {
   	target.style.color='gray';  
   }
+}
+function testtt(){
+  alert('hi');
 }
 </script>
 </head>
