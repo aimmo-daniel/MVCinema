@@ -10,23 +10,28 @@
 <style>
 table {
 	width: 100%;
-	cellpadding: 10px;
+	cellpadding: 15px;
 }
 
 td {
 	padding: 10px;
 }
 
-td.lable {
+td.td_lable {
 	width: 20%;
 }
 
-td.input {
+
+
+td.td_input {
 	width: 50%;
 }
 
-td.button {
+td.td_button {
 	width: 50%;
+}
+label.label.label-default{
+font-size: 18px;
 }
 </style>
 </head>
@@ -72,20 +77,23 @@ td.button {
 							</tr>
 							<tr>
 								<td>&nbsp;</td>
-								<td><span class="@2x glyphicon glyphicon-remove" style="color:red;"></span><b>중복확인값</b></td>
+								<td><span class="@2x glyphicon glyphicon-remove"
+									style="color: red;"></span><b>중복확인값</b></td>
 							</tr>
 							<tr>
 								<td class="td_label"><label class="label label-default">비밀번호</label></td>
 								<td class="td_input"><input type="password" class="form-control"
 										name="password" id="password"></td>
-								<td><span class="glyphicon glyphicon-lock" style="color:#FFB432;"></span><b>비밀번호 정규화결과</b></td>
+								<td><span class="glyphicon glyphicon-lock" style="color: #FFB432;"></span><b>비밀번호
+										정규화결과</b></td>
 							</tr>
 							<tr>
 								<td class="td_label"><label class="label label-default">비밀번호
 										확인</label></td>
 								<td class="td_input"><input type="password" class="form-control"
 										name="password2" id="password2"></td>
-								<td><span class="glyphicon glyphicon-remove" style="color:red;"></span><b>비밀번호 일치여부</b></td>
+								<td><span class="glyphicon glyphicon-remove" style="color: red;"></span><b>비밀번호
+										일치여부</b></td>
 							</tr>
 							<tr>
 								<td class="td_label"><label class="label label-default">이름</label></td>
@@ -112,14 +120,16 @@ td.button {
 							</tr>
 							<tr>
 								<td>&nbsp;</td>
-								<td><span class="glyphicon glyphicon-ok" style="color:green;"></span><b>이메일 인증결과</b></td>
+								<td><span class="glyphicon glyphicon-ok" style="color: green;"></span><b>이메일
+										인증결과</b></td>
 							</tr>
 						</table>
-
 					</form>
 				</div>
 			</div>
 		</div>
+		<br><br>
+		<button class="btn btn-default" style="position: relative; left: 50%;">회원가입</button>
 	</section>
 	<p>&nbsp;Copyright © 2016 Your Company Name - Designed by Tooplate</p>
 </body>
