@@ -43,7 +43,7 @@
 						<div class="form-group">
 							<label class="label label-default" style="height:30px;">아이디</label>
 							<input class="form-control" name=userid id="userid">
-
+							
 						</div>
 					</form>
 				</div>
