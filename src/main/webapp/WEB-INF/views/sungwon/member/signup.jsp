@@ -7,43 +7,83 @@
 <title>Insert title here</title>
 <%@ include file="../../include/header.jsp"%>
 <%@ include file="../sw_include/template.jsp"%>
-<style>
-table {
-	width: 100%;
-	cellpadding: 15px;
-}
+<link rel="stylesheet" href="${path}/sungwon/etc/css/sw_style.css?v=3">
+<script>
 
-td {
-	padding: 10px;
-}
+//아이디 중복확인 체크
+var id_status = false;
+//비밀번호 양식상태 체크
+var pwd_rule = false;
+//비밀번호 일치여부 체크
+var pwd_match = false;
+//이메일 중복확인
+var email_check = true;
+//이메일 인증상태 체크
+var email_status = false;
+//약관동의상태 체크
+var cb_status = false;
+//인증번호 
+var rndNum;
 
-td.td_lable {
-	width: 20%;
-}
-
-
-
-td.td_input {
-	width: 50%;
-}
-
-td.td_button {
-	width: 50%;
-}
-label.label.label-default{
-font-size: 18px;
-}
-</style>
+$(function() {
+	//중복확인 체크이벤트
+	$("#btnCheckid").click(function() {
+		var userid = $("#userid").val();
+		if (userid == "") {
+			alert("아이디를 입력하세요");
+			$("#userid").focus();
+			return;
+		}
+		var param = "userid=" + userid;
+		$.ajax({
+			type : "post",
+			url : "${path}/member/checkid.do",
+			data : param,
+			success : function(result) {
+				  if (result.name == null) {
+					$("#td_checkid").attr("hidden",false);
+					$("#ck_id_icon").attr("style",'color:green')
+					$("#ck_id_icon").addClass('glyphicon glyphicon-ok');
+					$("#ck_id_result").html("사용 가능한 아이디 입니다.");
+					$("#passwd").focus();
+					id_status = true; 
+				} else {
+					$("#td_checkid").attr("hidden",false);
+					$("#ck_id_icon").attr("style",'color:red')
+					$("#ck_id_icon").addClass('glyphicon glyphicon-remove');
+					$("#ck_id_result").html("이미 사용중인 아이디 입니다.");
+					$("#userid").val("");
+					$("#userid").focus();
+				}  
+			},
+			error: function(x,e){
+		            if(x.status==0){
+		            alert('You are offline!!n Please Check Your Network.');
+		            }else if(x.status==404){
+		            alert('Requested URL not found.');
+		            }else if(x.status==500){
+		            alert('Internel Server Error.');
+		            }else if(e=='parsererror'){
+		            alert('Error.nParsing JSON Request failed.');
+		            }else if(e=='timeout'){
+		            alert('Request Time out.');
+		            }else {
+		            alert('Unknow Error.n'+x.responseText);
+		            }
+			} 
+		});
+	});
+});
+</script>
 </head>
 <body>
-
 	<div class="nav-container">
 		<nav class="nav-inner transparent">
 			<div class="navbar">
 				<div class="container">
 					<div class="row">
 						<div class="brand">
-							<a href="index=.html">MVCinema</a>
+							<a href="${path}">MVCinema</a>
 						</div>
 					</div>
 				</div>
@@ -55,7 +95,7 @@ font-size: 18px;
 		<div class="container">
 			<h1>회원가입</h1>
 			<div class="row">
-				<div class="wow fadeInUp col-md-5 col-sm-5" data-wow-delay="0.4s">
+				<div class="col-md-5 col-sm-5">
 					<textarea class="form-control col-sm-70" rows="20" style="resize: none;"
 						disabled="disabled"><%@include file="../etc/terms.jsp"%></textarea>
 					<input style="width: 25px; height: 25px;" type="checkbox" id="agree"
@@ -64,26 +104,27 @@ font-size: 18px;
 						이용약관에 동의<span style="color: red;">(필수)</span>
 					</label>
 				</div>
-				<div class="wow fadeInUp col-md-7 col-sm-7" data-wow-delay="0.7s">
+				<div class="col-md-7 col-sm-7">
 					<form method="post" name="signup">
 						<table>
 							<tr>
-								<td class="td_label"><label class="label label-default">아이디</label></td>
+								<td class="td_label"><label class="label label-default">아이디</label>
+								</td>
 								<td class="td_input"><input class="form-control" name=userid
 										id="userid"></td>
 								<td class="td_button">
-									<button class="btn btn-default" id="checkId">중복확인</button>
+									<input type="button" role="button" class="btn btn-default" id="btnCheckid" value="중복확인">
 								</td>
 							</tr>
 							<tr>
 								<td>&nbsp;</td>
-								<td><span class="@2x glyphicon glyphicon-remove"
-									style="color: red;"></span><b>중복확인값</b></td>
+								<td  id="td_checkid" hidden="hidden" ><span id="ck_id_icon" style="color: red;"></span><b
+									id="ck_id_result"></b></td>
 							</tr>
 							<tr>
 								<td class="td_label"><label class="label label-default">비밀번호</label></td>
 								<td class="td_input"><input type="password" class="form-control"
-										name="password" id="password"></td>
+										name="passwd" id="passwd"></td>
 								<td><span class="glyphicon glyphicon-lock" style="color: #FFB432;"></span><b>비밀번호
 										정규화결과</b></td>
 							</tr>
@@ -104,7 +145,7 @@ font-size: 18px;
 								<td class="td_label"><label class="label label-default">생년월일</label></td>
 								<td class="td_input" style="max-height: 20px;"><input
 										style="width: 40%;" class="form-control col-md-5 col-sm-5"
-										name="birth" id="birth" placeholder="930625"><b
+										name="birth" id="birth" placeholder="930625"> <b
 									class="col-md-1 col-sm-1">-</b> <input style="width: 30px;"
 										class="form-control col-md-5 col-sm-5" name="gender" id="gender"
 										placeholder="1">
@@ -120,6 +161,11 @@ font-size: 18px;
 							</tr>
 							<tr>
 								<td>&nbsp;</td>
+								<td><input class="form-control" placeholder="인증번호"></td>
+								<td><button class="btn btn-default" id="rndNum_check">확인</button></td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
 								<td><span class="glyphicon glyphicon-ok" style="color: green;"></span><b>이메일
 										인증결과</b></td>
 							</tr>
@@ -128,9 +174,10 @@ font-size: 18px;
 				</div>
 			</div>
 		</div>
-		<br><br>
-		<button class="btn btn-default" style="position: relative; left: 50%;">회원가입</button>
+		<br>
+		<br>
+		<button class="btn btn-default btn-lg" style="position: relative; left: 45%;">회원가입</button>
 	</section>
-	<p>&nbsp;Copyright © 2016 Your Company Name - Designed by Tooplate</p>
+	<%@ include file="../sw_include/footer_menu.jsp"%>
 </body>
 </html>
