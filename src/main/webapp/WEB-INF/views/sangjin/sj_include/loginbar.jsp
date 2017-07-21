@@ -46,7 +46,7 @@ img {
 	margin-right: auto;
 	margin-right: auto;
 }
-</style>
+</style> 
 
 <div class="nav-container">
 	<nav class="nav-inner transparent">
