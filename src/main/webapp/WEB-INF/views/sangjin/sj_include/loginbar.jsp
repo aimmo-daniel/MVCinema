@@ -28,6 +28,16 @@
 	text-decoration: none;
 	color: #000000;
 }
+
+img {
+	display: block;
+    max-width: 100%;
+    width: 1250px;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+}
+
 </style>
 
 <div class="nav-container">
@@ -87,6 +97,3 @@
 	</nav>
 </div>
 <br><br>
-
-
-
