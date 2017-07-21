@@ -27,4 +27,14 @@ public class SubMenuController {
     return "/insang/submenu/theater";
   }
   
+  @RequestMapping("/theater/add.do")
+  public String theater_add(){
+    return "/insang/submenu/sub_theater/theater_add";
+  }
+  
+  @RequestMapping("/theater/sit.do")
+  public String theater_sit(){
+    return "/insang/submenu/sub_theater/theater_sit";
+  }
+  
 }

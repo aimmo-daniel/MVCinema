@@ -28,6 +28,7 @@ $(function(){
 $(window).bind('hashchange',function(){
   var menuName= document.location.hash.split('#')[1];
   loadSubMenu(menuName);
+  fnMove();
 })
 function loadSubMenu(select){
   $.ajax({
@@ -37,9 +38,47 @@ function loadSubMenu(select){
     }
   });
 }
+function fnMove(){
+  var offset = $("#zzo_section").offset();
+  console.log(offset);
+  $('html, body').animate({scrollTop : offset.top-100}, 1000);
+}
+function sub_theater(choice, value1, value2, value3){
+  
+  switch (choice){
+  
+  case 'sub_sub_mouseOver':
+    var target= document.getElementById(value2);
+    if (value1=='over'){
+      target.style.color='green';
+    } else if (value1== 'out') {
+	  target.style.color='black';
+    }
+    break;
+    
+  case '':
+    break;
+  }
+  
+}
+function sub_theater_loadSub(choice){
+  var param= choice=='sub_theater_1'?'add':'sit';
+  $.ajax({
+    url: "${path}/subMenu/theater/"+param+".do",
+    success: function(result){
+      $("#sub_theater_contents").html(result);
+    }
+  })
+}
 </script>
 </head>
 <body>
+
+  <c:if test="${result != null}">
+    <script>
+    alert("로그인에 실패하셨습니다.\n 아이디 혹은 비밀번호를 확인해주세요");
+    </script>
+  </c:if>
 
   <!-- Preloader section -->
   <div class="preloader">
@@ -145,7 +184,7 @@ function loadSubMenu(select){
 
   <!-- Contact section -->
 
-  <div class="zzo_section">
+  <div class="zzo_section" id="zzo_section">
     <div class="container">
       <div class="wow fadeInUp" data-wow-delay="1.3s">
         <c:if test="${sessionScope.dto.id!= null}">
@@ -168,7 +207,7 @@ function loadSubMenu(select){
     </div>
   </div>
 
-  <div id="zzo_contents"></div>
+  <div id="zzo_contents" class="container"></div>
 
 
 

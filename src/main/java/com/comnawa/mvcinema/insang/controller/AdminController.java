@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -26,12 +27,15 @@ public class AdminController {
   }
   
   @RequestMapping("login.do")
-  public String login(@ModelAttribute AdminDTO dto, HttpSession session){
+  public String login(@ModelAttribute AdminDTO dto, HttpSession session, Model model){
     if (adminService.login(dto)){
       Map<String, String> map= new HashMap<>();
       map.put("id", "admin");
       map.put("name", "관리자");
       session.setAttribute("dto", map);
+    } else {
+      model.addAttribute("result","fail");
+      return "/insang/login/admin_login";
     }
     return "redirect:/admin/loginpage.do";
   }

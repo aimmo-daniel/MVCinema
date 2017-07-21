@@ -16,7 +16,7 @@ public class AdminDAOImpl implements AdminDAO {
   @Override
   public boolean login(AdminDTO dto) {
     boolean result= false;
-    if (((AdminDTO)sqlSession.selectOne("admin.login", dto)).getId()!= null){
+    if (((AdminDTO)sqlSession.selectOne("admin.login", dto))!= null){
       result= true;
     }
     return result;
