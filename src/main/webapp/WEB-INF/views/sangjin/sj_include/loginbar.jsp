@@ -4,6 +4,32 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<style type="text/css">
+#sangjin a:hover {
+	color: #ffffff;
+	font: bold;
+	background: #000000;
+}
+
+#sangjin ul {
+	padding-top: 10px;
+	margin-left: 220px;
+	text-align: center;
+}
+
+#sangjin ul li {
+	display: inline;
+	font: bold 18px Dotum;
+	padding: 0 10px;
+}
+
+#sangjin ul li a {
+	padding: 0.5em 1em 0.5em 1em;
+	text-decoration: none;
+	color: #000000;
+}
+</style>
+
 <div class="nav-container">
 	<nav class="nav-inner transparent">
 
@@ -11,9 +37,9 @@
 			<div class="container">
 				<div class="row">
 					<div class="brand">
-						<a href="index.html">MVCINEMA</a>
+						<a href="${path}">MVCINEMA</a>
 					</div>
-					<div class="navicon">
+					<div class="navicon" style="padding-top: 30px;">
 						<c:choose>
 							<c:when test="${sessionScope.userid == null}">
 								<div style="padding-top: 13px; padding-right: 5px;">
@@ -44,11 +70,23 @@
 									</ul>
 								</div>
 							</div>
-
 						</div>
 					</div>
+				</div>
+				<div id="sangjin">
+					<ul style="align:center;">
+						<li><a href="#">HOME</a></li>
+						<li><a href="#">MENU1</a></li>
+						<li><a href="#">MENU2</a></li>
+						<li><a href="#">MENU3</a></li>
+						<li><a href="#">MENU4</a></li>
+					</ul>
 				</div>
 			</div>
 		</div>
 	</nav>
 </div>
+<br><br>
+
+
+

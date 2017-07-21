@@ -3,86 +3,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!--
-
-Template 2082 Pure Mix
-
-http://www.tooplate.com/view/2082-pure-mix
-
--->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="keywords" content="">
 <meta name="description" content="">
 
-<!-- Site title
-   ================================================== -->
-<title>Pure Mix - HTML CSS Template</title>
-<%@ include file="include/header.jsp" %>
-<%@ include file="include/template.jsp" %>
+<title>MVCINEMA</title>
+<%@ include file="include/header.jsp"%>
+<%@ include file="include/template.jsp"%>
+<%@ include file="sangjin/sj_include/sangjincss.jsp"%>
 </head>
 <body>
-
-
-	<!-- Preloader section
-================================================== -->
 	<div class="preloader">
 		<div class="sk-spinner sk-spinner-pulse"></div>
 	</div>
-	<!-- Navigation section
-================================================== -->
-<%@ include file="sangjin/sj_include/loginbar.jsp" %>
-<%-- 	<div class="nav-container">
-		<nav class="nav-inner transparent">
 
-			<div class="navbar">
-				<div class="container">
-					<div class="row">
-						<div class="brand">
-							<a href="index.html">Pure Mix</a>
-						</div>
-						<div class="navicon">
-						<div style="padding-top:12px; padding-right: 5px;"> 
-							<a class="btn btn-default" role="button" href="${path}/member/login_page.do">로그인</a>
-					 	</div>
-							<div class="menu-container">
-								<div class="circle dark inline">
-									<i class="icon ion-navicon"></i>
-								</div>
-								<div class="list-menu">
-									<i class="icon ion-close-round close-iframe"></i>
-									<div class="intro-inner">
-										<ul id="nav-menu">
-											<li><a href="index.html">Home</a></li>
-											<li><a href="about.html">About</a></li>
-											<li><a href="blog.html">Blog</a></li>
-											<li><a href="contact.html">Contact</a></li>
-										</ul>
-									</div>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</nav>
-	</div>
- --%>
-
-	<!-- Header section
-================================================== -->
+	<%@ include file="sangjin/sj_include/loginbar.jsp"%>
 	<section id="header" class="header-one">
 		<div class="container">
 			<div class="row">
 
 				<div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
 					<div class="header-thumb">
-						<h1 class="wow fadeIn" data-wow-delay="1.6s">Lorem ipsum dolor</h1>
-						<h3 class="wow fadeInUp" data-wow-delay="1.9s">Six HTML pages
-							included</h3>
+						<h1 class="wow fadeIn" data-wow-delay="1.6s">Welcome to
+							MVCINEMA</h1>
+						<h3 class="wow fadeInUp" data-wow-delay="1.9s">Fighting Team
+							COMNAWA</h3>
 					</div>
 				</div>
 
@@ -90,139 +37,68 @@ http://www.tooplate.com/view/2082-pure-mix
 		</div>
 	</section>
 
-
-	<!-- Portfolio section
-================================================== -->
-	<section id="portfolio">
-		<div class="container">
-			<div class="row">
-
-				<div class="col-md-12 col-sm-12">
-
-					<!-- iso section -->
-					<div class="iso-section wow fadeInUp" data-wow-delay="2.6s">
-
-						<ul class="filter-wrapper clearfix">
-							<li><a href="#" data-filter="*" class="selected opc-main-bg">All</a></li>
-							<li><a href="#" class="opc-main-bg" data-filter=".graphic">Graphic</a></li>
-							<li><a href="#" class="opc-main-bg" data-filter=".template">Web
-									template</a></li>
-							<li><a href="#" class="opc-main-bg" data-filter=".photoshop">Photoshop</a></li>
-							<li><a href="#" class="opc-main-bg" data-filter=".branding">Branding</a></li>
-						</ul>
-
-						<!-- iso box section -->
-						<div class="iso-box-section wow fadeInUp" data-wow-delay="1s">
-							<div class="iso-box-wrapper col4-iso-box">
-
-								<div class="iso-box photoshop branding col-md-4 col-sm-6">
-									<div class="portfolio-thumb">
-										<img src="${path}/template/images/portfolio-img1.jpg" class="img-responsive"
-											alt="Portfolio">
-										<div class="portfolio-overlay">
-											<div class="portfolio-item">
-												<a href="single-project.html"><i class="fa fa-link"></i></a>
-												<h2>Project One</h2>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="iso-box graphic template col-md-4 col-sm-6">
-									<div class="portfolio-thumb">
-										<img src="${path}/template/images/portfolio-img2.jpg" class="img-responsive"
-											alt="Portfolio">
-										<div class="portfolio-overlay">
-											<div class="portfolio-item">
-												<a href="single-project.html"><i class="fa fa-link"></i></a>
-												<h2>Project Two</h2>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="iso-box template graphic col-md-4 col-sm-6">
-									<div class="portfolio-thumb">
-										<img src="${path}/template/images/portfolio-img3.jpg" class="img-responsive"
-											alt="Portfolio">
-										<div class="portfolio-overlay">
-											<div class="portfolio-item">
-												<a href="single-project.html"><i class="fa fa-link"></i></a>
-												<h2>Project Three</h2>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="iso-box graphic template col-md-4 col-sm-6">
-									<div class="portfolio-thumb">
-										<img src="${path}/template/images/portfolio-img4.jpg" class="img-responsive"
-											alt="Portfolio">
-										<div class="portfolio-overlay">
-											<div class="portfolio-item">
-												<a href="single-project.html"><i class="fa fa-link"></i></a>
-												<h2>Project Four</h2>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="iso-box photoshop branding col-md-4 col-sm-6">
-									<div class="portfolio-thumb">
-										<img src="${path}/template/images/portfolio-img5.jpg" class="img-responsive"
-											alt="Portfolio">
-										<div class="portfolio-overlay">
-											<div class="portfolio-item">
-												<a href="single-project.html"><i class="fa fa-link"></i></a>
-												<h2>Project Five</h2>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="iso-box graphic branding col-md-4 col-sm-6">
-									<div class="portfolio-thumb">
-										<img src="${path}/template/images/portfolio-img6.jpg" class="img-responsive"
-											alt="Portfolio">
-										<div class="portfolio-overlay">
-											<div class="portfolio-item">
-												<a href="single-project.html"><i class="fa fa-link"></i></a>
-												<h2>Project Six</h2>
-											</div>
-										</div>
-									</div>
-								</div>
-
-							</div>
-						</div>
-
+	<div class="wrap-movie-chart"
+		style="padding-right: 200px; padding-left: 200px;">
+		<!-- Heading Map Multi -->
+		<div class="tit-heading-wrap">
+			<h3>무비차트</h3>
+		</div>
+		<div class="sect-movie-chart">
+			<ol>
+				<!-- 영화1 -->
+				<li>
+					<div class="box-image">
+						<!-- 상세정보 페이지 URL입력 -->
+						<a href="#"> <!-- DB에서 이미지를 받아옴 영화포스터--> <span
+							class="thumb-image"> <img
+								src="http://img.cgv.co.kr/Movie/Thumbnail/Poster/000079/79729/79729_185.jpg"
+								alt="덩케르크 포스터" onerror="errorImage(this)"> <!-- 관람 등급 -->
+								<span class="ico-grade grade-12">12세 이상</span>
+						</span>
+						</a>
+					</div> <!-- 포스터 아래 영화이름과 개봉일자 -->
+					<div class="box-contents">
+						<a href="#"> <strong
+							class="title">덩케르크</strong>
+						</a> <span class="txt-info"> <strong> 2017.07.20 <span>개봉</span>
+						</strong>
+						</span>
 					</div>
-
-				</div>
-
-			</div>
+				</li>
+			</ol>
 		</div>
-	</section>
+	</div>
 
-	<!-- Footer section
-================================================== -->
-	<footer>
-		<div class="container">
-			<div class="row">
-s				<div class="col-md-12 col-sm-12">
-					<p class="wow fadeInUp" data-wow-delay="0.3s">Copyright © 2016 Your
-						Company Name - Designed by Tooplate</p>
-					<ul class="social-icon wow fadeInUp" data-wow-delay="0.6s">
-						<li><a href="#" class="fa fa-facebook"></a></li>
-						<li><a href="#" class="fa fa-twitter"></a></li>
-						<li><a href="#" class="fa fa-dribbble"></a></li>
-						<li><a href="#" class="fa fa-behance"></a></li>
-						<li><a href="#" class="fa fa-google-plus"></a></li>
-					</ul>
-				</div>
-
-			</div>
+	<div class="wrap-movie-chart"
+		style="padding-right: 200px; padding-left: 200px;">
+		<!-- Heading Map Multi -->
+		<div class="tit-heading-wrap">
+			<h3>상영 예정작</h3>
 		</div>
-	</footer>
+		<div class="sect-movie-chart">
+			<ol>
+				<!-- 영화1 -->
+				<li>
+					<div class="box-image">
+						<!-- 상세정보 페이지 URL입력 -->
+						<a href="#"> <!-- DB에서 이미지를 받아옴 영화포스터--> <span
+							class="thumb-image"> <img
+								src="http://img.cgv.co.kr/Movie/Thumbnail/Poster/000079/79729/79729_185.jpg"
+								alt="덩케르크 포스터" onerror="errorImage(this)"> <!-- 관람 등급 -->
+								<span class="ico-grade grade-12">12세 이상</span>
+						</span>
+						</a>
+					</div> <!-- 포스터 아래 영화이름과 개봉일자 -->
+					<div class="box-contents">
+						<a href="#"> 
+							<strong	class="title">덩케르크</strong>
+						</a> <span class="txt-info"> <strong> 2017.07.20 <span>개봉</span>
+						</strong>
+						</span>
+					</div>
+				</li>
+			</ol>
+		</div>
+	</div>
 </body>
 </html>
