@@ -61,12 +61,22 @@ $(document)
 });
 $(function(){
   document.location.href=document.location.href.split('#')[0]+"#admin";
+  scrollReset();
 })
 $(window).bind('hashchange',function(){
   var menuName= document.location.hash.split('#')[1];
+  console.log(menuName);
   loadSubMenu(menuName);
-  fnMove();
+  if (menuName == 'admin'){
+    scrollReset();
+  } else {
+  	fnMove();
+  }
 })
+function scrollReset(){
+  $('html, body').animate({scrollTop : 300},10);
+  $('html, body').animate({scrollTop : 0},10);
+}
 function loadSubMenu(select){
   $.ajax({
     url: "${path}/subMenu/"+select+".do",
@@ -85,7 +95,6 @@ function loadSubMenu(select){
 }
 function fnMove(){
   var offset = $("#zzo_section").offset();
-  console.log(offset);
   $('html, body').animate({scrollTop : offset.top-100}, 300);
 }
 function sub_theater(choice, value1, value2, value3){
@@ -96,6 +105,7 @@ function sub_theater(choice, value1, value2, value3){
     var target= document.getElementById(value2);
     if (value1=='over'){
       target.style.color='green';
+      
     } else if (value1== 'out') {
 	  target.style.color='black';
     }
@@ -130,14 +140,15 @@ function testtt(){
 </head>
 <body>
 
+
   <c:if test="${result != null}">
     <script>
-    alert("${result}");
+    alert("로그인에 실패하였습니다. \n 아이디 또는 비밀번호를 확인해주세요");
     </script>
   </c:if>
-
+  
   <!-- Preloader section -->
-  <div class="preloader">
+  <div class="preloader" id="zzo_preloader">
 
     <div class="sk-spinner sk-spinner-pulse"></div>
 
@@ -145,7 +156,7 @@ function testtt(){
 
 
   <!-- Navigation section -->
-  <div class="nav-container">
+  <div class="nav-container" id="zzo_nav-container">
     <nav class="nav-inner transparent">
 
       <div class="navbar">

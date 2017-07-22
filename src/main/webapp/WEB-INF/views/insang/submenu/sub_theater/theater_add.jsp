@@ -27,7 +27,11 @@
       <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.2s" style="margin-bottom: 100px; margin-top:20px;"
         onclick="testtt();">
         <div class="blog-thumb">
-          <img src="images/blog-img3.jpg" class="img-responsive" alt="좌석표">
+          
+          <table>
+            
+          </table>
+          
           <h1>${row.name}</h1>
           <p>${row.preview}</p>
         </div>
