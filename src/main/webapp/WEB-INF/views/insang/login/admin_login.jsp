@@ -21,7 +21,44 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'>
 <!-- ZZO loginpage StyleSheet -->
 <link rel="stylesheet" href="${path}/admin/resources/template/css/zzo_style_login.css">
+<style>
+#my-spinner {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: none;
+  opacity: .6;
+  background: silver;
+  position: fixed;
+}
+
+#my-spinner div {
+  width: 100%;
+  height: 100%;
+  display: table;
+}
+
+#my-spinner span {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#my-spinner img {
+  background: white;
+  padding: 1em;
+  border-radius: .7em;
+}
+</style>
 <script>
+$(document)
+.ajaxStart(function () {
+	$('#my-spinner').show();
+})
+.ajaxStop(function () {
+	$('#my-spinner').hide();
+});
 $(function(){
   document.location.href=document.location.href.split('#')[0]+"#admin";
 })
@@ -95,7 +132,7 @@ function testtt(){
 
   <c:if test="${result != null}">
     <script>
-    alert("로그인에 실패하셨습니다.\n 아이디 혹은 비밀번호를 확인해주세요");
+    alert("${result}");
     </script>
   </c:if>
 
@@ -226,7 +263,8 @@ function testtt(){
     </div>
   </div>
 
-  <div id="zzo_contents" class="container"></div>
+  <div id="zzo_contents" class="container">
+  </div>
 
 
 
