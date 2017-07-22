@@ -71,6 +71,10 @@
   transition: color 0.5s;
 }
 
+#sub_theater_add_addTheater {
+  transition: color 0.5s;
+}
+
 </style>
 <script>
 $(document)
@@ -168,16 +172,13 @@ function sub_theater_loadSub(choice){
 function sub_theater_add_addTheater(id, action){
   var target= document.getElementById(id);
   if (action== 'over'){
-    target.style.color='green';
+    $("#"+id).css("color","green");
   } else {
-  	target.style.color='gray';  
+    $("#"+id).css("color","gray");  
   }
 }
 function testtt(){
   alert('hi');
-}
-function sub_theater_add_thumbMouseover(){
-  $("#zzo_theaterThumbDiv").css("background-color","green");
 }
 </script>
 </head>

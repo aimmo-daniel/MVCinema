@@ -65,7 +65,7 @@
     </c:forEach>
   </c:if>
 
-  <div style="padding-left: 10%; float: right;" class="wow fadeInUp" data-wow-delay="0.7s">
+  <div style="padding-left: 10%; float: right;" class="wow fadeInUp" data-wow-delay="0.0s">
   <hr>
     <a href="#theater_addTheater">
       <label for="sub_theater_add_addTheater"
