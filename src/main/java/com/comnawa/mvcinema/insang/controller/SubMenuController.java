@@ -3,6 +3,7 @@ package com.comnawa.mvcinema.insang.controller;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,7 +38,8 @@ public class SubMenuController {
   }
   
   @RequestMapping("theater_addTheater.do")
-  public String theater_add_add(){
+  public String theater_add_add(Model model){
+    model.addAttribute("idx", theaterService.getMaxIDX());
     return "/insang/submenu/sub_theater/theater_add_add";
   }
   

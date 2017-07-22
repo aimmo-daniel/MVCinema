@@ -1,6 +1,8 @@
 package com.comnawa.mvcinema.insang.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -24,6 +26,15 @@ public class TheaterDAOImpl implements TheaterDAO {
   @Override
   public List<TheaterSitDTO> getTheaterSitList() {
     return sqlSession.selectList("admin.getTheaterSitList");
+  }
+  
+  @Override
+  public Map<String, Integer> getMaxIDX() {
+    Map<String, Integer> map= new HashMap<>();
+    map.put("max", sqlSession.selectOne("admin.getMaxIDX1"));
+    map.put("imax", sqlSession.selectOne("admin.getMaxIDX2"));
+    map.put("count", sqlSession.selectOne("admin.getCountIDX"));
+    return map;
   }
   
 }

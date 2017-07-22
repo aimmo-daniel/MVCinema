@@ -1,6 +1,7 @@
 package com.comnawa.mvcinema.insang.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -24,6 +25,11 @@ public class TheaterServiceImpl implements TheaterService {
   @Override
   public List<TheaterSitDTO> getTheaterSitList() {
     return theaterDao.getTheaterSitList();
+  }
+  
+  @Override
+  public Map<String, Integer> getMaxIDX() {
+    return theaterDao.getMaxIDX();
   }
   
 }

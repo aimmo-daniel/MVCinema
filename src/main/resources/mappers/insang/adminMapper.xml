@@ -17,7 +17,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <select id="getTheaterSitList" resultType="com.comnawa.mvcinema.insang.model.dto.TheaterSitDTO">
     select * from theater_sit order by idx
   </select>
+  
+  <select id="getMaxIDX2" resultType="int">
+    select max(idx) from theater where idx>100
+  </select>
+  
+  <select id="getMaxIDX1" resultType="int">
+    SELECT max(idx) FROM theater WHERE 101>idx
+  </select>
 
+  <select id="getCountIDX" resultType="int">
+    select count(idx) from theater
+  </select>
+  
 </mapper>
 
 
