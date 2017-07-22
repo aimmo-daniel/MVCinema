@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.comnawa.mvcinema.insang.model.dao.TheaterDAO;
 import com.comnawa.mvcinema.insang.model.dto.TheaterDTO;
+import com.comnawa.mvcinema.insang.model.dto.TheaterSitDTO;
 
 @Service
 public class TheaterServiceImpl implements TheaterService {
@@ -20,4 +21,9 @@ public class TheaterServiceImpl implements TheaterService {
     return theaterDao.getTheaterList();
   }
 
+  @Override
+  public List<TheaterSitDTO> getTheaterSitList() {
+    return theaterDao.getTheaterSitList();
+  }
+  
 }

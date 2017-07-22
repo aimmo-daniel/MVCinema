@@ -13,6 +13,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <select id="getTheaterList" resultType="com.comnawa.mvcinema.insang.model.dto.TheaterDTO">
     select idx, name, seat_max, preview from theater order by idx
   </select>
+  
+  <select id="getTheaterSitList" resultType="com.comnawa.mvcinema.insang.model.dto.TheaterSitDTO">
+    select * from theater_sit order by idx
+  </select>
 
 </mapper>
 

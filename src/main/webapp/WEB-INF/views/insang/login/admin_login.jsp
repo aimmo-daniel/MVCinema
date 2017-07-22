@@ -50,6 +50,27 @@
   padding: 1em;
   border-radius: .7em;
 }
+
+#zzo_theaterThumbDiv:hover {
+  background-color: rgba(250,190,230,.2);
+  transition: background-color 2s;
+}
+
+#zzo_section ul li a {
+  color: black;
+  transition: color 1s;
+}
+
+#sub_theater_1 {
+  color : black;
+  transition: color 0.5s;
+}
+
+#sub_theater_2 {
+  color : black;
+  transition: color 0.5s;
+}
+
 </style>
 <script>
 $(document)
@@ -71,6 +92,26 @@ $(window).bind('hashchange',function(){
     scrollReset();
   } else {
   	fnMove();
+  }
+  if (menuName=='theater' || menuName=='member' || menuName=='movie' || menuName=='option'){
+    $("#section_theater").css("color","black");
+    $("#section_member").css("color","black");
+    $("#section_movie").css("color","black");
+    $("#section_option").css("color","black");
+    $("#section_"+menuName).css("color","green");
+  }
+  if (menuName=='theater_add' || menuName=='theater_sit'){
+    $("#sub_theater_1").css("color","black");
+    $("#sub_theater_2").css("color","black");
+    $("#zzo_addTheater1_label").attr("onmouseout","sub_theater('sub_sub_mouseOver','out','sub_theater_1')");
+    $("#zzo_addTheater2_label").attr("onmouseout","sub_theater('sub_sub_mouseOver','out','sub_theater_2')");
+    if (menuName=='theater_add'){
+      $("#sub_theater_1").css("color","green");
+      $("#zzo_addTheater1_label").attr("onmouseout","");
+    } else if (menuName=='theater_sit') {
+      $("#sub_theater_2").css("color","green");
+      $("#zzo_addTheater2_label").attr("onmouseout","");
+    }
   }
 })
 function scrollReset(){
@@ -105,7 +146,6 @@ function sub_theater(choice, value1, value2, value3){
     var target= document.getElementById(value2);
     if (value1=='over'){
       target.style.color='green';
-      
     } else if (value1== 'out') {
 	  target.style.color='black';
     }
@@ -135,6 +175,9 @@ function sub_theater_add_addTheater(id, action){
 }
 function testtt(){
   alert('hi');
+}
+function sub_theater_add_thumbMouseover(){
+  $("#zzo_theaterThumbDiv").css("background-color","green");
 }
 </script>
 </head>
@@ -257,16 +300,16 @@ function testtt(){
         <c:if test="${sessionScope.dto.id!= null}">
           <ul class="zzo_subMenu" align="center">
             <li>
-              <a href="#theater"><b>상영관 관리</b></a>
+              <a href="#theater" id="section_theater"><b>상영관 관리</b></a>
             </li>
             <li>
-              <a href="#member"><b>회원 관리</b></a>
+              <a href="#member" id="section_member"><b>회원 관리</b></a>
             </li>
             <li>
-              <a href="#movie"><b>영화 관리</b></a>
+              <a href="#movie" id="section_movie"><b>영화 관리</b></a>
             </li>
             <li>
-              <a href="#option"><b>매출 확인</b></a>
+              <a href="#option" id="section_option"><b>매출 확인</b></a>
             </li>
           </ul>
         </c:if>

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.comnawa.mvcinema.insang.model.dto.TheaterSitDTO;
 import com.comnawa.mvcinema.insang.service.TheaterService;
 
 @Controller
@@ -44,6 +45,12 @@ public class SubMenuController {
   public ModelAndView theater_add(){
     ModelAndView mav= new ModelAndView();
     mav.addObject("theaterList",theaterService.getTheaterList());
+    mav.addObject("theaterSitList", theaterService.getTheaterSitList());
+    int max=0;
+    for (TheaterSitDTO dto: theaterService.getTheaterSitList()){
+      max= (max < dto.getSeat_row()) ? dto.getSeat_row() : max ;
+    }
+    mav.addObject("theaterSitMax", max);
     mav.setViewName("/insang/submenu/sub_theater/theater_add");
     return mav;
   }

@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.comnawa.mvcinema.insang.model.dto.TheaterDTO;
+import com.comnawa.mvcinema.insang.model.dto.TheaterSitDTO;
 
 @Repository
 public class TheaterDAOImpl implements TheaterDAO {
@@ -20,4 +21,9 @@ public class TheaterDAOImpl implements TheaterDAO {
     return sqlSession.selectList("admin.getTheaterList");
   }
 
+  @Override
+  public List<TheaterSitDTO> getTheaterSitList() {
+    return sqlSession.selectList("admin.getTheaterSitList");
+  }
+  
 }
