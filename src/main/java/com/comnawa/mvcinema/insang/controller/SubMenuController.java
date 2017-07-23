@@ -1,6 +1,10 @@
 package com.comnawa.mvcinema.insang.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,6 +45,20 @@ public class SubMenuController {
   public String theater_add_add(Model model){
     model.addAttribute("idx", theaterService.getMaxIDX());
     return "/insang/submenu/sub_theater/theater_add_add";
+  }
+  
+  @RequestMapping("theater_addTheaterDetail")
+  public String theater_addTheaterDetail(HttpServletRequest request){
+    Map<String, Object> map= new HashMap<>();
+    map.put("idx", request.getParameter("idx"));
+    map.put("name", request.getParameter("name"));
+    map.put("rows", request.getParameter("rows"));
+    map.put("cols", request.getParameter("cols"));
+    map.put("preview", request.getParameter("preview"));
+    map.put("price", request.getParameter("price"));
+    map.put("max", Integer.parseInt(request.getParameter("rows")) * Integer.parseInt(request.getParameter("cols")));
+    theaterService.addTheater(map);
+    return "redirect:/";
   }
   
   @RequestMapping("/theater/add.do")

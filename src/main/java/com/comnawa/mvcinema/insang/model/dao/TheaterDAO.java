@@ -10,4 +10,5 @@ public interface TheaterDAO {
   public List<TheaterDTO> getTheaterList();
   public List<TheaterSitDTO> getTheaterSitList();
   public Map<String, Integer> getMaxIDX();
+  public void addTheater(Map<String,Object> map);
 }

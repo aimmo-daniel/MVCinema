@@ -11,11 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   
   <select id="getTheaterList" resultType="com.comnawa.mvcinema.insang.model.dto.TheaterDTO">
-    select idx, name, seat_max, preview from theater order by idx
+    select idx, name, seat_max, preview from theater order by name
   </select>
   
   <select id="getTheaterSitList" resultType="com.comnawa.mvcinema.insang.model.dto.TheaterSitDTO">
-    select * from theater_sit order by idx
+    select * from theater_sit order by name
   </select>
   
   <select id="getMaxIDX2" resultType="int">
@@ -29,6 +29,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <select id="getCountIDX" resultType="int">
     select count(idx) from theater
   </select>
+  
+  <insert id="addTheater1">
+    insert into theater values(#{idx}, #{name}, #{max}, 0, #{price}, #{preview})
+  </insert>
+  
+  <insert id="addTheater2">
+    insert into theater_sit values(#{idx}, #{rows}, #{cols}, null)
+  </insert>
   
 </mapper>
 
