@@ -23,30 +23,4 @@ td.td_button {
 
 label.label.label-default {
 	font-size: 18px;
-=======
-@CHARSET "UTF-8";
-
-table {
-	width: 100%;
-	cellpadding: 15px;
-}
-
-td {
-	padding: 10px;
-}
-
-td.td_lable {
-	width: 20%;
-}
-
-td.td_input {
-	width: 50%;
-}
-
-td.td_button {
-	width: 50%;
-}
-
-label.label.label-default {
-	font-size: 18px;
 }
