@@ -1,4 +1,4 @@
-package com.comnawa.mvcinema.sangjin;
+package com.comnawa.mvcinema.sangjin.controller;
 
 import javax.servlet.http.HttpSession;
 

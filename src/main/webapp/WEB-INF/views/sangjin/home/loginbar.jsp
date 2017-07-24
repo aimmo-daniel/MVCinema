@@ -67,12 +67,12 @@ img {
 					</ul>
 					<div style="float: right;">
 						<c:choose>
-							<c:when test="${sessionScope.userid == null}">
+							<c:when test="${sessionScope.dto.userid == null}">
 								<a class="btn btn-default" role="button"
 									href="${path}/member/login_page.do">로그인</a>
 							</c:when>
-							<c:when test="${sessionScope.userid != null}">
-								<b><a href="{path}/member/account.do">${sessionScope.userid}님</a></b>
+							<c:when test="${sessionScope.dto.userid != null}">
+								<b><a href="{path}/member/account.do">${sessionScope.dto.userid}님</a></b>
 								<a class="btn btn-default" role="button"
 									href="${path}/main/logout.do">로그아웃</a>
 							</c:when>
