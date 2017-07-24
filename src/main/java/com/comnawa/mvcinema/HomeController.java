@@ -11,9 +11,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.comnawa.mvcinema.sangjin.model.dto.MovieDTO;
@@ -33,13 +35,15 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model, ModelAndView mav,@RequestParam(defaultValue = "rank") String order_type) {
 		logger.info("Welcome home! The client locale is {}.", locale);
+		List<MovieDTO> list = movieService.movieList(order_type);
 		mav.setViewName("home");
-		//뷰에 전달할 데이터 저장
-		mav.addObject("list",movieService.movieList(order_type));
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list); 
+		mav.addObject("map", map);
 		return mav;
 	}
 	
-	//예매순, 평점순, 관람객순
+/*	//예매순, 평점순, 관람객순
 	@RequestMapping("sort.do")
 	public ModelAndView list(@RequestParam(defaultValue = "rank") String order_type) throws Exception {
 		List<MovieDTO> list = movieService.movieList(order_type);
@@ -50,6 +54,16 @@ public class HomeController {
 		map.put("order_type", order_type); //예매율순, 평점순, 관람객순
 		mav.addObject("map", map);
 		return mav;
+	}*/
+	
+	@ResponseBody
+	@RequestMapping("sort.do")
+	public Map<String,Object> list(@RequestBody String order_type){
+		List<MovieDTO> list = movieService.movieList(order_type);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("list", list);
+		map.put("order_type", order_type);
+		return map;
 	}
 	
 	@RequestMapping("admin")

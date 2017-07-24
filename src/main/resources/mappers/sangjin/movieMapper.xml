@@ -6,11 +6,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="movie">
 
-	<select id="movie_list" resultType="com.comnawa.mvcinema.sangjin.model.dto.MovieDTO">
-		select img_url, age, title, release_date
-		from movie order by #{order_type}
+	<select id="movie_list" resultType="com.comnawa.mvcinema.sangjin.model.dto.MovieDTO" parameterType="String">
+		select img_url, age, title, release_date from movie
+		order by ${value}
 	</select>
-  
+
+
 </mapper>
 
 

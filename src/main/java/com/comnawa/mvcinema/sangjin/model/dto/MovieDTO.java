@@ -20,6 +20,7 @@ public class MovieDTO {
 
 	public MovieDTO() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public MovieDTO(int idx, String title, int age, double grade, double rank, int people, String director,
