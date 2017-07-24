@@ -34,5 +34,16 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 
+	@Override
+	public boolean login(MemberDTO dto) {
+		String name = sqlSession.selectOne("member.login",dto);
+		return name == null? false : true;
+	}
+	
+	@Override
+	public MemberDTO viewMember(String userid) {
+		return sqlSession.selectOne("member.view_member",userid);
+	}
+
 
 }

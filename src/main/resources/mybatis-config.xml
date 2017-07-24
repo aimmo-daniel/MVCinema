@@ -5,7 +5,9 @@
 <configuration>
 
 	<typeAliases>
+		<typeAlias type="com.comnawa.mvcinema.sungwon.model.member.dto.MemberDTO" alias="MemberDTO"/>
 	</typeAliases>
+
 
 </configuration>
 

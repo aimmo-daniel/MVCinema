@@ -15,6 +15,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into member (userid,passwd,email,name,gender,age) 
 		values(#{userid},#{passwd},#{email},#{name},#{gender},#{age})	
 	</insert>
+	<select id="view_member" resultType="MemberDTO">
+		select * from member where userid=#{userid}
+	</select>
+	<select id="login" resultType="String">
+		select name from member where userid=#{userid} and passwd=#{passwd} 
+	</select>
 </mapper>
 
 

@@ -7,6 +7,37 @@
 <title>Insert title here</title>
 <%@ include file="../../include/header.jsp"%>
 <%@ include file="../sw_include/template.jsp"%>
+<script>
+	$(function() {
+		$(function() {
+			$("#btnLogin").click(function() {
+				Login();
+			});
+
+			$("#passwd").keypress(function(e) {
+				if (e.which == 13) {
+					Login();
+				}
+			});
+		});
+	});
+	function Login() {
+		var userid = $("#userid").val();
+		var passwd = $("#passwd").val();
+		if (userid == "") {
+			alert("아이디를 입력하세요.");
+			$("#userid").focus();
+			return;
+		}
+		if (passwd == "") {
+			alert("비밀번호를 입력하세요");
+			$("#passwd").focus();
+			return;
+		}
+		document.login_form.action = "${path}/member/login.do";
+		document.login_form.submit();
+	}
+</script>
 </head>
 <body>
 	<div class="nav-container">
@@ -39,18 +70,20 @@
 												id="userid"></td>
 									</tr>
 									<tr>
-										<td><label for="password">비밀번호</label></td>
+										<td><label for="passwd">비밀번호</label></td>
 										<td><input style="width: 250px; height: 30px" type="password"
-												name=password id="password"></td>
+												name=passwd id="passwd"></td>
 									</tr>
 									<tr>
 										<td colspan="2" style="padding-top: 20px;">
-											<button class="btn btn-default"
-												style="width: 200px; height: 40px; margin-bottom: 5px;">
-												<span class="glyphicon glyphicon-off"></span>&nbsp;로그인
-											</button> <!--  
-											<br><b class="text text-danger">아이디또는 비밀번호가 일치하지않습니다.</b> -->
-										</td>
+										<input type="button" id="btnLogin" class="btn btn-default"
+												style="width: 200px; height: 40px; margin-bottom: 5px;" 
+												value="로그인">
+											<br>
+											<c:if test="${message == 'error' }">
+											<b class="text text-danger">아이디또는 비밀번호가 일치하지않습니다.</b> 
+											</c:if>
+											</td>
 									</tr>
 								</tbody>
 							</table>
@@ -72,7 +105,7 @@
 		<hr>
 		<span class="glyphicons glyphicons-search"></span> <i class="icon-search"></i>
 	</section>
-	
-	<%@ include file="../sw_include/footer_menu.jsp" %>
+
+	<%@ include file="../sw_include/footer_menu.jsp"%>
 </body>
 </html>

@@ -10,5 +10,6 @@ public interface MemberDAO {
 	public String checkid(String userid);
 	public String checkemail(String email);
 	public void signup(MemberDTO dto);
-	
+	public boolean login(MemberDTO dto);
+	public MemberDTO viewMember(String userid);
 }

@@ -46,4 +46,27 @@ public class MemberServiceImpl implements MemberService {
 			e.printStackTrace();
 		}
 	}
+
+
+
+	@Override
+	public boolean login(MemberDTO dto, HttpSession session) {
+		try {
+			String shapwd = sha256.getSha256(dto.getPasswd().getBytes());
+			dto.setPasswd(shapwd);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		boolean result = memberDao.login(dto);
+		if (result) {
+			MemberDTO dto2 = memberDao.viewMember(dto.getUserid());
+			session.setAttribute("dto", dto2);
+		}
+		return result;
+	}
+
+	@Override //로그인 성공후 회원정보전달
+	public MemberDTO viewMember(String userid) {
+		return memberDao.viewMember(userid);
+	}
 }
