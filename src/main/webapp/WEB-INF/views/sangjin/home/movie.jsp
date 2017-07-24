@@ -29,8 +29,6 @@ li {
 		<ol>
 			<!-- 영화1 -->
 			<c:forEach var="i" begin="1" end="6">
-				<c:if test=${i == 4}>
-				</c:if>
 				<li>
 					<div class="box-image">
 						<c:choose>
