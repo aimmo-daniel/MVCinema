@@ -37,4 +37,9 @@ public class TheaterServiceImpl implements TheaterService {
     theaterDao.addTheater(map);
   }
   
+  @Override
+  public void updateTheater(Map<String, Object> map) {
+    theaterDao.updateTheater(map);
+  }
+  
 }

@@ -91,6 +91,11 @@ $(function(){
 })
 $(window).bind('hashchange',function(){
   var menuName= document.location.hash.split('#')[1];
+  if (menuName.indexOf('Theater_detailTheater')!= -1){
+    var idx= menuName.split('?')[1];
+    loadTheaterDetail(idx);
+    return;
+  }
   console.log(menuName);
   loadSubMenu(menuName);
   if (menuName == 'admin'){
@@ -179,8 +184,16 @@ function sub_theater_add_addTheater(id, action){
     $("#"+id).css("color","gray");  
   }
 }
-function testtt(){
-  alert('hi');
+function loadTheaterDetail(idx){
+  var param= "idx="+idx;
+  $.ajax({
+    type: "post",
+    data: param,
+    url: "${path}/subMenu/theater_updateTheaterDetail",
+    success: function(result){
+      $("#sub_theater_contents").html(result);
+    }
+  })
 }
 </script>
 </head>
@@ -189,7 +202,13 @@ function testtt(){
 
   <c:if test="${result != null}">
     <script>
-    alert("로그인에 실패하였습니다. \n 아이디 또는 비밀번호를 확인해주세요");
+    if ('${result}' == 'modTheater'){
+      alert('상영관 수정에 성공하였습니다.');
+      loadSubMenu('theater');
+   	  fnMove();
+    } else {
+      alert("로그인에 실패하였습니다. \n 아이디 또는 비밀번호를 확인해주세요");
+    }
     </script>
   </c:if>
   

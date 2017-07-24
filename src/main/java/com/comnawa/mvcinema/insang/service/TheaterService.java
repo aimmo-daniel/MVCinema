@@ -11,4 +11,5 @@ public interface TheaterService {
   public List<TheaterSitDTO> getTheaterSitList();
   public Map<String, Integer> getMaxIDX();
   public void addTheater(Map<String, Object> map);
+  public void updateTheater(Map<String, Object> map);
 }

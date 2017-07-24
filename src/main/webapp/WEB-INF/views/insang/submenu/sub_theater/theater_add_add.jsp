@@ -10,7 +10,6 @@ $(function(){
   
   $("input:radio[name=type_radio]").click(function(){
     var val= $("input:radio[name=type_radio]:checked").val();
-    var value;
     if (val=='normal'){
       $("#theaterIDX").val('${idx.max+1}');
       $("#theaterName").val("${idx.count+1}관");
@@ -22,22 +21,22 @@ $(function(){
   
   $("#btnAddTheaterDetail").click(function(){
     if ($("#addTheater_cols").val() == ''){
-      alert('입력하지 않은 사항이있습니다. 입력후 다시시도해주세');
+      alert('입력하지 않은 사항이있습니다. 입력후 다시시도해주세요');
       $("#addTheater_cols").focus();
       return;
     }
     if ($("#addTheater_rows").val() == ''){
-      alert('입력하지 않은 사항이있습니다. 입력후 다시시도해주세');
+      alert('입력하지 않은 사항이있습니다. 입력후 다시시도해주세요');
       $("#addTheater_rows").focus();
       return;
     }
     if ($("#addTheater_price").val() == ''){
-      alert('입력하지 않은 사항이있습니다. 입력후 다시시도해주세');
+      alert('입력하지 않은 사항이있습니다. 입력후 다시시도해주세요');
       $("#addTheater_price").focus();
       return;
     }
     if ($("#addTheater_preview").val() == ''){
-      alert('입력하지 않은 사항이있습니다. 입력후 다시시도해주세');
+      alert('입력하지 않은 사항이있습니다. 입력후 다시시도해주세요');
       $("#addTheater_preview").focus();
       return;
     }

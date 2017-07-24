@@ -38,11 +38,18 @@ public class TheaterDAOImpl implements TheaterDAO {
     return map;
   }
   
-  @Override
   @Transactional
+  @Override
   public void addTheater(Map<String, Object> map) {
     sqlSession.insert("admin.addTheater1", map);
     sqlSession.insert("admin.addTheater2", map);
+  }
+  
+  @Transactional
+  @Override
+  public void updateTheater(Map<String, Object> map) {
+    sqlSession.update("admin.updateTheater1", map);
+    sqlSession.update("admin.updateTheater2", map);
   }
   
 }

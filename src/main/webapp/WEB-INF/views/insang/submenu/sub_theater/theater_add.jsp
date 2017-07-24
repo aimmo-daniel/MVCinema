@@ -26,36 +26,39 @@
   <c:if test="${theaterList != null}">
     <c:forEach var="row" items="${theaterList}" varStatus="status">
       <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.2s" style="padding: 20px 10px 10px 10px;"
-        onclick="testtt();" class="nav-inner transparent">
+        class="nav-inner transparent">
         <div class="blog-thumb">
-        
-          <div style="height: ${theaterSitMax * 28}px; border: 1px solid rgba(250,190,230,.4); text-align: center; padding-top: 10px;"
-            id="zzo_theaterThumbDiv">
-            <label for="zzo_theaterThumb">
-              <table style="width:100%;" id="zzo_theaterThumb">
-                <tr>
-                  <th colspan="${theaterSitList[status.index].seat_col +3}" style="text-align: center;"> | SCREEN |</th>
-                </tr>
-                <tr>
-                  <th>&nbsp;</th>
-                </tr>
-                <c:forEach var="rows" begin="1" end="${theaterSitList[status.index].seat_row}">
-                  <tr>
-                    <td>&nbsp;</td>
-                    <td><font color="lightgray"><b><%=row_en %></b></font></td>
-                    <c:forEach var="cols" begin="1" end="${theaterSitList[status.index].seat_col}">
-                      <td style="width: 30px;">
-                        <input type="hidden" value="<%= (int)row_en-64 %>">
-                        ${cols}
-                      </td>
+
+          
+          <a href="#Theater_detailTheater?${theaterList[status.index].idx}">
+            <div style="height: ${theaterSitMax * 28}px; border: 1px solid rgba(250,190,230,.4); text-align: center; padding-top: 10px;"
+              id="zzo_theaterThumbDiv">
+                <label for="zzo_theaterThumb">
+                  <table style="width:100%;" id="zzo_theaterThumb">
+                    <tr>
+                      <th colspan="${theaterSitList[status.index].seat_col +3}" style="text-align: center;"> | SCREEN |</th>
+                    </tr>
+                    <tr>
+                      <th>&nbsp;</th>
+                    </tr>
+                    <c:forEach var="rows" begin="1" end="${theaterSitList[status.index].seat_row}">
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td><font color="lightgray"><b><%=row_en %></b></font></td>
+                        <c:forEach var="cols" begin="1" end="${theaterSitList[status.index].seat_col}">
+                          <td style="width: 30px;">
+                            <input type="hidden" value="<%= (int)row_en-64 %>">
+                            ${cols}
+                          </td>
+                        </c:forEach>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <% row_en++; %>
                     </c:forEach>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <% row_en++; %>
-                </c:forEach>
-              </table>
-            </label>
-          </div>
+                  </table>
+                </label>
+              </div>
+            </a>
           
           <h1>${row.name}</h1>
           <p>${row.preview}</p>
