@@ -10,15 +10,15 @@ td {
 }
 
 td.td_lable {
-	width: 20%;
+	width: 15%;
 }
 
 td.td_input {
-	width: 50%;
+	width: 65%;
 }
 
 td.td_button {
-	width: 50%;
+	width: 40%;
 }
 
 label.label.label-default {

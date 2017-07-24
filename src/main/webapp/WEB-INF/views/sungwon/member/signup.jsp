@@ -7,8 +7,11 @@
 <title>Insert title here</title>
 <%@ include file="../../include/header.jsp"%>
 <%@ include file="../sw_include/template.jsp"%>
-<link rel="stylesheet" href="${path}/sungwon/etc/css/sw_style.css?v=3">
+<link rel="stylesheet" href="${path}/sungwon/etc/css/sw_style.css?v=4">
 <script>
+	var date = new Date();
+	var this_year = date.getFullYear();
+
 	//아이디 중복확인 체크
 	var id_status = false;
 	//비밀번호 양식상태 체크
@@ -24,8 +27,8 @@
 	//인증번호 
 	var rndNum;
 	//나이
-	var age;
-	var gender;
+	var age = 0;
+	var gender = "";
 	$(function() {
 		//중복확인 체크이벤트
 		$("#btnCheckid").click(
@@ -153,6 +156,8 @@
 		$("#passwd2").val("");
 		$("#resultPwd").html('');
 		$("#ck_pwdrule_icon").attr("class", '');
+		$("#matchPwd").html('');
+		$("#ck_pwdmatch_icon").attr("class", '');
 		pwd_match = false;
 		pwd_rule = false;
 	}
@@ -160,29 +165,42 @@
 		var birth = $("#birth").val();
 		if (birth.length == 2) {
 			var tmp_year = birth.substr(0, 2);
-			if(tmp_year < 17 ){
-				var my_year = '20' + tmp_year;	
-			}else{
+			if (tmp_year < 17) {
+				var my_year = '20' + tmp_year;
+			} else {
 				var my_year = '19' + tmp_year;
 			}
 			var date = new Date();
 			var this_year = date.getFullYear();
 			age = this_year - my_year;
 		}
-		if(birth.length > 5){
+		if (birth.length > 5) {
 			$("#gender").focus();
 		}
 	}
 
+	function resetAge() {
+		$("#gender").val("");
+		$("#birth").val("");
+		age = 0;
+		gender = "";
+	}
+
 	function getGender() {
+		if (age == 0) {
+			alert("생년월일을 먼저입력해주세요");
+			$("#gender").val("");
+			$("#birth").focus();
+			return;
+		}
 		var sex = $("#gender").val();
-		if(sex.length > 0 ){
+		if (sex.length > 0) {
 			$("#email").focus();
 		}
-		if (age> 17 && sex == 1 || age <= 17 && sex == 3) {
-			gender="남";
-		} else if (age> 17 && sex == 2 || age <= 17 && sex == 4) {
-			gender="여";
+		if (age > 17 && sex == 1 || age <= 17 && sex == 3) {
+			gender = "남";
+		} else if (age > 17 && sex == 2 || age <= 17 && sex == 4) {
+			gender = "여";
 		} else {
 			alert("양식에 맞지 않습니다.");
 			$("#gender").val("");
@@ -190,9 +208,6 @@
 			$("#birth").focus();
 			return;
 		}
-	}
-	function aaemail(){
-		$("#test").html(gender +","+ age);
 	}
 </script>
 </head>
@@ -226,67 +241,105 @@
 				</div>
 				<div class="col-md-7 col-sm-7">
 					<form method="post" name="signup">
-						<table>
+						<table >
 							<tr>
 								<td class="td_label"><label class="label label-default">아이디</label>
 								</td>
-								<td class="td_input"><input class="form-control" name=userid
-										id="userid" onfocus="id_focus()"></td>
+								<td colspan="6" class="td_input"><input class="form-control"
+										name=userid id="userid" onfocus="id_focus()"></td>
 								<td class="td_button"><input type="button" role="button"
 										class="btn btn-default" id="btnCheckid" value="중복확인"></td>
 							</tr>
 							<tr>
 								<td>&nbsp;</td>
-								<td id="td_checkid" hidden="hidden"><span id="ck_id_icon"
-									style="color: red;"></span><b id="ck_id_result"></b></td>
+								<td colspan="6" id="td_checkid" hidden="hidden"><span
+									id="ck_id_icon" style="color: red;"></span><b id="ck_id_result"></b></td>
 							</tr>
 							<tr>
 								<td class="td_label"><label class="label label-default">비밀번호</label></td>
-								<td class="td_input"><input type="password" class="form-control"
-										name="passwd" id="passwd" onkeyup="checkPwd()" onfocus="pwd_focus()"></td>
-								<td id="ck_pwdrule" hidden="hidden"><span id="ck_pwdrule_icon"></span><b
-									id=resultPwd></b></td>
+								<td colspan="6" class="td_input"><input type="password"
+										class="form-control" name="passwd" id="passwd" onkeyup="checkPwd()"
+										onfocus="pwd_focus()"></td>
+								<td class="td_button" id="ck_pwdrule" hidden="hidden"><span
+									id="ck_pwdrule_icon"></span><b id=resultPwd></b></td>
 							</tr>
 							<tr>
 								<td class="td_label"><label class="label label-default">비밀번호
 										확인</label></td>
-								<td class="td_input"><input type="password" class="form-control"
-										name="passwd2" id="passwd2" onkeyup="matchPwd()"></td>
-								<td id="ck_pwdmatch" hidden="hidden"><span id="ck_pwdmatch_icon"></span><b
-									id=matchPwd></b></td>
+								<td colspan="6" class="td_input"><input type="password"
+										class="form-control" name="passwd2" id="passwd2" onkeyup="matchPwd()"></td>
+								<td class="td_button" id="ck_pwdmatch" hidden="hidden"><span
+									id="ck_pwdmatch_icon"></span><b id=matchPwd></b></td>
 							</tr>
 							<tr>
 								<td class="td_label"><label class="label label-default">이름</label></td>
-								<td class="td_input"><input class="form-control" name="name"
-										id="name"></td>
+								<td colspan="6" class="td_input"><input class="form-control"
+										name="name" id="name"></td>
 							</tr>
 							<tr>
 								<td class="td_label"><label class="label label-default">생년월일</label></td>
-								<td class="td_input" style="max-height: 20px;"><input
-										style="width: 40%;" class="form-control col-md-5 col-sm-5"
-										name="birth" id="birth" placeholder="930625" onkeyup="getAge()">
-									<b class="col-md-1 col-sm-1">-</b> <input style="width: 40px;"
-										class="form-control col-md-5 col-sm-5" name="gender" id="gender"
-										placeholder="1" onkeyup="getGender()">
-									<p class="col-md-1 col-sm-1">XXXXXX</p></td>
+								<td class="td_input" style="width: 37%"><select
+									class="form-control">
+										<%
+											for (int i = 1900; i <= 2017; i++) {
+										%>
+										<option><%=i%>
+										</option>
+										<%
+											}
+										%>
+								</select></td>
+								<td style="width: 3%"><b>년</b></td>
+								<td style="width: 25%"><select class="form-control">
+										<%
+											for (int i = 1; i <= 12; i++) {
+										%>
+										<option><%=i%>
+										</option>
+										<%
+											}
+										%>
+								</select></td>
+								<td style="width: 3%"><b>월</b></td>
+								<td style="width: 29%"><select class="form-control">
+										<%
+											for (int i = 1; i <= 31; i++) {
+										%>
+										<option><%=i%>
+										</option>
+										<%
+											}
+										%>
+								</select></td>
+								<td style="width: 3%"><b>일</b></td>
+							</tr>
+							<tr>
+								<td><label class="label label-default">성별</label></td>
+								<td colspan="3">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="group" value="남" checked="checked"><b>남</b> 
+								</td>
+								<td colspan="3">
+								<input type="radio" name="group" value="여"><b>여</b>
+								</td>
 							</tr>
 							<tr>
 								<td class="td_label"><label class="label label-default">이메일</label></td>
-								<td class="td_input"><input type="email" name="email" id="email"
-										class="form-control" placeholder="mvcinema@example.com"></td>
+								<td colspan="6" class="td_input"><input type="email" name="email"
+										id="email" class="form-control" placeholder="mvcinema@example.com"></td>
 								<td class="td_button">
 									<button class="btn btn-default" id="check_eamil">인증메일 발송</button>
 								</td>
 							</tr>
 							<tr>
 								<td>&nbsp;</td>
-								<td><input class="form-control" placeholder="인증번호"></td>
+								<td colspan="6"><input class="form-control" placeholder="인증번호"></td>
 								<td><button class="btn btn-default" id="rndNum_check">확인</button></td>
 							</tr>
 							<tr>
 								<td>&nbsp;</td>
-								<td><span class="glyphicon glyphicon-ok" style="color: green;"></span><b>이메일
-										인증결과</b></td>
+								<td colspan="6"><span class="glyphicon glyphicon-ok"
+									style="color: green;"></span><b>이메일 인증결과</b></td>
 							</tr>
 						</table>
 					</form>
