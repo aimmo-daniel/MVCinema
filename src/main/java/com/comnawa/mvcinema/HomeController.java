@@ -43,7 +43,7 @@ public class HomeController {
 		return mav;
 	}
 	
-/*	//예매순, 평점순, 관람객순
+	//예매순, 평점순, 관람객순
 	@RequestMapping("sort.do")
 	public ModelAndView list(@RequestParam(defaultValue = "rank") String order_type) throws Exception {
 		List<MovieDTO> list = movieService.movieList(order_type);
@@ -54,9 +54,9 @@ public class HomeController {
 		map.put("order_type", order_type); //예매율순, 평점순, 관람객순
 		mav.addObject("map", map);
 		return mav;
-	}*/
+	}
 	
-	@ResponseBody
+/*	@ResponseBody
 	@RequestMapping("sort.do")
 	public Map<String,Object> list(@RequestBody String order_type){
 		List<MovieDTO> list = movieService.movieList(order_type);
@@ -64,7 +64,7 @@ public class HomeController {
 		map.put("list", list);
 		map.put("order_type", order_type);
 		return map;
-	}
+	}*/
 	
 	@RequestMapping("admin")
 	public String admin(){
