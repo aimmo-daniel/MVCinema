@@ -41,11 +41,13 @@
         </div>
 
         <div class="wow fadeInUp col-md-8 col-sm-8" data-wow-delay="0.3s" id="sub_theater_contents">
+        
           <div id='my-spinner'>
             <div>
               <span><img src='${path}/admin/resources/adminImages/loader.gif'></span>
             </div>
           </div>
+          
         </div>
 
       </div>
