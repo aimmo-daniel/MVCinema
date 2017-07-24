@@ -3,6 +3,8 @@
 <html lang="en">
 <head>
 <%@ include file="../../include/header.jsp" %>
+<script>
+</script>
 </head>
 <body>
 
@@ -17,7 +19,7 @@
               onmouseout="sub_theater('sub_sub_mouseOver','out','sub_theater_1')" onclick="sub_theater_loadSub('sub_theater_1')"
               id="zzo_addTheater1_label">
               <div class="project-info" id="zzo_addTheater1">
-                <h4 id="sub_theater_1">상영관 추가</h4>
+                <h4 id="sub_theater_1">상영관 추가/관리</h4>
                 <p>
                   Add theater.
                 </p>

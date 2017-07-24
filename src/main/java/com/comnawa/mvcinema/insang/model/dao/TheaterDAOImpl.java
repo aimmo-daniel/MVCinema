@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.comnawa.mvcinema.insang.model.dto.TheaterDTO;
 import com.comnawa.mvcinema.insang.model.dto.TheaterSitDTO;
@@ -35,6 +36,13 @@ public class TheaterDAOImpl implements TheaterDAO {
     map.put("imax", sqlSession.selectOne("admin.getMaxIDX2"));
     map.put("count", sqlSession.selectOne("admin.getCountIDX"));
     return map;
+  }
+  
+  @Override
+  @Transactional
+  public void addTheater(Map<String, Object> map) {
+    sqlSession.insert("admin.addTheater1", map);
+    sqlSession.insert("admin.addTheater2", map);
   }
   
 }

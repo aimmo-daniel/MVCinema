@@ -32,4 +32,9 @@ public class TheaterServiceImpl implements TheaterService {
     return theaterDao.getMaxIDX();
   }
   
+  @Override
+  public void addTheater(Map<String, Object> map) {
+    theaterDao.addTheater(map);
+  }
+  
 }

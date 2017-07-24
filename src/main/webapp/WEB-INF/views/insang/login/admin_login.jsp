@@ -77,14 +77,15 @@
 
 </style>
 <script>
-$(document)
-.ajaxStart(function () {
-	$('#my-spinner').show();
-})
-.ajaxStop(function () {
-	$('#my-spinner').hide();
-});
 $(function(){
+  $(document)
+  .ajaxStart(function () {
+  	$('#my-spinner').show();
+  });
+  $(document)
+  .ajaxStop(function () {
+  	$('#my-spinner').hide();
+  });
   document.location.href=document.location.href.split('#')[0]+"#admin";
   scrollReset();
 })
@@ -118,6 +119,7 @@ $(window).bind('hashchange',function(){
     }
   }
 })
+
 function scrollReset(){
   $('html, body').animate({scrollTop : 300},10);
   $('html, body').animate({scrollTop : 0},10);
