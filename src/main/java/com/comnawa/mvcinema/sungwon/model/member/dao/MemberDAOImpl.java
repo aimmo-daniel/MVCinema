@@ -21,5 +21,11 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 
+	@Override
+	public String checkemail(String email) {
+		return sqlSession.selectOne("member.check_eamil",email);
+	}
+
+
 
 }

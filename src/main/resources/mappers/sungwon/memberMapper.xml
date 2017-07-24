@@ -8,6 +8,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="check_id" resultType="String">
 		select name from member where userid=#{userid}
 	</select>
+	<select id="check_email" resultType="String">
+		select name from member where email=#{email}
+	</select>
 </mapper>
 
 

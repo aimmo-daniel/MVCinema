@@ -9,12 +9,11 @@
 <%@ include file="../sw_include/template.jsp"%>
 <link rel="stylesheet" href="${path}/sungwon/etc/css/sw_style.css?v=4">
 <script>
-	var date = new Date();
-	var this_year = date.getFullYear();
-
 	//아이디 중복확인 체크
 	var id_status = false;
-	//비밀번호 양식상태 체크
+	//아이디 양식 체크
+	var id_rule= false;
+	//비밀번호 양식 체크
 	var pwd_rule = false;
 	//비밀번호 일치여부 체크
 	var pwd_match = false;
@@ -26,13 +25,22 @@
 	var cb_status = false;
 	//인증번호 
 	var rndNum;
+	//이름
+	var name;
 	//나이
 	var age = 0;
+	//성별
 	var gender = "";
+	
 	$(function() {
+		//현재년도-100 부터 현재년도까지 select박스 에 추가
+		var date = new Date();
+		var this_year = date.getFullYear();
+		for (var i = this_year - 100; i <= this_year; i++) {
+			$("#year").append("<option value="+i+">" + i + "</option>");
+		}
 		//중복확인 체크이벤트
-		$("#btnCheckid").click(
-				function() {
+		$("#btnCheckid").click(function() {
 					var userid = $("#userid").val();
 					if (userid == "") {
 						alert("아이디를 입력하세요");
@@ -51,6 +59,7 @@
 								$("#ck_id_icon").addClass(
 										'glyphicon glyphicon-ok');
 								$("#ck_id_result").html("사용 가능한 아이디 입니다.");
+								$("#userid").attr("disabled","disabled");
 								$("#passwd").focus();
 								id_status = true;
 							} else {
@@ -65,8 +74,81 @@
 						}
 					});
 				});
+		$("check_emali").click(function(){
+			var email = $("#user_email").val();
+			if (email == "") {
+				alert("이메일을 입력해주세요");
+				return;
+			}
+			if (!/^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/.test(email)) {
+				alert("이메일 형식이 아닙니다.");
+				return;
+			}
+			var param = "email=" + email;
+			//이메일 중복확인
+			$.ajax({
+				type : "post",
+				url : "${path}/member/checkemail.do",
+				data : param,
+				success : function(result) {
+					if (result.name == null) {
+						alert("인증메일이 발송되었습니다.");
+						$("#emailResult").attr("hidden", false);
+						$.ajax({
+							type : "post",
+							url : "${path}/mail/sendMail.do",
+							data : param,
+							success : function(result) {
+								rndNum = result;
+							}
+						});
+					}else{
+						alert("이미사용중인 이메일입니다.");
+					}
+				}
+			});
+		});
 	});
-
+	//년도 선택후 월 출력하기
+	function getMonth() {
+		for (var i = 1; i <= 12; i++) {
+			$("#month").append("<option value="+i+">" + i + "</option>");
+		}
+	}
+	//월선택후 해당 월의 마지막 날구하기(윤달계산)
+	function getLastDay() {
+		var year = $("#year option:selected").val();
+		var month = $("#month option:selected").val();
+		//month 는 0 부터 시작해서..
+		var day = 32 - new Date(year, month - 1, 32).getDate();
+		if (day > 0) {
+			for (var i = 0; i <= day; i++) {
+				$("#day").append("<option value="+i+">" + i + "</option>");
+			}
+		}
+	}
+	//아이디 정규화
+	function checkId(){
+		var userid = $("#userid").val();
+		if(userid == ''){
+			$("#ck_id_icon").attr("class", '');
+			$("#ck_id_result").html("");
+			return;
+		}
+		if (!/^[a-zA-Z0-9]{6,15}$/.test(userid)) {
+			$("#td_checkid").attr("hidden", false);
+			$("#ck_id_icon").attr("style", 'color:red');
+			$("#ck_id_icon").attr("class", 'glyphicon glyphicon-remove');
+			$("#ck_id_result").html(" 숫자와 영문자 조합으로 6~15자리를 사용해야 합니다.");
+			return;
+		}
+		$("#td_checkid").attr("hidden", false);
+		$("#ck_id_icon").attr("style", 'color:orange');
+		$("#ck_id_icon").attr("class", 'glyphicon glyphicon-warning-sign');
+		$("#ck_id_result").html(" 사용가능한 양식입니다.\n 중복확인을 해주세요.");
+		
+		id_rule=true;
+		}
 	//비밀번호 정규화
 	function checkPwd() {
 		var password = $("#passwd").val();
@@ -143,13 +225,6 @@
 			$("#agree").attr('value', 'disagree');
 		}
 	}
-	//아이디 포커스
-	function id_focus() {
-		$("#userid").val("");
-		$("#td_checkid").attr("hidden", "hidden");
-		$("#ck_id_icon").attr("class", '');
-		id_status = false;
-	}
 	//비밀번호 포커스
 	function pwd_focus() {
 		$("#passwd").val("");
@@ -161,53 +236,9 @@
 		pwd_match = false;
 		pwd_rule = false;
 	}
-	function getAge() {
-		var birth = $("#birth").val();
-		if (birth.length == 2) {
-			var tmp_year = birth.substr(0, 2);
-			if (tmp_year < 17) {
-				var my_year = '20' + tmp_year;
-			} else {
-				var my_year = '19' + tmp_year;
-			}
-			var date = new Date();
-			var this_year = date.getFullYear();
-			age = this_year - my_year;
-		}
-		if (birth.length > 5) {
-			$("#gender").focus();
-		}
-	}
-
-	function resetAge() {
-		$("#gender").val("");
-		$("#birth").val("");
-		age = 0;
-		gender = "";
-	}
-
+	//성별 확인
 	function getGender() {
-		if (age == 0) {
-			alert("생년월일을 먼저입력해주세요");
-			$("#gender").val("");
-			$("#birth").focus();
-			return;
-		}
-		var sex = $("#gender").val();
-		if (sex.length > 0) {
-			$("#email").focus();
-		}
-		if (age > 17 && sex == 1 || age <= 17 && sex == 3) {
-			gender = "남";
-		} else if (age > 17 && sex == 2 || age <= 17 && sex == 4) {
-			gender = "여";
-		} else {
-			alert("양식에 맞지 않습니다.");
-			$("#gender").val("");
-			$("#birth").val("");
-			$("#birth").focus();
-			return;
-		}
+		gender = $(":input:radio[name=group]:checked").val();
 	}
 </script>
 </head>
@@ -241,12 +272,12 @@
 				</div>
 				<div class="col-md-7 col-sm-7">
 					<form method="post" name="signup">
-						<table >
+						<table>
 							<tr>
 								<td class="td_label"><label class="label label-default">아이디</label>
 								</td>
 								<td colspan="6" class="td_input"><input class="form-control"
-										name=userid id="userid" onfocus="id_focus()"></td>
+										name=userid id="userid" onkeyup="checkId()"></td>
 								<td class="td_button"><input type="button" role="button"
 										class="btn btn-default" id="btnCheckid" value="중복확인"></td>
 							</tr>
@@ -279,49 +310,29 @@
 							<tr>
 								<td class="td_label"><label class="label label-default">생년월일</label></td>
 								<td class="td_input" style="width: 37%"><select
-									class="form-control">
-										<%
-											for (int i = 1900; i <= 2017; i++) {
-										%>
-										<option><%=i%>
-										</option>
-										<%
-											}
-										%>
+									class="form-control" name="year" id="year" onchange="getMonth()">
+										<option value="">-</option>
 								</select></td>
-								<td style="width: 3%"><b>년</b></td>
-								<td style="width: 25%"><select class="form-control">
-										<%
-											for (int i = 1; i <= 12; i++) {
-										%>
-										<option><%=i%>
-										</option>
-										<%
-											}
-										%>
+								<td style="width: 2.5%"><b>년</b></td>
+								<td style="width: 28%"><select class="form-control" name="month"
+									id="month" onchange="getLastDay()">
+										<option value="">-</option>
 								</select></td>
-								<td style="width: 3%"><b>월</b></td>
-								<td style="width: 29%"><select class="form-control">
-										<%
-											for (int i = 1; i <= 31; i++) {
-										%>
-										<option><%=i%>
-										</option>
-										<%
-											}
-										%>
+								<td style="width: 2.5%"><b>월</b></td>
+								<td style="width: 28%"><select class="form-control" name="day"
+									id="day">
+										<option value="">-</option>
 								</select></td>
 								<td style="width: 3%"><b>일</b></td>
 							</tr>
 							<tr>
 								<td><label class="label label-default">성별</label></td>
 								<td colspan="3">
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="radio" name="group" value="남" checked="checked"><b>남</b> 
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
+										type="radio" name="group" value="남" onclick="getGender()"><b>남</b>
 								</td>
-								<td colspan="3">
-								<input type="radio" name="group" value="여"><b>여</b>
-								</td>
+								<td colspan="3"><input type="radio" name="group" value="여"
+										onclick="getGender()"><b>여</b></td>
 							</tr>
 							<tr>
 								<td class="td_label"><label class="label label-default">이메일</label></td>

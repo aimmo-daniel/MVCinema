@@ -25,4 +25,11 @@ public class MemberServiceImpl implements MemberService {
 	public String checkid(String userid) {
 		return memberDao.checkid(userid);
 	}
+
+
+
+	@Override
+	public String checkemail(String email) {
+		return memberDao.checkemail(email);
+	}
 }

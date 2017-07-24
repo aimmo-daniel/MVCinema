@@ -40,4 +40,13 @@ public class MemberController {
 		dto.setName(name);
 		return dto;
 	}
+	
+	@ResponseBody
+	@RequestMapping("checkemail.do")
+	public MemberDTO checkEmail(@RequestParam String email) {
+		String name = memberService.checkemail(email);
+		MemberDTO dto = new MemberDTO();
+		dto.setName(name);
+		return dto;
+	}
 }
