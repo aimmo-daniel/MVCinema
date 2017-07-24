@@ -6,22 +6,42 @@
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style>
 li {
- list-style: none;
+	list-style: none;
 }
 </style>
 <div class="wrap-movie-chart"
-	style="padding-right: 200px; padding-left: 200px;">
+	style="padding-right: 300px; padding-left: 300px;">
 	<!-- Heading Map Multi -->
 	<div class="tit-heading-wrap">
 		<h3>무비차트</h3>
 		<a href="#" style="margin-top: 20px; float: right;"><span>+더보기</span></a>
 	</div>
+	<div class="sect-sorting">
+		<label for="order_type" class="hidden">정렬</label> 
+		<select	id="order_type" name="order-type" style="width:auto; height: 30px;">
+			<option title="현재 선택됨" selected="" value="1">예매율순</option>
+			<option value="2">평점순</option>
+			<option value="3">관람객순</option>
+		</select>
+		<button type="button"><span>GO</span></button>
+	</div>
 	<div class="sect-movie-chart">
 		<ol>
 			<!-- 영화1 -->
 			<c:forEach var="i" begin="1" end="6">
+				<c:if test=${i == 4}>
+				</c:if>
 				<li>
 					<div class="box-image">
+						<c:choose>
+							<c:when test="${i < 4}">
+								<strong class="rank"
+									style="width: auto; height: auto; background: red;">No.${i}</strong>
+							</c:when>
+							<c:otherwise>
+								<strong class="rank" style="width: auto; height: auto;">&nbsp;&nbsp;&nbsp;</strong>
+							</c:otherwise>
+						</c:choose>
 						<!-- 상세정보 페이지 URL입력 -->
 						<a href="#"> <!-- DB에서 이미지를 받아옴 영화포스터--> <span
 							class="thumb-image"> <img
