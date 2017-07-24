@@ -74,7 +74,7 @@ img {
 							<c:when test="${sessionScope.dto.userid != null}">
 								<b><a href="{path}/member/account.do">${sessionScope.dto.userid}님</a></b>
 								<a class="btn btn-default" role="button"
-									href="${path}/main/logout.do">로그아웃</a>
+									href="${path}/main/logout.do">로그아웃</a> 
 							</c:when>
 						</c:choose>
 					</div>
