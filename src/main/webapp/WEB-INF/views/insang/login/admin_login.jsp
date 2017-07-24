@@ -8,6 +8,8 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 <title>MVCinema AdminPage</title>
+<!-- insang include css -->
+<link rel="stylesheet" href="${path}/admin/resources/template/css/zzo_style_login.css">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="${path}/admin/resources/template/css/bootstrap.min.css">
 <!-- Animate CSS -->
@@ -18,77 +20,14 @@
 <!-- Main CSS -->
 <link rel="stylesheet" href="${path}/admin/resources/template/css/style.css">
 <!-- Google web font --> 
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'>
-<!-- ZZO loginpage StyleSheet -->
-<link rel="stylesheet" href="${path}/admin/resources/template/css/zzo_style_login.css">
-<style>
-#my-spinner {
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  display: none;
-  opacity: .6;
-  background: silver;
-  position: fixed;
-}
+<link href='${path}/admin/resources/template/css/fontSansPro.css' rel='stylesheet' type='text/css'>
 
-#my-spinner div {
-  width: 100%;
-  height: 100%;
-  display: table;
-}
-
-#my-spinner span {
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-}
-
-#my-spinner img {
-  background: white;
-  padding: 1em;
-  border-radius: .7em;
-}
-
-#zzo_theaterThumbDiv:hover {
-  background-color: rgba(250,190,230,.2);
-  transition: background-color 2s;
-}
-
-#zzo_section ul li a {
-  color: black;
-  transition: color 1s;
-}
-
-#sub_theater_1 {
-  color : black;
-  transition: color 0.5s;
-}
-
-#sub_theater_2 {
-  color : black;
-  transition: color 0.5s;
-}
-
-#sub_theater_add_addTheater {
-  transition: color 0.5s;
-}
-
-</style>
 <script>
 $(function(){
-  $(document)
-  .ajaxStart(function () {
-  	$('#my-spinner').show();
-  });
-  $(document)
-  .ajaxStop(function () {
-  	$('#my-spinner').hide();
-  });
   document.location.href=document.location.href.split('#')[0]+"#admin";
   scrollReset();
 })
+
 $(window).bind('hashchange',function(){
   var menuName= document.location.hash.split('#')[1];
   if (menuName.indexOf('Theater_detailTheater')!= -1){
@@ -96,12 +35,11 @@ $(window).bind('hashchange',function(){
     loadTheaterDetail(idx);
     return;
   }
-  console.log(menuName);
   loadSubMenu(menuName);
   if (menuName == 'admin'){
     scrollReset();
   } else {
-  	fnMove();
+    fnMove();
   }
   if (menuName=='theater' || menuName=='member' || menuName=='movie' || menuName=='option'){
     $("#section_theater").css("color","black");
@@ -124,77 +62,6 @@ $(window).bind('hashchange',function(){
     }
   }
 })
-
-function scrollReset(){
-  $('html, body').animate({scrollTop : 300},10);
-  $('html, body').animate({scrollTop : 0},10);
-}
-function loadSubMenu(select){
-  $.ajax({
-    url: "${path}/subMenu/"+select+".do",
-    success: function(result){
-      if (select.indexOf("_")!= -1){
-        switch (select){
-        case 'theater_addTheater':
-          $("#sub_theater_contents").html(result);
-          break;
-        }
-      } else {
-        $("#zzo_contents").html(result);
-      }
-    }
-  });
-}
-function fnMove(){
-  var offset = $("#zzo_section").offset();
-  $('html, body').animate({scrollTop : offset.top-100}, 300);
-}
-function sub_theater(choice, value1, value2, value3){
-  
-  switch (choice){
-  
-  case 'sub_sub_mouseOver':
-    var target= document.getElementById(value2);
-    if (value1=='over'){
-      target.style.color='green';
-    } else if (value1== 'out') {
-	  target.style.color='black';
-    }
-    break;
-    
-  case '':
-    break;
-  }
-  
-}
-function sub_theater_loadSub(choice){
-  var param= choice=='sub_theater_1'?'add':'sit';
-  $.ajax({
-    url: "${path}/subMenu/theater/"+param+".do",
-    success: function(result){
-      $("#sub_theater_contents").html(result);
-    }
-  })
-}
-function sub_theater_add_addTheater(id, action){
-  var target= document.getElementById(id);
-  if (action== 'over'){
-    $("#"+id).css("color","green");
-  } else {
-    $("#"+id).css("color","gray");  
-  }
-}
-function loadTheaterDetail(idx){
-  var param= "idx="+idx;
-  $.ajax({
-    type: "post",
-    data: param,
-    url: "${path}/subMenu/theater_updateTheaterDetail",
-    success: function(result){
-      $("#sub_theater_contents").html(result);
-    }
-  })
-}
 </script>
 </head>
 <body>
@@ -342,78 +209,6 @@ function loadTheaterDetail(idx){
   <div id="zzo_contents" class="container">
   </div>
 
-
-
-
-  <!-- <section id="contact">
-    <div class="container">
-      <div class="row">
-
-        <div class="wow fadeInUp col-md-6 col-sm-12" data-wow-delay="1.3s">
-          <div class="google_map">
-            <div id="map-canvas"></div>
-          </div>
-        </div>
-
-        <div class="wow fadeInUp col-md-6 col-sm-12" data-wow-delay="1.6s">
-          <h1>Let's work together!</h1>
-          <div class="contact-form">
-            <form id="contact-form" method="post" action="#">
-              <input name="name" type="text" class="form-control" placeholder="Your Name" required> <input name="email"
-                type="email" class="form-control" placeholder="Your Email" required>
-              <textarea name="message" class="form-control" placeholder="Message" rows="4" required></textarea>
-              <div class="contact-submit">
-                <input type="submit" class="form-control submit" value="Send a message">
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <div class="clearfix"></div>
-
-        <div class="col-md-4 col-sm-4">
-          <div class="wow fadeInUp media" data-wow-delay="0.3s">
-            <div class="media-object pull-left">
-              <i class="fa fa-tablet"></i>
-            </div>
-            <div class="media-body">
-              <h3 class="media-heading">Phone</h3>
-              <p>+99 00 8877 6655</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 col-sm-4">
-          <div class="wow fadeInUp media" data-wow-delay="0.6s">
-            <div class="media-object pull-left">
-              <i class="fa fa-envelope"></i>
-            </div>
-            <div class="media-body">
-              <h3 class="media-heading">Email</h3>
-              <p>hello@company.com</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 col-sm-4">
-          <div class="wow fadeInUp media" data-wow-delay="0.9s">
-            <div class="media-object pull-left">
-              <i class="fa fa-globe"></i>
-            </div>
-            <div class="media-body">
-              <h3 class="media-heading">Address</h3>
-              <p>
-                123 New Street, Old Town<br> Another Village, 11220
-              </p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section> -->
-
-
   <!-- Footer section -->
   <footer>
     <div class="container">
@@ -421,13 +216,6 @@ function loadTheaterDetail(idx){
 
         <div class="col-md-12 col-sm-12">
           <p class="wow fadeInUp" data-wow-delay="0.3s">Copyright © 2016 Your Company Name - Designed by Tooplate</p>
-          <!-- <ul class="social-icon wow fadeInUp" data-wow-delay="0.6s">
-            <li><a href="#" class="fa fa-facebook"></a></li>
-            <li><a href="#" class="fa fa-twitter"></a></li>
-            <li><a href="#" class="fa fa-dribbble"></a></li>
-            <li><a href="#" class="fa fa-behance"></a></li>
-            <li><a href="#" class="fa fa-google-plus"></a></li>
-          </ul> -->
         </div>
 
       </div>
@@ -439,6 +227,9 @@ function loadTheaterDetail(idx){
   <script src="${path}/admin/resources/template/js/bootstrap.min.js"></script>
   <script src="${path}/admin/resources/template/js/wow.min.js"></script>
   <script src="${path}/admin/resources/template/js/custom.js"></script>
-
+  <!-- insang Javascript -->
+  <script src="${path}/subMenu/resources/template/js/zzo_main.js?v1" charset="utf-8"></script>
+  <script src="${path}/subMenu/resources/template/js/zzo_main_theater.js?v1" charset="utf-8"></script>
+  <script src="${path}/subMenu/resources/template/js/zzo_main_movie.js?v1" charset="utf-8"></script>
 </body>
 </html>

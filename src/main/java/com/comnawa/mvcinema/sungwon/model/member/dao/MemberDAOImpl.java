@@ -21,5 +21,29 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 
+	@Override
+	public String checkemail(String email) {
+		return sqlSession.selectOne("member.check_email",email);
+	}
+
+
+	@Override
+	public void signup(MemberDTO dto) {
+		sqlSession.insert("member.signup",dto);
+		
+	}
+
+
+	@Override
+	public boolean login(MemberDTO dto) {
+		String name = sqlSession.selectOne("member.login",dto);
+		return name == null? false : true;
+	}
+	
+	@Override
+	public MemberDTO viewMember(String userid) {
+		return sqlSession.selectOne("member.view_member",userid);
+	}
+
 
 }

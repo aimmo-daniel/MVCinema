@@ -25,4 +25,48 @@ public class MemberServiceImpl implements MemberService {
 	public String checkid(String userid) {
 		return memberDao.checkid(userid);
 	}
+
+
+
+	@Override //이메일 중복확인
+	public String checkemail(String email) {
+		return memberDao.checkemail(email);
+	}
+
+
+
+	@Override //회원가입
+	public void signup(MemberDTO dto) {
+		try {
+			sha256 = SHA256.getInstance();
+			String shapwd = sha256.getSha256(dto.getPasswd().getBytes());
+			dto.setPasswd(shapwd);
+			memberDao.signup(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
+	@Override
+	public boolean login(MemberDTO dto, HttpSession session) {
+		try {
+			String shapwd = sha256.getSha256(dto.getPasswd().getBytes());
+			dto.setPasswd(shapwd);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		boolean result = memberDao.login(dto);
+		if (result) {
+			MemberDTO dto2 = memberDao.viewMember(dto.getUserid());
+			session.setAttribute("dto", dto2);
+		}
+		return result;
+	}
+
+	@Override //로그인 성공후 회원정보전달
+	public MemberDTO viewMember(String userid) {
+		return memberDao.viewMember(userid);
+	}
 }

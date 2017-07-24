@@ -131,4 +131,9 @@ public class SubMenuController {
     return "/insang/submenu/sub_theater/theater_sit";
   }
   
+  @RequestMapping("/movie/add.do")
+  public String movie_add(){
+    return "/insang/submenu/sub_movie/movie_add";
+  }
+  
 }
