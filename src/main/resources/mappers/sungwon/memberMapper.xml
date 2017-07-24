@@ -11,6 +11,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="check_email" resultType="String">
 		select name from member where email=#{email}
 	</select>
+	<insert id="signup">
+		insert into member (userid,passwd,email,name,gender,age) 
+		values(#{userid},#{passwd},#{email},#{name},#{gender},#{age})	
+	</insert>
 </mapper>
 
 

@@ -47,35 +47,39 @@
 						$("#userid").focus();
 						return;
 					}
-					var param = "userid=" + userid;
-					$.ajax({
-						type : "post",
-						url : "${path}/member/checkid.do",
-						data : param,
-						success : function(result) {
-							if (result.name == null) {
-								$("#td_checkid").attr("hidden", false);
-								$("#ck_id_icon").attr("style", 'color:green')
-								$("#ck_id_icon").addClass(
-										'glyphicon glyphicon-ok');
-								$("#ck_id_result").html("사용 가능한 아이디 입니다.");
-								$("#userid").attr("disabled","disabled");
-								$("#passwd").focus();
-								id_status = true;
-							} else {
-								$("#td_checkid").attr("hidden", false);
-								$("#ck_id_icon").attr("style", 'color:red')
-								$("#ck_id_icon").addClass(
-										'glyphicon glyphicon-remove');
-								$("#ck_id_result").html("이미 사용중인 아이디 입니다.");
-								$("#userid").val("");
-								$("#userid").focus();
+					if(id_rule){
+						var param = "userid=" + userid;
+						$.ajax({
+							type : "post",
+							url : "${path}/member/checkid.do",
+							data : param,
+							success : function(result) {
+								if (result.name == null) {
+									$("#td_checkid").attr("hidden", false);
+									$("#ck_id_icon").attr("style", 'color:green')
+									$("#ck_id_icon").attr("class",'glyphicon glyphicon-ok');
+									$("#ck_id_result").html("사용 가능한 아이디 입니다.");
+									$("#userid").attr("disabled","disabled");
+									$("#passwd").focus();
+									id_status = true;
+								} else {
+									$("#td_checkid").attr("hidden", false);
+									$("#ck_id_icon").attr("style", 'color:red')
+									$("#ck_id_icon").addClass(
+											'glyphicon glyphicon-remove');
+									$("#ck_id_result").html("이미 사용중인 아이디 입니다.");
+									$("#userid").val("");
+									$("#userid").focus();
+								}
 							}
-						}
-					});
+						});
+					}else{
+						alert("아이디 양식이 맞지않습니다.");
+						return;
+					}
 				});
-		$("check_emali").click(function(){
-			var email = $("#user_email").val();
+		$("#check_email").click(function(){
+			var email = $("#email").val();
 			if (email == "") {
 				alert("이메일을 입력해주세요");
 				return;
@@ -93,7 +97,8 @@
 				success : function(result) {
 					if (result.name == null) {
 						alert("인증메일이 발송되었습니다.");
-						$("#emailResult").attr("hidden", false);
+						$(".emailResult").attr("hidden", false);
+						$("#user_num").focus();
 						$.ajax({
 							type : "post",
 							url : "${path}/mail/sendMail.do",
@@ -108,6 +113,104 @@
 				}
 			});
 		});
+		//인증번호 체크
+		$("#rndNum_check").click(function() {
+			var userNum = $("#user_num").val();
+			if (userNum == "") {
+				alert("인증번호 7자리를 입력하세요");
+				return;
+			}
+			if (userNum != rndNum) {
+				$("#td_rndNum").attr("hidden",false);
+				$("#icon_rndNum").attr("class", 'glyphicon glyphicon-remove');
+				$("#icon_rndNum").attr("style", 'color:red');
+				$("#text_rndNum").html("인증번호가 일치 하지 않습니다.");
+				return;
+			}
+			if (userNum == rndNum) {
+				$("#td_rndNum").attr("hidden",false);
+				$("#icon_rndNum").attr("class", 'glyphicon glyphicon-ok');
+				$("#icon_rndNum").attr("style", 'color:green');
+				$("#text_rndNum").html("인증 완료");
+				$("#user_num").attr("disabled",'disabled');
+				$("#email").attr("disabled",'disabled');
+				email_status = true;
+			}
+		});
+		//회원가입 버튼 클릭이벤트
+		$("#btnSignUp").click(
+				function() {
+					var userid = $("#userid").val();
+					var name = $("#name").val();
+					var password = $("#passwd").val();
+					var email = $("#email").val();
+					//아이디 정규화 양식에 맞지않다면
+					if (!id_rule) {
+						alert("아이디 양식이 맞지않습니다.")
+						return;
+					}
+					//아이디 중복확인이 안된상태라면
+					if (!id_status) {
+						alert("아이디 중복확인이 완료되지않았습니다.")
+						return;
+					}
+					//비밀번호 정규화 약식에 맞지않다면
+					if (!pwd_rule) {
+						alert("비밀번호가 적절하지 않습니다.")
+						return;
+					}
+					//1차2차 비밀번호가일치하지않다면
+					if (!pwd_match) {
+						alert("비밀번호가 일치하지  않습니다.")
+						return;
+					}
+					//이름이 입력안된상태라면
+					if (name == "") {
+						alert("이름이 입력되지않았습니다.")
+						return;
+					}
+					//생년월일을 입력하지 않았다면
+					if($("#year").val() == '' || $("#month").val() == '' || $("#day").val() == '' ){
+						alert("생년월일을 모두 입력해주세요");
+						return;
+					}
+					if(gender == ''){
+						alert("성별을 입력해주세요");
+						return;
+					}
+					//메일 인증이 안된상태라면 
+					if (!email_status) {
+						alert("이메일 인증이 완료되지않았습니다.")
+						return;
+					}
+					//이용약관에 동의하지않았다면
+					if (!cb_status) {
+						alert("이용약관에 동의해주세요.")
+						return;
+					}
+						var age = this_year - $("#year").val();
+						var param = "userid=" + $("#userid").val()+
+						"&passwd=" + $("#passwd").val() + 
+						"&email=" + $("#email").val() + 
+						"&name=" + $("#name").val() +
+						"&gender=" +gender +
+						"&age="+ age;
+
+						$.ajax({
+							type : "post",
+							url : "${path}/member/signup.do",
+							data : param,
+							success : function(result) {
+								if (result.message == 'success') {
+									alert("회원가입이 완료되었습니다.");
+									location.href = "${path}/member/login_page.do";
+								} else {
+									alert("회원 가입에 실패하였습니다.\n 잠시후 다시 시도해주세요");
+								}
+							}
+						});
+
+				});
 	});
 	//년도 선택후 월 출력하기
 	function getMonth() {
@@ -146,8 +249,7 @@
 		$("#ck_id_icon").attr("style", 'color:orange');
 		$("#ck_id_icon").attr("class", 'glyphicon glyphicon-warning-sign');
 		$("#ck_id_result").html(" 사용가능한 양식입니다.\n 중복확인을 해주세요.");
-		
-		id_rule=true;
+			id_rule=true;
 		}
 	//비밀번호 정규화
 	function checkPwd() {
@@ -339,18 +441,19 @@
 								<td colspan="6" class="td_input"><input type="email" name="email"
 										id="email" class="form-control" placeholder="mvcinema@example.com"></td>
 								<td class="td_button">
-									<button class="btn btn-default" id="check_eamil">인증메일 발송</button>
+									<input type="button" class="btn btn-default" role="button" id="check_email" value="인증메일 발송">
 								</td>
 							</tr>
-							<tr>
+							<tr class="emailResult" hidden="hidden">
 								<td>&nbsp;</td>
-								<td colspan="6"><input class="form-control" placeholder="인증번호"></td>
-								<td><button class="btn btn-default" id="rndNum_check">확인</button></td>
+								<td colspan="6"><input class="form-control" placeholder="인증번호" id="user_num"></td>
+								<td><input type="button" role="button" class="btn btn-default" id="rndNum_check" value="확인"></td>
 							</tr>
-							<tr>
+							<tr class="emailResult" hidden="hidden">
 								<td>&nbsp;</td>
-								<td colspan="6"><span class="glyphicon glyphicon-ok"
-									style="color: green;"></span><b>이메일 인증결과</b></td>
+								<td colspan="6" id="td_rndNum">
+								<span id="icon_rndNum"></span>
+								<b id="text_rndNum"></b></td>
 							</tr>
 						</table>
 					</form>
@@ -359,7 +462,7 @@
 		</div>
 		<br>
 		<br>
-		<button class="btn btn-default btn-lg" style="position: relative; left: 45%;">회원가입</button>
+		<input type="button" role="button" class="btn btn-default btn-lg" id="btnSignUp"  value="회원 가입">
 	</section>
 	<%@ include file="../sw_include/footer_menu.jsp"%>
 </body>

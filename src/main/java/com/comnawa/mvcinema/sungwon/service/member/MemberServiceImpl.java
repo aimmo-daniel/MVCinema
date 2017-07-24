@@ -28,8 +28,22 @@ public class MemberServiceImpl implements MemberService {
 
 
 
-	@Override
+	@Override //이메일 중복확인
 	public String checkemail(String email) {
 		return memberDao.checkemail(email);
+	}
+
+
+
+	@Override //회원가입
+	public void signup(MemberDTO dto) {
+		try {
+			sha256 = SHA256.getInstance();
+			String shapwd = sha256.getSha256(dto.getPasswd().getBytes());
+			dto.setPasswd(shapwd);
+			memberDao.signup(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

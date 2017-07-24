@@ -2,9 +2,11 @@ package com.comnawa.mvcinema.sungwon.controller.member;
 
 import javax.inject.Inject;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,5 +50,19 @@ public class MemberController {
 		MemberDTO dto = new MemberDTO();
 		dto.setName(name);
 		return dto;
+	}
+	
+	@ResponseBody
+	@RequestMapping("signup.do")
+	public JSONObject signUp(@ModelAttribute MemberDTO dto) {
+		JSONObject json = new JSONObject();
+		try {
+			memberService.signup(dto);
+			json.put("message", "success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			json.put("message", "fail");
+		}
+		return json;
 	}
 }

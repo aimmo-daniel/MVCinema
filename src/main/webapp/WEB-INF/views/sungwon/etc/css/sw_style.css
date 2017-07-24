@@ -24,3 +24,8 @@ td.td_button {
 label.label.label-default {
 	font-size: 18px;
 }
+
+#btnSignUp{
+	position: relative; 
+	left: 45%;
+}
