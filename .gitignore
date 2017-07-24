@@ -3,4 +3,3 @@
 .DS_Store
 .project
 .settings/
-/src/main/webapp/WEB-INF/spring/root-context.xml
