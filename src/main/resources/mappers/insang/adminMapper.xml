@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </insert>
   
   <insert id="addTheater2">
-    insert into theater_sit values(#{idx}, #{rows}, #{cols}, null)
+    insert into theater_sit values(#{idx}, #{rows}, #{cols}, null, #{name})
   </insert>
   
 </mapper>
