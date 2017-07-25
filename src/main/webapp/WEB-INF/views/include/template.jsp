@@ -17,10 +17,6 @@
    ================================================== -->
 <link rel="stylesheet" href="${path}/template/css/style.css">
 
-<!-- Google web font 
-   ================================================== -->
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300'
-	rel='stylesheet' type='text/css'>
 	
 <!-- Javascript 
 ================================================== -->
