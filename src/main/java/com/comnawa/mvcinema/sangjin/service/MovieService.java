@@ -7,4 +7,5 @@ import com.comnawa.mvcinema.sangjin.model.dto.MovieDTO;
 
 public interface MovieService {
 	List<MovieDTO> movieList(String order_type);
+	List<MovieDTO> ScdmovieList();
 }

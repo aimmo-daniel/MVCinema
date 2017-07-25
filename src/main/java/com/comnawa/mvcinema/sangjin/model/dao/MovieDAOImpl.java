@@ -19,4 +19,9 @@ public class MovieDAOImpl implements MovieDAO {
 		return sqlSession.selectList("movie.movie_list", order_type);
 	}
 
+	@Override
+	public List<MovieDTO> ScdmovieList() {
+		return sqlSession.selectList("movie.scdmovie_list");
+	}
+
 }

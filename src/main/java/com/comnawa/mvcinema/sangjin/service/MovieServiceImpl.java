@@ -19,4 +19,9 @@ public class MovieServiceImpl implements MovieService {
 		return movieDao.movieList(order_type);
 	}
 
+	@Override
+	public List<MovieDTO> ScdmovieList() {
+		return movieDao.ScdmovieList();
+	}
+
 }

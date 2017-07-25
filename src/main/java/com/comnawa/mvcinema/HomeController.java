@@ -1,7 +1,5 @@
 package com.comnawa.mvcinema;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -43,6 +41,16 @@ public class HomeController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("list", list); //영화 목록
 		map.put("order_type", order_type); //예매율순, 평점순, 관람객순
+		mav.addObject("map", map);
+		return mav;
+	}
+	
+	@RequestMapping("schedule.do")
+	public ModelAndView schedule(ModelAndView mav) {
+		List<MovieDTO> list = movieService.ScdmovieList();
+		mav.setViewName("sangjin/home/ajaxMlist");
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list); //영화 목록
 		mav.addObject("map", map);
 		return mav;
 	}

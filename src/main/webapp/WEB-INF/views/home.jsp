@@ -18,6 +18,7 @@ li {
 <%@ include file="include/header.jsp"%>
 <%@ include file="include/template.jsp"%>
 <%@ include file="sangjin/sj_include/sangjincss.jsp"%>
+<script src="${path }/admin/resources/template/js/zzo_main.js"></script>
 <script>
 	$(document).ready(function() {
 		$("#expand").click(function() {
@@ -26,14 +27,39 @@ li {
 		});
 		listMovie();
 	});
-
+	
 	function listMovie() {
 		var order_type = $("#order_type").val();
+		if (order_type == undefined) {
+			order_type = String("rank");
+		}
 		$.ajax({
 			type : "get",
 			url : "${path}/sort.do?order_type=" + order_type,
 			success : function(result) {
 				$("#listMovie").html(result);
+				$("#order_type").show();
+				$("#btnSearch").show();
+				$("#expand").show();
+				$("#hr_name").html("무비차트");
+				$("#on_2").removeClass("on");
+				$("#on_1").addClass("on");
+			}
+		});
+	}
+	
+	function scheduleMovie() {
+		$.ajax({
+			type : "get",
+			url : "${path}/schedule.do",
+			success : function(result) {
+				$("#listMovie").html(result);
+				$("#order_type").hide();
+				$("#btnSearch").hide();
+				$("#expand").hide();
+				$("#hr_name").html("상영예정작");
+				$("#on_1").removeClass("on");
+				$("#on_2").addClass("on");
 			}
 		});
 	}
@@ -45,44 +71,20 @@ li {
 	</div>
 	<%@ include file="sangjin/home/loginbar.jsp"%>
 	<%@ include file="sangjin/sj_include/carousel.jsp"%>
-	<div class="wrap-movie-chart"
-		style="padding-right: 200px; padding-left: 200px;">
+	<!-- ajax방식으로 영화목록 출력 -->
+	<div class="wrap-movie-chart" style="padding-right: 200px; padding-left: 200px;">
 		<div class="tit-heading-wrap">
-			<h3>무비차트</h3>
+			<h3 id="hr_name"></h3>
 			<div class="submenu">
 				<ul>
-					<li class="on"><a href="/movies/" title="선택">무비차트</a></li>
-					<li><a href="/movies/pre-movies.aspx">상영예정작</a></li>
+					<li id="on_1" class="on"><a href='javascript:void(0);' onclick='listMovie();'>무비차트</a></li>
+					<li id="on_1"><a href='javascript:void(0);' onclick='scheduleMovie();'>상영예정작</a></li>
 				</ul>
 			</div>
 		</div>
-		<div class="sect-sorting">
-			<label for="order_type" class="hidden">정렬</label> <select
-				id="order_type" name="order_type" style="width: auto; height: 30px;">
-				<c:choose>
-					<c:when test="${map.order_type == 'grade' }">
-						<option value="rank">예매율순</option>
-						<option value="grade" selected>평점순</option>
-						<option value="people">관람객순</option>
-					</c:when>
-					<c:when test="${map.order_type == 'people' }">
-						<option value="rank">예매율순</option>
-						<option value="grade">평점순</option>
-						<option value="people" selected>관람객순</option>
-					</c:when>
-					<c:otherwise>
-						<option value="rank" selected>예매율순</option>
-						<option value="grade">평점순</option>
-						<option value="people">관람객순</option>
-					</c:otherwise>
-				</c:choose>
-			</select>
-			<button type="button" id="btnSearch" onclick="listMovie()">
-				<span>GO</span>
-			</button>
-		</div>
-		<!-- ajax 방식으로 영화목록 출력 -->
-		<div class="sect-movie-chart" id="listMovie"></div>
+		
+		<div id="listMovie"></div>
+		
 	</div>
 	<div class="wrap-movie-chart"
 		style="padding-right: 200px; padding-left: 200px;">
