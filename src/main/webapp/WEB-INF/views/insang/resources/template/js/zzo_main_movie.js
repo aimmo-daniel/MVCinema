@@ -14,3 +14,12 @@ function sub_movie_loadSub(choice){
     }
   })
 }
+
+function sub_movie_addMovie_div(value){
+  var now=$('#'+value).css('display');
+  if (now=='none'){
+    $('#'+value).css('display','block')
+  } else if (now== 'block'){
+    $('#'+value).css('display','none');
+  }
+}

@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+
+.lab:hover {
+	color: green;
+	transaction: 0.5s;
+}
