@@ -60,7 +60,7 @@ img {
 				</div>
 				<div id="sangjin" style="margin-top: 30px;">
 					<ul>
-						<li><a href="#">영화</a></li>
+						<li><a href="${path}">영화</a></li>
 						<li><a href="#">예매</a></li>
 						<li><a href="#">극장</a></li>
 						<li><a href="#">고객센터</a></li>

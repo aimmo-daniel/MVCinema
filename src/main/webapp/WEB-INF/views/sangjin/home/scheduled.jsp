@@ -9,8 +9,7 @@ li {
 	list-style: none;
 }
 </style>
-<div class="wrap-movie-chart"
-	style="padding-right: 200px; padding-left: 200px;">
+<div class="wrap-movie-chart" style="padding-right: 200px; padding-left: 200px;">
 	<!-- Heading Map Multi -->
 	<div class="tit-heading-wrap">
 		<h3>상영 예정작</h3>
@@ -25,8 +24,8 @@ li {
 					<a href="#"> <!-- DB에서 이미지를 받아옴 영화포스터--> <span
 						class="thumb-image"> <img
 							src="http://img.cgv.co.kr/Movie/Thumbnail/Poster/000079/79729/79729_185.jpg"
-							alt="덩케르크 포스터" onerror="errorImage(this)"> <!-- 관람 등급 --> <span
-							class="ico-grade grade-12">12세 이상</span>
+							alt="덩케르크 포스터" onerror="errorImage(this)"> <!-- 관람 등급 --> 
+							<span class="ico-grade grade-12">12세 이상</span>
 					</span>
 					</a>
 				</div> <!-- 포스터 아래 영화이름과 개봉일자 -->
