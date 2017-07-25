@@ -34,7 +34,7 @@ public class AdminController {
       map.put("name", "관리자");
       session.setAttribute("dto", map);
     } else {
-      model.addAttribute("result", "로그인에 실패하셨습니다 \n 아이디 또는 비밀번호를 확인해주세요");
+      model.addAttribute("result", "loginFail");
       return "/insang/login/admin_login";
     }
     return "redirect:/admin/loginpage.do";

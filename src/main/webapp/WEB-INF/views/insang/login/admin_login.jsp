@@ -66,14 +66,13 @@ $(window).bind('hashchange',function(){
 </head>
 <body>
 
-
   <c:if test="${result != null}">
     <script>
     if ('${result}' == 'modTheater'){
       alert('상영관 수정에 성공하였습니다.');
       loadSubMenu('theater');
    	  fnMove();
-    } else {
+    } else if ('${result}' == 'loginFail'){
       alert("로그인에 실패하였습니다. \n 아이디 또는 비밀번호를 확인해주세요");
     }
     </script>

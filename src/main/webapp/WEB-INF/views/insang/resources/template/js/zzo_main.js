@@ -33,6 +33,11 @@ function fnMove(){
   $('html, body').animate({scrollTop : offset.top-100}, 300);
 }
 
+function fnScroll(id,animtime,y){
+  var offset= $("#"+value).offset();
+  $('html, body').animate({scrollTop : offset.top-y},animtime)
+}
+
 function sub_theater(choice, value1, value2, value3){
   switch (choice){
   case 'sub_sub_mouseOver':
