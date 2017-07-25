@@ -34,6 +34,7 @@
 			$("#passwd").focus();
 			return;
 		}
+		document.login_form.method = "post";
 		document.login_form.action = "${path}/member/login.do";
 		document.login_form.submit();
 	}
@@ -98,7 +99,7 @@
 	<section>
 		<div align="center" class="wow fadeInUp" data-wow-delay="0.5s">
 			<a href="${path}/member/signup_page.do" class="btn btn-default" role="button"><span
-				class="glyphicon glyphicon-user"></span>&nbsp;회원가입</a> <a href="#"
+				class="glyphicon glyphicon-user"></span>&nbsp;회원가입</a> <a href="${path}/member/findAccount_page.do"
 				class="btn btn-default" role="button"><span
 				class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;아이디/비밀번호찾기</a>
 		</div>

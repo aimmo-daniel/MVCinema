@@ -431,10 +431,10 @@
 								<td><label class="label label-default">성별</label></td>
 								<td colspan="3">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
-										type="radio" name="group" value="남" onclick="getGender()"><b>남</b>
+										type="radio" id="male" name="group" value="남" onclick="getGender()"><label for="male">남</label>
 								</td>
-								<td colspan="3"><input type="radio" name="group" value="여"
-										onclick="getGender()"><b>여</b></td>
+								<td colspan="3"><input type="radio" id="female" name="group" value="여"
+										onclick="getGender()"><label for="female">여</label></td>
 							</tr>
 							<tr>
 								<td class="td_label"><label class="label label-default">이메일</label></td>
