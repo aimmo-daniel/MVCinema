@@ -15,7 +15,7 @@
 								style="width: auto; height: auto; background: red;">No.${status.index+1}</strong>
 						</c:when>
 						<c:otherwise>
-							<strong class="rank" style="width: auto; height: auto;">&nbsp;&nbsp;&nbsp;</strong>
+							<strong class="rank" style="width: auto; height: auto;">No.${status.index+1}</strong>
 						</c:otherwise>
 					</c:choose>
 					<!-- 상세정보 페이지 URL입력 -->
