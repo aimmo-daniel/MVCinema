@@ -34,6 +34,10 @@ public class MemberController {
 	public String signup() {
 		return "sungwon/member/signup";
 	}
+	@RequestMapping("findAccount_page.do")
+	public String findAccount() {
+		return "sungwon/member/find_account";
+	}
 	
 	@ResponseBody
 	@RequestMapping("checkid.do")
