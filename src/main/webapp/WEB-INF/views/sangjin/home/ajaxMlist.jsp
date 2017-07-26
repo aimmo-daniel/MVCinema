@@ -35,7 +35,7 @@
 		<span>GO</span>
 	</button>
 </div>
-<div class="sect-movie-chart">
+<div class="sect-movie-chart"> 
 	<ol>
 		<!-- 영화 7건만 표시 -->
 		<c:forEach var="row" items="${map.list}" varStatus="status">
