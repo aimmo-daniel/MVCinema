@@ -74,6 +74,8 @@ $(window).bind('hashchange',function(){
    	  fnMove();
     } else if ('${result}' == 'loginFail'){
       alert("로그인에 실패하였습니다. \n 아이디 또는 비밀번호를 확인해주세요");
+    } else if ('${result}' == 'addMovie'){
+      alert("영화 추가에 성공하였습니다.")
     }
     </script>
   </c:if>

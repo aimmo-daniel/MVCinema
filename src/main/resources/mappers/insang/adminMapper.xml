@@ -48,6 +48,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     where name= #{primaryName}
   </update>
   
+  <select id="genreList" resultType="com.comnawa.mvcinema.insang.model.dto.GenreDTO">
+    select idx, genre from genre
+  </select>
+  
+  <insert id="insertMovie">
+    INSERT INTO movie (idx, title, age, director, actors, content, genre, release_date, runtime, img_url, preview)
+    values (movie_idx_seq.nextval, #{title}, #{age}, #{director}, #{actors}, #{content}, #{genre}, #{release_date}, #{runtime}
+    , #{img_url}, #{preview})
+  </insert>
+  
 </mapper>
 
 
