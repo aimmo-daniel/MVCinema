@@ -1,0 +1,42 @@
+======================
+	0727 insang;
+======================
+
+CREATE TABLE genre (
+  idx integer PRIMARY KEY,
+  genre varchar(50)
+);
+COMMIT;
+
+CREATE SEQUENCE genre_idx
+START WITH 1
+INCREMENT BY 1;
+
+INSERT INTO genre values(genre_idx.nextval, '코미디');
+INSERT INTO genre values(genre_idx.nextval, '느와르');
+INSERT INTO genre values(genre_idx.nextval, '범죄');
+INSERT INTO genre values(genre_idx.nextval, '호러');
+INSERT INTO genre values(genre_idx.nextval, '전쟁');
+INSERT INTO genre values(genre_idx.nextval, '코미디');
+INSERT INTO genre values(genre_idx.nextval, '가족');
+INSERT INTO genre values(genre_idx.nextval, '멜로');
+INSERT INTO genre values(genre_idx.nextval, '로맨스');
+INSERT INTO genre values(genre_idx.nextval, '어드벤처');
+INSERT INTO genre values(genre_idx.nextval, 'SF');
+INSERT INTO genre values(genre_idx.nextval, '스릴러');
+INSERT INTO genre values(genre_idx.nextval, '애니메이션');
+INSERT INTO genre values(genre_idx.nextval, '드라마');
+INSERT INTO genre values(genre_idx.nextval, '액션');
+
+COMMIT;
+
+DROP SEQUENCE movie_idx_seq;
+
+CREATE SEQUENCE movie_idx_seq
+START WITH 100
+INCREMENT BY 1;
+
+SELECT * FROM movie;
+COMMIT;
+
+======================= insang;
