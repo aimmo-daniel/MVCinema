@@ -69,4 +69,34 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDTO viewMember(String userid) {
 		return memberDao.viewMember(userid);
 	}
+
+
+
+	@Override
+	public String findid(MemberDTO dto) {
+		return memberDao.findid(dto);
+	}
+
+
+
+	@Override
+	public String findpwd(MemberDTO dto) {
+		return memberDao.findpwd(dto);
+	}
+
+
+
+	@Override
+	public int changePwd(String userid, String passwd) {
+		MemberDTO dto = new MemberDTO();
+		try {
+			String shapwd = sha256.getSha256(passwd.getBytes());
+			dto.setUserid(userid);
+			dto.setPasswd(shapwd);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 return memberDao.changePwd(dto);
+	}
 }

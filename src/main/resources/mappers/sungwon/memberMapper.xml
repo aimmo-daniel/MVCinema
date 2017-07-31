@@ -21,6 +21,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="login" resultType="String">
 		select name from member where userid=#{userid} and passwd=#{passwd} 
 	</select>
+	<select id="find_id" resultType="String">
+		select userid from member where name=#{name} and email=#{email}
+	</select>
+	<select id="find_pwd" resultType="String">
+		select name from member where userid=#{userid} and email=#{email}
+	</select>
+	<update id="change_pwd">
+		update member set passwd=#{passwd} where userid=#{userid}
+	</update>
 </mapper>
 
 

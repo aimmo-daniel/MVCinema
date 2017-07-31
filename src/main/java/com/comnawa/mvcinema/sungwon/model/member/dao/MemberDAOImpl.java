@@ -46,4 +46,22 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 
+	@Override
+	public String findid(MemberDTO dto) {
+		return sqlSession.selectOne("member.find_id",dto);
+	}
+
+
+	@Override
+	public String findpwd(MemberDTO dto) {
+		return sqlSession.selectOne("member.find_pwd",dto);
+	}
+
+
+	@Override
+	public int changePwd(MemberDTO dto) {
+		return sqlSession.update("member.change_pwd",dto);
+	}
+
+
 }

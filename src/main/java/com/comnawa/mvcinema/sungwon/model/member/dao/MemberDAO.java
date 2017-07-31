@@ -12,4 +12,7 @@ public interface MemberDAO {
 	public void signup(MemberDTO dto);
 	public boolean login(MemberDTO dto);
 	public MemberDTO viewMember(String userid);
+	public String findid(MemberDTO dto);
+	public String findpwd(MemberDTO dto);
+	public int changePwd(MemberDTO dto);
 }
