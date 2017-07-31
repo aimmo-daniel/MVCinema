@@ -9,6 +9,11 @@
 			$("#mlist" + i).show();
 		}
 	});
+	
+	//영화 상세정보
+	function movie_detail(idx){
+		location.href="${path}/info/detail/"+idx;
+	}
 </script>
 <div class="sect-sorting">
 	<label for="order_type" class="hidden">정렬</label>
@@ -51,8 +56,8 @@
 						</c:otherwise>
 					</c:choose>
 					<!-- 상세정보 페이지 URL입력 -->
-					<a href="#"> <span class="thumb-image"> <img
-							src="${path}/sangjin/resource/image/${row.img_url}"> <!-- 영화포스터 -->
+					<a href="#" onclick="movie_detail('${row.idx}')"> <span class="thumb-image">
+					<img src="D:/mvcinema/img/${row.img_url}"> <!-- 영화포스터 -->
 							<span class="ico-grade grade-12">12세이상</span> <!-- 관람 등급 -->
 					</span>
 					</a>

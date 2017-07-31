@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,7 @@ public class HomeController {
 	@RequestMapping("sort.do")
 	public ModelAndView sort(@RequestParam(defaultValue = "rank") String order_type, ModelAndView mav) {
 		List<MovieDTO> list = movieService.movieList(order_type);
-		mav.setViewName("sangjin/home/ajaxMlist");
+		mav.setViewName("sangjin/home/movielist");
 		Map<String, Object> map = new HashMap<>();
 		map.put("list", list); //영화 목록
 		map.put("order_type", order_type); //예매율순, 평점순, 관람객순
@@ -48,7 +49,7 @@ public class HomeController {
 	@RequestMapping("schedule.do")
 	public ModelAndView schedule(ModelAndView mav) {
 		List<MovieDTO> list = movieService.ScdmovieList();
-		mav.setViewName("sangjin/home/ajaxMlist");
+		mav.setViewName("sangjin/home/movielist");
 		Map<String, Object> map = new HashMap<>();
 		map.put("list", list); //영화 목록
 		mav.addObject("map", map);
@@ -59,6 +60,12 @@ public class HomeController {
 	@RequestMapping("admin")
 	public String admin(){
 	  return "redirect:/admin/loginpage.do";
+	}
+	
+	@RequestMapping("logout.do")
+	public String logout(HttpSession session){
+		session.invalidate();
+		return "redirect:/";
 	}
 	
 }

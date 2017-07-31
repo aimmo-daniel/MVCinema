@@ -7,13 +7,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="movie">
 
 	<select id="movie_list" resultType="com.comnawa.mvcinema.sangjin.model.dto.MovieDTO" parameterType="String">
-		select img_url, age, title, release_date from movie
+		select idx, img_url, age, title, release_date from movie
 		order by ${value}
 	</select>
 	
 	<select id="scdmovie_list" resultType="com.comnawa.mvcinema.sangjin.model.dto.MovieDTO">
-		select img_url, age, title, release_date from movie
+		select idx, img_url, age, title, release_date from movie
 		where release_date > CURRENT_DATE
+	</select>
+	
+	<select id="movie_detail" resultType="com.comnawa.mvcinema.sangjin.model.dto.MovieDTO">
+		select * from movie where idx=#{idx}
 	</select>
 
 

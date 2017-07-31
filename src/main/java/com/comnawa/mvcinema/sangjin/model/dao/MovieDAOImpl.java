@@ -24,4 +24,9 @@ public class MovieDAOImpl implements MovieDAO {
 		return sqlSession.selectList("movie.scdmovie_list");
 	}
 
+	@Override
+	public MovieDTO movie_view(int idx) {
+		return sqlSession.selectOne("movie.movie_detail", idx);
+	}
+
 }

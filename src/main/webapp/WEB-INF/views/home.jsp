@@ -18,7 +18,6 @@ li {
 <%@ include file="include/header.jsp"%>
 <%@ include file="include/template.jsp"%>
 <%@ include file="sangjin/sj_include/sangjincss.jsp"%>
-<script src="${path }/admin/resources/template/js/zzo_main.js"></script>
 <script>
 	$(document).ready(function() {
 		$("#expand").click(function() {

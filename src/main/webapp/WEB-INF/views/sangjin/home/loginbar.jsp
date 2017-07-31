@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<%@ include file="../../sangjin/sj_include/sangjincss.jsp"%>
 <style type="text/css">
 #sangjin a:hover {
 	color: #ffffff;
@@ -60,7 +61,7 @@ img {
 				</div>
 				<div id="sangjin" style="margin-top: 30px;">
 					<ul>
-						<li><a href="${path}">영화</a></li>
+						<li><a href="${path}">무비차트</a></li>
 						<li><a href="#">예매</a></li>
 						<li><a href="#">극장</a></li>
 						<li><a href="#">고객센터</a></li>
@@ -72,9 +73,9 @@ img {
 									href="${path}/member/login_page.do">로그인</a>
 							</c:when>
 							<c:when test="${sessionScope.dto.userid != null}">
-								<b><a href="{path}/member/account.do">${sessionScope.dto.name}님</a></b>
+								<b><a href="{path}/member/account.do">${sessionScope.dto.name}</a>님</b>
 								<a class="btn btn-default" role="button"
-									href="${path}/main/logout.do">로그아웃</a> 
+									href="${path}/logout.do">로그아웃</a> 
 							</c:when>
 						</c:choose>
 					</div>
