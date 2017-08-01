@@ -167,7 +167,7 @@
           <tr align="center">
             <td colspan="2" style="padding-top: 30px;"><input type="button" id="mod_btnCancel" value="수정취소"
               class="btn btn-defulat" style="color: white;"> &nbsp; <input type="button" id="mod_btnOk" value="수정완료"
-              class="btn btn-success" onclick="modMovie()"></td>
+              class="btn btn-success" onclick="modMovie()"> <input type="hidden" name="mod_idx" id="mod_idx" value="0"></td>
           </tr>
         </table>
       </form>
@@ -187,13 +187,13 @@
       type: "get",
       url: '${path}/subMenu/movie/movieDetail.do?idx='+idx,
       success: function(result){
+        $("#mod_idx").val(result.idx);
         $("#mod_title").val(result.title);
         $("#mod_age").val(result.age);
         $("#mod_director").val(result.director);
         $("#mod_actors").val(result.actors);
         $("#mod_content").val(result.content);
-        alert(changeDate(result.release_date));
-        $("#mod_release_date").val();
+        $("#mod_release_date").val(changeDate(result.release_date));
         $("#mod_runtime").val(result.runtime);
         $("#mod_video").html((result.preview != null)?result.preview:'영상없음');
         $("#mod_img").attr("src","http://192.168.0.5/mvcinema/img/"+result.img_url);
@@ -213,9 +213,9 @@
     date= new Date(parseInt(date));
     //javascript 날짜 객체, parseInt() 숫자로 변환
     year= date.getFullYear(); //4자리 연도
-    month= date.getMonth()<10 ? '0'+date.getMonth() : date.getMonth();
+    month= (date.getMonth()+1)<10 ? '0'+(date.getMonth()+1) : (date.getMonth()+1);
     day= date.getDate()<10 ? '0'+date.getDate() : date.getDate();
-    strDate= year+"-"+month+"-"+day+";
+    strDate= year+"-"+month+"-"+day;
     return strDate;
   }
 
@@ -387,20 +387,11 @@
                    ========================================= */
                 if (title == '' || age == '' || director == '' || actors == ''
                     || content == '' || release_date == '' || runtime == ''
-                    || filePreview == '') {
+                    || filePoster == '') {
                   alert("입력하지 않은 항목이 있습니다.");
                   return;
                 }
                 // -- end
-                console.log("title:" + title);
-                console.log("age:" + age);
-                console.log("genre:" + genre);
-                console.log("director:" + director);
-                console.log("actors:" + actors);
-                console.log("content:" + content);
-                console.log("release_date:" + release_date);
-                console.log("runtime:" + runtime);
-                console.log("filePreview:" + filePreview);
                 document.form1.submit();
               });
     </script>
