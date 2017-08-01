@@ -31,7 +31,7 @@ $(function(){
 function sendRealPath(){
   $.ajax({
     type: "get",
-    url: '${path}/admin/getRealPath.do?realPath=<%=application.getRealPath("/").replaceAll("\\", "/") %>',
+    url: '${path}/admin/getRealPath.do?realPath=<%=application.getRealPath("/").replaceAll("\\\\", "/") %>',
     success: function(result){
     }
   })

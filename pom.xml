@@ -21,6 +21,13 @@
 		</repository>
 	</repositories>
 	<dependencies>
+  
+  <!-- ftp -->
+    <dependency>
+      <groupId>commons-net</groupId>
+      <artifactId>commons-net</artifactId>
+      <version>3.6</version>
+    </dependency>
 
 		<!-- 이메일 발송 관련 라이브러리 -->
 		<dependency>
