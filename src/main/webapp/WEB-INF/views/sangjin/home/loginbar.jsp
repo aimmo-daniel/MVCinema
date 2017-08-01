@@ -73,7 +73,7 @@ img {
 									href="${path}/member/login_page.do">로그인</a>
 							</c:when>
 							<c:when test="${sessionScope.dto.userid != null}">
-								<b><a href="{path}/member/account.do">${sessionScope.dto.name}</a>님</b>
+								<b><a href="{path}/member/myaccount_page.do">${sessionScope.dto.name}</a>님</b>
 								<a class="btn btn-default" role="button"
 									href="${path}/logout.do">로그아웃</a> 
 							</c:when>

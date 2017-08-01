@@ -28,26 +28,26 @@
 				</span>
 			</div>
 			<div style="position: relative; left: 250px; top: -150px;">
-				개봉일 : <fmt:formatDate value="${dto.release_date}" pattern="yyyy.MM.dd" /><br> 
-				감독 : ${dto.director} <br>
-				출연진 : ${dto.actors} <br>
-				장르 : ${dto.genre} <br>
-				기본 :
+				<b>개봉일 :</b> <fmt:formatDate value="${dto.release_date}" pattern="yyyy.MM.dd" /><br> 
+				<b>감독 :</b> ${dto.director} <br>
+				<b>출연진 :</b> ${dto.actors} <br>
+				<b>장르 :</b> ${dto.genre} <br>
+				<b>기본 :</b>
 				<c:choose>
-					<c:when test="${dto.age} > 7 && ${dto.age} < 12">
-				<span style="color: yellow">${dto.age}</span>세 이상 / ${dto.runtime}분
+					<c:when test="${(dto.age > 0) and (dto.age < 12)}">
+				<b style="color: yellow">${dto.age}</b>세 이상 / ${dto.runtime}분<br>
 					</c:when>
-					<c:when test="${dto.age} > 11 && ${dto.age} < 15">
-				<span style="color: green">${dto.age}</span>세 이상 / ${dto.runtime}분	
+					<c:when test="${(dto.age >= 12) and (dto.age < 15)} ">
+				<b style="color: green">${dto.age}</b>세 이상 / ${dto.runtime}분<br>	
 					</c:when>
-					<c:when test="${dto.age} > 14 && ${dto.age} < 18">
-				<span style="color: black">${dto.age}</span>세 이상 / ${dto.runtime}분	
+					<c:when test="${(dto.age >= 15) and (dto.age < 19)} ">
+				<b style="color: black">${dto.age}</b>세 이상 / ${dto.runtime}분<br>	
 					</c:when>
-					<c:when test="${dto.age} > 17" >
-				<span style="color: red">${dto.age}</span>세 이상 / ${dto.runtime}분
+					<c:when test="${dto.age >= 19}" >
+				<b style="color: red">${dto.age}</b>세 이상 / ${dto.runtime}분<br>
 					</c:when>
 				</c:choose>	
-				<p>누적관객 :</p> ${dto.people} (<%=today%> 기준) <br>
+				<b>누적관객 :</b> ${dto.people} (<%=today%> 기준) <br>
 				<a class="btn btn-default" role="button" href="#">예매하기</a>
 			</div>
 		</div>
