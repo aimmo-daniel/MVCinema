@@ -26,4 +26,9 @@ public class Insang_MovieServiceImpl implements Insang_MovieService {
     movieDao.insertMovie(dto);
   }
 
+  @Override
+  public List<Insang_MovieDTO> getMovieList() {
+    return movieDao.getMovieList();
+  }
+  
 }

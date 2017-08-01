@@ -58,6 +58,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     , #{img_url}, #{preview})
   </insert>
   
+  <select id="movieList" resultType="com.comnawa.mvcinema.insang.model.dto.Insang_MovieDTO">
+    select * from movie order by idx
+  </select>
+  
 </mapper>
 
 

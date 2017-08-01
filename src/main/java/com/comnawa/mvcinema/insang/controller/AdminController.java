@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.comnawa.mvcinema.insang.model.dto.AdminDTO;
 import com.comnawa.mvcinema.insang.service.AdminService;
@@ -44,6 +45,13 @@ public class AdminController {
   public String login(HttpSession session) {
     session.removeAttribute("dto");
     return "redirect:/admin/loginpage.do";
+  }
+  
+  @RequestMapping("getRealPath.do")
+  public String getRealPath(@RequestParam String realPath, HttpSession session){
+    session.setAttribute("realPath", realPath);
+    System.out.println(realPath);
+    return "insang/test";
   }
 
 }

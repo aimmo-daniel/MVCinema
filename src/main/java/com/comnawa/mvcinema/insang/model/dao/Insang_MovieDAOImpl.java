@@ -26,4 +26,9 @@ public class Insang_MovieDAOImpl implements Insang_MovieDAO{
     sqlSession.insert("admin.insertMovie", dto);
   }
   
+  @Override
+  public List<Insang_MovieDTO> getMovieList() {
+    return sqlSession.selectList("admin.movieList");
+  }
+  
 }

@@ -51,11 +51,11 @@
 	</beans:bean>
   
     <beans:bean id="imgPath" class="java.lang.String">
-      <beans:constructor-arg value="d:/mvcinemaUpload/img/"/>
+      <beans:constructor-arg value="upload/image/"/>
       <!-- <beans:constructor-arg value="/users/insang/git/mvcinemaUpload/img"/> -->
     </beans:bean>
     <beans:bean id="videoPath" class="java.lang.String">
-      <beans:constructor-arg value="d:/mvcinemaUpload/video/"/>
+      <beans:constructor-arg value="upload/video/"/>
       <!-- <beans:constructor-arg value="/users/insang/git/mvcinemaUpload/video"/> -->
     </beans:bean>
 

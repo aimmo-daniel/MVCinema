@@ -21,12 +21,21 @@
 <link rel="stylesheet" href="${path}/admin/resources/template/css/style.css">
 <!-- Google web font --> 
 <link href='${path}/admin/resources/template/css/fontSansPro.css' rel='stylesheet' type='text/css'>
-
 <script>
 $(function(){
   document.location.href=document.location.href.split('#')[0]+"#admin";
   scrollReset();
+  sendRealPath();
 })
+
+function sendRealPath(){
+  $.ajax({
+    type: "get",
+    url: '${path}/admin/getRealPath.do?realPath=<%=application.getRealPath("/") %>',
+    success: function(result){
+    }
+  })
+}
 
 $(window).bind('hashchange',function(){
   var menuName= document.location.hash.split('#')[1];

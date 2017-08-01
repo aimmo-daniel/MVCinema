@@ -23,7 +23,9 @@
 
   <div>
     <label for="sub_movie_add_lab">
-      <p class="wow fadeIn lab" data-wow-delay="0s" id="sub_movie_add_lab" style="font-size: 20px; margin: 10px 20px 20px 20px;">신규 영화 추가</p>
+      <p class="wow fadeIn lab" data-wow-delay="0s" id="sub_movie_add_lab" style="font-size: 20px; margin: 10px 20px 20px 20px;">
+        신규 영화 추가
+      </p>
     </label>
   </div>
   
@@ -99,7 +101,57 @@
   </div>
   
   <div style="display: none;" id="sub_movie_modMovie_div" class="sub_sub_lab">
-    shabal
+    <table class="" style="width: 50px;">
+      <tr>
+        <td>제목</td>
+        <td>시청연령</td>
+        <td>감독</td>
+        <td>배우</td>
+        <td>줄거리</td>
+        <td>장르</td>
+        <td>개봉일</td>
+        <td>상영시간(분)</td>
+        <td>포스터이미지</td>
+        <td>미리보기영상</td>
+      </tr>
+      <c:forEach var="mod_row" items="${movieList}">
+        <tr>
+          <td>
+            <input type="text" id="mod_title" value="${mod_row.title}">
+          </td>
+          <td>
+            <input type="number" id="mod_age" value="${mod_row.age}">
+          </td>
+          <td>
+            <input type="text" id="mod_director" value="${mod_row.director}">
+          </td>
+          <td>
+            <input type="text" id="mod_actors" value="${mod_row.actors}">
+          </td>
+          <td>
+            장르
+          </td>
+          <td>
+            <input type="date" id="mod_release_date" value="${mod_row.release_date}">
+          </td>
+          <td>
+            <input type="number" id="mod_runtime" value="${mod_row.runtime}">
+          </td>
+          <td>
+            <input type="text" id="mod_img_url" value="${mod_row.img_url}">
+          </td>
+          <td>
+            <input type="text" id="mod_preview" value="${mod_row.preview}">
+          </td>
+          <td>
+            <input type="button" id="btnModMovie" value="수정">
+          </td>
+          <td>
+            <input type="button" id="btnDelMovie" value="삭제">
+          </td>
+        </tr>
+      </c:forEach>
+    </table>
   </div>
   
   
