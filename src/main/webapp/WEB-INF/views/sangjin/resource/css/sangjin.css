@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+
+#sangjin a:hover {
+	color: #000000;
+	font: bold;
+	background: #cccccc;
+}
+
+#sangjin ul {
+	margin-left: 200px;
+	margin-top: 3px;
+	text-align: center;
+}
+
+#sangjin ul li {
+	display: inline;
+	font: bold 18px Dotum;
+	padding: 0 10px;
+	padding-left: 30px;
+}
+
+#sangjin ul li a {
+	padding: 0.5em 1em 0.5em 1em;
+	text-decoration: none;
+	font: bold;
+	color: #000000;
+	font-family: 'NanumBarunGothic';
+}
+
+img {
+	display: block;
+	max-width: 100%;
+	width: 1250px;
+	margin-left: auto;
+	margin-right: auto;
+	height: auto;
+	width: 1250px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-right: auto;
+}

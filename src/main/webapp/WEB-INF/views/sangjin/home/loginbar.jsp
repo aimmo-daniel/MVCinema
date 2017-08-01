@@ -5,50 +5,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <%@ include file="../../sangjin/sj_include/sangjincss.jsp"%>
-<style type="text/css">
-#sangjin a:hover {
-	color: #ffffff;
-	font: bold;
-	background: #000000;
-}
-
-#sangjin ul {
-	margin-left: 280px;
-	margin-top: 3px;
-	text-align: center;
-}
-
-#sangjin ul li {
-	display: inline;
-	font: bold 18px Dotum;
-	padding: 0 10px;
-	padding-left: 30px;
-}
-
-#sangjin ul li a {
-	padding: 0.5em 1em 0.5em 1em;
-	text-decoration: none;
-	font: bold;
-	color: #000000;
-	font-family: 'NanumBarunGothic';
-}
-
-img {
-	display: block;
-	max-width: 100%;
-	width: 1250px;
-	margin-left: auto;
-	margin-right: auto;
-	height: auto;
-	width: 1250px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-left: auto;
-	margin-right: auto;
-	margin-right: auto;
-}
-</style> 
-
+<link rel="stylesheet" href="${path}/sangjin/resource/css/sangjin.css">
 <div class="nav-container">
 	<nav class="nav-inner transparent">
 

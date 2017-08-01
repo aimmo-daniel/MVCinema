@@ -36,7 +36,7 @@
 			</c:otherwise>
 		</c:choose>
 	</select>
-	<button type="button" id="btnSearch" onclick="listMovie()">
+	<button class="btn btn-primary" type="button" id="btnSearch" onclick="listMovie()">
 		<span>GO</span>
 	</button>
 </div>
@@ -48,25 +48,36 @@
 				<div class="box-image">
 					<c:choose>
 						<c:when test="${status.index < 3}">
-							<strong class="rank"
-								style="width: auto; height: auto; background: red;">No.${status.index+1}</strong>
+							<strong class="rank" style="width: auto; height: auto; background: red;">
+								No.${status.index+1}
+							</strong>
 						</c:when>
 						<c:otherwise>
-							<strong class="rank" style="width: auto; height: auto;">No.${status.index+1}</strong>
+							<strong class="rank" style="width: auto; height: auto;">
+								No.${status.index+1}
+							</strong>
 						</c:otherwise>
 					</c:choose>
 					<!-- 상세정보 페이지 URL입력 -->
-					<a href="#" onclick="movie_detail('${row.idx}')"> <span class="thumb-image">
-					<img src="D:/mvcinema/img/${row.img_url}"> <!-- 영화포스터 -->
-							<span class="ico-grade grade-12">12세이상</span> <!-- 관람 등급 -->
-					</span>
+					<a href="#" onclick="movie_detail('${row.idx}')"> 
+						<span class="thumb-image">
+							<img src="D:/mvcinema/img/${row.img_url}"> <!-- 영화포스터 -->
+						</span>
 					</a>
+					<button style="width: 96px;" class="btn btn-primary" type="button" onclick="movie_detail('${row.idx}')">
+						<span>상세정보</span>
+					</button>
+					<button style="width: 96px;" class="btn btn-danger" type="button">
+						<span>예매하기</span>
+					</button>
 				</div>
 				<div class="box-contents">
-					<a href="#"> <strong class="title">${row.title}</strong> <!-- 영화제목 -->
-						<span>${row.age}세 이상</span>
-					</a> <span class="txt-info"> <strong> <!-- 개봉일자 --> <fmt:formatDate
-								value="${row.release_date}" pattern="yyyy.MM.dd" /> <span>개봉</span>
+					<strong class="title">${row.title}</strong>  <!-- 영화제목 --> 
+					<span>${row.age}세 이상</span>
+					<span class="txt-info"> 
+					<strong> <!-- 개봉일자 --> 
+						<fmt:formatDate	value="${row.release_date}" pattern="yyyy.MM.dd" /> 
+						<span>개봉</span>
 					</strong>
 					</span>
 				</div>

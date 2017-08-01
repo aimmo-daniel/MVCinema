@@ -4,6 +4,7 @@ img {
 	height: auto;
 }
 </style>
+<link rel="stylesheet" href="${path}/sangjin/resource/css/bootstrap-theme.min.css">
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
 	<ol class="carousel-indicators">
 		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
