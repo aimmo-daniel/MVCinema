@@ -359,7 +359,7 @@
                 //==========================================
                 //  업로드 영상 확장자 검사                      
                 //------------------------------------------
-                if (filePreview.substring(filePreview.lastIndexOf('.'))
+                /* if (filePreview.substring(filePreview.lastIndexOf('.'))
                     .toLowerCase() != '.mp4'
                     && filePreview.substring(filePreview.lastIndexOf('.'))
                         .toLowerCase() != '.mkv'
@@ -371,9 +371,9 @@
                         .toLowerCase() != '.m4v') {
                   alert("미리보기 동영상은 동영상 파일만 업로드 가능합니다.\n ( mp4, mkv, avi, mov, m4v )");
                   return;
-                }
-                //영화 확장자검사
-                /* if (filePoster.substring(filePoster.lastIndexOf('.'))
+                } */
+                
+                if (filePoster.substring(filePoster.lastIndexOf('.'))
                     .toLowerCase() != '.jpg'
                     && filePoster.substring(filePoster.lastIndexOf('.'))
                         .toLowerCase() != '.jpeg'
@@ -381,7 +381,7 @@
                         .toLowerCase() != '.png') {
                   alert("영화 포스터는 사진 파일만 업로드 가능합니다.\n ( jpg, jpeg, png )");
                   return;
-                } */
+                }
                 // -- end
                 /* =========================================
                      각 입력항복 비어있는곳 체크 후 알람 띄우기
