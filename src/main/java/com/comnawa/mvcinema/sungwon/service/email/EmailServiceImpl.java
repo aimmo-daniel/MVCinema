@@ -56,4 +56,33 @@ public class EmailServiceImpl implements EmailService {
 		return rndNum;
 	}
 
+	@Override
+	public String findpwdMail(String email) {
+		String rndNum = rndNum();
+		
+		// 메일 내용
+		String recipient = email;
+		String subject = "MVCinema 비밀번호 재설정 인증 메일입니다.";
+		String body ="안녕하세요, 고객님 MVCiema 입니다.\n"
+				+ "MVCiema 비밀번호 재설정 을 위해 이메일 인증을 진행합니다.\n"
+				+ "비밀번호 재설정 을 완료하시려면 아래의 인증번호를 입력창에 입력해주세요 \n"
+				+ "인증 번호 : [ "+rndNum+" ]";
+		try {
+			MimeMessage msg = mailsender.createMimeMessage();
+			//메일 수신자 추가
+			msg.addRecipient(RecipientType.TO, new InternetAddress(email));
+			//메일 발신자 추가
+			msg.addFrom(new InternetAddress[]{new InternetAddress("mvcinema@gmail.com","MVCinema")});
+			//메일제목
+			msg.setSubject(subject,"utf-8");
+			//메일 본문
+			msg.setText(body,"utf-8");
+			//메일 발송
+			mailsender.send(msg);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rndNum;
+	}
+
 }

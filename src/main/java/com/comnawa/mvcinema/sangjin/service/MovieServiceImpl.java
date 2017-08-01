@@ -24,4 +24,9 @@ public class MovieServiceImpl implements MovieService {
 		return movieDao.ScdmovieList();
 	}
 
+	@Override
+	public MovieDTO movie_view(int idx) {
+		return movieDao.movie_view(idx);
+	}
+
 }

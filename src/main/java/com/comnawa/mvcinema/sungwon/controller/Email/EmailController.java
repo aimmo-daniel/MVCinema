@@ -24,5 +24,14 @@ public class EmailController {
 		String rndNum = emailService.SignupMail(email);
 		return rndNum;
 	}
+	
+	@ResponseBody
+	@RequestMapping("findpwdMail.do")
+	public String findpwdMail(@RequestParam String email) throws Exception {
+		String rndNum = emailService.findpwdMail(email);
+		System.out.println(rndNum);
+		return rndNum;
+	}
+
 
 }

@@ -25,6 +25,7 @@ public class MemberController {
 	@Inject
 	MemberService memberService;
 	
+	
 	@RequestMapping("login_page.do")
 	public String login_page(){
 		return "sungwon/member/login";
@@ -86,4 +87,43 @@ public class MemberController {
 		}
 		return mav;
 	}
+	
+	@ResponseBody
+	@RequestMapping("findid.do")
+	public JSONObject findId(@ModelAttribute MemberDTO dto){
+		String userid = memberService.findid(dto);
+		JSONObject json = new  JSONObject();
+		json.put("userid", userid);
+		return json;
+	}
+	
+	@ResponseBody
+	@RequestMapping("findpwd.do")
+	public JSONObject findPwd(@ModelAttribute MemberDTO dto){
+		String name = memberService.findpwd(dto);
+		JSONObject json = new  JSONObject();
+		System.out.println(name);
+		if(name == null ){
+			json.put("name", "fail");
+			System.out.println("널 :" + json.toJSONString());
+		}else{
+			json.put("name", name);
+			System.out.println("이름 :" + json.toJSONString());
+		}
+		return json;
+	}
+	
+	@ResponseBody
+	@RequestMapping("changePwd.do")
+	public JSONObject changePwd(@RequestParam String userid, @RequestParam String passwd){
+		JSONObject json = new JSONObject();
+		int result = memberService.changePwd(userid, passwd);
+		if(result <= 0 ){
+			json.put("message", "fail");
+		}else{
+			json.put("message", "success");
+		}
+		return json;
+	}
+	
 }

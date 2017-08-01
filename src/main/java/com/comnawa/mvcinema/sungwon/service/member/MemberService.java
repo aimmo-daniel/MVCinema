@@ -10,4 +10,7 @@ public interface MemberService {
 	public void signup(MemberDTO dto);
 	public boolean login(MemberDTO dto,HttpSession session);
 	public MemberDTO viewMember(String userid);
+	public String findid(MemberDTO dto);
+	public String findpwd(MemberDTO dto);
+	public int changePwd(String userid, String passwd);
 }

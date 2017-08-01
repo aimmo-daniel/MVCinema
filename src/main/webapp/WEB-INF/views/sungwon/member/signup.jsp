@@ -236,6 +236,7 @@
 		if(userid == ''){
 			$("#ck_id_icon").attr("class", '');
 			$("#ck_id_result").html("");
+			id_rule=false;
 			return;
 		}
 		if (!/^[a-zA-Z0-9]{6,15}$/.test(userid)) {
@@ -243,6 +244,7 @@
 			$("#ck_id_icon").attr("style", 'color:red');
 			$("#ck_id_icon").attr("class", 'glyphicon glyphicon-remove');
 			$("#ck_id_result").html(" 숫자와 영문자 조합으로 6~15자리를 사용해야 합니다.");
+			id_rule=false;
 			return;
 		}
 		$("#td_checkid").attr("hidden", false);
@@ -259,6 +261,7 @@
 			$("#ck_pwdrule_icon").addClass(false);
 			$("#ck_pwdrule").attr("hidden", 'hidden');
 			$("#resultPwd").html('');
+			pwd_rule = false;
 			return;
 		}
 
@@ -267,6 +270,7 @@
 			$("#ck_pwdrule_icon").attr("style", 'color:red');
 			$("#ck_pwdrule_icon").attr("class", 'glyphicon glyphicon-remove');
 			$("#resultPwd").html('숫자와 영문자 조합으로 6~15자리를 사용해야 합니다.');
+			pwd_rule = false;
 			return;
 		}
 
@@ -278,6 +282,7 @@
 			$("#ck_pwdrule_icon").attr("style", 'color:red')
 			$("#ck_pwdrule_icon").attr("class", 'glyphicon glyphicon-remove');
 			$("#resultPwd").html("숫자와 영문자를 혼용하여야 합니다.");
+			pwd_rule = false;
 			return;
 		}
 		if (/(\w)\1\1\1/.test(password)) {
@@ -285,6 +290,7 @@
 			$("#ck_pwdrule_icon").attr("style", 'color:red')
 			$("#ck_pwdrule_icon").attr("class", 'glyphicon glyphicon-remove');
 			$("#resultPwd").html('같은 문자를 3번 이상 사용하실 수 없습니다.');
+			pwd_rule = false;
 			return;
 		}
 		$("#ck_pwdrule").attr("hidden", false);
@@ -302,6 +308,7 @@
 			$("#passwd").val("");
 			$("#passwd2").val("");
 			$("#passwd").focus();
+			pwd_match = false;
 			return;
 		}
 		if (passwd1 == passwd2) {
@@ -315,6 +322,7 @@
 			$("#ck_pwdmatch_icon").attr("style", 'color:red');
 			$("#ck_pwdmatch_icon").attr("class", 'glyphicon glyphicon-remove');
 			$("#matchPwd").html("불일치");
+			pwd_match = false;
 		}
 	}
 	//약관동의 체크여부
@@ -401,8 +409,8 @@
 										확인</label></td>
 								<td colspan="6" class="td_input"><input type="password"
 										class="form-control" name="passwd2" id="passwd2" onkeyup="matchPwd()"></td>
-								<td class="td_button" id="ck_pwdmatch" hidden="hidden"><span
-									id="ck_pwdmatch_icon"></span><b id=matchPwd></b></td>
+								<td class="td_button" id="ck_pwdmatch" hidden="hidden">
+								<span id="ck_pwdmatch_icon"></span><b id=matchPwd></b></td>
 							</tr>
 							<tr>
 								<td class="td_label"><label class="label label-default">이름</label></td>
