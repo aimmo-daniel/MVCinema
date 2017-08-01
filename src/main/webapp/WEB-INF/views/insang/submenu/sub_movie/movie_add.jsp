@@ -194,6 +194,7 @@
         $("#mod_runtime").val(result.runtime);
         $("#mod_video").html((result.preview != null)?'영상있음':'영상없음');
         $("#mod_img").attr("src","http://192.168.0.5/mvcinema/img/"+result.img_url);
+        
       }
     })
   }
