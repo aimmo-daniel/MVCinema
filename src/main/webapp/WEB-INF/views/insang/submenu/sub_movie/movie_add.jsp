@@ -139,7 +139,7 @@
           <tr>
             <td>장르</td>
             <td colspan="2"><c:forEach var="genre" items="${genreList}">
-                <label style="font-weight: normal;"> <input type="checkbox" id="genre${genre.idx}" value="${genre.genre}">
+                <label style="font-weight: normal;"> <input type="checkbox" id="mod_genre${genre.genre}" value="${genre.genre}">
                   ${genre.genre} &nbsp;
                 </label>
               </c:forEach> <input type="hidden" name="genre" id="mod_genreResult"></td>
@@ -156,16 +156,18 @@
             <td>미리보기 동영상</td>
             <td><input type="file" name="filePreview" id="mod_filePreview"></td>
             <td style="width: 120px;"><div id="mod_video"></div></td>
+            <td><input type="hidden" name="preview" id="mod_preview" value=""></td>
           </tr>
           <tr>
             <td>영화 포스터</td>
             <td><input type="file" name="filePoster" id="mod_filePoster"></td>
-            <td style="width: 120px;"><img src="" id="mod_img"></td>
+            <td style="width: 120px;"><img src="ad.png" id="mod_img"></td>
+            <td><input type="hidden" name="img_url" id="mod_img_url" value=""></td>
           </tr>
           <tr align="center">
             <td colspan="2" style="padding-top: 30px;"><input type="button" id="mod_btnCancel" value="수정취소"
               class="btn btn-defulat" style="color: white;"> &nbsp; <input type="button" id="mod_btnOk" value="수정완료"
-              class="btn btn-success"></td>
+              class="btn btn-success" onclick="modMovie()"></td>
           </tr>
         </table>
       </form>
@@ -190,13 +192,31 @@
         $("#mod_director").val(result.director);
         $("#mod_actors").val(result.actors);
         $("#mod_content").val(result.content);
-        $("#mod_release_date").val(result.release_date);
+        alert(changeDate(result.release_date));
+        $("#mod_release_date").val();
         $("#mod_runtime").val(result.runtime);
-        $("#mod_video").html((result.preview != null)?'영상있음':'영상없음');
+        $("#mod_video").html((result.preview != null)?result.preview:'영상없음');
         $("#mod_img").attr("src","http://192.168.0.5/mvcinema/img/"+result.img_url);
+        $("#mod_img_url").val(result.img_url);
+        $("#mod_preview").val(result.preview);
         
+        var genres= [];
+        genres= result.genre.split(',');
+        for (var i=0; i<genres.length; i++){
+          $("#mod_genre"+genres[i]).prop("checked",true);
+        }
       }
     })
+  }
+  
+  function changeDate(date){
+    date= new Date(parseInt(date));
+    //javascript 날짜 객체, parseInt() 숫자로 변환
+    year= date.getFullYear(); //4자리 연도
+    month= date.getMonth()<10 ? '0'+date.getMonth() : date.getMonth();
+    day= date.getDate()<10 ? '0'+date.getDate() : date.getDate();
+    strDate= year+"-"+month+"-"+day+";
+    return strDate;
   }
 
       function modMovie() {
@@ -207,63 +227,58 @@
         var size = parseInt('${genreSize}', 10);
         var genre = '';
         for (var i = 1; i <= size; i++) {
-          if ($("#genre" + i).is(":checked")) {
-            genre = genre + ($("#genre" + i).val() + ',');
+          if ($("#mod_genre" + i).is(":checked")) {
+            genre = genre + ($("#mod_genre" + i).val() + ',');
           }
         }
         genre = genre.slice(0, -1);
-        $("#genreResult").val(genre);
+        $("#mod_genreResult").val(genre);
         // -- end
-        var title = $("#title").val();
-        var age = $("#age").val();
-        var director = $("#director").val();
-        var actors = $("#actors").val();
-        var content = $("#content").val();
-        var release_date = $("#release_date").val();
-        var runtime = $("#runtime").val();
-        var filePreview = $("#filePreview").val();
-        var filePoster = $("#filePoster").val();
+        var title = $("#mod_title").val();
+        var age = $("#mod_age").val();
+        var director = $("#mod_director").val();
+        var actors = $("#mod_actors").val();
+        var content = $("#mod_content").val();
+        var release_date = $("#mod_release_date").val();
+        var runtime = $("#mod_runtime").val();
+        var filePreview = $("#mod_filePreview").val();
+        var filePoster = $("#mod_filePoster").val();
         //==========================================
         //  업로드 영상 확장자 검사                      
         //------------------------------------------
-        if (filePreview.substring(filePreview.lastIndexOf('.')).toLowerCase() != '.mp4'
-            && filePreview.substring(filePreview.lastIndexOf('.'))
-                .toLowerCase() != '.mkv'
-            && filePreview.substring(filePreview.lastIndexOf('.'))
-                .toLowerCase() != '.avi'
-            && filePreview.substring(filePreview.lastIndexOf('.'))
-                .toLowerCase() != '.mov'
-            && filePreview.substring(filePreview.lastIndexOf('.'))
-                .toLowerCase() != '.m4v') {
-          alert("미리보기 동영상은 동영상 파일만 업로드 가능합니다.\n ( mp4, mkv, avi, mov, m4v )");
-          return;
+        if ($("#mod_preview").val() == ""){
+          if (filePreview.substring(filePreview.lastIndexOf('.')).toLowerCase() != '.mp4'
+              && filePreview.substring(filePreview.lastIndexOf('.'))
+                  .toLowerCase() != '.mkv'
+              && filePreview.substring(filePreview.lastIndexOf('.'))
+                  .toLowerCase() != '.avi'
+              && filePreview.substring(filePreview.lastIndexOf('.'))
+                  .toLowerCase() != '.mov'
+              && filePreview.substring(filePreview.lastIndexOf('.'))
+                  .toLowerCase() != '.m4v') {
+            alert("미리보기 동영상은 동영상 파일만 업로드 가능합니다.\n ( mp4, mkv, avi, mov, m4v )");
+            return;
+          }
         }
-        if (filePoster.substring(filePoster.lastIndexOf('.')).toLowerCase() != '.jpg'
-            && filePoster.substring(filePoster.lastIndexOf('.')).toLowerCase() != '.jpeg'
-            && filePoster.substring(filePoster.lastIndexOf('.')).toLowerCase() != '.png') {
-          alert("영화 포스터는 사진 파일만 업로드 가능합니다.\n ( jpg, jpeg, png )");
-          return;
+        if ($("#mod_img_url").val() == ""){
+          if (filePoster.substring(filePoster.lastIndexOf('.')).toLowerCase() != '.jpg'
+              && filePoster.substring(filePoster.lastIndexOf('.')).toLowerCase() != '.jpeg'
+              && filePoster.substring(filePoster.lastIndexOf('.')).toLowerCase() != '.png') {
+            alert("영화 포스터는 사진 파일만 업로드 가능합니다.\n ( jpg, jpeg, png )");
+            return;
+          }
         }
         // -- end
         /* =========================================
              각 입력항복 비어있는곳 체크 후 알람 띄우기
            ========================================= */
+           alert("title:"+title+"\nage:"+age+"\ndirector:"+director+"\nactors:"+actors+"\ncontent:"+content+"\nrelease_date:"+release_date+"\nruntime:"+runtime)
         if (title == '' || age == '' || director == '' || actors == ''
-            || content == '' || release_date == '' || runtime == ''
-            || filePreview == '') {
+            || content == '' || release_date == '' || runtime == '') {
           alert("입력하지 않은 항목이 있습니다.");
           return;
         }
         // -- end
-        console.log("title:" + title);
-        console.log("age:" + age);
-        console.log("genre:" + genre);
-        console.log("director:" + director);
-        console.log("actors:" + actors);
-        console.log("content:" + content);
-        console.log("release_date:" + release_date);
-        console.log("runtime:" + runtime);
-        console.log("filePreview:" + filePreview);
         document.form2.submit();
       }
 
