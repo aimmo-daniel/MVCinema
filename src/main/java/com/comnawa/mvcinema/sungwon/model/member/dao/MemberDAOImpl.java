@@ -64,4 +64,10 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 
+	@Override
+	public String checkpwd(MemberDTO dto) {
+		return sqlSession.selectOne("member.login", dto);
+	}
+
+
 }

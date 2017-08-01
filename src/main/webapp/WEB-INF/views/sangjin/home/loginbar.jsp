@@ -5,41 +5,36 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <%@ include file="../../sangjin/sj_include/sangjincss.jsp"%>
-<link rel="stylesheet" href="${path}/sangjin/resource/css/sangjin.css">
 <div class="nav-container">
 	<nav class="nav-inner transparent">
-
 		<div class="navbar">
 			<div class="container">
 				<div class="row">
 					<div class="brand">
-						<a href="${path}">MVCINEMA</a>
-					</div>
-				</div>
-				<div id="sangjin" style="margin-top: 30px;">
-					<ul>
-						<li><a href="${path}">무비차트</a></li>
-						<li><a href="#">예매</a></li>
-						<li><a href="#">극장</a></li>
-						<li><a href="#">고객센터</a></li>
-					</ul>
-					<div style="float: right;">
-						<c:choose>
-							<c:when test="${sessionScope.dto.userid == null}">
-								<a class="btn btn-default" role="button"
-									href="${path}/member/login_page.do">로그인</a>
-							</c:when>
-							<c:when test="${sessionScope.dto.userid != null}">
-								<b><a href="{path}/member/myaccount_page.do">${sessionScope.dto.name}</a>님</b>
-								<a class="btn btn-default" role="button"
-									href="${path}/logout.do">로그아웃</a> 
-							</c:when>
-						</c:choose>
+						<a href="${path}">MVCinema</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</nav>
 </div>
-<br>
-<br>
+<nav id="topMenu">
+	<ul>
+		<li class="topMenuLi"><a class="menuLink" href="${path}">무비차트</a></li>
+		<li class="topMenuLi"><a class="menuLink" href="${path}">예매</a></li>
+		<li class="topMenuLi"><a class="menuLink" href="${path}">극장</a></li>
+		<li class="topMenuLi"><a class="menuLink" href="${path}">고객센터</a></li>
+		<li style="margin-left: 210px;" >
+			<c:choose>
+				<c:when test="${sessionScope.dto.userid == null}">
+					<a class="btn btn-default" role="button"
+						href="${path}/member/login_page.do">로그인</a>
+				</c:when>
+				<c:when test="${sessionScope.dto.userid != null}">
+					<b style="color: white;"><a href="${path}/member/myaccount_page.do" style="color: white;">${sessionScope.dto.name}</a>&nbsp;님&nbsp;&nbsp;</b>
+					<a class="btn btn-default" role="button" href="${path}/logout.do">로그아웃</a>
+				</c:when>
+			</c:choose>
+		</li>
+	</ul>
+</nav>

@@ -25,6 +25,10 @@ public class MemberController {
 	@Inject
 	MemberService memberService;
 	
+	@RequestMapping("myaccount_page.do")
+	public String myaccount_page(){
+		return "sungwon/member/myaccount";
+	}
 	
 	@RequestMapping("login_page.do")
 	public String login_page(){
@@ -51,6 +55,27 @@ public class MemberController {
 	}
 	
 	@ResponseBody
+	@RequestMapping("checkpwd.do")
+	public JSONObject checkPassword(@RequestParam String userid, @RequestParam String passwd) {
+		JSONObject json = new JSONObject();
+		MemberDTO dto = new MemberDTO();
+		dto.setUserid(userid);
+		dto.setPasswd(passwd);
+		System.out.println("비밀번호"+passwd);
+		System.out.println("유저아이디"+userid);
+		String result = memberService.checkpwd(dto);
+		if(result == null ){
+			json.put("result", "fail");
+			System.out.println("실패");
+		}else{
+			json.put("result", "success");
+			System.out.println("성공");
+		}
+		return json;
+	}
+	
+	
+	@ResponseBody
 	@RequestMapping("checkemail.do")
 	public MemberDTO checkEmail(@RequestParam String email) {
 		String name = memberService.checkemail(email);
@@ -75,7 +100,6 @@ public class MemberController {
 	
 	@RequestMapping("login.do")
 	public ModelAndView login(@ModelAttribute MemberDTO dto, HttpSession session) {
-		System.out.println("비번:" + dto.getPasswd());
 		boolean result = memberService.login(dto, session);
 		ModelAndView mav = new ModelAndView();
 		if (result) {
