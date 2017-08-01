@@ -61,7 +61,7 @@
 					<!-- 상세정보 페이지 URL입력 -->
 					<a href="#" onclick="movie_detail('${row.idx}')"> 
 						<span class="thumb-image">
-							<img src="D:/mvcinema/img/${row.img_url}"> <!-- 영화포스터 -->
+							<img src="http://192.168.0.5/mvcinema/img/${row.img_url}"> <!-- 영화포스터 -->
 						</span>
 					</a>
 					<button style="width: 96px;" class="btn btn-primary" type="button" onclick="movie_detail('${row.idx}')">
