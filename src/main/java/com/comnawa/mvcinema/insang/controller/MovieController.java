@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.comnawa.mvcinema.insang.model.dto.GenreDTO;
@@ -77,12 +78,12 @@ public class MovieController {
     String realpath= String.valueOf(session.getAttribute("realPath"));
     System.out.println(realpath+imgPath);
     //비디오 경로 생성
-    File f= new File(realpath+videoPath+"/");
+    File f= new File(realpath+videoPath);
     if (!f.exists()){
       f.mkdir();
     }
     //이미지 경로 생성
-    f= new File(realpath+imgPath+"/");
+    f= new File(realpath+imgPath);
     if (!f.exists()){
       f.mkdir();
     }
@@ -101,6 +102,18 @@ public class MovieController {
     model.addAttribute("result", "addMovie");
     
     return "/insang/login/admin_login";
+  }
+  
+  @ResponseBody
+  @RequestMapping("/movie/movieDetail.do")
+  public Insang_MovieDTO movieDetail(int idx){
+    Insang_MovieDTO select= null;
+    for (Insang_MovieDTO foo: movieService.getMovieList()){
+      if (foo.getIdx() == idx){
+        select= foo;
+      }
+    }
+    return select;
   }
   
 }

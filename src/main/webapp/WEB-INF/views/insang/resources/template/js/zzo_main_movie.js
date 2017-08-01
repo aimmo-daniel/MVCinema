@@ -22,4 +22,5 @@ function sub_movie_addMovie_div(value){
   } else if (now== 'block'){
     $('#'+value).css('display','none');
   }
+  $("#sub_movie_modMovie_div_div").css("visibility","hidden");
 }

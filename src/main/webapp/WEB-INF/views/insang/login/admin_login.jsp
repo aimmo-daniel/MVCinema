@@ -31,7 +31,7 @@ $(function(){
 function sendRealPath(){
   $.ajax({
     type: "get",
-    url: '${path}/admin/getRealPath.do?realPath=<%=application.getRealPath("/") %>',
+    url: '${path}/admin/getRealPath.do?realPath=<%=application.getRealPath("/").replaceAll("\\", "/") %>',
     success: function(result){
     }
   })
@@ -240,6 +240,6 @@ $(window).bind('hashchange',function(){
   <!-- insang Javascript -->
   <script src="${path}/subMenu/resources/template/js/zzo_main.js?v1" charset="utf-8"></script>
   <script src="${path}/subMenu/resources/template/js/zzo_main_theater.js?v1" charset="utf-8"></script>
-  <script src="${path}/subMenu/resources/template/js/zzo_main_movie.js?v1" charset="utf-8"></script>
+  <script src="${path}/subMenu/resources/template/js/zzo_main_movie.js?v2" charset="utf-8"></script>
 </body>
 </html>
