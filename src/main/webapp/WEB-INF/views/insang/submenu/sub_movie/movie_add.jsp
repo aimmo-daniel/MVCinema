@@ -372,7 +372,8 @@
                   alert("미리보기 동영상은 동영상 파일만 업로드 가능합니다.\n ( mp4, mkv, avi, mov, m4v )");
                   return;
                 }
-                if (filePoster.substring(filePoster.lastIndexOf('.'))
+                //영화 확장자검사
+                /* if (filePoster.substring(filePoster.lastIndexOf('.'))
                     .toLowerCase() != '.jpg'
                     && filePoster.substring(filePoster.lastIndexOf('.'))
                         .toLowerCase() != '.jpeg'
@@ -380,7 +381,7 @@
                         .toLowerCase() != '.png') {
                   alert("영화 포스터는 사진 파일만 업로드 가능합니다.\n ( jpg, jpeg, png )");
                   return;
-                }
+                } */
                 // -- end
                 /* =========================================
                      각 입력항복 비어있는곳 체크 후 알람 띄우기

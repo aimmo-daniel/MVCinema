@@ -148,14 +148,12 @@ public class MovieController {
         break;
       }
     }
-    System.out.println("originimg:"+originImg);
-    System.out.println("img_url:"+request.getParameter("img_url"));
     //바뀌었다면 기존파일 삭제
     if (!originImg.equals(filePoster.getOriginalFilename())){
       System.out.println("/img/"+originImg);
       ftpSender.delete("/img/"+originImg);
     }
-    if (!originVid.equals(request.getParameter("preview"))){
+    if (!originVid.equals(filePreview.getOriginalFilename())){
       ftpSender.delete("/video/"+originVid);
     }
     
