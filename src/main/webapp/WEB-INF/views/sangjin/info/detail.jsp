@@ -34,17 +34,17 @@
 				<b>장르 :</b> ${dto.genre} <br>
 				<b>기본 :</b>
 				<c:choose>
-					<c:when test="${dto.age > 7 && dto.age < 12}">
-				<b style="color: yellow">${dto.age}</b>세 이상 / ${dto.runtime}분
+					<c:when test="${dto.age > 0 and dto.age < 12}">
+				<b style="color: yellow">${dto.age}</b>세 이상 / ${dto.runtime}분<br>
 					</c:when>
-					<c:when test="${dto.age > 11 && dto.age < 15}">
-				<b style="color: green">${dto.age}</b>세 이상 / ${dto.runtime}분	
+					<c:when test="${(dto.age >= 12) and dto.age < 15} ">
+				<b style="color: green">${dto.age}</b>세 이상 / ${dto.runtime}분<br>	
 					</c:when>
-					<c:when test="${dto.age > 14 && dto.age < 18} ">
-				<b style="color: black">${dto.age}</b>세 이상 / ${dto.runtime}분	
+					<c:when test="${dto.age >= 15 and dto.age < 19} ">
+				<b style="color: black">${dto.age}</b>세 이상 / ${dto.runtime}분<br>	
 					</c:when>
-					<c:when test="${dto.age > 17}" >
-				<b style="color: red">${dto.age}</b>세 이상 / ${dto.runtime}분
+					<c:when test="${dto.age >= 19}" >
+				<b style="color: red">${dto.age}</b>세 이상 / ${dto.runtime}분<br>
 					</c:when>
 				</c:choose>	
 				<b>누적관객 :</b> ${dto.people} (<%=today%> 기준) <br>
