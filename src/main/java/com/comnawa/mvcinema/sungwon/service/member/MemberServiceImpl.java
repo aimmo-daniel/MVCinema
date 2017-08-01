@@ -99,4 +99,20 @@ public class MemberServiceImpl implements MemberService {
 		}
 		 return memberDao.changePwd(dto);
 	}
+
+
+
+	@Override
+	public String checkpwd(MemberDTO dto) {
+		try {
+			String shapwd = sha256.getSha256(dto.getPasswd().getBytes());
+			System.out.println(shapwd);
+			dto.setPasswd(shapwd);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 String name = memberDao.checkpwd(dto); 
+		return name;
+	}
+
 }

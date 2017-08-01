@@ -9,6 +9,7 @@ import com.comnawa.mvcinema.sungwon.model.member.dto.MemberDTO;
 public interface MemberDAO {
 	public String checkid(String userid);
 	public String checkemail(String email);
+	public String checkpwd(MemberDTO dto);
 	public void signup(MemberDTO dto);
 	public boolean login(MemberDTO dto);
 	public MemberDTO viewMember(String userid);
