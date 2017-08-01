@@ -1,0 +1,125 @@
+@CHARSET "UTF-8";
+
+#myCalendar {
+	float: left; 
+	max-width : 400px;
+	max-height: 400px;
+	margin-left: 50px;
+}
+
+#myCalendar table {
+	margin-top: 20px;
+	max-width: 400px;
+	max-height: 400px;
+	border-radius: 20px;
+}
+
+#myCalendar>#header {
+	padding: 0px;
+	border: 2px solid black;
+	border-radius: 10px;
+	width: 400px;
+	height: 30px;
+	text-align: center;
+}
+
+#myCalendar th {
+	border-radius: 10px;
+}
+
+#myCalendar td {
+	border-radius: 10px;
+	vertical-align: top;
+	width: 85px;
+	height: 40px;
+}
+#myCalendar td:hover {
+	background-color: #D2D2D2;
+}
+/*  a태그 설정     */
+#myCalendar a {
+	text-decoration: none;
+}
+
+#myCalendar a.mon:VISITED, a.tue:VISITED, a.wed:VISITED, a.thu:VISITED,
+	a.fri:VISITED {
+	color: black;
+}
+
+#myCalendar a.mon:HOVER, a.tue:HOVER, a.wed:HOVER, a.thu:HOVER, a.fri:HOVER
+	{
+	color: black;
+}
+
+#myCalendar a.sat:VISITED {
+	color: blue;
+}
+
+#myCalendar a.sat:HOVER {
+	color: black;
+}
+
+#myCalendar a.sun:VISITED {
+	color: red;
+}
+
+#myCalendar a.sun:HOVER {
+	color: black;
+}
+
+#myCalendar span {
+	margin-top: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+	font-size: 14px;
+}
+
+#myCalendar .button {
+	color: #000;
+	text-decoration: none;
+}
+
+/* 평일 컬럼 처리 */
+#myCalendar .mon, .tue, .wed, .thu, .fri{
+	border: 2px solid black;
+	text-align: center;
+	max-width:50px;
+	height: 50px;
+}
+#myCalendar .mon>p, .tue>p, .wed>p, .thu>p, .fri>p{
+	text-align: left;
+	font-size: 10px;
+	border: 0;
+	margin:0px;
+}
+/* 평일 컬럼 자식태그 (a) 처리 */
+#myCalendar .mon>a, .tue>a, .wed>a, .thu>a, .fri>a{
+	border: 0;
+	text-align: center;
+	color: black;
+}
+
+/* 토요일 컬럼 처리 */
+#myCalendar .sat {
+	border: 2px solid blue;	
+	color: #0000ff;
+	text-align: center;
+	height: 30px;
+}
+#myCalendar .sat>a {
+	/* background-color: #BEEFFF; */
+	border: 0;
+	text-align: center;
+}
+/* 일요일 컬럼 처리*/
+#myCalendar .sun {
+	border: 2px solid red;
+	color: #ff0000;
+	text-align: center;
+	height: 30px;
+}
+#myCalendar .sun>a {
+	border: 0;
+	text-align: center;
+	height: 30px;
+}
