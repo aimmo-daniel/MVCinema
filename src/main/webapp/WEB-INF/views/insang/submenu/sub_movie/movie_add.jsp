@@ -102,9 +102,9 @@
     <table class="table" style="width: 100%;">
       <c:forEach var="mod_row" items="${movieList}">
         <tr onclick="showModForm(${mod_row.idx});">
-          <td><img src="${mod_row.img_url}"></td>
-          <td>
-            <p style="font-weight: bolder;">${mod_row.title}</p>
+          <td><img src="http://192.168.0.5/mvcinema/img/${mod_row.img_url}" style="width:240px; height: 320px;"></td>
+          <td style="height:320px;">
+            <p style="font-weight: bolder; vertical-align: middle; padding-top: 130px; font-size: 50px;" >${mod_row.title}</p>
           </td>
         </tr>
       </c:forEach>
@@ -118,27 +118,27 @@
         <table class="table table-default">
           <tr>
             <td>영화제목</td>
-            <td><input type="text" name="title" id="mod_title" style="width: 80%;"></td>
+            <td colspan="2"><input type="text" name="title" id="mod_title" style="width: 80%;"></td>
           </tr>
           <tr>
             <td>나이제한</td>
-            <td><input type="number" name="age" id="mod_age" style="width: 80%;" min="1" max="120"></td>
+            <td colspan="2"><input type="number" name="age" id="mod_age" style="width: 80%;" min="1" max="120"></td>
           </tr>
           <tr>
             <td>영화감독</td>
-            <td><input type="text" name="director" id="mod_director" style="width: 80%;"></td>
+            <td colspan="2"><input type="text" name="director" id="mod_director" style="width: 80%;"></td>
           </tr>
           <tr>
             <td>주연배우</td>
-            <td><input type="text" name="actors" id="mod_actors" style="width: 80%;"></td>
+            <td colspan="2"><input type="text" name="actors" id="mod_actors" style="width: 80%;"></td>
           </tr>
           <tr>
             <td>줄거리</td>
-            <td><textarea name="content" id="mod_content" style="width: 80%;" rows="6"></textarea></td>
+            <td colspan="2"><textarea name="content" id="mod_content" style="width: 80%;" rows="6"></textarea></td>
           </tr>
           <tr>
             <td>장르</td>
-            <td><c:forEach var="genre" items="${genreList}">
+            <td colspan="2"><c:forEach var="genre" items="${genreList}">
                 <label style="font-weight: normal;"> <input type="checkbox" id="genre${genre.idx}" value="${genre.genre}">
                   ${genre.genre} &nbsp;
                 </label>
@@ -146,19 +146,21 @@
           </tr>
           <tr>
             <td>개봉일</td>
-            <td><input type="date" name="release_date" id="mod_release_date"></td>
+            <td colspan="2"><input type="date" name="release_date" id="mod_release_date"></td>
           </tr>
           <tr>
             <td>상영시간</td>
-            <td><input type="number" name="runtime" id="mod_runtime"> 분</td>
+            <td colspan="2"><input type="number" name="runtime" id="mod_runtime"> 분</td>
           </tr>
           <tr>
             <td>미리보기 동영상</td>
             <td><input type="file" name="filePreview" id="mod_filePreview"></td>
+            <td style="width: 120px;"><div id="mod_video"></div></td>
           </tr>
           <tr>
             <td>영화 포스터</td>
             <td><input type="file" name="filePoster" id="mod_filePoster"></td>
+            <td style="width: 120px;"><img src="" id="mod_img"></td>
           </tr>
           <tr align="center">
             <td colspan="2" style="padding-top: 30px;"><input type="button" id="mod_btnCancel" value="수정취소"
@@ -173,6 +175,10 @@
   
   <script>
   function showModForm(idx) {
+    /*
+     *  영화관리창 영화 상세정보 페이지 벨류 등록
+     */
+    
     $("#sub_movie_modMovie_div").css("display","none");
     $("#sub_movie_modMovie_div_div").css("visibility","visible");
     $.ajax({
@@ -186,12 +192,10 @@
         $("#mod_content").val(result.content);
         $("#mod_release_date").val(result.release_date);
         $("#mod_runtime").val(result.runtime);
-        $("#mod_filePreview").val(result.filePreview);
-        $("#mod_filePoster").val(result.filePoster);
+        $("#mod_video").html((result.preview != null)?'영상있음':'영상없음');
+        $("#mod_img").attr("src","http://192.168.0.5/mvcinema/img/"+result.img_url);
       }
     })
-    
-    
   }
 
       function modMovie() {
