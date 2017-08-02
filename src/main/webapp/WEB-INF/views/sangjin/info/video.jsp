@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-	<video width="800" height="450" controls autoplay>
+	<video style="margin-left: 100px;" width="800" height="450" controls autoplay>
 		<source src="${vdo_ad}/${dto.preview}"type="video/mp4">
 	</video>
 </body>
