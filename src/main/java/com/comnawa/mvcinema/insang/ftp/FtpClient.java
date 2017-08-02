@@ -10,7 +10,7 @@ import org.apache.commons.net.ftp.FTPReply;
 
 public class FtpClient {
 
-  private String svrIp = "192.168.0.5";
+  private String svrIp = "192.168.0.69";
   private String path;
 
   public FtpClient(String path) {
