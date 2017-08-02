@@ -2,7 +2,6 @@ package com.comnawa.mvcinema.insang.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -148,22 +146,21 @@ public class MovieController {
         break;
       }
     }
-    //바뀌었다면 기존파일 삭제
-    if (!originImg.equals(filePoster.getOriginalFilename())){
-      System.out.println("/img/"+originImg);
-      ftpSender.delete("/img/"+originImg);
-    }
-    if (!originVid.equals(filePreview.getOriginalFilename())){
-      ftpSender.delete("/video/"+originVid);
-    }
+    System.out.println("originImg:"+originImg);
+    System.out.println("originVid:"+originVid);
+    System.out.println("img_url:"+request.getParameter("img_url"));
+    System.out.println("preview:"+request.getParameter("preview"));
     
     /* 
      * form에서 넘어온 데이터 가공 후 dto에 넣기
      */
     long primarykey= System.currentTimeMillis();
-    String previewName= primarykey+"_"+filePreview.getOriginalFilename();
-    String posterName= primarykey+"_"+filePoster.getOriginalFilename(); 
+    String previewName= ( originImg.equals(request.getParameter("img_url")) ) ? 
+        originVid : request.getParameter("preview");
+    String posterName= ( originVid.equals(request.getParameter("preview")) ) ?
+        originImg : request.getParameter("img_url");
     Insang_MovieDTO dto= new Insang_MovieDTO();
+    dto.setIdx(Integer.parseInt(request.getParameter("mod_idx")));
     dto.setTitle(request.getParameter("title"));
     dto.setAge(Integer.parseInt(request.getParameter("age")));
     dto.setDirector(request.getParameter("director"));
@@ -180,31 +177,31 @@ public class MovieController {
     dto.setRelease_date(release_date);
     dto.setPreview(previewName);
     dto.setImg_url(posterName);
-    
+
     /*
      * MultipartFile 동영상 디렉토리에 복사
      */
     
-    String realpath= String.valueOf(session.getAttribute("realPath"));
-    //비디오 경로 생성
-    File f= new File(realpath+videoPath);
-    if (!f.exists()){
-      f.mkdirs();
-    }
-    //이미지 경로 생성
-    f= new File(realpath+imgPath);
-    if (!f.exists()){
-      f.mkdirs();
-    }
-    //비디오 파일 복사
-    File f2= new File(realpath+videoPath + previewName);
-    File f1= new File(realpath+imgPath + posterName);
-    try {
-      FileCopyUtils.copy(filePreview.getBytes(), f2);
-      FileCopyUtils.copy(filePoster.getBytes(), f1);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+//    String realpath= String.valueOf(session.getAttribute("realPath"));
+//    //비디오 경로 생성
+//    File f= new File(realpath+videoPath);
+//    if (!f.exists()){
+//      f.mkdirs();
+//    }
+//    //이미지 경로 생성
+//    f= new File(realpath+imgPath);
+//    if (!f.exists()){
+//      f.mkdirs();
+//    }
+//    //비디오 파일 복사
+//    File f2= new File(realpath+videoPath + previewName);
+//    File f1= new File(realpath+imgPath + posterName);
+//    try {
+//      FileCopyUtils.copy(filePreview.getBytes(), f2);
+//      FileCopyUtils.copy(filePoster.getBytes(), f1);
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
     
     File fPreview= new File(previewName);
     File fPoster= new File(posterName);
@@ -217,12 +214,20 @@ public class MovieController {
     fos.flush();
     fos.close();
     
-    ftpSender.upload(fPreview, "/video/"+previewName);
-    ftpSender.upload(fPoster, "/img/"+posterName);
+    // 이미지 혹은 영상이 바뀌었다면 기존파일 삭제
+    if (!originImg.equals(request.getParameter("img_url"))){
+      ftpSender.delete("/img/"+originImg);
+      ftpSender.upload(fPoster, "/img/"+posterName);
+    }
+    if (!originVid.equals(request.getParameter("preview"))){
+      ftpSender.delete("/video/"+originVid);
+      ftpSender.upload(fPreview, "/video/"+previewName);
+    }
     
-//    movieService.insertMovie(dto);
     
-    model.addAttribute("result", "addMovie");
+    movieService.updateMovie(dto);
+    
+    model.addAttribute("result", "modMovie");
     
     return "/insang/login/admin_login";
   }

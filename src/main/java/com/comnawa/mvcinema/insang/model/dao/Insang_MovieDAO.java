@@ -8,5 +8,6 @@ import com.comnawa.mvcinema.insang.model.dto.Insang_MovieDTO;
 public interface Insang_MovieDAO {
   public List<GenreDTO> getGenreList();
   public void insertMovie(Insang_MovieDTO dto);
+  public void updateMovie(Insang_MovieDTO dto);
   public List<Insang_MovieDTO> getMovieList();
 }

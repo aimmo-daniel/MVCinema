@@ -102,9 +102,9 @@
     <table class="table" style="width: 100%;">
       <c:forEach var="mod_row" items="${movieList}">
         <tr onclick="showModForm(${mod_row.idx});">
-          <td><img src="http://192.168.0.5/mvcinema/img/${mod_row.img_url}" style="width:240px; height: 320px;"></td>
-          <td style="height:320px;">
-            <p style="font-weight: bolder; vertical-align: middle; padding-top: 130px; font-size: 50px;" >${mod_row.title}</p>
+          <td><img src="http://192.168.0.69/mvcinema/img/${mod_row.img_url}" width="240px" height= "280px"></td>
+          <td style="height:320px;" align="center">
+            <p style="font-weight: bolder; vertical-align: middle; padding-top: 130px; font-size: 30px;" >${mod_row.title}</p>
           </td>
         </tr>
       </c:forEach>
@@ -138,7 +138,8 @@
           </tr>
           <tr>
             <td>장르</td>
-            <td colspan="2"><c:forEach var="genre" items="${genreList}">
+            <td colspan="2">
+              <c:forEach var="genre" items="${genreList}">
                 <label style="font-weight: normal;"> <input type="checkbox" id="mod_genre${genre.genre}" value="${genre.genre}">
                   ${genre.genre} &nbsp;
                 </label>
@@ -173,8 +174,6 @@
       </form>
     </div>
   
-  
-  
   <script>
   function showModForm(idx) {
     /*
@@ -196,7 +195,7 @@
         $("#mod_release_date").val(changeDate(result.release_date));
         $("#mod_runtime").val(result.runtime);
         $("#mod_video").html((result.preview != null)?result.preview:'영상없음');
-        $("#mod_img").attr("src","http://192.168.0.5/mvcinema/img/"+result.img_url);
+        $("#mod_img").attr("src","http://192.168.0.69/mvcinema/img/"+result.img_url);
         $("#mod_img_url").val(result.img_url);
         $("#mod_preview").val(result.preview);
         
@@ -241,8 +240,15 @@
         var content = $("#mod_content").val();
         var release_date = $("#mod_release_date").val();
         var runtime = $("#mod_runtime").val();
-        var filePreview = $("#mod_filePreview").val();
-        var filePoster = $("#mod_filePoster").val();
+        alert($("#mod_filePreview").val() == '');
+        var filePreview = ( $("#mod_filePreview").val() == '' ) ? $("#mod_img_url").val() : $("#mod_filePreview").val();
+        var filePoster = ( $("#mod_filePoster").val() == '' ) ? $("#mod_preview").val() : $("#mod_filePreview").val();
+        if (!$("#mod_filePreview").val() == ''){
+          $("#mod_preview").val($("#mod_filePreview").val());
+        }
+        if (!$("#mod_filePoster").val() == ''){
+          $("#mod_img_url").val($("#mod_filePoster").val());
+        }
         //==========================================
         //  업로드 영상 확장자 검사                      
         //------------------------------------------
@@ -272,7 +278,7 @@
         /* =========================================
              각 입력항복 비어있는곳 체크 후 알람 띄우기
            ========================================= */
-           alert("title:"+title+"\nage:"+age+"\ndirector:"+director+"\nactors:"+actors+"\ncontent:"+content+"\nrelease_date:"+release_date+"\nruntime:"+runtime)
+           alert("filePreview"+filePreview+"\n"+"filePoster:"+filePoster);
         if (title == '' || age == '' || director == '' || actors == ''
             || content == '' || release_date == '' || runtime == '') {
           alert("입력하지 않은 항목이 있습니다.");
@@ -329,6 +335,12 @@
         }
         // -- end
       });
+      
+      $("#mod_btnCancel").click(function(){
+        $("#sub_movie_modMovie_div").css("display","block");
+        $("#sub_movie_modMovie_div_div").css("visibility","hidden");
+        fnMove();
+      })
 
       $("#btnOk")
           .click(

@@ -31,4 +31,9 @@ public class Insang_MovieDAOImpl implements Insang_MovieDAO{
     return sqlSession.selectList("admin.movieList");
   }
   
+  @Override
+  public void updateMovie(Insang_MovieDTO dto) {
+    sqlSession.update("admin.updateMovie", dto);
+  }
+  
 }

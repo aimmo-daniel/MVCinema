@@ -62,6 +62,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     select * from movie order by idx
   </select>
   
+  <update id="updateMovie">
+    update movie
+    set title= #{title}, age= #{age}, director= #{director}, actors= #{actors},
+      content= #{content}, genre= #{genre}, runtime= #{runtime}, img_url= #{img_url}, preview= #{preview} 
+    where idx=#{idx}
+  </update>
+  
 </mapper>
 
 
