@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="scdmovie_list" resultType="com.comnawa.mvcinema.sangjin.model.dto.MovieDTO">
 		select idx, img_url, age, title, release_date from movie
-		where release_date > CURRENT_DATE
+		where release_date > CURRENT_DATE order by release_date
 	</select>
 	
 	<select id="movie_detail" resultType="com.comnawa.mvcinema.sangjin.model.dto.MovieDTO">

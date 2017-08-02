@@ -4,55 +4,123 @@
 <%@ include file="../../include/template.jsp"%>
 <%@ include file="../sj_include/sangjincss.jsp"%>
 <%@ page import="java.util.*, java.text.*"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
 	java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("MM-dd");
 	String today = formatter.format(new java.util.Date());
 %>
 <!DOCTYPE html>
 <html>
+<script>
+$(document).ready(function() {
+	content();
+});
+
+function content() {
+	var idx=$("#movie_idx").val();
+	$("#tab1").addClass("active");
+	$("#tab2").removeClass("active");
+	$("#tab3").removeClass("active");
+	$("#tab4").removeClass("active");
+	$.ajax({
+		type : "get",
+		url : "${path}/info/content.do?idx=" + idx,
+		success : function(result) {
+			$("#bottom_content").html(result);
+		}
+	});
+}
+
+function actors() {
+	var idx=$("#movie_idx").val();
+	$("#tab1").removeClass("active");
+	$("#tab2").addClass("active");
+	$("#tab3").removeClass("active");
+	$("#tab4").removeClass("active");
+	$.ajax({
+		type : "get",
+		url : "${path}/info/actors.do?idx=" + idx,
+		success : function(result) {
+			$("#bottom_content").html(result);
+		}
+	});
+}
+
+function stillcut() {
+	var idx=$("#movie_idx").val();
+	$("#tab1").removeClass("active");
+	$("#tab2").removeClass("active");
+	$("#tab3").addClass("active");
+	$("#tab4").removeClass("active");
+	$.ajax({
+		type : "get",
+		url : "${path}/info/stillcut.do?idx=" + idx,
+		success : function(result) {
+			$("#bottom_content").html(result);
+		}
+	});
+}
+
+function video() {
+	var idx=$("#movie_idx").val();
+	$("#tab1").removeClass("active");
+	$("#tab2").removeClass("active");
+	$("#tab3").removeClass("active");
+	$("#tab4").addClass("active");
+	$.ajax({
+		type : "get",
+		url : "${path}/info/video.do?idx=" + idx,
+		success : function(result) {
+			$("#bottom_content").html(result);
+		}
+	});
+}
+
+</script>
+<style>
+/* #bg {
+	background-image: url('../../sangjin/resource/image/bg.jpg');
+	background-size: cover;
+} */
+</style>
 <head>
 <%@ include file="../../sangjin/home/loginbar.jsp"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
- 	<div class="wrap-movie-chart" style="padding-right: 200px; padding-left: 200px;">
+ 	<div class="wrap-movie-chart" id="bg" style="padding-right: 200px; padding-left: 200px;">
 		<div class="tit-heading-wrap">
 			<h3>영화 상세</h3>
 		</div>
 		<div class="sect-movie-chart" style="height: 400px; margin-left: 50px;">
 			<div class="box-image">
 				<span class="thumb-image"> <img
-					src="http://192.168.0.5/mvcinema/img/${dto.img_url}">
+					src="${img_ad}/${dto.img_url}">
 				</span>
-				<a class="btn btn-danger" role="button" href="#">예매하기</a>
+				<a class="btn btn-danger" role="button" href="${path}/ticket/quick_ticket_page.do">예매하기</a>
 			</div>
-			<div style="position: relative; left: 250px; top: -165px;">
+			<div style="position: relative; left: 250px; top: -250px;">
+				<input id="movie_idx" type="hidden" value="${dto.idx}"/>
+				<h2>[ ${dto.title} ]</h2>
+				<hr>
 				<b>개봉 :</b> <fmt:formatDate value="${dto.release_date}" pattern="yyyy.MM.dd" /><br> 
 				<b>감독 :</b> ${dto.director} <br>
 				<b>출연 :</b> ${dto.actors} <br>
 				<b>장르 :</b> ${dto.genre} <br> 
-				<b>기본 :	${dto.age}</b>세 이상 / <b>${dto.runtime}</b>분<br>	
-				<b>누적관객 :</b> ${dto.people} (<%=today%> 기준) &nbsp;&nbsp;&nbsp;
+				<b>기본 :	${dto.age}</b>세 이상 / ${dto.runtime}분<br>	
+				<b>누적관객 :</b> <fmt:formatNumber value="${dto.people}" type="number"/>명 (<%=today%> 기준) &nbsp;&nbsp;&nbsp;
 			</div>
 		</div>
 		<div>
 			<ul class="nav nav-tabs">
-			  <li class="active"><a href="#">줄거리</a></li>
-			  <li><a href="#">출연/제작진</a></li>
-			  <li><a href="#">스틸컷</a></li>
-			  <li><a href="#">예고편</a></li>
+			  <li id="tab1"><a href='javascript:void(0);' onclick='content();'>줄거리</a></li>
+			  <li id="tab2"><a href='javascript:void(0);' onclick='actors();'>출연/제작진</a></li>
+			  <li id="tab3"><a href='javascript:void(0);' onclick='stillcut();'>스틸컷</a></li>
+			  <li id="tab4"><a href='javascript:void(0);' onclick='video();'>예고편</a></li>
 			</ul>
 		</div>
-		<div style="margin-top: 40px;">
-			<% pageContext.setAttribute("newLineChar", "\n"); %>
-			<!-- 공백문자 처리 -->
-			<c:set var="str" value="${fn:replace(dto.content,'  ','&nbsp;&nbsp;') }" />
-			<!-- 줄바꿈 처리 -->
-			<c:set var="str" value="${fn:replace(str,newLineChar,'<br>') }" />
-			${str}
-		</div>
+		<!-- 하단 내용 출력 -->
+		<div style="margin-top: 40px; margin-bottom: 100px" id="bottom_content"></div>
 	</div>
 </body>
 </html>

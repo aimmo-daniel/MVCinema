@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="detail">
+
+	<!-- 배우이름과 사진 -->
+	<select id="actors_list" resultType="com.comnawa.mvcinema.sangjin.model.dto.ActorsDTO">
+		select a.name, a.img_url from movie m, actors a where m.idx=a.idx and m.idx=#{idx}
+	</select>
+	
+	<!-- 영화 스틸컷 -->
+	<select id="stillcut" resultType="com.comnawa.mvcinema.sangjin.model.dto.StillcutDTO">
+		select s.img_url from movie m, stillcut s where m.idx=s.idx and m.idx=#{idx}
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

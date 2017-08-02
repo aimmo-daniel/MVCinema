@@ -1359,6 +1359,7 @@ button, input, select, textarea {
 
 a {
 	color: #337ab7;
+	font-weight: bold;
 	text-decoration: none
 }
 
@@ -4378,6 +4379,7 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 	{
 	color: #555;
 	cursor: default;
+	font-weight: bold;
 	background-color: #fff;
 	border: 1px solid #ddd;
 	border-bottom-color: transparent

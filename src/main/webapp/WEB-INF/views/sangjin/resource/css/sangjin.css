@@ -18,7 +18,7 @@ img {
 #topMenu {
 	height: 40px; /* 메인 메뉴의 높이 */
 	width: 100%; /* 메인 메뉴의 넓이 */
-	background: #0080ff;
+	background: #0082bf;
 	margin-bottom: 20px;
 }
 
@@ -29,7 +29,7 @@ img {
 
 #topMenu ul li { /* 메인 메뉴 안에 ul 태그 안에 있는 li 태그의 스타일 적용(상위/하위메뉴 모두) */
 	color: black; /* 글씨 색을 흰색으로 설정 */
-	background-color: #0080ff; /* 배경 색을 RGB(2D2D2D)로 설정 */
+	background-color: #0082bf; /* 배경 색을 RGB(2D2D2D)로 설정 */
 	float: left; /* 왼쪽으로 나열되도록 설정 */
 	line-height: 40px; /* 텍스트 한 줄의 높이를 30px로 설정 */
 	vertical-align: middle; /* 세로 정렬을 가운데로 설정 */
@@ -46,20 +46,13 @@ img {
 	font-family: "Trebuchet MS", Dotum; /* 기본 폰트를 영어/한글 순서대로 설정 */
 }
 
-.menuLink { /* 상위 메뉴의 글씨색을 흰색으로 설정 */
-	color: white;
+.menuLink {
+	color: #ffffff;
 }
 
-.topMenuLi:hover .menuLink:hover { /* 상위 메뉴의 li에 마우스오버 되었을 때 스타일 설정 */
-	color: white;
+ .topMenuLi:hover .menuLink:hover {
 	background-color: #0000ff;
-}
-
-.submenuLink { /* 하위 메뉴의 a 태그 스타일 설정 */
-	color: #2d2d2d; /* 글씨 색을 RGB(2D2D2D)로 설정 */
-	background-color: white; /* 배경색을 흰색으로 설정 */
-	border: solid 1px black; /* 테두리를 설정 */
-	margin-top: -1px; /* 위 칸의 하단 테두리와 아래칸의 상단 테두리가 겹쳐지도록 설덩 */
+	color: white;
 }
 
 .longLink { /* 좀 더 긴 메뉴 스타일 설정 */

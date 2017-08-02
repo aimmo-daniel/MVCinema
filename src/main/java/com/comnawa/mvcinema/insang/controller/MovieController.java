@@ -141,8 +141,10 @@ public class MovieController {
     String originVid = "";
     for (Insang_MovieDTO foo : movieService.getMovieList()) {
       if (foo.getIdx() == Integer.parseInt(request.getParameter("mod_idx"))) {
-        originImg = foo.getImg_url();
-        originVid = foo.getPreview();
+        originImg = ( foo.getImg_url()==null || foo.getImg_url().equals("null") ) ?
+        		"null" : foo.getImg_url();
+        originVid = ( foo.getPreview()==null || foo.getPreview().equals("null") ) ?
+        		"null" : foo.getPreview();
         break;
       }
     }
@@ -157,6 +159,12 @@ public class MovieController {
     long primarykey = System.currentTimeMillis();
     String previewName="";
     String posterName="";
+    try{
+    	String re_preview = request.getParameter("preview");
+    	String re_img_url = request.getParameter("img_url");
+    }catch(Exception e){
+    	e.printStackTrace();
+    }
     previewName = (originImg.equals(request.getParameter("preview"))) ? originVid : request.getParameter("preview");
     posterName = (originVid.equals(request.getParameter("img_url"))) ? originImg : request.getParameter("img_url");
     Insang_MovieDTO dto = new Insang_MovieDTO();
