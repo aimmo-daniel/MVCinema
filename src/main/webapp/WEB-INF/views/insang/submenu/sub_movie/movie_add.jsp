@@ -102,7 +102,7 @@
     <table class="table" style="width: 100%;">
       <c:forEach var="mod_row" items="${movieList}">
         <tr onclick="showModForm(${mod_row.idx});">
-          <td><img src="http://192.168.0.69/mvcinema/img/${mod_row.img_url}" width="240px" height= "280px"></td>
+          <td><img src="http://192.168.0.69/mvcinema/img/${mod_row.img_url}" style="width: 120%; height: 100%;"></td>
           <td style="height:320px;" align="center">
             <p style="font-weight: bolder; vertical-align: middle; padding-top: 130px; font-size: 30px;" >${mod_row.title}</p>
           </td>
@@ -246,7 +246,6 @@
     var content = $("#mod_content").val();
     var release_date = $("#mod_release_date").val();
     var runtime = $("#mod_runtime").val();
-    alert($("#mod_filePreview").val() == '');
     var filePreview = ($("#mod_filePreview").val() == '') ? $("#mod_img_url")
         .val() : $("#mod_filePreview").val();
     var filePoster = ($("#mod_filePoster").val() == '') ? $("#mod_preview").val()
@@ -283,7 +282,6 @@
      * ========================================= 각 입력항복 비어있는곳 체크 후 알람 띄우기
      * =========================================
      */
-    alert("filePreview" + filePreview + "\n" + "filePoster:" + filePoster);
     if (title == '' || age == '' || director == '' || actors == ''
         || content == '' || release_date == '' || runtime == '') {
       alert("입력하지 않은 항목이 있습니다.");

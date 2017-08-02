@@ -148,10 +148,23 @@ public class MovieController {
         break;
       }
     }
+    String re_preview= request.getParameter("preview");
+    String re_img_url= request.getParameter("img_url");
+    System.out.println("requestparam:"+request.getParameter("img_url"));
+    System.out.println("requestparam:"+request.getParameter("preview"));
+    if (re_preview.indexOf("C:\\fakepath\\")!= -1){
+      int start=request.getParameter("preview").lastIndexOf("\\")+1;
+      re_preview = request.getParameter("preview").substring(start);
+    }
+    if (re_img_url.indexOf("C:\\fakepath\\")!= -1){
+      int start= request.getParameter("img_url").lastIndexOf("\\")+1;
+      re_img_url = request.getParameter("img_url").substring(start);
+    }
     System.out.println("originImg:" + originImg);
     System.out.println("originVid:" + originVid);
-    System.out.println("img_url:" + request.getParameter("img_url"));
-    System.out.println("preview:" + request.getParameter("preview"));
+    
+    System.out.println("img_url:" + re_img_url);
+    System.out.println("preview:" + re_preview);
 
     /*
      * form에서 넘어온 데이터 가공 후 dto에 넣기
@@ -159,14 +172,8 @@ public class MovieController {
     long primarykey = System.currentTimeMillis();
     String previewName="";
     String posterName="";
-    try{
-    	String re_preview = request.getParameter("preview");
-    	String re_img_url = request.getParameter("img_url");
-    }catch(Exception e){
-    	e.printStackTrace();
-    }
-    previewName = (originImg.equals(request.getParameter("preview"))) ? originVid : request.getParameter("preview");
-    posterName = (originVid.equals(request.getParameter("img_url"))) ? originImg : request.getParameter("img_url");
+    previewName = (originImg.equals(re_preview)) ? originVid : re_preview;
+    posterName = (originVid.equals(re_img_url)) ? originImg : re_img_url;
     Insang_MovieDTO dto = new Insang_MovieDTO();
     dto.setIdx(Integer.parseInt(request.getParameter("mod_idx")));
     dto.setTitle(request.getParameter("title"));
@@ -223,11 +230,11 @@ public class MovieController {
     fos.close();
 
     // 이미지 혹은 영상이 바뀌었다면 기존파일 삭제
-    if (!originImg.equals(request.getParameter("img_url"))) {
+    if (!originImg.equals(re_img_url)) {
       ftpSender.delete("/img/" + originImg);
       ftpSender.upload(fPoster, "/img/" + posterName);
     }
-    if (!originVid.equals(request.getParameter("preview"))) {
+    if (!originVid.equals(re_preview)) {
       ftpSender.delete("/video/" + originVid);
       ftpSender.upload(fPreview, "/video/" + previewName);
     }
