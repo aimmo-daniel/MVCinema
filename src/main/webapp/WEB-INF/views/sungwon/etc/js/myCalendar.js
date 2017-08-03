@@ -1,26 +1,44 @@
-function myCalendar(id, date) {
+function myCalendar(id, date,r_date) {
+	
 	var myCalendar = document.getElementById(id);
-
+	
+	var c_date= date;
 	if (typeof (date) !== 'undefined') {
 		date = date.split('-');
 		date[1] = date[1] - 1;
 		date = new Date(date[0], date[1], date[2]);
-
 	} else {
 		var date = new Date();
 	}
+	
+	/*선택한 날짜 구하기*/
 	// 년도를 구함
 	var currentYear = date.getFullYear();
 	// 월을 구함. 월은 0부터 시작하므로 +1, 12월은 11을 출력
 	var currentMonth = date.getMonth() + 1;
 	// 오늘 일자.
 	var currentDate = date.getDate();
-
-	getToday(currentYear, currentMonth, currentDate);
-
-	date.setDate(1);
+	
+	/*오늘 날짜 구하기*/
+	// 오늘 날짜  yyyy-MM-dd 
+	var tmp_today = new Date();
+	//이번달이 10월보다 작으면 앞에 0을 더함
+	if(tmp_today.getMonth()<10){
+		tmp_month = ('0'+(tmp_today.getMonth()+1))
+	}else{
+		tmp_month = (tmp_today.getMonth()+1);
+	}
+	//오늘 날짜가 10일보다 작으면 앞에 0을더함
+	if(tmp_today.getDate()<10){
+		tmp_day = ('0'+tmp_today.getDate())  
+	}else{
+		tmp_day = tmp_today.getDate();
+	}
+	var today = tmp_today.getFullYear()+'-'+tmp_month+'-'+tmp_day;
+	
 	
 	// 이번달 1일의 요일을 출력. 0은 일요일 6은 토요일
+	date.setDate(1);
 	var currentDay = date.getDay();
 	var dateString = new Array('sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat');
 	// 각 달의 마지막 일을 계산, 윤년의 경우 년도가 4의 배수이고 100의 배수가 아닐 때 혹은 400의 배수일 때 2월달이 29일
@@ -53,27 +71,27 @@ function myCalendar(id, date) {
 	if (currentMonth < 10)
 		// 10월 이하라면 앞에 0을 붙여준다.
 		var currentMonth = '0' + currentMonth;
-
 	var calendar = '';
-
-	calendar += '<div id="header">';
-	calendar += '			<span><input type="button" class="button left" value="이전" onclick="myCalendar(\''
-			+ id + '\', \'' + prevDate + '\')"></span>';
-	calendar += '			<span id="date">' + currentYear + '년 ' + currentMonth
-			+ '월</span>';
-	calendar += '			<span><input type="button" class="button right" value="다음" onclick="myCalendar(\''
-			+ id + '\', \'' + nextDate + '\')"></a></span>';
-	calendar += '		</div>';
-	calendar += '		<table>';
+	calendar += '<table>';
+	calendar +=		'<tr>';
+	calendar +=			'<td style="padding-top:20px; padding-bottom:0px; text-align:center; ">';
+	calendar += '			<span><input type="button" class="btn btn-info" style="font-size: 12px;" value="이전" onclick="myCalendar(\''
+			+ id + '\', \'' + prevDate + '\', \'' + r_date + '\')"></span></td>';
+	calendar += '<td style="text-align:center;"><h1><span class="label label-primary" style="align:center;"id="date">'
+			+ currentYear + '년 ' + currentMonth + '월</span></h1></td>';
+	calendar += '<td style="padding-top:20px; padding-bottom:0px; text-align:center;"><span><input type="button" class="btn btn-info" style="font-size: 12px;" value="다음" onclick="myCalendar(\''
+			+ id + '\', \'' + nextDate + '\', \'' + r_date + '\')"></a></span></td>';
+	calendar += '		</tr></table>';
+	calendar += '		<table id="mvc_caleandar" class="table table-primary" style="height:80%">';
 	calendar += '			<thead>';
 	calendar += '				<tr>';
-	calendar += '				  <th class="sun" scope="row">일</th>';
-	calendar += '				  <th class="mon" scope="row">월</th>';
-	calendar += '				  <th class="tue" scope="row">화</th>';
-	calendar += '				  <th class="wed" scope="row">수</th>';
-	calendar += '				  <th class="thu" scope="row">목</th>';
-	calendar += '				  <th class="fri" scope="row">금</th>';
-	calendar += '				  <th class="sat" scope="row">토</th>';
+	calendar += '				  <th style="text-align:center;" class="sun" scope="row"><h2><label class="label label-danger">일</label></h2></th>';
+	calendar += '				  <th style="text-align:center;" class="mon" scope="row"><h2><label class="label label-success">월</label></h2></th>';
+	calendar += '				  <th style="text-align:center;" class="tue" scope="row"><h2><label class="label label-success">화</label></h2></th>';
+	calendar += '				  <th style="text-align:center;" class="wed" scope="row"><h2><label class="label label-success">수</label></h2></th>';
+	calendar += '				  <th style="text-align:center;" class="thu" scope="row"><h2><label class="label label-success">목</label></h2></th>';
+	calendar += '				  <th style="text-align:center;" class="fri" scope="row"><h2><label class="label label-success">금</label></h2></th>';
+	calendar += '				  <th style="text-align:center;" class="sat" scope="row"><h2><label class="label label-primary">일</label></h2></th>';
 	calendar += '				</tr>';
 	calendar += '			</thead>';
 	calendar += '			<tbody>';
@@ -92,16 +110,37 @@ function myCalendar(id, date) {
 			} else {
 				currentDay = dateNum;
 			}
+			
 			var tdname = currentYear + '-' + currentMonth + '-' + currentDay;
-
-			calendar += '<td style="width:85px;  padding:0px"'
-					+'class="'+ dateString[j]
-					+ '" onclick="javascript:selectDay('+ currentYear+ ','
-					+ currentMonth+ ','+ currentDay + ')">'
-					+ '<a href="#"'
-					+ 'class="'
-					+ dateString[j] + '">' + dateNum + '</a>';
-			calendar += '</td>';
+			
+			if (typeof (r_date) !== 'undefined') {
+				if(r_date > tdname ){ //개봉일 보다 이전일은 예매x
+					calendar += '<td style="width:85px; height:67.2px;  padding:0px; text-align:center; background-color:gray"' 
+						+ 'class="'+ dateString[j] + '">'
+						+ '<p  style="font-weight:nomal; color: white;"  class="' + dateString[j] + '">'
+						+ dateNum + '</p>';
+					calendar += '</td>';
+				}else if(tdname < today){ //오늘 보다 이전일은 예매x
+					calendar += '<td style="width:85px; height:67.2px;  padding:0px; text-align:center; background-color:gray"' 
+						+ 'class="'+ dateString[j] + '">'
+						+ '<p  style="font-weight:nomal; color: white;"  class="' + dateString[j] + '">'
+						+ dateNum + '</p>';
+					calendar += '</td>';
+				}else{ //모든 조건 충족시 
+					calendar += '<td style="width:85px; height:67.2px;  padding:0px; text-align:center;"' 
+						+ 'class="'+ dateString[j] + '" onclick="javascript:selectDay('
+						+ currentYear + ',' + currentMonth + ',' + currentDay
+						+ ')">' + '<a href="#"' + 'class="' + dateString[j] + '">'
+						+ dateNum + '</a>';
+					calendar += '</td>';
+				}
+			}else{ //영화를 선택하지않고 클릭시 얼럿
+				calendar += '<td style="width:85px; height:67.2px;  padding:0px; text-align:center; background-color:gray"' 
+					+ 'class="'+ dateString[j] + '"onclick="javascript:noSelect()">'
+					+ '<p  style="font-weight:nomal; color: white;"  class="' + dateString[j] + '">'
+					+ dateNum + '</p>';
+				calendar += '</td>';
+			}
 		}
 		calendar += '</tr>';
 	}

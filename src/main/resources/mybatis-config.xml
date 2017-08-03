@@ -6,6 +6,7 @@
 
 	<typeAliases>
 		<typeAlias type="com.comnawa.mvcinema.sungwon.model.member.dto.MemberDTO" alias="MemberDTO"/>
+		<typeAlias type="com.comnawa.mvcinema.sungwon.model.ticket.dto.TicketDTO" alias="TicketDTO"/>
 	</typeAliases>
 
 
