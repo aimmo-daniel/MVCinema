@@ -115,9 +115,11 @@ public class TheaterController {
         theaterSitResult+= dto.getSeat_empty()+",";
       }
     }
-    theaterSitResult= theaterSitResult.substring(0, theaterSitResult.length()-1);
+    if (!theaterSitResult.equals("")){
+      theaterSitResult= theaterSitResult.substring(0, theaterSitResult.length()-1);
+    }
     model.addAttribute("theater_sit_empty", listEmpty);
-    model.addAttribute("theater_sit_empty_result", theaterSitResult);
+    model.addAttribute("theater_sit_empty_result", theaterSitResult.equals("null") ? "" : theaterSitResult);
     model.addAttribute("theaterSitMax", max);
     model.addAttribute("idx", idx);
     return "/insang/submenu/sub_theater/theater_sit_detail";

@@ -54,7 +54,7 @@
                             <c:set var="emptyResult" value="false"/>
                             <c:set value="${pageScope.row_en}${cols}" var="sit_empty"/>
                               <c:forEach var="theaterSit" items="${theater_sit_empty}">
-                                <c:if test="${fn:contains(theaterSit.seat_empty,sit_empty) && theaterList[status.index].idx == theaterSit.idx}">
+                                <c:if test="${theaterSit.seat_empty==sit_empty && theaterList[status.index].idx == theaterSit.idx}">
                                   <c:set var="emptyResult" value="true"/>
                                 </c:if>
                               </c:forEach>
@@ -71,6 +71,10 @@
                     pageContext.setAttribute("row_en", String.valueOf(row_en).toLowerCase());
                     %>
                   </c:forEach>
+                    <%
+                    row_en = 'A';
+                    pageContext.setAttribute("row_en", String.valueOf(row_en).toLowerCase());
+                    %>
                 </table>
               </label>
             </div>
@@ -79,9 +83,6 @@
           <p>${row.preview}</p>
         </div>
       </div>
-      <%
-        row_en = 'A';
-      %>
     </c:forEach>
   </c:if>
   

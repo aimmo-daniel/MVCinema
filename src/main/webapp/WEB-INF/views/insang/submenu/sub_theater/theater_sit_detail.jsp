@@ -32,8 +32,9 @@
                 <c:set var="emptyResult" value="false"/>
                 <c:set value="${pageScope.row_en}${cols}" var="sit_empty"/>
                   <c:forEach var="theaterSit" items="${theater_sit_empty}">
-                    <c:if test="${fn:contains(theaterSit.seat_empty,sit_empty) && idx == theaterSit.idx}">
-                      <c:set var="emptyResult" value="true"/><span id="seat${pageScope.row_en}${cols}"></span>
+                    <c:if test="${theaterSit.seat_empty==sit_empty && idx == theaterSit.idx}">
+                      <c:set var="emptyResult" value="true"/>
+                      <span id="seat${pageScope.row_en}${cols}"></span>
                     </c:if>
                   </c:forEach>
                   <c:if test="${emptyResult==false}">

@@ -53,10 +53,10 @@
                         <td><font color="lightgray"><b><%=row_en %></b></font></td>
                         <c:forEach var="cols" begin="1" end="${theaterSitList[status.index].seat_col}">
                           <td style="width: 30px;">
-                          <c:set value="${pageScope.row_en}${cols}" var="sit_empty"/>
-                              <c:set var="emptyResult" value="false"/>
-                              <c:forEach var="theaterSitt" items="${theater_sit_empty}">
-                                <c:if test="${fn:contains(theaterSit.seat_empty,sit_empty) && theaterList[status.index].idx == theaterSit.idx}">
+                            <c:set var="emptyResult" value="false"/>
+                            <c:set value="${pageScope.row_en}${cols}" var="sit_empty"/>
+                              <c:forEach var="theaterSit" items="${theater_sit_empty}">
+                                <c:if test="${theaterSit.seat_empty==sit_empty && theaterList[status.index].idx == theaterSit.idx}">
                                   <c:set var="emptyResult" value="true"/>
                                 </c:if>
                               </c:forEach>
