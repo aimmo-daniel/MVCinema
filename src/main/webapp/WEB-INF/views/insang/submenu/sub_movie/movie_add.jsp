@@ -208,8 +208,9 @@
         for (var i = 0; i < genres.length; i++) {
           $("#mod_genre" + genres[i]).prop("checked", true);
         }
+        fnMove();
       }
-    })
+    });
   }
 
   function changeDate(date) {

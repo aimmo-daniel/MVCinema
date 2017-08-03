@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.comnawa.mvcinema.insang.model.dto.TheaterDTO;
 import com.comnawa.mvcinema.insang.model.dto.TheaterSitDTO;
+import com.comnawa.mvcinema.insang.model.dto.TheaterSitEmptyDTO;
 import com.comnawa.mvcinema.insang.service.TheaterService;
 
 @Controller
@@ -91,11 +92,49 @@ public class TheaterController {
     return "/insang/submenu/sub_theater/theater_add_detail";
   }
   
+  @RequestMapping("theater_updateTheaterSitDetail")
+  public String theater_updateTheaterSitDetail(@RequestParam int idx, Model model){
+    for (TheaterDTO foo: theaterService.getTheaterList()){
+      if (foo.getIdx() == idx){
+        model.addAttribute("dto", foo);
+      }
+    }
+    int max=0;
+    for (TheaterSitDTO dto: theaterService.getTheaterSitList()){
+      max= (max < dto.getSeat_row()) ? dto.getSeat_row() : max ;
+    }
+    for (TheaterSitDTO foo: theaterService.getTheaterSitList()){
+      if (foo.getIdx() == idx){
+        model.addAttribute("theaterSitDTO", foo);
+      }
+    }
+    List<TheaterSitEmptyDTO> listEmpty= theaterService.getTheaterSitEmpty();
+    String theaterSitResult="";
+    for (TheaterSitEmptyDTO dto: listEmpty){
+      if (dto.getIdx()== idx){
+        theaterSitResult+= dto.getSeat_empty()+",";
+      }
+    }
+    theaterSitResult= theaterSitResult.substring(0, theaterSitResult.length()-1);
+    model.addAttribute("theater_sit_empty", listEmpty);
+    model.addAttribute("theater_sit_empty_result", theaterSitResult);
+    model.addAttribute("theaterSitMax", max);
+    model.addAttribute("idx", idx);
+    return "/insang/submenu/sub_theater/theater_sit_detail";
+  }
+  
+  @RequestMapping("/theater/updateSit.do")
+  public String updateSit(HttpServletRequest request, @RequestParam String idx){
+    theaterService.updateSit(String.valueOf(request.getParameter("sit")), Integer.parseInt(idx));
+    return "/insang/test";
+  }
+  
   @RequestMapping("/theater/add.do")
   public ModelAndView theater_add(){
     ModelAndView mav= new ModelAndView();
     mav.addObject("theaterList",theaterService.getTheaterList());
     mav.addObject("theaterSitList", theaterService.getTheaterSitList());
+    mav.addObject("theater_sit_empty", theaterService.getTheaterSitEmpty());
     int max=0;
     for (TheaterSitDTO dto: theaterService.getTheaterSitList()){
       max= (max < dto.getSeat_row()) ? dto.getSeat_row() : max ;
@@ -106,8 +145,19 @@ public class TheaterController {
   }
   
   @RequestMapping("/theater/sit.do")
-  public String theater_sit(){
-    return "/insang/submenu/sub_theater/theater_sit";
+  public ModelAndView theater_sit(){
+    ModelAndView mav= new ModelAndView();
+    mav.addObject("theaterList",theaterService.getTheaterList());
+    mav.addObject("theaterSitList", theaterService.getTheaterSitList());
+    mav.addObject("theater_sit_empty", theaterService.getTheaterSitEmpty());
+    int max=0;
+    for (TheaterSitDTO dto: theaterService.getTheaterSitList()){
+      max= (max < dto.getSeat_row()) ? dto.getSeat_row() : max ;
+    }
+    mav.addObject("theaterSitMax", max);
+    mav.setViewName("/insang/submenu/sub_theater/theater_sit");
+    return mav;
   }
+  
 
 }

@@ -1,3 +1,5 @@
+<%@page import="com.comnawa.mvcinema.insang.model.dto.TheaterSitDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,7 +24,11 @@
     </label>
   </c:if>
   
-  <% char row_en= 'A'; %>
+  <%
+  char row_en= 'A';
+  
+  pageContext.setAttribute("row_en", String.valueOf(row_en).toLowerCase());
+  %>
   <c:if test="${theaterList != null}">
     <c:forEach var="row" items="${theaterList}" varStatus="status">
       <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.2s" style="padding: 20px 10px 10px 10px;"
@@ -47,13 +53,25 @@
                         <td><font color="lightgray"><b><%=row_en %></b></font></td>
                         <c:forEach var="cols" begin="1" end="${theaterSitList[status.index].seat_col}">
                           <td style="width: 30px;">
-                            <input type="hidden" value="<%= (int)row_en-64 %>">
-                            ${cols}
+                          <c:set value="${pageScope.row_en}${cols}" var="sit_empty"/>
+                              <c:set var="emptyResult" value="false"/>
+                              <c:forEach var="theaterSitt" items="${theater_sit_empty}">
+                                <c:if test="${fn:contains(theaterSit.seat_empty,sit_empty) && theaterList[status.index].idx == theaterSit.idx}">
+                                  <c:set var="emptyResult" value="true"/>
+                                </c:if>
+                              </c:forEach>
+                              <c:if test="${emptyResult==false}">
+                                <input type="hidden" value="<%= (int)row_en-64 %>">
+                                ${cols}
+                              </c:if>
                           </td>
                         </c:forEach>
                         <td>&nbsp;</td>
                       </tr>
-                      <% row_en++; %>
+                      <%
+                      row_en++;
+                      pageContext.setAttribute("row_en", String.valueOf(row_en).toLowerCase());
+                      %>
                     </c:forEach>
                   </table>
                 </label>

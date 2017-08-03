@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.comnawa.mvcinema.insang.model.dto.TheaterDTO;
 import com.comnawa.mvcinema.insang.model.dto.TheaterSitDTO;
+import com.comnawa.mvcinema.insang.model.dto.TheaterSitEmptyDTO;
 
 @Repository
 public class TheaterDAOImpl implements TheaterDAO {
@@ -50,6 +51,23 @@ public class TheaterDAOImpl implements TheaterDAO {
   public void updateTheater(Map<String, Object> map) {
     sqlSession.update("admin.updateTheater1", map);
     sqlSession.update("admin.updateTheater2", map);
+  }
+  
+  @Override
+  public List<TheaterSitEmptyDTO> getTheaterEmpty() {
+    return sqlSession.selectList("admin.theaterSitEmpty");
+  }
+  
+  @Override
+  public void updateSit(String sit, int idx) {
+    sqlSession.delete("admin.deleteSit", idx);
+    String[] str= sit.split(",");
+    for (String t: str){
+      Map<String, Object> map= new HashMap<>();
+      map.put("sit", t);
+      map.put("idx", idx);
+      sqlSession.insert("admin.updateSit", map);
+    }
   }
   
 }

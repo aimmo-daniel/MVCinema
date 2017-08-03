@@ -25,17 +25,7 @@
 $(function(){
   document.location.href=document.location.href.split('#')[0]+"#admin";
   scrollReset();
-  sendRealPath();
 })
-
-function sendRealPath(){
-  $.ajax({
-    type: "get",
-    url: '${path}/admin/getRealPath.do?realPath=<%=application.getRealPath("/").replaceAll("\\\\", "/") %>',
-    success: function(result){
-    }
-  })
-}
 
 $(window).bind('hashchange',function(){
   var menuName= document.location.hash.split('#')[1];
@@ -69,6 +59,10 @@ $(window).bind('hashchange',function(){
       $("#sub_theater_2").css("color","green");
       $("#zzo_addTheater2_label").attr("onmouseout","");
     }
+  }
+  if (menuName.indexOf('Theater_sitTheater')!= -1){
+    var idx= menuName.split('?')[1];
+    loadTheaterSitDetail(idx);
   }
 })
 </script>
@@ -243,7 +237,7 @@ $(window).bind('hashchange',function(){
   <script src="${path}/admin/resources/template/js/custom.js"></script>
   <!-- insang Javascript -->
   <script src="${path}/subMenu/resources/template/js/zzo_main.js?v1" charset="utf-8"></script>
-  <script src="${path}/subMenu/resources/template/js/zzo_main_theater.js?v1" charset="utf-8"></script>
+  <script src="${path}/subMenu/resources/template/js/zzo_main_theater.js?v2" charset="utf-8"></script>
   <script src="${path}/subMenu/resources/template/js/zzo_main_movie.js?v2" charset="utf-8"></script>
 </body>
 </html>

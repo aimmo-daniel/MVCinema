@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.comnawa.mvcinema.insang.model.dao.TheaterDAO;
 import com.comnawa.mvcinema.insang.model.dto.TheaterDTO;
 import com.comnawa.mvcinema.insang.model.dto.TheaterSitDTO;
+import com.comnawa.mvcinema.insang.model.dto.TheaterSitEmptyDTO;
 
 @Service
 public class TheaterServiceImpl implements TheaterService {
@@ -40,6 +41,16 @@ public class TheaterServiceImpl implements TheaterService {
   @Override
   public void updateTheater(Map<String, Object> map) {
     theaterDao.updateTheater(map);
+  }
+  
+  @Override
+  public List<TheaterSitEmptyDTO> getTheaterSitEmpty() {
+    return theaterDao.getTheaterEmpty();
+  }
+  
+  @Override
+  public void updateSit(String sit, int idx) {
+    theaterDao.updateSit(sit, idx);
   }
   
 }

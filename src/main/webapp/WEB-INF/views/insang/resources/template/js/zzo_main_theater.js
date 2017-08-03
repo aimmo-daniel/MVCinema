@@ -37,3 +37,15 @@ function loadTheaterDetail(idx){
     }
   })
 }
+
+function loadTheaterSitDetail(idx){
+  $("#my-spinner").show();
+  $.ajax({
+    type: "get",
+    url: "/mvcinema/subMenu/theater_updateTheaterSitDetail?idx="+idx,
+    success: function(result){
+      $("#my-spinner").hide();
+      $("#sub_theater_contents").html(result);
+    }
+  })
+}
