@@ -4,8 +4,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +24,7 @@ import com.comnawa.mvcinema.insang.ftp.FtpClient;
 import com.comnawa.mvcinema.insang.model.dto.GenreDTO;
 import com.comnawa.mvcinema.insang.model.dto.Insang_MovieDTO;
 import com.comnawa.mvcinema.insang.service.Insang_MovieService;
+import com.comnawa.mvcinema.insang.service.TheaterService;
 
 @Controller
 @RequestMapping("/subMenu/*")
@@ -28,6 +32,8 @@ public class MovieController {
 
   @Inject
   Insang_MovieService movieService;
+  @Inject
+  TheaterService theaterService;
   @Inject
   String imgPath;
   @Inject
@@ -244,6 +250,32 @@ public class MovieController {
     model.addAttribute("result", "modMovie");
 
     return "/insang/login/admin_login";
+  }
+  
+  @RequestMapping("/movie/batch.do")
+  public String batch(Model model){
+    model.addAttribute("theaterList", theaterService.getTheaterList());
+    System.out.println(theaterService.getTheaterList().toString());
+    return "/insang/submenu/sub_movie/movie_batch"; 
+  }
+  
+  @RequestMapping("/movie/searchBatch.do")
+  public String searchBatch(HttpServletRequest request, Model model){
+    int idx= Integer.parseInt(request.getParameter("idx"));
+    String[] date= request.getParameter("date").split("-");
+    String startdate= date[0]+"-"+date[1]+"-"+date[2];
+    Calendar cal= Calendar.getInstance();
+    cal.set(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]));
+    cal.add(Calendar.DATE, 1);
+    String enddate= cal.get(Calendar.YEAR)+"-"+cal.get(Calendar.MONTH)+"-"+cal.get(Calendar.DATE);
+    
+    Map<String,Object> map= new HashMap<>();
+    map.put("startdate", startdate);
+    map.put("enddate", enddate);
+    map.put("idx", idx);
+    
+    model.addAttribute("scheduleList",movieService.getScheduleList(map));
+    return "/insang/submenu/sub_movie/movie_batch_search";
   }
 
 }

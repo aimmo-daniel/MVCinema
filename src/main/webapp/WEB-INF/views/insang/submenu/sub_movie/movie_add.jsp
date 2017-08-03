@@ -320,7 +320,7 @@
     // 체크박스초기화 후 div 숨김
     sub_movie_addMovie_div('sub_movie_addMovie_div');
   });
-
+  
   $("#btnReset").click(function() { // 다시작성하기 버튼 클릭
     $("#title").val("");
     $("#age").val("");

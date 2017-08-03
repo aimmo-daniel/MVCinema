@@ -1,6 +1,7 @@
 package com.comnawa.mvcinema.insang.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.comnawa.mvcinema.insang.model.dto.GenreDTO;
 import com.comnawa.mvcinema.insang.model.dto.Insang_MovieDTO;
+import com.comnawa.mvcinema.insang.model.dto.ScreenInfoDTO;
 
 @Repository
 public class Insang_MovieDAOImpl implements Insang_MovieDAO{
@@ -34,6 +36,11 @@ public class Insang_MovieDAOImpl implements Insang_MovieDAO{
   @Override
   public void updateMovie(Insang_MovieDTO dto) {
     sqlSession.update("admin.updateMovie", dto);
+  }
+  
+  @Override
+  public List<ScreenInfoDTO> getScheduleList(Map<String, Object> map) {
+    return sqlSession.selectList("admin.scheduleList", map);
   }
   
 }

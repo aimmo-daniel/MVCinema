@@ -81,6 +81,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     delete from theater_sit_empty where idx=#{idx}
   </delete>
   
+  <select id="scheduleList" resultType="com.comnawa.mvcinema.insang.model.dto.ScreenInfoDTO">
+    SELECT * FROM screen_info 
+    WHERE start_time > to_date(#{startdate},'yyyy-MM-dd') AND to_date(#{enddate},'yyyy-MM-dd') > start_time and theater_idx=#{idx}
+  </select>
+  
 </mapper>
 
 
