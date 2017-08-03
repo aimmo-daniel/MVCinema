@@ -5,16 +5,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="detail">
-
-	<!-- 배우이름과 사진 -->
-	<select id="actors_list" resultType="com.comnawa.mvcinema.sangjin.model.dto.ActorsDTO">
-		select a.name, a.img_url from movie m, actors a where m.idx=a.idx and m.idx=#{idx}
-	</select>
 	
 	<!-- 영화 스틸컷 -->
 	<select id="stillcut" resultType="com.comnawa.mvcinema.sangjin.model.dto.StillcutDTO">
 		select s.img_url from movie m, stillcut s where m.idx=s.idx and m.idx=#{idx}
 	</select>
+	
+	<insert id="memo">
+		insert into memo (idx, comment_num, userid, memo, score) 
+		values (#{idx}, memo_seq.nextval, #{userid}, #{memo}, #{score})
+	</insert>
 
 </mapper>
 

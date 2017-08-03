@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.comnawa.mvcinema.sangjin.model.dao.DetailDAO;
-import com.comnawa.mvcinema.sangjin.model.dto.ActorsDTO;
+import com.comnawa.mvcinema.sangjin.model.dto.MemoDTO;
 import com.comnawa.mvcinema.sangjin.model.dto.StillcutDTO;
 @Service
 public class DetailServiceImpl implements DetailService {
@@ -15,13 +15,13 @@ public class DetailServiceImpl implements DetailService {
 	DetailDAO detailDao;
 	
 	@Override
-	public List<ActorsDTO> actor_list(int idx) {
-		return detailDao.actor_list(idx);
+	public List<StillcutDTO> stillcut(int idx) {
+		return detailDao.stillcut(idx);
 	}
 
 	@Override
-	public List<StillcutDTO> stillcut(int idx) {
-		return detailDao.stillcut(idx);
+	public void insert(MemoDTO dto) {
+		detailDao.insert(dto);
 	}
 
 }

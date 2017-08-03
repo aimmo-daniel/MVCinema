@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.comnawa.mvcinema.sangjin.model.dto.ActorsDTO;
+import com.comnawa.mvcinema.sangjin.model.dto.MovieDTO;
 import com.comnawa.mvcinema.sangjin.model.dto.StillcutDTO;
 import com.comnawa.mvcinema.sangjin.service.DetailService;
 import com.comnawa.mvcinema.sangjin.service.MovieService;
@@ -48,11 +48,8 @@ public class InfoController {
 	//탭2 - 배우목록 ajax
 	@RequestMapping("actors.do")
 	public ModelAndView actors(@RequestParam int idx, ModelAndView mav){
-		List<ActorsDTO> list = detailService.actor_list(idx);
 		mav.setViewName("sangjin/info/actors");
-		Map<String, Object> map = new HashMap<>();
-		map.put("list", list); //배우 이름과 사진
-		mav.addObject("map", map);
+		mav.addObject("dto", movieService.movie_view(idx));
 		return mav;
 	}
 	

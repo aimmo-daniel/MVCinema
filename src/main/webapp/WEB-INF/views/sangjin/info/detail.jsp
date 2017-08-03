@@ -121,6 +121,7 @@ function video() {
 		</div>
 		<!-- 하단 내용 출력 -->
 		<div style="margin-top: 40px; margin-bottom: 100px" id="bottom_content"></div>
+		<%@ include file="../../sangjin/info/memo.jsp"%>
 	</div>
 </body>
 </html>

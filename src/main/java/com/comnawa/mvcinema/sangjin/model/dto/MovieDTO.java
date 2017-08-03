@@ -3,29 +3,29 @@ package com.comnawa.mvcinema.sangjin.model.dto;
 import java.util.Date;
 
 public class MovieDTO {
-	int idx; // 영화번호
-	String title; // 제목
-	int age; // 관람 나이 제한
-	double grade; // 평점
-	double rank; // 예매율
-	int people; // 관람객
-	String director; // 감독
-	String actors; // 출연배우
-	String content; // 줄거리
-	String genre; // 장르
-	Date release_date; // 개봉일
-	int runtime; // 영화시간
-	String img_url; // 포스터이미지 링크
-	String preview; // 예고편 링크
+	private int idx; // 영화번호
+	private String title; // 제목
+	private int age; // 관람 나이 제한
+	private double grade; // 평점
+	private double rank; // 예매율
+	private int people; // 관람객
+	private String director; // 감독
+	private String actors; // 출연배우
+	private String content; // 줄거리
+	private String genre; // 장르
+	private Date release_date; // 개봉일
+	private int runtime; // 영화시간
+	private String img_url; // 포스터이미지 링크
+	private String preview; // 예고편 링크
+	private String act_img_url; //배우사진
 
 	public MovieDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public MovieDTO(int idx, String title, int age, double grade, double rank, int people, String director,
-			String actors, String content, String genre, Date release_date, int runtime, String img_url,
-			String preview) {
+			String actors, String content, String genre, Date release_date, int runtime, String img_url, String preview,
+			String act_img_url) {
 		super();
 		this.idx = idx;
 		this.title = title;
@@ -41,6 +41,7 @@ public class MovieDTO {
 		this.runtime = runtime;
 		this.img_url = img_url;
 		this.preview = preview;
+		this.act_img_url = act_img_url;
 	}
 
 	public int getIdx() {
@@ -155,12 +156,20 @@ public class MovieDTO {
 		this.preview = preview;
 	}
 
+	public String getAct_img_url() {
+		return act_img_url;
+	}
+
+	public void setAct_img_url(String act_img_url) {
+		this.act_img_url = act_img_url;
+	}
+
 	@Override
 	public String toString() {
 		return "MovieDTO [idx=" + idx + ", title=" + title + ", age=" + age + ", grade=" + grade + ", rank=" + rank
 				+ ", people=" + people + ", director=" + director + ", actors=" + actors + ", content=" + content
 				+ ", genre=" + genre + ", release_date=" + release_date + ", runtime=" + runtime + ", img_url="
-				+ img_url + ", preview=" + preview + "]";
+				+ img_url + ", preview=" + preview + ", act_img_url=" + act_img_url + "]";
 	}
 
 }
