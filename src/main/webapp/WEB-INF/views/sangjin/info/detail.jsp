@@ -60,6 +60,10 @@ function stillcut() {
 	});
 }
 
+function buy_ticket(idx){
+	location.href="${path}/ticket/movie_ticket_page.do?movie_idx="+idx;
+}
+
 function video() {
 	var idx=$("#movie_idx").val();
 	$("#tab1").removeClass("active");
@@ -97,7 +101,7 @@ function video() {
 				<span class="thumb-image"> <img
 					src="${img_ad}/${dto.img_url}">
 				</span>
-				<a class="btn btn-danger" role="button" href="${path}/ticket/quick_ticket_page.do">예매하기</a>
+				<a class="btn btn-danger" role="button" onclick="buy_ticket('${dto.idx}')">예매하기</a>
 			</div>
 			<div style="position: relative; left: 250px; top: -250px;">
 				<input id="movie_idx" type="hidden" value="${dto.idx}"/>

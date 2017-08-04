@@ -16,7 +16,7 @@
 	}
 	
 	function buy_ticket(idx){
-		location.href="${path}/ticket/movie_ticket_page.do?idx="+idx;
+		location.href="${path}/ticket/movie_ticket_page.do?movie_idx="+idx;
 	}
 </script>
 <div class="sect-sorting">
