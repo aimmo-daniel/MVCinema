@@ -22,12 +22,17 @@
 <script>
 	var count = [];
 	var today;
-	var movie_idx;
-	var choose_day;
-	var start_time;
+	
+	var movie_idx;    //영화   movie table idx
+	var choose_day;	  //선택한 일자 
+	var start_time;   //상영정보 screen_info table idx
 
 	//선택한 날짜 구하기
 	function selectDay(y, m, d) {
+		if(movie_idx == ""){
+			alert("영화를 선택해주세요");
+			return;
+		}
 		if (m < 10) {
 			m = '0' + m
 		}
@@ -47,7 +52,6 @@
 			}
 
 		}
-
 		$.ajax({
 			type : "get",
 			url : "${path}/ticket/sreen_time.do?movie_idx=" + movie_idx
@@ -64,6 +68,18 @@
 
 	//선택한 영화
 	function selectMovie(tagid) {
+		$("#ticket_time").html(
+				'<h1 align="center"><span class="label label-warning">시간 선택</span></h1><br>'
+					+'<ul class="list-group" style="overflow: auto; height: 400px;">'
+						+'<c:forEach var="i" begin="1" end="8">'
+							+'<li class="list-group-item">&nbsp;</li>'
+								+'<c:if test="${i == 2 }">'
+									+'<li class="list-group-item" style="text-align: center;">'
+										+'<b>영화와시간을 선택해주세요</b>'
+									+'</li>'
+								+'</c:if>'
+							+'</c:forEach>'
+					+'</ul>');
 		choose_day = "";
 		start_time = "";
 		var li = $("#movieList li");
@@ -80,6 +96,14 @@
 	}
 
 	function selectTime(timeid) {
+		if(movie_idx == ""){
+			alert("영화를 선택해주세요");
+			return;
+		}
+		if(choose_day == ""){
+			alert("상영일을 먼저 선택해주세요");
+			return;
+		}
 		var t_li = $("#ticket_time li");
 		for (var i = 0; i < t_li.length; i++) {
 			if (t_li[i].id != '') {
@@ -91,7 +115,7 @@
 				}
 			}
 		}
-		alert("영화:" + movie_idx + "날짜:" + choose_day + "상영정보" + start_time);
+		/* alert("영화:" + movie_idx + "날짜:" + choose_day + "상영정보" + start_time); */
 	}
 </script>
 </head>
