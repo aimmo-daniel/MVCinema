@@ -26,7 +26,7 @@ public class TicketController {
 	@Inject
 	TicketService ticketService;
 	
-	@RequestMapping("quick_ticket_page.do")
+	@RequestMapping("movie_ticket_page.do")
 	public ModelAndView quickticket_page(@RequestParam(defaultValue="0") int movie_idx,ModelAndView mav){
 		List<TicketDTO> list = ticketService.movieList();
 		HashMap<String, Object> map = new HashMap<>();
@@ -36,7 +36,7 @@ public class TicketController {
 			map.put("idx", movie_idx);
 		}
 		map.put("list", list);
-		mav.setViewName("sungwon/ticket/reservation");
+		mav.setViewName("sungwon/ticket/m_reservation");
 		mav.addObject("map", map);
 		return mav;
 	}

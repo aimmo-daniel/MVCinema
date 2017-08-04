@@ -25,11 +25,6 @@
 	var movie_idx;
 	var choose_day;
 
-	//페이지가 로딩되면
-	window.onload = function() {
-		myCalendar('myCalendar');
-	}
-
 	//선택한 날짜 구하기
 	function selectDay(y, m, d) {
 		if (m < 10) {
@@ -63,8 +58,6 @@
 
 	function noSelect() {
 		alert("영화를 먼저 선택해주세요");
-		$("#movieList li").onclick(function() {
-		});
 	}
 
 	//선택한 영화
@@ -75,7 +68,6 @@
 				$("#" + tagid).css("background-color", '#6699FF');
 				var r_date = $("#" + tagid + " input").val();
 				myCalendar('myCalendar', today, r_date);
-				alert(today+"_"+r_date);s
 				movie_idx = tagid;
 			} else {
 				$("#" + li[i].id).css("background-color", '#FFFFFF');
@@ -85,6 +77,10 @@
 </script>
 </head>
 <body>
+	<div align="left" style="margin-left:80%">
+	<a href="#" role="button" class="btn btn-default">영화별 예매</a> 
+	<a href="#" role="button" class="btn btn-default">날짜별 예매</a>
+	</div>
 	<div class="container" style="width: 100%">
 		<div class="row">
 			<div class="col-md-4" id="ticket_movie">
@@ -108,9 +104,8 @@
 									value="<fmt:formatDate value="${row.release_date}" pattern="yyyy-MM-dd"/>">
 							</li>
 						</c:forEach>
-						<c:if test="${map.idx != null }">
-						<script>selectMovie('${map.idx}')</script>
-						</c:if>
+						<c:set var="idx" value="${map.idx}"/>
+						<li>${map.idx}</li>
 					</ul>
 				</div>
 			</div>
@@ -132,12 +127,9 @@
 			</div>
 		</div>
 	</div>
-	<table>
-
-		<tr>
-			<td></td>
-		</tr>
-
-	</table>
+	<script>
+	myCalendar('myCalendar');
+	selectMovie('${idx}');
+	</script>
 </body>
 </html>
