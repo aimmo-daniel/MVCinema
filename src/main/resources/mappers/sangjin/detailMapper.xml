@@ -15,6 +15,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into memo (idx, comment_num, userid, memo, score) 
 		values (#{idx}, memo_seq.nextval, #{userid}, #{memo}, #{score})
 	</insert>
+	
+	<select id="memolist" resultType="com.comnawa.mvcinema.sangjin.model.dto.MemoDTO">
+		select comment_num, score, userid, memo, post_date 
+		from memo where idx=#{idx} order by post_date desc
+	</select>
 
 </mapper>
 

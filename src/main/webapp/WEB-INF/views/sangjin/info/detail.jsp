@@ -107,7 +107,7 @@ function video() {
 				<b>감독 :</b> ${dto.director} <br>
 				<b>출연 :</b> ${dto.actors} <br>
 				<b>장르 :</b> ${dto.genre} <br> 
-				<b>기본 :	${dto.age}</b>세 이상 / ${dto.runtime}분<br>	
+				<b>기본 :	${dto.age}</b>세 이상 / ${dto.runtime}분<br>
 				<b>누적관객 :</b> <fmt:formatNumber value="${dto.people}" type="number"/>명 (<%=today%> 기준) &nbsp;&nbsp;&nbsp;
 			</div>
 		</div>
@@ -120,8 +120,9 @@ function video() {
 			</ul>
 		</div>
 		<!-- 하단 내용 출력 -->
-		<div style="margin-top: 40px; margin-bottom: 100px" id="bottom_content"></div>
-		<%@ include file="../../sangjin/info/memo.jsp"%>
+		<div style="margin-top: 40px; margin-bottom: 100px; margin-left: 50px;" id="bottom_content"></div>
+		<!-- 댓글폼 -->
+		<div style="margin-left: 50px;"><%@ include file="../../sangjin/info/memo.jsp"%></div>
 	</div>
 </body>
 </html>

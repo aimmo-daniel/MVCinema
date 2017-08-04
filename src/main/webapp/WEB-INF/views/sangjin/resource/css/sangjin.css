@@ -50,13 +50,37 @@ img {
 	color: #ffffff;
 }
 
- .topMenuLi:hover .menuLink:hover {
+.topMenuLi:hover .menuLink:hover {
 	background-color: #0000ff;
 	color: white;
 }
 
+.submenuLink { /* 하위 메뉴의 a 태그 스타일 설정 */
+	color: #2d2d2d; /* 글씨 색을 RGB(2D2D2D)로 설정 */
+	background-color: white; /* 배경색을 흰색으로 설정 */
+	border: solid 1px black; /* 테두리를 설정 */
+	margin-top: -1px; /* 위 칸의 하단 테두리와 아래칸의 상단 테두리가 겹쳐지도록 설덩 */
+}
+
 .longLink { /* 좀 더 긴 메뉴 스타일 설정 */
 	width: 190px; /* 넓이는 190px로 설정 */
+}
+
+.submenu { /* 하위 메뉴 스타일 설정 */
+	position: absolute; /* html의 flow에 영향을 미치지 않게 absolute 설정 */
+	height: 0px; /* 초기 높이는 0px로 설정 */
+	overflow: hidden; /* 실 내용이 높이보다 커지면 해당 내용 감춤 */
+	transition: height .2s; /* height를 변화 시켰을 때 0.2초간 변화 되도록 설정(기본) */
+	-webkit-transition: height .2s;
+	/* height를 변화 시켰을 때 0.2초간 변화 되도록 설정(구버전 크롬/사파라ㅣ) */
+	-moz-transition: height .2s;
+	/* height를 변화 시켰을 때 0.2초간 변화 되도록 설정(구버전 파폭) */
+	-o-transition: height .2s;
+	/* height를 변화 시켰을 때 0.2초간 변화 되도록 설정(구버전 오페라) */
+}
+
+.topMenuLi:hover .submenu { /* 상위 메뉴에 마우스 모버한 경우 그 안의 하위 메뉴 스타일 설정 */
+	height: 93px; /* 높이를 93px로 설정 */
 }
 
 .submenuLink:hover { /* 하위 메뉴의 a 태그의 마우스 오버 스타일 설정 */

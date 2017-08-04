@@ -1,5 +1,6 @@
 package com.comnawa.mvcinema.sangjin.controller;
 
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,8 +27,9 @@ public class MemoController {
 		dto.setIdx(Integer.parseInt(request.getParameter("mv_idx")));
 		dto.setScore(score2);
 		dto.setMemo(memo);
-		logger.info("디티오:" + dto);
 		detailService.insert(dto);
-		return "redirect:/";
+		return "redirect:/info/detail/"+dto.getIdx();
 	}
+
+	
 }
