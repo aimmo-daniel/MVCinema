@@ -5,6 +5,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <%@ include file ="../../../include/header.jsp" %>
+<style>
+#movie_batch_addMovie {
+  transition: color 0.5s
+}
+#movie_batch_addMovie:hover {
+  color: green;
+}
+</style>
 </head>
 <body>
 
@@ -37,6 +45,13 @@
   </div>
   
   <div id="insang_batch_searchResult"></div>
+  
+  <hr>
+  <div style="text-align: right;" id="insang_batch_addSchedule">
+    <label for="movie_batch_addMovie">
+      <p id="movie_batch_addMovie">영화 등록하기</p>
+    </label>
+  </div>
 
 <script>
 $("#btn_search").click(function(){
@@ -48,8 +63,17 @@ $("#btn_search").click(function(){
     success: function(result){
       $("#insang_batch_searchResult").html(result);
     }
-  })
+  });
 });
+$("#insang_batch_addSchedule").click(function(){
+  $.ajax({
+    url: "${path}/subMenu/movie/addBatch.do",
+    success: function(result){
+      $("#insang_batch_searchResult").html(result);
+    }
+  });
+});
+
 </script>
   
 </body>

@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.comnawa.mvcinema.insang.ftp.FtpClient;
 import com.comnawa.mvcinema.insang.model.dto.GenreDTO;
 import com.comnawa.mvcinema.insang.model.dto.Insang_MovieDTO;
+import com.comnawa.mvcinema.insang.model.dto.TheaterDTO;
 import com.comnawa.mvcinema.insang.service.Insang_MovieService;
 import com.comnawa.mvcinema.insang.service.TheaterService;
 
@@ -262,6 +263,7 @@ public class MovieController {
   @RequestMapping("/movie/searchBatch.do")
   public String searchBatch(HttpServletRequest request, Model model){
     int idx= Integer.parseInt(request.getParameter("idx"));
+    
     String[] date= request.getParameter("date").split("-");
     String startdate= date[0]+"-"+date[1]+"-"+date[2];
     Calendar cal= Calendar.getInstance();
@@ -269,13 +271,44 @@ public class MovieController {
     cal.add(Calendar.DATE, 1);
     String enddate= cal.get(Calendar.YEAR)+"-"+cal.get(Calendar.MONTH)+"-"+cal.get(Calendar.DATE);
     
+    
     Map<String,Object> map= new HashMap<>();
     map.put("startdate", startdate);
     map.put("enddate", enddate);
     map.put("idx", idx);
     
     model.addAttribute("scheduleList",movieService.getScheduleList(map));
+    model.addAttribute("theater_idx", idx);
     return "/insang/submenu/sub_movie/movie_batch_search";
+  }
+  
+  @RequestMapping("/movie/addBatch.do")
+  public String addBarch(Model model){
+    model.addAttribute("theaterList", theaterService.getTheaterList());
+    model.addAttribute("movieList", movieService.getMovieList());
+    return "/insang/submenu/sub_movie/movie_batch_add";
+  }
+  
+  @RequestMapping("/movie/addSchedule.do")
+  public String addSchedule(HttpServletRequest request){
+    int movieIDX= Integer.parseInt(request.getParameter("movieIDX"));
+    int theaterIDX= Integer.parseInt(request.getParameter("theaterIDX"));
+    String starttime= request.getParameter("starttime")+":00";
+    starttime= starttime.substring(0, 10)+" "+starttime.substring(10);
+    int seat_max=0;
+    List<TheaterDTO> lists= theaterService.getTheaterList();
+    for (TheaterDTO dto: lists){
+      if (dto.getIdx() == theaterIDX){
+        seat_max= dto.getSeat_max();
+      }
+    }
+    Map<String, Object> map= new HashMap<>();
+    map.put("movie_idx", movieIDX);
+    map.put("theater_idx", theaterIDX);
+    map.put("start_time", starttime);
+    map.put("empty_sit", seat_max);
+    movieService.insertSchedule(map);
+    return "/insang/test";
   }
 
 }

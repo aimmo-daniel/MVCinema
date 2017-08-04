@@ -31,9 +31,9 @@
               onmouseout="sub_theater('sub_sub_mouseOver','out','sub_theater_2')" onclick="sub_movie_loadSub('sub_theater_2')"
               id="zzo_addTheater2_label">
               <div class="project-info" id="zzo_addTheater2">
-                <h4 id="sub_theater_2">상영관 영화 등록</h4>
+                <h4 id="sub_theater_2">상영시간표</h4>
                 <p>
-                   Registration movie.
+                  Timetable.
                 </p>
               </div>
             </label>

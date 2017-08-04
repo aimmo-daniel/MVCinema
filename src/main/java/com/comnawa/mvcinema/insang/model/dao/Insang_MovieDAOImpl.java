@@ -43,4 +43,9 @@ public class Insang_MovieDAOImpl implements Insang_MovieDAO{
     return sqlSession.selectList("admin.scheduleList", map);
   }
   
+  @Override
+  public void insertSchedule(Map<String, Object> map) {
+    sqlSession.insert("admin.insertSchedule", map);
+  }
+  
 }

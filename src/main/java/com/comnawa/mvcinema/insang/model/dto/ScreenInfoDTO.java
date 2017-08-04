@@ -1,30 +1,38 @@
 package com.comnawa.mvcinema.insang.model.dto;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class ScreenInfoDTO {
   private int theater_idx;
-  private Date start_date;
+  private Date start_time;
   private int movie_idx;
   private int empty_sit;
+  private String title;
+  private String img_url;
+  private int runtime;
+  private Date end_time;
 
   public ScreenInfoDTO() {
     super();
     // TODO Auto-generated constructor stub
   }
 
-  public ScreenInfoDTO(int theater_idx, Date start_date, int movie_idx, int empty_sit) {
+  public ScreenInfoDTO(int theater_idx, Date start_time, int movie_idx, int empty_sit, String title, String img_url, int runtime) {
     super();
     this.theater_idx = theater_idx;
-    this.start_date = start_date;
+    this.start_time = start_time;
     this.movie_idx = movie_idx;
     this.empty_sit = empty_sit;
+    this.title = title;
+    this.img_url = img_url;
+    this.runtime= runtime;
   }
 
   @Override
   public String toString() {
-    return "ScreenInfoDTO [theater_idx=" + theater_idx + ", start_date=" + start_date + ", movie_idx=" + movie_idx
-        + ", empty_sit=" + empty_sit + "]";
+    return "ScreenInfoDTO [theater_idx=" + theater_idx + ", start_time=" + start_time + ", movie_idx=" + movie_idx
+        + ", empty_sit=" + empty_sit + ", title=" + title + ", img_url=" + img_url + "]";
   }
 
   public int getTheater_idx() {
@@ -35,12 +43,12 @@ public class ScreenInfoDTO {
     this.theater_idx = theater_idx;
   }
 
-  public Date getStart_date() {
-    return start_date;
+  public Date getstart_time() {
+    return start_time;
   }
 
-  public void setStart_date(Date start_date) {
-    this.start_date = start_date;
+  public void setstart_time(Date start_time) {
+    this.start_time = start_time;
   }
 
   public int getMovie_idx() {
@@ -59,4 +67,37 @@ public class ScreenInfoDTO {
     this.empty_sit = empty_sit;
   }
 
+  public String getImg_url() {
+    return img_url;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setImg_url(String img_url) {
+    this.img_url = img_url;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+  
+  public int getRuntime() {
+    return runtime;
+  }
+
+  public void setRuntime(int runtime) {
+    this.runtime = runtime;
+  }
+  
+  public Date getEnd_time(){
+    Date sDate= start_time;
+    Calendar cal= Calendar.getInstance();
+    cal.setTime(sDate);
+    cal.add(Calendar.MINUTE, runtime);
+    end_time= new Date(cal.getTimeInMillis());
+    return end_time;
+  }
+  
 }

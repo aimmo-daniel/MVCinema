@@ -43,4 +43,9 @@ public class Insang_MovieServiceImpl implements Insang_MovieService {
     return movieDao.getScheduleList(map);
   }
   
+  @Override
+  public void insertSchedule(Map<String, Object> map) {
+    movieDao.insertSchedule(map);
+  }
+  
 }

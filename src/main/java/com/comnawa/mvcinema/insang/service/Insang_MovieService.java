@@ -13,4 +13,5 @@ public interface Insang_MovieService {
   public void updateMovie(Insang_MovieDTO dto);
   public List<Insang_MovieDTO> getMovieList();
   public List<ScreenInfoDTO> getScheduleList(Map<String, Object> map);
+  public void insertSchedule(Map<String, Object> map);
 }
