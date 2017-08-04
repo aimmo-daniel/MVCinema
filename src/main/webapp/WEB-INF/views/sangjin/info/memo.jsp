@@ -29,20 +29,22 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 .star-input>output{display:inline-block;width:60px; font-size:18px;text-align:right; vertical-align:middle;}
 </style>
 <script>
+$(function(){
+	var hash=document.location.href;
+	if(hash.indexOf("?page=") != -1){
+		$('html, body').animate({scrollTop : 999999}, 0);
+	}
+});
+
 function set_score(score){
 	$('#score').val(score);
 }
 
-/* function list_memo(){
+function list(page) {
 	var idx=$("#mv_idx").val();
-	$.ajax({
-		type : "get",
-		url : "${path}/memo/list.do?idx=" + idx,
-		success : function(result) {
-			$("#memoAndScore").html(result);
-		}
-	}); 
-}*/
+	location.href="${path}/info/detail/"+idx+"?page="+page;
+}
+
 </script>
 </head>
 <body>
@@ -73,11 +75,10 @@ function set_score(score){
 	</tr>
 </table>
 </form>
-<!-- <input type="button" value="메모보기" onclick="list_memo()"> -->
-<!-- <div id="memoAndScore"></div> -->
 
-<table  style="width:835px;" class="table table-hover">
-	<c:forEach var="memo" items="${memo_list}">
+<div style="height: 500px;">
+<table style="width:835px;" class="table table-hover">
+	<c:forEach var="memo" items="${map.list}">
 	<tr>
 		<td style="width:20%">
 			<c:forEach begin="1" end="${memo.score}">
@@ -94,14 +95,37 @@ function set_score(score){
 	</c:forEach>
 </table>
 <hr>
-<div class="text-center">
-	<ul class="pagination">
-		<li><a href="#">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li><a href="#">4</a></li>
-		<li><a href="#">5</a></li>
-	</ul>
+	<table style="margin-left: 200px;">
+		<tr>
+			<td colspan="5" align="center">
+				<c:if test="${map.pager.curBlock > 1}">
+					<a href="javascript:list('1')"> [처음]</a>
+				</c:if> 
+				<c:if test="${map.pager.curBlock > 1 }">
+					<a href="javascript:list('${map.pager.prevPage}')">[이전]</a>
+				</c:if> 
+				<c:forEach var="num" begin="${map.pager.blockBegin}" end="${map.pager.blockEnd}">
+					<c:choose>
+						<c:when test="${num == map.pager.curPage}">
+							<!-- 현재 페이지이면 하이퍼링크 제거 -->
+							<span style="color: red">${num}</span>&nbsp;
+						</c:when>
+						<c:otherwise>
+							<a href="javascript:list('${num}')"> ${num}</a>&nbsp;
+						</c:otherwise>
+					</c:choose>
+				</c:forEach> 
+				<!-- 전체페이지블록 개수가 현재페이지 블록이거나 더 크면 [다음] -->
+				<c:if test="${map.pager.curBlock <= map.pager.totBlock}">
+					<a href="javascript:list('${map.pager.nextPage}')"> [다음]</a>
+				</c:if> 
+				<c:if test="${map.pager.curPage <= map.pager.totPage}">
+					<a href="javascript:list('${map.pager.totPage}')"> [끝]</a>
+				</c:if>
+			</td>
+		</tr>
+	</table>
 </div>
+	<br><br><br><br><br>
 </body>
 </html>

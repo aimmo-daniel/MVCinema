@@ -14,6 +14,10 @@
 	function movie_detail(idx){
 		location.href="${path}/info/detail/"+idx;
 	}
+	
+	function buy_ticket(idx){
+		location.href="${path}/ticket/movie_ticket_page.do?idx="+idx;
+	}
 </script>
 <div class="sect-sorting">
 	<label for="order_type" class="hidden">정렬</label>
@@ -67,7 +71,7 @@
 					<button style="width: 96px;" class="btn btn-primary" type="button" onclick="movie_detail('${row.idx}')">
 						<span>상세정보</span>
 					</button>
-					<button style="width: 96px;" class="btn btn-danger" type="button">
+					<button style="width: 96px;" class="btn btn-danger" type="button" onclick="buy_ticket('${row.idx}')">
 						<span>예매하기</span>
 					</button>
 				</div>

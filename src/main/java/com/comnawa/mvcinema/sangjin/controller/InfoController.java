@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.comnawa.mvcinema.sangjin.model.dto.MovieDTO;
+import com.comnawa.mvcinema.sangjin.model.dto.MemoDTO;
 import com.comnawa.mvcinema.sangjin.model.dto.StillcutDTO;
 import com.comnawa.mvcinema.sangjin.service.DetailService;
 import com.comnawa.mvcinema.sangjin.service.MovieService;
+import com.comnawa.mvcinema.sangjin.service.Pager;
 
 @Controller
 @RequestMapping("/info/*")
@@ -29,20 +30,22 @@ public class InfoController {
 	@Inject
 	DetailService detailService;
 	
-/*	//영화 상세정보
 	@RequestMapping("detail/{idx}")
-	public ModelAndView view(@PathVariable int idx, ModelAndView mav) {
+	public ModelAndView view(@PathVariable int idx,@RequestParam(defaultValue = "1") int page, ModelAndView mav) {
+		// 레코드 갯수 계산
+		int count = detailService.countMemo(idx);
+		// 페이지의 시작번호,끝번호 계산
+		Pager pager = new Pager(count, page);
+		int start = pager.getPageBegin();
+		int end = pager.getPageEnd();
+		List<MemoDTO> list = detailService.memolist(start, end, idx);
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list); // 게시물 목록
+		map.put("count", list.size()); // 레코드 갯수
+		map.put("pager", pager);
 		mav.setViewName("sangjin/info/detail");
 		mav.addObject("dto", movieService.movie_view(idx));
-		mav.addObject("memo_list", detailService.memolist(idx));
-		return mav;
-	}*/
-	
-	@RequestMapping("detail/{idx}")
-	public ModelAndView view(@PathVariable int idx, ModelAndView mav) {
-		mav.setViewName("sangjin/info/detail");
-		mav.addObject("dto", movieService.movie_view(idx));
-		mav.addObject("memo_list", detailService.memolist(idx));
+		mav.addObject("map", map);
 		return mav;
 	}
 	

@@ -25,8 +25,19 @@ public class DetailServiceImpl implements DetailService {
 	}
 
 	@Override
+	public List<MemoDTO> memolist(int start, int end, int idx) {
+		return detailDao.memolist(start, end, idx);
+	}
+
+	@Override
+	public int countMemo(int idx) {
+		return detailDao.countMemo(idx);
+	}
+
+/*	@Override
 	public List<MemoDTO> memolist(int idx) {
 		return detailDao.memolist(idx);
-	}
+	}*/
+	
 
 }
