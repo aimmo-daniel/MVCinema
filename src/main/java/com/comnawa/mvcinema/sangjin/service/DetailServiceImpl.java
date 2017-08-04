@@ -24,4 +24,9 @@ public class DetailServiceImpl implements DetailService {
 		detailDao.insert(dto);
 	}
 
+	@Override
+	public List<MemoDTO> memolist(int idx) {
+		return detailDao.memolist(idx);
+	}
+
 }

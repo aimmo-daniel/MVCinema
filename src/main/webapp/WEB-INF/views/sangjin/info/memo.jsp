@@ -31,8 +31,18 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 <script>
 function set_score(score){
 	$('#score').val(score);
-	alert($('#score').val());
 }
+
+/* function list_memo(){
+	var idx=$("#mv_idx").val();
+	$.ajax({
+		type : "get",
+		url : "${path}/memo/list.do?idx=" + idx,
+		success : function(result) {
+			$("#memoAndScore").html(result);
+		}
+	}); 
+}*/
 </script>
 </head>
 <body>
@@ -58,10 +68,40 @@ function set_score(score){
 </span>
 <table>
 	<tr>
-		<td><textarea style="width:650px; height:85px;" id="memo" name="memo"></textarea></td>
-		<td><input style="width:85px; height:85px;" class="btn btn-primary"type="submit" value="등록"></td>
+		<td><textarea style="width:750px; height:85px; resize: none;" id="memo" name="memo"></textarea></td>
+		<td><input style="width:85px; height:85px;" class="btn btn-primary" type="submit" value="등록"></td>
 	</tr>
 </table>
 </form>
+<!-- <input type="button" value="메모보기" onclick="list_memo()"> -->
+<!-- <div id="memoAndScore"></div> -->
+
+<table  style="width:835px;" class="table table-hover">
+	<c:forEach var="memo" items="${memo_list}">
+	<tr>
+		<td style="width:20%">
+			<c:forEach begin="1" end="${memo.score}">
+				<b style="color: red;">★</b>
+			</c:forEach>		
+		</td>
+		<td style="width:80%">
+			<span style="color: blue; font-size: 15px;">${memo.userid}</span>
+			<span style="font-size: 12px;"><fmt:formatDate value="${memo.post_date}" pattern="yyyy.MM.dd"/></span> 
+			<br>
+			<span style="color: black;">${memo.memo}</span>
+		</td>
+	</tr>
+	</c:forEach>
+</table>
+<hr>
+<div class="text-center">
+	<ul class="pagination">
+		<li><a href="#">1</a></li>
+		<li><a href="#">2</a></li>
+		<li><a href="#">3</a></li>
+		<li><a href="#">4</a></li>
+		<li><a href="#">5</a></li>
+	</ul>
+</div>
 </body>
 </html>

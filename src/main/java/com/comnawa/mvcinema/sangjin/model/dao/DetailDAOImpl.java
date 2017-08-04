@@ -24,4 +24,9 @@ public class DetailDAOImpl implements DetailDAO {
 		sqlSession.insert("detail.memo", dto);
 	}
 
+	@Override
+	public List<MemoDTO> memolist(int idx) {
+		return sqlSession.selectList("detail.memolist", idx);
+	}
+
 }

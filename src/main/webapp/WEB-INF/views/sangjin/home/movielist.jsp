@@ -72,8 +72,18 @@
 					</button>
 				</div>
 				<div class="box-contents">
-					<strong class="title">${row.title}</strong>  <!-- 영화제목 --> 
-					<span>${row.age}세 이상</span>
+					<c:if test="${row.age >=19 }">
+						<span class="label label-danger">${row.age}</span><b>${row.title}</b>
+					</c:if> 
+					<c:if test="${row.age >=15 && row.age <19 }">
+						<span class="label label-warning">${row.age}</span><b>${row.title}</b>
+					</c:if> 
+					<c:if test="${row.age > 0 && row.age <15 }">
+						<span class="label label-primary">${row.age}</span><b>${row.title}</b>
+					</c:if> 
+					<c:if test="${row.age == 0 }">
+						<span class="label label-success">전체이용가</span><b>${row.title}</b>
+					</c:if>
 					<span class="txt-info"> 
 					<strong> <!-- 개봉일자 --> 
 						<fmt:formatDate	value="${row.release_date}" pattern="yyyy.MM.dd" /> 

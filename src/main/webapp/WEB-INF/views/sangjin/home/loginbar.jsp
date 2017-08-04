@@ -21,7 +21,7 @@
 <nav id="topMenu">
 	<ul>
 		<li class="topMenuLi"><a class="menuLink" href="${path}">무비차트</a></li>
-		<li class="topMenuLi"><a class="menuLink" href="${path}">예매</a></li>
+		<li class="topMenuLi"><a class="menuLink" href="${path}/ticket/movie_ticket_page.do">예매</a>	</li>
 		<li class="topMenuLi"><a class="menuLink" href="${path}">극장</a></li>
 		<li class="topMenuLi"><a class="menuLink" href="${path}">고객센터</a></li>
 		<li style="margin-left: 210px;" >

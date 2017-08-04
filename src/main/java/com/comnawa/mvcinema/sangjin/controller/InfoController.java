@@ -29,11 +29,20 @@ public class InfoController {
 	@Inject
 	DetailService detailService;
 	
-	//영화 상세정보
+/*	//영화 상세정보
 	@RequestMapping("detail/{idx}")
 	public ModelAndView view(@PathVariable int idx, ModelAndView mav) {
 		mav.setViewName("sangjin/info/detail");
 		mav.addObject("dto", movieService.movie_view(idx));
+		mav.addObject("memo_list", detailService.memolist(idx));
+		return mav;
+	}*/
+	
+	@RequestMapping("detail/{idx}")
+	public ModelAndView view(@PathVariable int idx, ModelAndView mav) {
+		mav.setViewName("sangjin/info/detail");
+		mav.addObject("dto", movieService.movie_view(idx));
+		mav.addObject("memo_list", detailService.memolist(idx));
 		return mav;
 	}
 	
