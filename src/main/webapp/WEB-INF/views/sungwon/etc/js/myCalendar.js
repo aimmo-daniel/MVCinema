@@ -94,10 +94,10 @@ function myCalendar(id, date,r_date) {
 	calendar += '				  <th style="text-align:center;" class="sat" scope="row"><h2><label class="label label-primary">일</label></h2></th>';
 	calendar += '				</tr>';
 	calendar += '			</thead>';
-	calendar += '			<tbody>';
+	calendar += '			<tbody id="cal_body">';
 
 	var dateNum = 1 - currentDay;
-
+	var count =0;
 	for (var i = 0; i < week; i++) {
 		calendar += '<tr>';
 		for (var j = 0; j < 7; j++, dateNum++) {
@@ -115,21 +115,20 @@ function myCalendar(id, date,r_date) {
 			
 			if (typeof (r_date) !== 'undefined') {
 				if(r_date > tdname ){ //개봉일 보다 이전일은 예매x
-					calendar += '<td style="width:85px; height:67.2px;  padding:0px; text-align:center; background-color:gray"' 
+					calendar += '<td  style="width:85px; height:67.2px;  padding:0px; text-align:center; background-color:gray"' 
 						+ 'class="'+ dateString[j] + '">'
 						+ '<p  style="font-weight:nomal; color: white;"  class="' + dateString[j] + '">'
 						+ dateNum + '</p>';
 					calendar += '</td>';
 				}else if(tdname < today){ //오늘 보다 이전일은 예매x
-					calendar += '<td style="width:85px; height:67.2px;  padding:0px; text-align:center; background-color:gray"' 
+					calendar += '<td  style="width:85px; height:67.2px;  padding:0px; text-align:center; background-color:gray"' 
 						+ 'class="'+ dateString[j] + '">'
 						+ '<p  style="font-weight:nomal; color: white;"  class="' + dateString[j] + '">'
 						+ dateNum + '</p>';
 					calendar += '</td>';
 				}else{ //모든 조건 충족시 
-					calendar += '<td style="width:85px; height:67.2px;  padding:0px; text-align:center;"' 
-						+ 'class="'+ dateString[j] + '" onclick="javascript:selectDay('
-						+ currentYear + ',' + currentMonth + ',' + currentDay
+					calendar += '<td id="'+tdname+'"style="width:85px; height:67.2px;  padding:0px; text-align:center;"' 
+						+ 'class="'+ dateString[j] + '" onclick="javascript:selectDay('+ currentYear + ',' + currentMonth + ',' + currentDay
 						+ ')">' + '<a href="#"' + 'class="' + dateString[j] + '">'
 						+ dateNum + '</a>';
 					calendar += '</td>';
@@ -141,6 +140,7 @@ function myCalendar(id, date,r_date) {
 					+ dateNum + '</p>';
 				calendar += '</td>';
 			}
+			count++;
 		}
 		calendar += '</tr>';
 	}

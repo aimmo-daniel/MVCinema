@@ -11,8 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="screenTime" resultType="TicketDTO">
 		select start_time,t.name t_name,empty_sit 
 		from screen_info s, theater t
-		where s.theater_idx=t.idx  and start_time > to_date(#{start_time},'yyyy-MM-dd') 
-		and to_date(#{end_date},'yyyy-MM-dd') > start_time
+		where s.theater_idx=t.idx  and start_time > to_date(#{start_date},'yyyy-MM-dd') 
+		and to_date(#{end_date},'yyyy-MM-dd') > start_time and movie_idx=#{movie_idx}
 		order by start_time
 	</select>
 </mapper>

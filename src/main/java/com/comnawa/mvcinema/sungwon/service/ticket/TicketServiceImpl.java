@@ -22,10 +22,12 @@ public class TicketServiceImpl implements TicketService {
 	}
 
 	@Override
-	public List<TicketDTO> screen_time(Date start_date , Date endDate) {
+	public List<TicketDTO> screen_time(String start_date , String end_date,int movie_idx) {
 		TicketDTO dto = new TicketDTO();
-		dto.setStart_time(start_date);;
-		return ticketDao.screen_time(start_date, endDate);
+		dto.setMovie_idx(movie_idx);
+		dto.setStart_date(start_date);;
+		dto.setEnd_date(end_date);
+		return ticketDao.screen_time(dto);
 	}
 
 }

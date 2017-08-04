@@ -22,8 +22,8 @@ public class TIcketDAOImpl implements TicketDAO {
 	}
 
 	@Override
-	public List<TicketDTO> screen_time(Date start_date , Date endDate) {
-		return sqlSession.selectList("ticket.screenTime",endDate);
+	public List<TicketDTO> screen_time(TicketDTO dto) {
+		return sqlSession.selectList("ticket.screenTime",dto);
 	}
 
 }

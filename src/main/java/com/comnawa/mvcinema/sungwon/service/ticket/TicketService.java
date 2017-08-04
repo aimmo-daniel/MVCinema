@@ -7,5 +7,5 @@ import com.comnawa.mvcinema.sungwon.model.ticket.dto.TicketDTO;
 
 public interface TicketService {
 	public List<TicketDTO> movieList();
-	public List<TicketDTO> screen_time(Date start_date , Date endDate);
+	public List<TicketDTO> screen_time(String start_date , String endDate,int movie_idx);
 }

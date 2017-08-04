@@ -13,6 +13,8 @@ public class TicketDTO {
 	/*-------------------영화 상영  정보------------------------------*/
 	private int theater_idx; // 상영관 정보
 	private Date start_time; // 상영 시간
+	private String start_date;
+	private String end_date;
 	private int empty_sit; // 남은좌석
 	/*-------------------상영관  정보------------------------------*/
 	private int t_idx;
@@ -20,6 +22,14 @@ public class TicketDTO {
 	private int seat_max;
 	private int seat_out;
 	private int price;
+
+	public String getStart_date() {
+		return start_date;
+	}
+
+	public void setStart_date(String start_date) {
+		this.start_date = start_date;
+	}
 
 	public int getMovie_idx() {
 		return movie_idx;
@@ -85,6 +95,14 @@ public class TicketDTO {
 		this.start_time = start_time;
 	}
 
+	public String getEnd_date() {
+		return end_date;
+	}
+
+	public void setEnd_date(String end_date) {
+		this.end_date = end_date;
+	}
+
 	public int getEmpty_sit() {
 		return empty_sit;
 	}
@@ -138,7 +156,9 @@ public class TicketDTO {
 	}
 
 	public TicketDTO(int movie_idx, String title, int age, int people, Date release_date, int runtime, int theater_idx,
-			Date start_time, int empty_sit, int t_idx, String t_name, int seat_max, int seat_out, int price) {
+			Date start_time, String start_date, String end_date, int empty_sit, int t_idx, String t_name, int seat_max,
+			int seat_out, int price) {
+		super();
 		this.movie_idx = movie_idx;
 		this.title = title;
 		this.age = age;
@@ -147,6 +167,8 @@ public class TicketDTO {
 		this.runtime = runtime;
 		this.theater_idx = theater_idx;
 		this.start_time = start_time;
+		this.start_date = start_date;
+		this.end_date = end_date;
 		this.empty_sit = empty_sit;
 		this.t_idx = t_idx;
 		this.t_name = t_name;
@@ -159,8 +181,9 @@ public class TicketDTO {
 	public String toString() {
 		return "TicketDTO [movie_idx=" + movie_idx + ", title=" + title + ", age=" + age + ", people=" + people
 				+ ", release_date=" + release_date + ", runtime=" + runtime + ", theater_idx=" + theater_idx
-				+ ", start_time=" + start_time + ", empty_sit=" + empty_sit + ", t_idx=" + t_idx + ", t_name=" + t_name
-				+ ", seat_max=" + seat_max + ", seat_out=" + seat_out + ", price=" + price + "]";
+				+ ", start_time=" + start_time + ", start_date=" + start_date + ", end_date=" + end_date
+				+ ", empty_sit=" + empty_sit + ", t_idx=" + t_idx + ", t_name=" + t_name + ", seat_max=" + seat_max
+				+ ", seat_out=" + seat_out + ", price=" + price + "]";
 	}
 
 }
