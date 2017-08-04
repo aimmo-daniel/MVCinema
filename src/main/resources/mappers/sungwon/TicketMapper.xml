@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select idx movie_idx,title,age,release_date from movie order by release_date
 	</select>
 	<select id="screenTime" resultType="TicketDTO">
-		select start_time,t.name t_name,empty_sit 
+		select screen_idx,start_time,t.name t_name,empty_sit 
 		from screen_info s, theater t
 		where s.theater_idx=t.idx  and start_time > to_date(#{start_date},'yyyy-MM-dd') 
 		and to_date(#{end_date},'yyyy-MM-dd') > start_time and movie_idx=#{movie_idx}

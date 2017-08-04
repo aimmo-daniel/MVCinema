@@ -17,19 +17,12 @@ public class TicketDTO {
 	private String end_date;
 	private int empty_sit; // 남은좌석
 	/*-------------------상영관  정보------------------------------*/
+	private int screen_idx;
 	private int t_idx;
 	private String t_name;
 	private int seat_max;
 	private int seat_out;
 	private int price;
-
-	public String getStart_date() {
-		return start_date;
-	}
-
-	public void setStart_date(String start_date) {
-		this.start_date = start_date;
-	}
 
 	public int getMovie_idx() {
 		return movie_idx;
@@ -95,6 +88,14 @@ public class TicketDTO {
 		this.start_time = start_time;
 	}
 
+	public String getStart_date() {
+		return start_date;
+	}
+
+	public void setStart_date(String start_date) {
+		this.start_date = start_date;
+	}
+
 	public String getEnd_date() {
 		return end_date;
 	}
@@ -109,6 +110,14 @@ public class TicketDTO {
 
 	public void setEmpty_sit(int empty_sit) {
 		this.empty_sit = empty_sit;
+	}
+
+	public int getScreen_idx() {
+		return screen_idx;
+	}
+
+	public void setScreen_idx(int screen_idx) {
+		this.screen_idx = screen_idx;
 	}
 
 	public int getT_idx() {
@@ -156,8 +165,8 @@ public class TicketDTO {
 	}
 
 	public TicketDTO(int movie_idx, String title, int age, int people, Date release_date, int runtime, int theater_idx,
-			Date start_time, String start_date, String end_date, int empty_sit, int t_idx, String t_name, int seat_max,
-			int seat_out, int price) {
+			Date start_time, String start_date, String end_date, int empty_sit, int screen_idx, int t_idx,
+			String t_name, int seat_max, int seat_out, int price) {
 		super();
 		this.movie_idx = movie_idx;
 		this.title = title;
@@ -170,6 +179,7 @@ public class TicketDTO {
 		this.start_date = start_date;
 		this.end_date = end_date;
 		this.empty_sit = empty_sit;
+		this.screen_idx = screen_idx;
 		this.t_idx = t_idx;
 		this.t_name = t_name;
 		this.seat_max = seat_max;
@@ -182,8 +192,8 @@ public class TicketDTO {
 		return "TicketDTO [movie_idx=" + movie_idx + ", title=" + title + ", age=" + age + ", people=" + people
 				+ ", release_date=" + release_date + ", runtime=" + runtime + ", theater_idx=" + theater_idx
 				+ ", start_time=" + start_time + ", start_date=" + start_date + ", end_date=" + end_date
-				+ ", empty_sit=" + empty_sit + ", t_idx=" + t_idx + ", t_name=" + t_name + ", seat_max=" + seat_max
-				+ ", seat_out=" + seat_out + ", price=" + price + "]";
+				+ ", empty_sit=" + empty_sit + ", screen_idx=" + screen_idx + ", t_idx=" + t_idx + ", t_name=" + t_name
+				+ ", seat_max=" + seat_max + ", seat_out=" + seat_out + ", price=" + price + "]";
 	}
 
 }

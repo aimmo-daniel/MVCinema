@@ -75,11 +75,11 @@ function myCalendar(id, date,r_date) {
 	calendar += '<table>';
 	calendar +=		'<tr>';
 	calendar +=			'<td style="padding-top:20px; padding-bottom:0px; text-align:center; ">';
-	calendar += '			<span><input type="button" class="btn btn-info" style="font-size: 12px;" value="이전" onclick="myCalendar(\''
+	calendar += '			<span><input type="button" class="btn btn-warning" style="font-size: 12px;" value="◀" onclick="myCalendar(\''
 			+ id + '\', \'' + prevDate + '\', \'' + r_date + '\')"></span></td>';
-	calendar += '<td style="text-align:center;"><h1><span class="label label-primary" style="align:center;"id="date">'
+	calendar += '<td style="text-align:center;"><h1><span class="label label-warning" style="align:center;"id="date">'
 			+ currentYear + '년 ' + currentMonth + '월</span></h1></td>';
-	calendar += '<td style="padding-top:20px; padding-bottom:0px; text-align:center;"><span><input type="button" class="btn btn-info" style="font-size: 12px;" value="다음" onclick="myCalendar(\''
+	calendar += '<td style="padding-top:20px; padding-bottom:0px; text-align:center;"><span><input type="button" class="btn btn-warning" style="font-size: 12px;" value="▶" onclick="myCalendar(\''
 			+ id + '\', \'' + nextDate + '\', \'' + r_date + '\')"></a></span></td>';
 	calendar += '		</tr></table>';
 	calendar += '		<table id="mvc_caleandar" class="table table-primary" style="height:80%">';

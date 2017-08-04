@@ -9,10 +9,10 @@
 <ul class="list-group" style="overflow: auto; height: 400px;">
 	<c:if test="${map.list != null }">
 		<c:forEach var="row" items="${map.list}" varStatus="status">
-			<li class="list-group-item"><a href=# style="margin-left: 10px;"> <fmt:formatDate
-						value="${row.start_time}" pattern="HH:mm" /></a> <b
-				style="margin-left: 96px;">${row.t_name }</b> <span class="badge"
-				style="margin-right: 20px;">${row.empty_sit}</span></li>
+			<li id="t_${row.screen_idx}" class="list-group-item" onclick="selectTime('t_${row.screen_idx}')"><b><fmt:formatDate
+						value="${row.start_time}" pattern="HH:mm" /></b>
+						<b style="margin-left: 96px;">${row.t_name }</b> 
+						<span class="badge" style="margin-right: 20px;">${row.empty_sit}</span></li>
 			<c:set var="i" value="${status.index}"></c:set>
 		</c:forEach>
 		<c:if test="${i < 7  }">

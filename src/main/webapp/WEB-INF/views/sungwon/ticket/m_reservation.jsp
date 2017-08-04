@@ -8,7 +8,7 @@
 <%@include file="../../sangjin/home/loginbar.jsp"%>
 <%@include file="../../include/header.jsp"%>
 <%@include file="../sw_include/template.jsp"%>
-<script src="${path}/sungwon/etc/js/myCalendar.js?v=1"></script>
+<script src="${path}/sungwon/etc/js/myCalendar.js?v=2"></script>
 <link rel="stylesheet" href="${path}/sungwon/etc/css/sw_style.css?v=2">
 <style>
 #mvc_caleandar td:HOVER {
@@ -24,6 +24,7 @@
 	var today;
 	var movie_idx;
 	var choose_day;
+	var start_time;
 
 	//선택한 날짜 구하기
 	function selectDay(y, m, d) {
@@ -36,20 +37,21 @@
 		date = y + "-" + m + "-" + d;
 		choose_day = date;
 		var td = $("#cal_body td");
-		for(var i=0; i<td.length; i++){
-			if(td[i].id != ""){
-				if(td[i].id == date){
-					$("#"+date).css("background-color",'#6699FF');
-				}else{
-					$("#"+td[i].id).css("background-color",'#FFFFFF');
+		for (var i = 0; i < td.length; i++) {
+			if (td[i].id != "") {
+				if (td[i].id == date) {
+					$("#" + date).css("background-color", '#6699FF');
+				} else {
+					$("#" + td[i].id).css("background-color", '#FFFFFF');
 				}
 			}
-				
+
 		}
-		
+
 		$.ajax({
 			type : "get",
-			url : "${path}/ticket/sreen_time.do?movie_idx=" + movie_idx + "&start_date=" + choose_day,
+			url : "${path}/ticket/sreen_time.do?movie_idx=" + movie_idx
+					+ "&start_date=" + choose_day,
 			success : function(result) {
 				$("#ticket_time").html(result);
 			}
@@ -62,6 +64,8 @@
 
 	//선택한 영화
 	function selectMovie(tagid) {
+		choose_day = "";
+		start_time = "";
 		var li = $("#movieList li");
 		for (var i = 0; i < li.length; i++) {
 			if (li[i].id == tagid) {
@@ -74,18 +78,34 @@
 			}
 		}
 	}
+
+	function selectTime(timeid) {
+		var t_li = $("#ticket_time li");
+		for (var i = 0; i < t_li.length; i++) {
+			if (t_li[i].id != '') {
+				if (t_li[i].id == timeid) {
+					$("#" + timeid).css("background-color", '#6699FF');
+					start_time = timeid.split("_")[1];
+				} else {
+					$("#" + t_li[i].id).css("background-color", '#FFFFFF');
+				}
+			}
+		}
+		alert("영화:" + movie_idx + "날짜:" + choose_day + "상영정보" + start_time);
+	}
 </script>
 </head>
 <body>
-	<div align="left" style="margin-left:80%">
-	<a href="#" role="button" class="btn btn-default">영화별 예매</a> 
-	<a href="#" role="button" class="btn btn-default">날짜별 예매</a>
+	<div align="left" style="margin-left: 70%">
+		<a href="${path}/ticket/movie_ticket_page.do" role="button"
+			class="btn btn-primary">영화별 예매</a> <a href="#" role="button"
+			class="btn btn-info">날짜별 예매</a>
 	</div>
 	<div class="container" style="width: 100%">
 		<div class="row">
 			<div class="col-md-4" id="ticket_movie">
 				<h1 align="center">
-					<span class="label label-danger">영화 선택</span>
+					<span class="label label-warning">영화 선택</span>
 				</h1>
 				<br>
 				<div id="movieList">
@@ -104,8 +124,7 @@
 									value="<fmt:formatDate value="${row.release_date}" pattern="yyyy-MM-dd"/>">
 							</li>
 						</c:forEach>
-						<c:set var="idx" value="${map.idx}"/>
-						<li>${map.idx}</li>
+						<c:set var="idx" value="${map.idx}" />
 					</ul>
 				</div>
 			</div>
@@ -119,8 +138,8 @@
 					<c:forEach var="i" begin="1" end="8">
 						<li class="list-group-item">&nbsp;</li>
 						<c:if test="${i == 2 }">
-							<li class="list-group-item" style="text-align: center;">
-							<b>영화와 시간을 선택해주세요</b></li>
+							<li class="list-group-item" style="text-align: center;"><b>영화와
+									시간을 선택해주세요</b></li>
 						</c:if>
 					</c:forEach>
 				</ul>
@@ -128,8 +147,11 @@
 		</div>
 	</div>
 	<script>
-	myCalendar('myCalendar');
-	selectMovie('${idx}');
+		myCalendar('myCalendar');
+		var hash = document.location.href;
+		if (hash.indexOf('?movie_idx=') != -1) {
+			selectMovie('${idx}');
+		}
 	</script>
 </body>
 </html>
