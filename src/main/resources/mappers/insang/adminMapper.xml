@@ -89,7 +89,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   
   <insert id="insertSchedule">
-    insert into screen_info values(#{theater_idx}, to_date(#{start_time}, 'yyyy-MM-dd HH24:MI:SS'), #{movie_idx}, #{empty_sit})
+    insert into screen_info values(#{theater_idx}, to_date(#{start_time},'yyyy-MM-dd HH24:MI:SS'),
+     #{movie_idx}, #{empty_sit}, seq_screen_idx.nextval)
   </insert>
   
 </mapper>
