@@ -58,4 +58,9 @@ public class Insang_MovieServiceImpl implements Insang_MovieService {
     movieDao.modSchedule(map);
   }
   
+  @Override
+  public void delMovie(int idx) {
+    movieDao.delMovie(idx);
+  }
+  
 }

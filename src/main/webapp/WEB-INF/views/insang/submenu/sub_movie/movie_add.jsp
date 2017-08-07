@@ -169,9 +169,12 @@
             <td><input type="hidden" name="img_url" id="mod_img_url" value=""></td>
           </tr>
           <tr align="center">
-            <td colspan="2" style="padding-top: 30px;"><input type="button" id="mod_btnCancel" value="수정취소"
-              class="btn btn-defulat" style="color: white;"> &nbsp; <input type="button" id="mod_btnOk" value="수정완료"
-              class="btn btn-success" onclick="modMovie()"> <input type="hidden" name="mod_idx" id="mod_idx" value="0"></td>
+            <td colspan="2" style="padding-top: 30px;">
+              <input type="button" id="mod_btnCancel" value="수정취소" class="btn btn-defulat" style="color: white;"> &nbsp; 
+              <input type="button" id="mod_btnDel" value="영화삭제" class="btn btn-danger" onclick="delMovie()"> &nbsp; 
+              <input type="button" id="mod_btnOk" value="수정완료" class="btn btn-success" onclick="modMovie()"> 
+              <input type="hidden" name="mod_idx" id="mod_idx" value="0">
+            </td>
           </tr>
         </table>
       </form>
@@ -227,6 +230,20 @@
     return strDate;
   }
 
+  function delMovie(){
+    var idx= $("#mod_idx").val();
+    if (confirm("정말 삭제하시겠습니까?")){
+      $.ajax({
+        type: "get",
+        url: "${path}/subMenu/movie/delMovie.do",
+        success: function(){
+          alert("영화 삭제에 성공하였습니다.");
+          location.href="${path}/admin";
+        }
+      });
+    }
+  }
+  
   function modMovie() {
     /*
      * ============================================================ 작성완료 버큰을 클릭했을시

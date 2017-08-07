@@ -18,6 +18,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     select * from theater_sit order by name
   </select>
   
+  <delete id="delTheater">
+    delete from theater where idx=#{idx}
+  </delete>
+  
+  <delete id="delTheater_sit">
+    delete from theater_sit where idx=#{idx}
+  </delete>
+  
+  <delete id="delTheater_sit_empty">
+    delete from theater_sit where idx=#{idx}
+  </delete>
+  
+  <delete id="delMovie">
+    delete from movie where idx=#{idx}
+  </delete>
+  
   <select id="getMaxIDX2" resultType="int">
     select nvl(max(idx),100) from theater where idx>100
   </select>

@@ -53,4 +53,9 @@ public class TheaterServiceImpl implements TheaterService {
     theaterDao.updateSit(sit, idx, sitCount);
   }
   
+  @Override
+  public void delTheater(int idx) {
+    theaterDao.delTheater(idx);
+  }
+  
 }

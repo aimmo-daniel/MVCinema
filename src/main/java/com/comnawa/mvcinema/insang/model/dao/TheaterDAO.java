@@ -15,4 +15,5 @@ public interface TheaterDAO {
   public void updateTheater(Map<String,Object> map);
   public List<TheaterSitEmptyDTO> getTheaterEmpty();
   public void updateSit(String sit, int idx, int sitCount);
+  public void delTheater(int idx);
 }

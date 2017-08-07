@@ -22,6 +22,19 @@ $(function(){
     }
   })
   
+  $("#btnDelTheater").click(function(){
+    if (confirm('정말 삭제하시겠습니까?')){
+      $.ajax({
+        type:"get",
+        url: "${path}/subMenu/theater_delTheater.do?idx="+$("#primaryIDX").val(),
+        success: function(){
+          alert("영화관 삭제가 완료되었습니다.");
+          location.href="${path}/admin";
+        }
+      })
+    }
+  })
+  
   $("#btnAddTheaterDetail").click(function(){
     if ($("#addTheater_cols").val() == ''){
       alert('입력하지 않은 사항이있습니다. 입력후 다시시도해주세요');
@@ -89,7 +102,10 @@ $(function(){
           <td colspan="2"><textarea id="addTheater_preview" name="preview"></textarea></td>
         </tr>
         <tr>
-          <td colspan="3" align="right"><button type="button" id="btnAddTheaterDetail">수정 긔긔</button></td>
+          <td colspan="3" align="right">
+            <input type="button" value="삭제 긔긔" class="btn btn-danger" style="margin-right: 20px;" id="btnDelTheater">
+            <button type="button" id="btnAddTheaterDetail" class="btn btn-success">수정 긔긔</button>
+          </td>
         </tr>
       </table>
     </form>

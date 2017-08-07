@@ -76,4 +76,12 @@ public class TheaterDAOImpl implements TheaterDAO {
     sqlSession.update("admin.emptySitUpdate",map1);
   }
   
+  @Transactional
+  @Override
+  public void delTheater(int idx) {
+    sqlSession.delete("admin.delTheater", idx);
+    sqlSession.delete("admin.delTheater_sit", idx);
+    sqlSession.delete("admin.delTheater_sit_empty", idx);
+  }
+  
 }

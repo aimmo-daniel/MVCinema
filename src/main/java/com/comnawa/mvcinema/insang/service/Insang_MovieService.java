@@ -16,4 +16,5 @@ public interface Insang_MovieService {
   public void insertSchedule(Map<String, Object> map);
   public ScreenInfoDTO getScheduleDetail(int idx);
   public void modSchedule(Map<String, Object> map);
+  public void delMovie(int idx);
 }

@@ -32,7 +32,7 @@ public class TheaterController {
   }
   
   @RequestMapping("theater_addTheaterDetail")
-  public String theater_addTheaterDetail(HttpServletRequest request){
+  public String theater_addTheaterDetail(HttpServletRequest request, Model model){
     Map<String, Object> map= new HashMap<>();
     map.put("idx", request.getParameter("idx"));
     map.put("name", request.getParameter("name"));
@@ -42,7 +42,8 @@ public class TheaterController {
     map.put("price", request.getParameter("price"));
     map.put("max", Integer.parseInt(request.getParameter("rows")) * Integer.parseInt(request.getParameter("cols")));
     theaterService.addTheater(map);
-    return "redirect:/";
+    model.addAttribute("result","addTheater");
+    return "/insang/login/admin_login";
   }
   
   @RequestMapping("theater_updateTheater.do")
@@ -60,6 +61,12 @@ public class TheaterController {
     theaterService.updateTheater(map);
     model.addAttribute("result", "modTheater");
     return "/insang/login/admin_login";
+  }
+  
+  @RequestMapping("theater_delTheater.do")
+  public String theater_updateTheater(@RequestParam String idx){
+    theaterService.delTheater(Integer.parseInt(idx));
+    return "/insang/test";
   }
   
   @RequestMapping("theater_updateTheaterDetail")

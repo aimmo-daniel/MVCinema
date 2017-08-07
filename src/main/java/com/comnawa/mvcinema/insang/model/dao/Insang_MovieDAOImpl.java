@@ -58,4 +58,9 @@ public class Insang_MovieDAOImpl implements Insang_MovieDAO{
     sqlSession.update("admin.modSchedule", map);
   }
   
+  @Override
+  public void delMovie(int idx) {
+    sqlSession.delete("admin.delMovie", idx);
+  }
+  
 }

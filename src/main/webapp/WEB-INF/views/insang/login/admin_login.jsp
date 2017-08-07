@@ -78,10 +78,13 @@ $(window).bind('hashchange',function(){
       alert("로그인에 실패하였습니다. \n 아이디 또는 비밀번호를 확인해주세요");
       location.href="${path}/admin";
     } else if ('${result}' == 'addMovie'){
-      alert("영화 추가에 성공하였습니다.")
+      alert("영화 추가에 성공하였습니다.");
       location.href="${path}/admin";
     } else if ('${result}' == 'modMovie'){
-      alert("영화 수정이 성공하였습니다.")
+      alert("영화 수정이 성공하였습니다.");
+      location.href="${path}/admin";
+    } else if ('${result}' == 'addTheater'){
+      alert("상영관 추가에 성공하셨습니다.");
       location.href="${path}/admin";
     }
     </script>
