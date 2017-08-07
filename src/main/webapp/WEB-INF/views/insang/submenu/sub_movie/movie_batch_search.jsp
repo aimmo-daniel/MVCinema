@@ -42,13 +42,14 @@
             <td><label><fmt:formatDate value="${rows.start_time}" pattern="HH시 mm분"/></label></td>
             <td><label><fmt:formatDate value="${rows.end_time}" pattern="HH시 mm분"/></label></td>
             <td><label>${rows.empty_sit}</label></td>
-            <td><input type="button" value="수정" class="btn btn-success"></td>
+            <td><input type="button" value="수정" class="btn btn-success" onclick="modMovieSchedule('${rows.screen_idx}')"></td>
           </tr>
         </c:forEach>
         </table>
       </div>
     </c:otherwise>
   </c:choose>
+  
   
 </body>
 </html>

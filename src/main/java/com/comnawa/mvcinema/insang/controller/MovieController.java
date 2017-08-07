@@ -310,5 +310,39 @@ public class MovieController {
     movieService.insertSchedule(map);
     return "/insang/test";
   }
+  
+  @RequestMapping("/movie/modSchedulePage.do")
+  public String modSchedulePage(HttpServletRequest request, Model model){
+    int idx= Integer.parseInt(request.getParameter("idx"));
+    model.addAttribute("dto", movieService.getScheduleDetail(idx));
+    model.addAttribute("theaterList", theaterService.getTheaterList());
+    model.addAttribute("movieList", movieService.getMovieList());
+    return "/insang/submenu/sub_movie/movie_batch_mod";
+  }
 
+  @RequestMapping("/movie/modSchedule.do")
+  public String modSchedule(HttpServletRequest request){
+    int movieIDX= Integer.parseInt(request.getParameter("movieIDX"));
+    int theaterIDX= Integer.parseInt(request.getParameter("theaterIDX"));
+    int screenIDX= Integer.parseInt(request.getParameter("screenIDX"));
+    String starttime= request.getParameter("starttime");
+    starttime= starttime.substring(0, 10)+" "+starttime.substring(10);
+    int seat_max=0;
+    List<TheaterDTO> lists= theaterService.getTheaterList();
+    for (TheaterDTO dto: lists){
+      if (dto.getIdx() == theaterIDX){
+        seat_max= dto.getSeat_max();
+      }
+    }
+    Map<String, Object> map= new HashMap<>();
+    map.put("movie_idx", movieIDX);
+    map.put("theater_idx", theaterIDX);
+    map.put("start_time", starttime);
+    map.put("empty_sit", seat_max);
+    map.put("screen_idx", screenIDX);
+    System.out.println(starttime);
+    movieService.modSchedule(map);
+    return "/insang/test";
+  }
+  
 }

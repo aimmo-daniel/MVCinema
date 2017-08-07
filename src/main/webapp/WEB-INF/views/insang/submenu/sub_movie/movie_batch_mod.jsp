@@ -8,16 +8,17 @@
 </head>
 <body>
 
-<h1 style="color: #ff8888; text-align: center;'">상영시간표 등록</h1>
-    <br>
-
+<h1 style="color: #ff8888; text-align: center;'">상영시간표 수정</h1>
+<br>
+<fmt:formatDate var="dto_date" value="${dto.start_time}" pattern="yyyy-MM-dd"/>
+<fmt:formatDate var="dto_time" value="${dto.start_time}" pattern="HH:mm:ss"/>
 <table class="table table-default" style="margin-bottom: 50px;">
   <tr>
     <td><label>상영관 선택</label></td>
     <td>
       <select id="theaterIDX">
         <c:forEach var="th_rows" items="${theaterList}" varStatus="status">
-          <option value="${th_rows.idx}">${th_rows.name}</option>
+          <option value="${th_rows.idx}" <c:if test="${dto.theater_idx==th_rows.idx}">selected</c:if>>${th_rows.name}</option>
         </c:forEach>
       </select>
     </td>
@@ -25,13 +26,13 @@
   <tr>
     <td><label>상영 시작날짜</label></td>
     <td>
-      <input type="date" id="sDate">
+      <input type="date" id="sDate" value="${dto_date}">
     </td>
   </tr>
   <tr>
     <td><label>상영 시작시간</label></td>
     <td>
-      <input type="time" id="sTime">
+      <input type="time" id="sTime" value="${dto_time}">
     </td>
   </tr>
   <tr>
@@ -39,18 +40,21 @@
     <td>
       <select id="movieIDX">
         <c:forEach var="mv_rows" items="${movieList}" varStatus="status">
-          <option value="${mv_rows.idx}">${mv_rows.title}</option>
+          <option value="${mv_rows.idx}" <c:if test="${dto.movie_idx==mv_rows.idx}">selected</c:if>>${mv_rows.title}</option>
         </c:forEach>
       </select>
     </td>
   </tr>
   <tr style="text-align: right;">
-    <td colspan="2"><input type="button" value="등록 완료!!" class="btn btn-success" id="btnAddSchedule"></td>
+    <td colspan="2">
+      <input type="button" value="수정 완료!!" class="btn btn-success" id="btnModSchedule">
+      <input type="hidden" value="${dto.screen_idx}" id="screenIDX">
+    </td>
   </tr>
 </table>
 
 <script>
-$("#btnAddSchedule").click(function(){
+$("#btnModSchedule").click(function(screen_idx){
   if ($("#sTime").val() == ""){
     alert('상영시작시간을 입력하지 않으셨습니다.');
     $("#sTime").focus();
@@ -61,16 +65,17 @@ $("#btnAddSchedule").click(function(){
     $("#sDate").focus();
     return;
   }
-  if (confirm("이 내용으로 상영일정을 등록하시겠습니까?")){
+  if (confirm("이 내용으로 상영일정을 수정하시겠습니까?")){
     var theaterIDX= $("#theaterIDX option:selected").val();
     var starttime= $("#sDate").val()+$("#sTime").val();
     var movieIDX= $("#movieIDX option:selected").val();
-    var param= "theaterIDX="+theaterIDX+"&starttime="+starttime+"&movieIDX="+movieIDX;
+    var screenIDX= $("#screenIDX").val();
+    var param= "theaterIDX="+theaterIDX+"&starttime="+starttime+"&movieIDX="+movieIDX+"&screenIDX="+screenIDX;
     $.ajax({
       type: "get",
-      url: "${path}/subMenu/movie/addSchedule.do?"+param,
+      url: "${path}/subMenu/movie/modSchedule.do?"+param,
       success: function(result){
-        alert('상영일정 추가가 완료되었습니다.');
+        alert('상영일정 수정이 완료되었습니다.');
         location.href="${path}/admin";
       }
     });

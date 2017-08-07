@@ -82,7 +82,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </delete>
   
   <select id="scheduleList" resultType="com.comnawa.mvcinema.insang.model.dto.ScreenInfoDTO">
-    SELECT theater_idx, start_time, movie_idx, empty_sit, m.title title, m.IMG_URL img_url, m.runtime runtime
+    SELECT theater_idx, start_time, movie_idx, empty_sit, m.title title, m.IMG_URL img_url, m.runtime runtime, si.screen_idx screen_idx
     FROM screen_info si, movie m
     WHERE start_time > to_date(#{startdate},'yyyy-MM-dd') AND to_date(#{enddate},'yyyy-MM-dd') > start_time and theater_idx=#{idx}
       AND movie_idx= m.idx order by start_time
@@ -92,6 +92,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     insert into screen_info values(#{theater_idx}, to_date(#{start_time},'yyyy-MM-dd HH24:MI:SS'),
      #{movie_idx}, #{empty_sit}, seq_screen_idx.nextval)
   </insert>
+  
+  <select id="detailSchedule" resultType="com.comnawa.mvcinema.insang.model.dto.ScreenInfoDTO">
+    select * from screen_info where screen_idx= #{idx}
+  </select>
+  
+  <update id="modSchedule">
+    update screen_info set theater_idx= #{theater_idx}, start_time= to_date(#{start_time},'yyyy-MM-dd HH24:MI:SS'),
+      movie_idx= #{movie_idx}
+    where screen_idx= #{screen_idx}
+  </update>
   
 </mapper>
 

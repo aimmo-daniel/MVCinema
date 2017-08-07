@@ -73,7 +73,15 @@ $("#insang_batch_addSchedule").click(function(){
     }
   });
 });
-
+function modMovieSchedule(idx){
+  $.ajax({
+    type: "get",
+    url: "${path}/subMenu/movie/modSchedulePage.do?idx="+idx,
+    success: function(result){
+      $("#insang_batch_searchResult").html(result);
+    }
+  }); 
+}
 </script>
   
 </body>

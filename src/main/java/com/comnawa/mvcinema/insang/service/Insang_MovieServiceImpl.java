@@ -48,4 +48,14 @@ public class Insang_MovieServiceImpl implements Insang_MovieService {
     movieDao.insertSchedule(map);
   }
   
+  @Override
+  public ScreenInfoDTO getScheduleDetail(int idx) {
+    return movieDao.getScheduleDetail(idx);
+  }
+  
+  @Override
+  public void modSchedule(Map<String, Object> map) {
+    movieDao.modSchedule(map);
+  }
+  
 }

@@ -12,13 +12,15 @@ public class ScreenInfoDTO {
   private String img_url;
   private int runtime;
   private Date end_time;
+  private int screen_idx;
 
   public ScreenInfoDTO() {
     super();
     // TODO Auto-generated constructor stub
   }
 
-  public ScreenInfoDTO(int theater_idx, Date start_time, int movie_idx, int empty_sit, String title, String img_url, int runtime) {
+  public ScreenInfoDTO(int theater_idx, Date start_time, int movie_idx, int empty_sit, String title, String img_url, int runtime,
+      int screen_idx) {
     super();
     this.theater_idx = theater_idx;
     this.start_time = start_time;
@@ -27,12 +29,13 @@ public class ScreenInfoDTO {
     this.title = title;
     this.img_url = img_url;
     this.runtime= runtime;
+    this.screen_idx= screen_idx;
   }
 
   @Override
   public String toString() {
     return "ScreenInfoDTO [theater_idx=" + theater_idx + ", start_time=" + start_time + ", movie_idx=" + movie_idx
-        + ", empty_sit=" + empty_sit + ", title=" + title + ", img_url=" + img_url + "]";
+        + ", empty_sit=" + empty_sit + ", title=" + title + ", img_url=" + img_url + ", screen_idx="+screen_idx+"]";
   }
 
   public int getTheater_idx() {
@@ -98,6 +101,14 @@ public class ScreenInfoDTO {
     cal.add(Calendar.MINUTE, runtime);
     end_time= new Date(cal.getTimeInMillis());
     return end_time;
+  }
+  
+  public int getScreen_idx() {
+    return screen_idx;
+  }
+  
+  public void setScreen_idx(int screen_idx) {
+    this.screen_idx = screen_idx;
   }
   
 }

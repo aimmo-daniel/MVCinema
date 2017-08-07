@@ -48,4 +48,14 @@ public class Insang_MovieDAOImpl implements Insang_MovieDAO{
     sqlSession.insert("admin.insertSchedule", map);
   }
   
+  @Override
+  public ScreenInfoDTO getScheduleDetail(int idx) {
+    return sqlSession.selectOne("admin.detailSchedule", idx);
+  }
+  
+  @Override
+  public void modSchedule(Map<String, Object> map) {
+    sqlSession.update("admin.modSchedule", map);
+  }
+  
 }
