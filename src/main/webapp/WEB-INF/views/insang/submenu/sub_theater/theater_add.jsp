@@ -78,8 +78,9 @@
               </div>
             </a>
           
-          <h1>${row.name}</h1>
+          <h1>${row.name}</h1> <p style="color: green;">[ ${row.seat_now}좌석 ]</p>
           <p>${row.preview}</p>
+          
         </div>
       </div>
       <% row_en= 'A'; %>

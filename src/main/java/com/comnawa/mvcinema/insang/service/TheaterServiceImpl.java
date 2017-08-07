@@ -49,8 +49,8 @@ public class TheaterServiceImpl implements TheaterService {
   }
   
   @Override
-  public void updateSit(String sit, int idx) {
-    theaterDao.updateSit(sit, idx);
+  public void updateSit(String sit, int idx, int sitCount) {
+    theaterDao.updateSit(sit, idx, sitCount);
   }
   
 }

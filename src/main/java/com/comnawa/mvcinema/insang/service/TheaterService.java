@@ -14,5 +14,5 @@ public interface TheaterService {
   public void addTheater(Map<String, Object> map);
   public void updateTheater(Map<String, Object> map);
   public List<TheaterSitEmptyDTO> getTheaterSitEmpty();
-  public void updateSit(String sit, int idx);
+  public void updateSit(String sit, int idx, int sitCount);
 }

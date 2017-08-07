@@ -127,7 +127,8 @@ public class TheaterController {
   
   @RequestMapping("/theater/updateSit.do")
   public String updateSit(HttpServletRequest request, @RequestParam String idx){
-    theaterService.updateSit(String.valueOf(request.getParameter("sit")), Integer.parseInt(idx));
+    int sitCount= String.valueOf(request.getParameter("sit")).split(",").length;
+    theaterService.updateSit(String.valueOf(request.getParameter("sit")), Integer.parseInt(idx), sitCount);
     return "/insang/test";
   }
   

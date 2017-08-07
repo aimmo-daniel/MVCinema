@@ -5,6 +5,7 @@ public class TheaterDTO {
   private String name;
   private int seat_max;
   private int seat_out;
+  private int seat_now;
   private int price;
   private String preview;
 
@@ -13,7 +14,7 @@ public class TheaterDTO {
     // TODO Auto-generated constructor stub
   }
 
-  public TheaterDTO(int idx, String name, int seat_max, int seat_out, int price, String preview) {
+  public TheaterDTO(int idx, String name, int seat_max, int seat_out, int price, String preview, int seat_now) {
     super();
     this.idx = idx;
     this.name = name;
@@ -21,12 +22,13 @@ public class TheaterDTO {
     this.seat_out = seat_out;
     this.price = price;
     this.preview= preview;
+    this.seat_now= seat_now;
   }
 
   @Override
   public String toString() {
     return "TheaterDTO [idx=" + idx + ", name=" + name + ", seat_max=" + seat_max + ", seat_out=" + seat_out + ", price=" + price
-        + ", preview="+preview+"]";
+        + ", preview="+preview+ ", seat_now="+ seat_now +"]";
   }
   
   public String getPreview() {
@@ -75,6 +77,14 @@ public class TheaterDTO {
 
   public void setPrice(int price) {
     this.price = price;
+  }
+  
+  public int getSeat_now() {
+    return seat_now;
+  }
+  
+  public void setSeat_now(int seat_now) {
+    this.seat_now = seat_now;
   }
 
 }

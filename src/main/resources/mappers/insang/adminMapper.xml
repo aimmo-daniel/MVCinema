@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   
   <select id="getTheaterList" resultType="com.comnawa.mvcinema.insang.model.dto.TheaterDTO">
-    select idx, name, seat_max, price, preview from theater order by name
+    select idx, name, seat_max, price, preview, seat_now from theater order by name
   </select>
   
   <select id="getTheaterSitList" resultType="com.comnawa.mvcinema.insang.model.dto.TheaterSitDTO">
@@ -31,11 +31,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   
   <insert id="addTheater1">
-    insert into theater values(#{idx}, #{name}, #{max}, 0, #{price}, #{preview})
+    insert into theater values(#{idx}, #{name}, #{max}, 0, #{price}, #{preview}, #{max})
   </insert>
   
   <insert id="addTheater2">
-    insert into theater_sit values(#{idx}, #{rows}, #{cols}, null, #{name})
+    insert into theater_sit values(#{idx}, #{rows}, #{cols}, #{name})
   </insert>
   
   <update id="updateTheater1">
@@ -101,6 +101,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     update screen_info set theater_idx= #{theater_idx}, start_time= to_date(#{start_time},'yyyy-MM-dd HH24:MI:SS'),
       movie_idx= #{movie_idx}
     where screen_idx= #{screen_idx}
+  </update>
+  
+  <update id="maxSitUpdate">
+    update theater set seat_now= seat_max- #{sitCount} where idx=#{idx}
   </update>
   
 </mapper>

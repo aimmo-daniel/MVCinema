@@ -58,8 +58,9 @@ public class TheaterDAOImpl implements TheaterDAO {
     return sqlSession.selectList("admin.theaterSitEmpty");
   }
   
+  @Transactional
   @Override
-  public void updateSit(String sit, int idx) {
+  public void updateSit(String sit, int idx, int sitCount) {
     sqlSession.delete("admin.deleteSit", idx);
     String[] str= sit.split(",");
     for (String t: str){
@@ -68,6 +69,10 @@ public class TheaterDAOImpl implements TheaterDAO {
       map.put("idx", idx);
       sqlSession.insert("admin.updateSit", map);
     }
+    Map<String, Object> map1= new HashMap<>();
+    map1.put("sitCount", sitCount);
+    map1.put("idx", idx);
+    sqlSession.update("admin.maxSitUpdate", map1);
   }
   
 }

@@ -21,6 +21,9 @@
 .sub_sub_lab {
 	margin-left: 50px;
 }
+.table > tbody > tr > td {
+  vertical-align: middle;
+}
 </style>
 <script>
   
@@ -102,9 +105,9 @@
     <table class="table" style="width: 100%;">
       <c:forEach var="mod_row" items="${movieList}">
         <tr onclick="showModForm(${mod_row.idx});">
-          <td><img src="http://192.168.0.69/mvcinema/img/${mod_row.img_url}" style="width: 120%; height: 100%;"></td>
-          <td style="height:320px;" align="center">
-            <p style="font-weight: bolder; vertical-align: middle; padding-top: 130px; font-size: 30px;" >${mod_row.title}</p>
+          <td><img src="http://192.168.0.69/mvcinema/img/${mod_row.img_url}" style="width: 60%; height: auto;"></td>
+          <td align="center">
+            <p style="font-weight: bolder; font-size: 30px;" >${mod_row.title}</p>
           </td>
         </tr>
       </c:forEach>
