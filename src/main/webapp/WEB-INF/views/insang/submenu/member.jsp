@@ -7,34 +7,35 @@
 
 <!-- Single Project section
 ================================================== -->
-<section id="single-project">
-   <div class="container">
+  <section id="single-project">
+    <div class="container" style="margin-bottom: 20px; transition: color 1s;" >
       <div class="row">
-
-         <div class="wow fadeInUp col-md-offset-1 col-md-3 col-sm-offset-1 col-sm-4" data-wow-delay="2.3s">
-			<div class="project-info">
-				<h4>Client</h4>
-				<p>Ananda Co.</hp>
-			</div>
-			<div class="project-info">
-				<h4>Date</h4>
-				<hp>12 June 2016</p>
-			</div>
-			<div class="project-info">
-				<h4>Category</h4>
-				<p>Branding</p>
-			</div>
-		</div>
-
-		<div class="wow fadeInUp col-md-7 col-sm-7" data-wow-delay="2.6s">
-			<p>Ut urna turpis, tempor sit amet massa vitae, pulvinar porttitor magna. Pellentesque dolor lorem, blandit ac congue non, mattis a mi. Vestibulum id accumsan neque. Aenean turpis dui, consectetur in ornare quis, sollicitudin vel mauris. Aliquam eros elit, blandit et tortor non, ornare tincidunt ante.</p>
-			<p>Sed quis quam ullamcorper, tincidunt eros vel, malesuada purus. Mauris risus erat, faucibus in aliquam ut, posuere posuere metus. Phasellus eget sem tempus, egestas nisl dapibus, aliquet elit.</p>
-			<img src="images/portfolio-img1.jpg" class="img-responsive" alt="Single Project">
-		</div>
-
-      </div>
-   </div>
-</section>
+        <div class="wow fadeInUp col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-4" data-wow-delay="0.1s">
+          <a href="#tong_statistics1">
+            <label for="zzo_addTheater1" onmouseover="sub_theater('sub_sub_mouseOver', 'over', 'sub_theater_1')"
+              onmouseout="sub_theater('sub_sub_mouseOver','out','sub_theater_1')" onclick="sub_tong_loadSub('yeame1')"
+              id="zzo_addTheater1_label">
+              <div class="project-info" id="zzo_addTheater1">
+                <h4 id="sub_theater_1">1:1문의 답변</h4>
+                <p>
+                  response contact
+                </p>
+              </div>
+            </label>
+          </a>
+          <a href="#theater_sit">
+            <label for="zzo_addTheater2" onmouseover="sub_theater('sub_sub_mouseOver','over','sub_theater_2')"
+              onmouseout="sub_theater('sub_sub_mouseOver','out','sub_theater_2')" onclick="sub_tong_loadSub('yeame2')"
+              id="zzo_addTheater2_label">
+              <div class="project-info" id="zzo_addTheater2">
+                <h4 id="sub_theater_2">아직안정함</h4>
+                <p>
+                  Timetable.
+                </p>
+              </div>
+            </label>
+          </a>
+        </div>
 
 <!-- Javascript 
 ================================================== -->

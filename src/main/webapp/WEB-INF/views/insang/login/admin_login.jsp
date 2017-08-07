@@ -206,7 +206,7 @@ $(window).bind('hashchange',function(){
               <a href="#member" id="section_member"><b>회원 관리</b></a>
             </li>
             <li>
-              <a href="#option" id="section_option"><b>매출 확인</b></a>
+              <a href="#option" id="section_option"><b>통계</b></a>
             </li>
           </ul>
         </c:if>
