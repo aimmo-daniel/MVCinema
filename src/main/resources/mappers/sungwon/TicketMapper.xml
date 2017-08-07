@@ -15,6 +15,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and to_date(#{end_date},'yyyy-MM-dd') > start_time and movie_idx=#{movie_idx}
 		order by start_time
 	</select>
+	<select id="selectMovie" resultType="TicketDTO">
+	  	select title,age,img_url from movie where idx=#{movie_idx}
+	</select>
+	<select id="selectTime" resultType="TicketDTO">
+		select start_time,t.name t_name
+		from screen_info s, theater t
+		where  s.theater_idx=t.idx  and screen_idx=#{screen_idx}
+	</select>
 </mapper>
 
 

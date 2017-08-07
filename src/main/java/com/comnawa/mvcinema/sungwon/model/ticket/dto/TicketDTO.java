@@ -10,6 +10,7 @@ public class TicketDTO {
 	private int people; // 관람객
 	private Date release_date; // 개봉일
 	private int runtime; // 영화시간
+	private String img_url;
 	/*-------------------영화 상영  정보------------------------------*/
 	private int theater_idx; // 상영관 정보
 	private Date start_time; // 상영 시간
@@ -70,6 +71,14 @@ public class TicketDTO {
 
 	public void setRuntime(int runtime) {
 		this.runtime = runtime;
+	}
+
+	public String getImg_url() {
+		return img_url;
+	}
+
+	public void setImg_url(String img_url) {
+		this.img_url = img_url;
 	}
 
 	public int getTheater_idx() {
@@ -164,9 +173,9 @@ public class TicketDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TicketDTO(int movie_idx, String title, int age, int people, Date release_date, int runtime, int theater_idx,
-			Date start_time, String start_date, String end_date, int empty_sit, int screen_idx, int t_idx,
-			String t_name, int seat_max, int seat_out, int price) {
+	public TicketDTO(int movie_idx, String title, int age, int people, Date release_date, int runtime, String img_url,
+			int theater_idx, Date start_time, String start_date, String end_date, int empty_sit, int screen_idx,
+			int t_idx, String t_name, int seat_max, int seat_out, int price) {
 		super();
 		this.movie_idx = movie_idx;
 		this.title = title;
@@ -174,6 +183,7 @@ public class TicketDTO {
 		this.people = people;
 		this.release_date = release_date;
 		this.runtime = runtime;
+		this.img_url = img_url;
 		this.theater_idx = theater_idx;
 		this.start_time = start_time;
 		this.start_date = start_date;
@@ -190,8 +200,8 @@ public class TicketDTO {
 	@Override
 	public String toString() {
 		return "TicketDTO [movie_idx=" + movie_idx + ", title=" + title + ", age=" + age + ", people=" + people
-				+ ", release_date=" + release_date + ", runtime=" + runtime + ", theater_idx=" + theater_idx
-				+ ", start_time=" + start_time + ", start_date=" + start_date + ", end_date=" + end_date
+				+ ", release_date=" + release_date + ", runtime=" + runtime + ", img_url=" + img_url + ", theater_idx="
+				+ theater_idx + ", start_time=" + start_time + ", start_date=" + start_date + ", end_date=" + end_date
 				+ ", empty_sit=" + empty_sit + ", screen_idx=" + screen_idx + ", t_idx=" + t_idx + ", t_name=" + t_name
 				+ ", seat_max=" + seat_max + ", seat_out=" + seat_out + ", price=" + price + "]";
 	}

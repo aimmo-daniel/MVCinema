@@ -30,4 +30,14 @@ public class TicketServiceImpl implements TicketService {
 		return ticketDao.screen_time(dto);
 	}
 
+	@Override
+	public TicketDTO selectMovieInfo(int movie_idx) {
+		return ticketDao.selectMovieInfo(movie_idx);
+	}
+
+	@Override
+	public TicketDTO selectTime(int screen_idx) {
+		return ticketDao.selectTime(screen_idx);
+	}
+
 }

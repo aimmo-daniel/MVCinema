@@ -34,6 +34,12 @@ public class MemberController {
 	public String login_page(){
 		return "sungwon/member/login";
 	}
+	@RequestMapping("s_login_page.do")
+	public ModelAndView s_login_page(@RequestParam String screen_idx,ModelAndView mav){
+		mav.setViewName("sungwon/member/second_login");
+		mav.addObject("screen_idx",screen_idx);
+		return mav;
+	}
 	
 	@RequestMapping("signup_page.do")
 	public String signup() {
@@ -111,6 +117,23 @@ public class MemberController {
 		}
 		return mav;
 	}
+	
+	@RequestMapping("login2.do")
+	public ModelAndView login2(@ModelAttribute MemberDTO dto,@RequestParam String screen_idx, HttpSession session) {
+		boolean result = memberService.login(dto, session);
+		ModelAndView mav = new ModelAndView();
+		if (result) {
+			mav.setViewName("sungwon/member/second_login");
+			mav.addObject("message", "success");
+			mav.addObject("screen_idx",screen_idx);
+		} else {
+			mav.setViewName("sungwon/member/second_login");
+			mav.addObject("message", "error");
+			mav.addObject("screen_idx",screen_idx);
+		}
+		return mav;
+	}
+	
 	
 	@ResponseBody
 	@RequestMapping("findid.do")
