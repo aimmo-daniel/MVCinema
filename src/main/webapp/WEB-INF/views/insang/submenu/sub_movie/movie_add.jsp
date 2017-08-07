@@ -24,10 +24,10 @@
 .table > tbody > tr > td {
   vertical-align: middle;
 }
+#zzo__modMovie_div {
+  display: none;
+}
 </style>
-<script>
-  
-</script>
 </head>
 <body>
 
@@ -116,7 +116,7 @@
     <hr>
   </div>
   
-    <div id="sub_movie_modMovie_div_div" style="visibility: hidden;">
+    <div id="zzo__modMovie_div">
       <form name="form2" method="post" action="${path}/subMenu/movie/modMovie.do" enctype="multipart/form-data">
         <table class="table table-default">
           <tr>
@@ -186,8 +186,8 @@
      * 영화관리창 영화 상세정보 페이지 벨류 등록
      */
 
+    $("#zzo__modMovie_div").show();
     $("#sub_movie_modMovie_div").css("display", "none");
-    $("#sub_movie_modMovie_div_div").css("visibility", "visible");
     $.ajax({
       type : "get",
       url : '${path}/subMenu/movie/movieDetail.do?idx=' + idx,
@@ -345,7 +345,7 @@
 
   $("#mod_btnCancel").click(function() {
     $("#sub_movie_modMovie_div").css("display", "block");
-    $("#sub_movie_modMovie_div_div").css("visibility", "hidden");
+    $("#zzo__modMovie_div").hide();
     fnMove();
   })
 

@@ -107,6 +107,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     update theater set seat_now= seat_max- #{sitCount} where idx=#{idx}
   </update>
   
+  <update id="emptySitUpdate">
+    UPDATE screen_info SET empty_sit= (select seat_max from theater where idx=#{idx})-#{sitCount} 
+    WHERE theater_idx=#{idx}
+  </update>
+  
 </mapper>
 
 

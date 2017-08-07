@@ -295,18 +295,18 @@ public class MovieController {
     int theaterIDX= Integer.parseInt(request.getParameter("theaterIDX"));
     String starttime= request.getParameter("starttime")+":00";
     starttime= starttime.substring(0, 10)+" "+starttime.substring(10);
-    int seat_max=0;
+    int seat_now=0;
     List<TheaterDTO> lists= theaterService.getTheaterList();
     for (TheaterDTO dto: lists){
       if (dto.getIdx() == theaterIDX){
-        seat_max= dto.getSeat_max();
+        seat_now= dto.getSeat_max();
       }
     }
     Map<String, Object> map= new HashMap<>();
     map.put("movie_idx", movieIDX);
     map.put("theater_idx", theaterIDX);
     map.put("start_time", starttime);
-    map.put("empty_sit", seat_max);
+    map.put("empty_sit", seat_now);
     movieService.insertSchedule(map);
     return "/insang/test";
   }

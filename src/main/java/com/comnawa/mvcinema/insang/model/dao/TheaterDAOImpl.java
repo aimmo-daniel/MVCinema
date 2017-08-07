@@ -73,6 +73,7 @@ public class TheaterDAOImpl implements TheaterDAO {
     map1.put("sitCount", sitCount);
     map1.put("idx", idx);
     sqlSession.update("admin.maxSitUpdate", map1);
+    sqlSession.update("admin.emptySitUpdate",map1);
   }
   
 }

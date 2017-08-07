@@ -84,9 +84,8 @@
   $("#btn_save").click(function(){
     var param= "sit="+$("#add_seat_empty").val()+"&idx="+$("#idxx").val();
     $.ajax({
-      type: "post",
-      data: param,
-      url: "${path}/subMenu/theater/updateSit.do",
+      type: "get",
+      url: "${path}/subMenu/theater/updateSit.do?"+param,
       success: function(){
         alert("좌석 배치에 성공하였습니다.");
         location.href="${path}/admin";

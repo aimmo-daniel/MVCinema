@@ -200,10 +200,10 @@ $(window).bind('hashchange',function(){
               <a href="#theater" id="section_theater"><b>상영관 관리</b></a>
             </li>
             <li>
-              <a href="#member" id="section_member"><b>회원 관리</b></a>
+              <a href="#movie" id="section_movie"><b>영화 관리</b></a>
             </li>
             <li>
-              <a href="#movie" id="section_movie"><b>영화 관리</b></a>
+              <a href="#member" id="section_member"><b>회원 관리</b></a>
             </li>
             <li>
               <a href="#option" id="section_option"><b>매출 확인</b></a>
@@ -238,6 +238,6 @@ $(window).bind('hashchange',function(){
   <!-- insang Javascript -->
   <script src="${path}/subMenu/resources/template/js/zzo_main.js?v1" charset="utf-8"></script>
   <script src="${path}/subMenu/resources/template/js/zzo_main_theater.js?v2" charset="utf-8"></script>
-  <script src="${path}/subMenu/resources/template/js/zzo_main_movie.js?v2" charset="utf-8"></script>
+  <script src="${path}/subMenu/resources/template/js/zzo_main_movie.js?v3" charset="utf-8"></script>
 </body>
 </html>
