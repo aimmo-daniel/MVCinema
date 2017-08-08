@@ -206,7 +206,7 @@ $(window).bind('hashchange',function(){
               <a href="#movie" id="section_movie"><b>영화 관리</b></a>
             </li>
             <li>
-              <a href="#member" id="section_member"><b>회원 관리</b></a>
+              <a href="#member" id="section_member"><b>고객센터 관리</b></a>
             </li>
             <li>
               <a href="#option" id="section_option"><b>통계</b></a>

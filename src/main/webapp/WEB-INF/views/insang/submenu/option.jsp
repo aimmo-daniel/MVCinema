@@ -26,18 +26,6 @@
               </div>
             </label>
           </a>
-          <a href="#theater_sit">
-            <label for="zzo_addTheater2" onmouseover="sub_theater('sub_sub_mouseOver','over','sub_theater_2')"
-              onmouseout="sub_theater('sub_sub_mouseOver','out','sub_theater_2')" onclick="sub_tong_loadSub('yeame2')"
-              id="zzo_addTheater2_label">
-              <div class="project-info" id="zzo_addTheater2">
-                <h4 id="sub_theater_2">아직안정함</h4>
-                <p>
-                  Timetable.
-                </p>
-              </div>
-            </label>
-          </a>
         </div>
 
         <div class="wow fadeInUp col-md-8 col-sm-8" data-wow-delay="0.3s" id="sub_movie_contents">

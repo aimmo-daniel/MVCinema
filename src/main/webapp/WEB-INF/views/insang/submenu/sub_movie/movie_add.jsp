@@ -143,7 +143,7 @@
             <td>장르</td>
             <td colspan="2">
               <c:forEach var="genre" items="${genreList}">
-                <label style="font-weight: normal;"> <input type="checkbox" id="mod_genre${genre.genre}" value="${genre.genre}">
+                <label style="font-weight: normal;"> <input type="checkbox" id="mod_genre${genre.idx}" value="${genre.genre}">
                   ${genre.genre} &nbsp;
                 </label>
               </c:forEach> <input type="hidden" name="genre" id="mod_genreResult"></td>
@@ -195,24 +195,28 @@
       type : "get",
       url : '${path}/subMenu/movie/movieDetail.do?idx=' + idx,
       success : function(result) {
-        $("#mod_idx").val(result.idx);
-        $("#mod_title").val(result.title);
-        $("#mod_age").val(result.age);
-        $("#mod_director").val(result.director);
-        $("#mod_actors").val(result.actors);
-        $("#mod_content").val(result.content);
-        $("#mod_release_date").val(changeDate(result.release_date));
-        $("#mod_runtime").val(result.runtime);
-        $("#mod_video").html((result.preview != null) ? result.preview : '영상없음');
+        $("#mod_idx").val(result.dto.idx);
+        $("#mod_title").val(result.dto.title);
+        $("#mod_age").val(result.dto.age);
+        $("#mod_director").val(result.dto.director);
+        $("#mod_actors").val(result.dto.actors);
+        $("#mod_content").val(result.dto.content);
+        $("#mod_release_date").val(changeDate(result.dto.release_date));
+        $("#mod_runtime").val(result.dto.runtime);
+        $("#mod_video").html((result.dto.preview != null) ? result.dto.preview : '영상없음');
         $("#mod_img").attr("src",
-            "http://192.168.0.69/mvcinema/img/" + result.img_url);
-        $("#mod_img_url").val(result.img_url);
-        $("#mod_preview").val(result.preview);
+            "http://192.168.0.69/mvcinema/img/" + result.dto.img_url);
+        $("#mod_img_url").val(result.dto.img_url);
+        $("#mod_preview").val(result.dto.preview);
 
         var genres = [];
-        genres = result.genre.split(',');
+        genres = result.dto.genre.split(',');
         for (var i = 0; i < genres.length; i++) {
-          $("#mod_genre" + genres[i]).prop("checked", true);
+          for (var k=0; k<result.genreList.length; k++){
+            if (genres[i] == result.genreList[k].genre){
+              $("#mod_genre" + result.genreList[k].idx).prop("checked", true);
+            }
+          }
         }
         fnMove();
       }
@@ -318,6 +322,9 @@
 
   $("#sub_movie_mod_lab").click(function() { // 영화관리 div 열고닫기
     sub_movie_addMovie_div('sub_movie_modMovie_div');
+    for (var i = 1; i <= parseInt('${genreSize}', 10); i++) {
+      $("#mod_genre" + i).prop("checked", false);
+    }
   });
 
   $("#btnCancel").click(function() { // 취소버튼 클릭
@@ -363,6 +370,9 @@
   $("#mod_btnCancel").click(function() {
     $("#sub_movie_modMovie_div").css("display", "block");
     $("#zzo__modMovie_div").hide();
+    for (var i = 1; i <= parseInt('${genreSize}', 10); i++) {
+      $("#mod_genre" + i).prop("checked", false);
+    }
     fnMove();
   })
 

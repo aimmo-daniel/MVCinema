@@ -128,14 +128,15 @@ public class MovieController {
 
   @ResponseBody
   @RequestMapping("/movie/movieDetail.do")
-  public Insang_MovieDTO movieDetail(int idx) {
-    Insang_MovieDTO select = null;
+  public Map<String, Object> movieDetail(int idx) {
+    Map<String, Object> map= new HashMap<>();
     for (Insang_MovieDTO foo : movieService.getMovieList()) {
       if (foo.getIdx() == idx) {
-        select = foo;
+        map.put("dto", foo);
       }
     }
-    return select;
+    map.put("genreList", movieService.getGenreList());
+    return map;
   }
   
   @RequestMapping("/movie/delMovie.do")
