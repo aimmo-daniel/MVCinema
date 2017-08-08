@@ -59,7 +59,6 @@
                                 </c:if>
                               </c:forEach>
                               <c:if test="${emptyResult==false}">
-                                <input type="hidden" value="<%= (int)row_en-64 %>">
                                 ${cols}
                               </c:if>
                           </td>

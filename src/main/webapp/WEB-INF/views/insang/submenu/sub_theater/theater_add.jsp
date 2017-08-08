@@ -48,10 +48,12 @@
                       <th>&nbsp;</th>
                     </tr>
                     <c:forEach var="rows" begin="1" end="${theaterSitList[status.index].seat_row}">
-                      <tr>
-                        <td>&nbsp;</td>
-                        <td><font color="lightgray"><b><%=row_en %></b></font></td>
-                        <c:forEach var="cols" begin="1" end="${theaterSitList[status.index].seat_col}">
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td>
+                        <font color="lightgray"><b><%=row_en%></b></font>
+                      </td>
+                      <c:forEach var="cols" begin="1" end="${theaterSitList[status.index].seat_col}">
                           <td style="width: 30px;">
                             <c:set var="emptyResult" value="false"/>
                             <c:set value="${pageScope.row_en}${cols}" var="sit_empty"/>
@@ -61,18 +63,21 @@
                                 </c:if>
                               </c:forEach>
                               <c:if test="${emptyResult==false}">
-                                <input type="hidden" value="<%= (int)row_en-64 %>">
                                 ${cols}
                               </c:if>
                           </td>
                         </c:forEach>
-                        <td>&nbsp;</td>
-                      </tr>
-                      <%
+                      <td>&nbsp;</td>
+                    </tr>
+                    <%
                       row_en++;
+                    pageContext.setAttribute("row_en", String.valueOf(row_en).toLowerCase());
+                    %>
+                  </c:forEach>
+                    <%
+                      row_en= 'A';
                       pageContext.setAttribute("row_en", String.valueOf(row_en).toLowerCase());
-                      %>
-                    </c:forEach>
+                    %>
                   </table>
                 </label>
               </div>
