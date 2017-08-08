@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
+	<!-- 배우목록 이미지 -->
 	<img src="${act_img_ad}/${dto.act_img_url}">
 </body>
 </html>

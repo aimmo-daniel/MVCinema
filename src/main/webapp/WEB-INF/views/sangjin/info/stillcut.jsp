@@ -8,6 +8,7 @@
 </head>
 <body>
 <table>
+		<!-- 영화 스틸컷 -->
 		<c:forEach var="row" items="${map.list}" varStatus="status">
 				<td><img src="${stc}/${row.img_url}.jpg"></td>
 		</c:forEach>

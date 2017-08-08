@@ -31,5 +31,13 @@ public class MemoController {
 		return "redirect:/info/detail/"+dto.getIdx();
 	}
 
+	@RequestMapping("delete.do")
+	public String delete(HttpServletRequest request, int comment_num, @ModelAttribute MemoDTO dto) throws Exception{
+		dto.setIdx(Integer.parseInt(request.getParameter("idx")));
+		detailService.delete(comment_num);
+		return "redirect:/info/detail/"+dto.getIdx();
+	}
+	
+
 	
 }

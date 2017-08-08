@@ -34,10 +34,14 @@ public class DetailServiceImpl implements DetailService {
 		return detailDao.countMemo(idx);
 	}
 
-/*	@Override
-	public List<MemoDTO> memolist(int idx) {
-		return detailDao.memolist(idx);
-	}*/
-	
+	@Override
+	public void delete(int comment_num) {
+		detailDao.delete(comment_num);
+	}
+
+	@Override
+	public void update(MemoDTO dto) {
+		detailDao.update(dto);
+	}
 
 }

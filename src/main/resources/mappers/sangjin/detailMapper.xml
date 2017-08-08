@@ -11,14 +11,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select s.img_url from movie m, stillcut s where m.idx=s.idx and m.idx=#{idx}
 	</select>
 	
-	<insert id="memo">
+	<insert id="insertmemo">
 		insert into memo (idx, comment_num, userid, memo, score) 
 		values (#{idx}, memo_seq.nextval, #{userid}, #{memo}, #{score})
 	</insert>
 	
+	<update id="updatememo">
+		update memo set memo=#{memo}, score=#{score} where comment_num=#{comment_num}
+	</update>
+	
+	<delete id="deletememo">
+		delete from memo where comment_num=#{comment_num}
+	</delete>
+	
 	<select id="memolist" resultType="com.comnawa.mvcinema.sangjin.model.dto.MemoDTO">
 		<include refid="paging_header" />
-		select comment_num, score, userid, memo, post_date 
+		select idx, comment_num, score, userid, memo, post_date 
 		from memo where idx=#{idx} order by post_date desc
 		<include refid="paging_footer" />
 	</select>

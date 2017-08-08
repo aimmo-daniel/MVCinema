@@ -98,7 +98,7 @@ if (typeof jQuery === 'undefined') {
 
   Alert.VERSION = '3.3.2'
 
-  Alert.TRANSITION_DURATION = 150
+  Alert.TRANSITION_DURATION = 100
 
   Alert.prototype.close = function (e) {
     var $this    = $(this)
@@ -309,7 +309,7 @@ if (typeof jQuery === 'undefined') {
     this.options     = options
     this.paused      =
     this.sliding     =
-    this.interval    =
+    this.interval    = 500
     this.$active     =
     this.$items      = null
 
@@ -322,10 +322,10 @@ if (typeof jQuery === 'undefined') {
 
   Carousel.VERSION  = '3.3.2'
 
-  Carousel.TRANSITION_DURATION = 600
+  Carousel.TRANSITION_DURATION = 100
 
   Carousel.DEFAULTS = {
-    interval: 5000,
+    interval: 500,
     pause: 'hover',
     wrap: true,
     keyboard: true
@@ -502,7 +502,7 @@ if (typeof jQuery === 'undefined') {
     if (!$target.hasClass('carousel')) return
     var options = $.extend({}, $target.data(), $this.data())
     var slideIndex = $this.attr('data-slide-to')
-    if (slideIndex) options.interval = false
+    if (slideIndex) options.interval = 500
 
     Plugin.call($target, options)
 
@@ -558,7 +558,7 @@ if (typeof jQuery === 'undefined') {
 
   Collapse.VERSION  = '3.3.2'
 
-  Collapse.TRANSITION_DURATION = 350
+  Collapse.TRANSITION_DURATION = 100
 
   Collapse.DEFAULTS = {
     toggle: true,

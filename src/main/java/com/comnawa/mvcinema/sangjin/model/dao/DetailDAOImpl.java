@@ -23,13 +23,8 @@ public class DetailDAOImpl implements DetailDAO {
 
 	@Override
 	public void insert(MemoDTO dto) {
-		sqlSession.insert("detail.memo", dto);
+		sqlSession.insert("detail.insertmemo", dto);
 	}
-
-/*	@Override
-	public List<MemoDTO> memolist(int idx) {
-		return sqlSession.selectList("detail.memolist", idx);
-	}*/
 	
 	@Override
 	public List<MemoDTO> memolist(int start, int end, int idx) {
@@ -43,6 +38,16 @@ public class DetailDAOImpl implements DetailDAO {
 	@Override
 	public int countMemo(int idx) {
 		return sqlSession.selectOne("detail.countMemo", idx);
+	}
+
+	@Override
+	public void delete(int comment_num) {
+		sqlSession.delete("detail.deletememo", comment_num);
+	}
+
+	@Override
+	public void update(MemoDTO dto) {
+		sqlSession.update("detail.updatememo", dto);
 	}
 
 }

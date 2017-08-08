@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
+	<!-- 영화 줄거리 -->
 	<% pageContext.setAttribute("newLineChar", "\n"); %>
 	<!-- 공백문자 처리 -->
 	<c:set var="str" value="${fn:replace(dto.content,'  ','&nbsp;&nbsp;') }" />

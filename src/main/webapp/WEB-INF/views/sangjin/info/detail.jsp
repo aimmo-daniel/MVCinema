@@ -11,10 +11,12 @@
 <!DOCTYPE html>
 <html>
 <script>
+//페이지 로드시 줄거리 출력
 $(document).ready(function() {
 	content();
 });
 
+//줄거리탭 ajax
 function content() {
 	var idx=$("#movie_idx").val();
 	$("#tab1").addClass("active");
@@ -30,6 +32,7 @@ function content() {
 	});
 }
 
+//배우탭 ajax
 function actors() {
 	var idx=$("#movie_idx").val();
 	$("#tab1").removeClass("active");
@@ -45,6 +48,7 @@ function actors() {
 	});
 }
 
+//스틸컷탭 ajax
 function stillcut() {
 	var idx=$("#movie_idx").val();
 	$("#tab1").removeClass("active");
@@ -60,10 +64,7 @@ function stillcut() {
 	});
 }
 
-function buy_ticket(idx){
-	location.href="${path}/ticket/movie_ticket_page.do?movie_idx="+idx;
-}
-
+//예고편탭 ajax
 function video() {
 	var idx=$("#movie_idx").val();
 	$("#tab1").removeClass("active");
@@ -79,19 +80,21 @@ function video() {
 	});
 }
 
+//예매하기버튼 하이퍼링크
+function buy_ticket(idx){
+	location.href="${path}/ticket/movie_ticket_page.do?movie_idx="+idx;
+}
+
+
 </script>
-<style>
-/* #bg {
-	background-image: url('../../sangjin/resource/image/bg.jpg');
-	background-size: cover;
-} */
-</style>
 <head>
+<!-- 메뉴바 -->
 <%@ include file="../../sangjin/home/loginbar.jsp"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>영화 상세정보</title>
 </head>
 <body>
+	<!-- 영화 상세정보 표시 -->
  	<div class="wrap-movie-chart" id="bg" style="padding-right: 200px; padding-left: 200px;">
 		<div class="tit-heading-wrap">
 			<h3>영화 상세</h3>
@@ -115,6 +118,7 @@ function video() {
 				<b>누적관객 :</b> <fmt:formatNumber value="${dto.people}" type="number"/>명 (<%=today%> 기준) &nbsp;&nbsp;&nbsp;
 			</div>
 		</div>
+		<!-- ajax탭 -->
 		<div>
 			<ul class="nav nav-tabs">
 			  <li id="tab1"><a href='javascript:void(0);' onclick='content();'>줄거리</a></li>
@@ -123,7 +127,7 @@ function video() {
 			  <li id="tab4"><a href='javascript:void(0);' onclick='video();'>예고편</a></li>
 			</ul>
 		</div>
-		<!-- 하단 내용 출력 -->
+		<!-- ajax 결과를 출력할 div -->
 		<div style="margin-top: 40px; margin-bottom: 100px; margin-left: 50px;" id="bottom_content"></div>
 		<!-- 댓글폼 -->
 		<div style="margin-left: 50px;"><%@ include file="../../sangjin/info/memo.jsp"%></div>

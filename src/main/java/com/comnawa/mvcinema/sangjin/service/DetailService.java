@@ -11,4 +11,6 @@ public interface DetailService {
 	/*public List<MemoDTO> memolist(int idx);*/
 	public List<MemoDTO> memolist(int start, int end, int idx);
 	public int countMemo(int idx);
+	public void delete(int comment_num);
+	public void update(MemoDTO dto);
 }
