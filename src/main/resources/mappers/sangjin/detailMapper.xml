@@ -11,6 +11,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select s.img_url from movie m, stillcut s where m.idx=s.idx and m.idx=#{idx}
 	</select>
 	
+	<select id="memo_just_one" resultType="String">
+		select userid from memo where userid=#{userid} and idx=#{idx}
+	</select>
+	
 	<insert id="insertmemo">
 		insert into memo (idx, comment_num, userid, memo, score) 
 		values (#{idx}, memo_seq.nextval, #{userid}, #{memo}, #{score})

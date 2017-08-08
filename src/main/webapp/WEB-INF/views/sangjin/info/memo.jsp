@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="../../include/header.jsp"%>
 <script src="${path}/sangjin/resource/js/jquery-1.11.3.min.js"></script>
-<script src="${path}/sangjin/resource/js/star.js"></script>
+<script src="${path}/sangjin/resource/js/star.js?v2"></script>
 <style>
 /* 평점 스타일 */
 .star-input>.input,
@@ -76,38 +76,6 @@ $(function(){
 			$('#think').html("너무 멋진 영화였어요!");
 		}
 	});
-	$("input[name=star-input2]").click(function(){
-		var radioval2=$("input[name=star-input2]:checked").val();
-		if(radioval2 == 1){
-			$('#think2').html("괜히 봤어요");
-		}
-		if(radioval2 == 2){
-			$('#think2').html("기대하진 말아요");
-		}
-		if(radioval2 == 3){
-			$('#think2').html("무난했어요");
-		}
-		if(radioval2 == 4){
-			$('#think2').html("기대해도 좋아요!");
-		}
-		if(radioval2 == 5){
-			$('#thin2k').html("너무 멋진 영화였어요!");
-		}
-	});
-	
-	//한줄평 작성
-	var frm1 = $('#form1');
-    frm1.submit(function (e) {
-        e.preventDefault();
-        $.ajax({
-            type: frm1.attr('method'),
-            url: frm1.attr('action'),
-            data: frm1.serialize(),
-            success: function (data) {
-            	location.reload();
-            },
-        });
-    });
 	
     //한줄평 수정/삭제후 ajax새로고침
 	var frm2 = $('#form2');
@@ -125,40 +93,127 @@ $(function(){
     
 });
 
-//한줄평 수정
-function update_memo(comment_num){
-	alert(comment_num);
+function check_star(score2, comment_num){
+	$("#q"+score2+comment_num).attr("checked",true);
+	if(score2 == 1){
+		$('#think2'+comment_num).html("괜히 봤어요");
+	}
+	if(score2 == 2){
+		$('#think2'+comment_num).html("기대하진 말아요");
+	}
+	if(score2 == 3){
+		$('#think2'+comment_num).html("무난했어요");
+	}
+	if(score2 == 4){
+		$('#think2'+comment_num).html("기대해도 좋아요!");
+	}
+	if(score2 == 5){
+		$('#think2'+comment_num).html("너무 멋진 영화였어요!");
+	}
+}
+
+//한줄평 작성
+function insert_memo(){
+	var score=$("input[name=star-input]:checked").val();
+	var memo=document.form1.memo.value;
+	var idx=$('#mv_idx').val();
+	var userid=$('#userid').val();
+	var param="userid="+userid+"&idx="+idx;
+	var params="score="+score+"&memo="+memo+"&idx="+idx+"&userid="+userid;
+	if(score == undefined){
+		alert("평점을 적용해 주세요.");
+		return;
+	}
+	if(document.form1.memo.value == ""){
+		alert("한줄평을 입력해 주세요.");
+		return;
+	}
+	if(document.form1.memo.value.length > 50){
+		alert("한줄평은 50자 내로 입력해주세요.");
+		return;
+	}
+	$.ajax({
+		type: "post",
+		url: "${path}/memo/check_id.do",
+		data: param,
+		success: function(result){
+			if(result.userid == userid){
+				alert("한줄평은 한번만 등록할 수 있습니다.");
+				$('#memo').val("");
+			}else{
+				$.ajax({
+					type: "post",
+					url: "${path}/memo/insert.do",
+					data: params,
+					success: function(){
+						location.reload();
+					}
+				});
+			}
+		}
+	});
+}
+
+//한줄평 수정 셋팅
+function update_set(comment_num, score){
 	$('#show_toggle'+comment_num).hide();
 	$('#hide_toggle'+comment_num).show();
 	$('#memo').attr("disabled",true);
 	$('#submitbutton').attr("disabled",true);
-	
-	var star=document.getElementsByName('star-input2');
-	for(var i=0; i<star.length; i++){
-		if(star[i].checked == true){
-			alert(star[i].value);
-		}
+	var star=parseInt(score);
+	$("#q"+star+comment_num).attr("checked",true);
+	if(star == 1){
+		$('#think2'+comment_num).html("괜히 봤어요");
+	}
+	if(star == 2){
+		$('#think2'+comment_num).html("기대하진 말아요");
+	}
+	if(star == 3){
+		$('#think2'+comment_num).html("무난했어요");
+	}
+	if(star == 4){
+		$('#think2'+comment_num).html("기대해도 좋아요!");
+	}
+	if(star == 5){
+		$('#think2'+comment_num).html("너무 멋진 영화였어요!");
 	}
 }
 
-//한줄평 수정/삭제
-function submitTest(mode,comment_num){
-	if(mode == "update"){
-		form2.action = "${path}/memo/update.do?comment_num="+comment_num;
-		form2.submit();
-	}else if(mode == "delete"){
-		if(confirm('한줄평을 삭제하시겠습니까?')){
-			form2.action = "${path}/memo/delete.do?comment_num="+comment_num;
-			form2.submit();
-		}else{
-			return false;
+//한줄평 수정
+function update_memo(comment_num, idx, star){
+	var memo=$("#memo2"+comment_num).val();
+	var score=$("#score2"+comment_num).val();
+	if(score == ""){
+		score=star;
+	}
+	var param="memo="+memo+"&score="+score+"&comment_num="+comment_num+"&idx="+idx;
+	$.ajax({
+		type: "post",
+		url: "${path}/memo/update.do",
+		data: param,
+		success: function(){
+			location.reload();
 		}
+	});	
+}
+
+//한줄평 삭제 
+function delete_memo(comment_num){
+	if(confirm('한줄평을 삭제하시겠습니까?')){
+		form2.action = "${path}/memo/delete.do?comment_num="+comment_num;
+		form2.submit();
+	}else{
+		return false;
 	}
 }
 
 //hidden 태그 score에 평점 적용
 function set_score(score){
  	$('#score').val(score);
+}
+function set_score2(score2,comment_num){
+	$('#score2'+comment_num).val(score2);
+	check_star(score2, comment_num);
 }
 
 //댓글 페이지 넘김
@@ -167,26 +222,13 @@ function list(page) {
 	location.href="${path}/info/detail/"+idx+"?page="+page;
 }
 
-//평점 등록전 체크
-function check(){
-	var star=$("input[name=star-input]:checked").val();
-	if(star == undefined){
-		alert("평점을 적용해 주세요.");
-		return false;
-	}
-	if(document.form1.memo.value == ""){
-		alert("한줄평을 입력해 주세요.");
-		return false;
-	}
-}
-
 </script>
 </head>
 <body>
 <h2>평점/한줄평</h2>
 <hr>
 <!-- form1 한줄평 작성폼 -->
-<form name="form1" id="form1" method="post" action="${path}/memo/insert.do" onsubmit="return check();">
+<form name="form1" id="form1" method="post">
 <input id="mv_idx" name="mv_idx" type="hidden" value="${dto.idx}"/>
 <input id="userid" name="userid" type="hidden" value="${sessionScope.dto.userid}"/>
 <span class="star-input">
@@ -211,8 +253,8 @@ function check(){
 		<c:if test="${sessionScope.dto.userid != null}">
 			<td><textarea style="width:750px; height:85px; 
 						resize: none;" id="memo" name="memo"></textarea></td>
-			<td><input type="submit" value="등록" style="width:85px; height:85px;"
-						 class="btn btn-primary" id="submitbutton"></td>
+			<td><button type="button" style="width:85px; height:85px;" onclick="insert_memo();"
+						 class="btn btn-primary" id="submitbutton">등록</button></td>
 		</c:if>
  		<c:if test="${sessionScope.dto.userid == null}">
 			<td><textarea style="width:750px; height:85px;
@@ -231,7 +273,7 @@ function check(){
 	<c:forEach var="memo" items="${map.list}">
 	<tr id="show_toggle${memo.comment_num}" style="display: block;">
 		<!-- 평점에 따라 별갯수과 메시지 출력 -->
-		<td style="width:100px;">
+		<td style="width:150px;">
 			<c:forEach begin="1" end="${memo.score}">
 				<b style="color: red;">★</b>
 			</c:forEach>
@@ -252,19 +294,19 @@ function check(){
 			<span style="color: green; font-size:11px;">너무 멋진 영화였어요!</span>
 			</c:if>
 		</td>
-		<td>
+		<td style="width:680px;">
 			<span style="color: blue; font-size: 15px;">${memo.userid}</span>
-			<span style="font-size: 12px;"><fmt:formatDate value="${memo.post_date}" pattern="yyyy.MM.dd"/></span> 
+			<span style="font-size: 12px;"><fmt:formatDate value="${memo.post_date}" pattern="yyyy.MM.dd HH:mm"/></span> 
 			<br>
 			<span style="color: black;">${memo.memo}</span>
 			<input type="hidden" id="idx" name="idx" value="${memo.idx}">
 			<input type="hidden" id="comment_num" name="comment_num" value="${memo.comment_num}">
 			<!-- 본인이 작성한 한줄평만 수정/삭제 가능 -->
 			<c:if test="${sessionScope.dto.userid == memo.userid}">
-			<button type="button" class="btn btn-warning btn-xs" onClick="update_memo('${memo.comment_num}');">
+			<button type="button" class="btn btn-warning btn-xs" onClick="update_set('${memo.comment_num}','${memo.score}');">
   				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 			</button>
-			<button type="submit" class="btn btn-danger btn-xs" onClick="submitTest('delete','${memo.comment_num}')">
+			<button type="submit" class="btn btn-danger btn-xs" onClick="delete_memo('${memo.comment_num}')">
   				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 			</button>
 			</c:if>
@@ -276,24 +318,24 @@ function check(){
 		<td colspan="2">
 		<span class="star-input2">
 			<span class="input2">
-		    	<input type="radio" name="star-input2" value="1" id="q1" onclick="set_score(1)">
-		    	<label for="q1">1</label>
-		    	<input type="radio" name="star-input2" value="2" id="q2" onclick="set_score(2)">
-		    	<label for="q2">2</label>
-		    	<input type="radio" name="star-input2" value="3" id="q3" onclick="set_score(3)">
-		    	<label for="q3">3</label>
-		    	<input type="radio" name="star-input2" value="4" id="q4" onclick="set_score(4)">
-		    	<label for="q4">4</label>
-		    	<input type="radio" name="star-input2" value="5" id="q5" onclick="set_score(5)">
-		    	<label for="q5">5</label>
-		 	 	<input type="hidden" id="score2" name="score2" value="">
+		    	<input type="radio" name="star-input2" value="1"  id="q1${memo.comment_num}">
+		    	<label for="q1" onclick="set_score2('1','${memo.comment_num}')">1</label>
+				<input type="radio" name="star-input2" value="2"  id="q2${memo.comment_num}">
+		    	<label for="q2" onclick="set_score2('2','${memo.comment_num}')">2</label>
+		    	<input type="radio" name="star-input2" value="3"  id="q3${memo.comment_num}">
+		    	<label for="q3" onclick="set_score2('3','${memo.comment_num}')">3</label>
+		    	<input type="radio" name="star-input2" value="4"  id="q4${memo.comment_num}">
+		    	<label for="q4" onclick="set_score2('4','${memo.comment_num}')">4</label>
+		    	<input type="radio" name="star-input2" value="5"  id="q5${memo.comment_num}">
+		    	<label for="q5" onclick="set_score2('5','${memo.comment_num}')">5</label>
+		 	 	<input type="hidden" id="score2${memo.comment_num}" name="score2" value="">
 		  	</span>&nbsp; &nbsp;
-		  	<span style="color: green;" id="think2"></span>
+		  	<span style="color: green;" id="think2${memo.comment_num}"></span>
 		</span>
 		<table>
 			<tr>
-				<td><textarea style="width:750px; height:85px; resize: none;" id="memo2" name="memo2">${memo.memo}</textarea></td>
-				<td><button type="submit" style="width:85px; height:85px;" class="btn btn-success" onclick="submitTest('update','${memo.comment_num}')">수정</button></td>
+				<td><textarea style="width:750px; height:85px; resize: none;" id="memo2${memo.comment_num}" name="memo2">${memo.memo}</textarea></td>
+				<td><button type="submit" style="width:85px; height:85px;" class="btn btn-success" onclick="update_memo('${memo.comment_num}','${memo.idx}','${memo.score}')">수정</button></td>
 			</tr>
 		</table>
 		</td>

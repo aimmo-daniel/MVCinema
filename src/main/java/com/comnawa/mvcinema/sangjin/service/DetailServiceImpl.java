@@ -44,4 +44,9 @@ public class DetailServiceImpl implements DetailService {
 		detailDao.update(dto);
 	}
 
+	@Override
+	public String checkUserid(MemoDTO dto) {
+		return detailDao.checkUserid(dto);
+	}
+
 }

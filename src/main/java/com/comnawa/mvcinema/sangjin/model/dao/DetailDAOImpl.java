@@ -50,4 +50,9 @@ public class DetailDAOImpl implements DetailDAO {
 		sqlSession.update("detail.updatememo", dto);
 	}
 
+	@Override
+	public String checkUserid(MemoDTO dto) {
+		return sqlSession.selectOne("detail.memo_just_one", dto);
+	}
+
 }
