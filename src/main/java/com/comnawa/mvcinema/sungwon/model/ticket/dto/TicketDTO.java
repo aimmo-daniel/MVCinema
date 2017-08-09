@@ -22,8 +22,8 @@ public class TicketDTO {
 	private int t_idx;
 	private String t_name;
 	private int seat_max;
-	private int seat_out;
 	private int price;
+	private String seat_out; //이미 예매된 좌석
 
 	public int getMovie_idx() {
 		return movie_idx;
@@ -153,11 +153,11 @@ public class TicketDTO {
 		this.seat_max = seat_max;
 	}
 
-	public int getSeat_out() {
+	public String getSeat_out() {
 		return seat_out;
 	}
 
-	public void setSeat_out(int seat_out) {
+	public void setSeat_out(String seat_out) {
 		this.seat_out = seat_out;
 	}
 
@@ -175,7 +175,7 @@ public class TicketDTO {
 
 	public TicketDTO(int movie_idx, String title, int age, int people, Date release_date, int runtime, String img_url,
 			int theater_idx, Date start_time, String start_date, String end_date, int empty_sit, int screen_idx,
-			int t_idx, String t_name, int seat_max, int seat_out, int price) {
+			int t_idx, String t_name, int seat_max, String seat_out, int price) {
 		super();
 		this.movie_idx = movie_idx;
 		this.title = title;

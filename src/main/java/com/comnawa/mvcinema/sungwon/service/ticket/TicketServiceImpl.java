@@ -40,4 +40,14 @@ public class TicketServiceImpl implements TicketService {
 		return ticketDao.selectTime(screen_idx);
 	}
 
+	@Override
+	public TicketDTO selectMovieTime(int screen_idx) {
+		return ticketDao.selectMovieTime(screen_idx);
+	}
+
+	@Override
+	public List<TicketDTO> soldout_seat(int screen_idx) {
+		return ticketDao.soldout_seat(screen_idx);
+	}
+
 }

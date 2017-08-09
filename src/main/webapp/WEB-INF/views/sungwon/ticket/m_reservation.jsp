@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <%@include file="../../include/header.jsp"%>
 <%@include file="../sw_include/template.jsp"%>
-<script src="${path}/sungwon/etc/js/myCalendar.js?v=2"></script>
+<script src="${path}/sungwon/etc/js/myCalendar.js?v=3"></script>
 <link rel="stylesheet" href="${path}/sungwon/etc/css/sw_style.css?v=2">
 
 <style>
@@ -271,13 +271,13 @@
 			</div>
 			<div class="col-md-3" id="result_s">
 				<h2 id="s_title" align="center" style="margin-top: 70px; display: block">
-					<label class="label label-default">좌석선택</label>
+					<label class="label label-default">인원/좌석선택</label>
 				</h2>
 				<div class="col-md-6" id="s_screen"
 					style="margin-top:60px; height: 90px; width: 150px; color: white; display: none;"
 					align="center">
 					<a href="javascript:seat_page()" role="button" class="btn btn-default btn-lg"><span
-						class="glyphicon glyphicon-film">&nbsp;좌석선택</span></a>
+						class="glyphicon glyphicon-film">&nbsp;인원/좌석선택</span></a>
 				</div>
 			</div>
 		</div>

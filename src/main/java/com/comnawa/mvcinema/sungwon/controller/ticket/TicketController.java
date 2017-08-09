@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.comnawa.mvcinema.insang.model.dto.TheaterDTO;
+import com.comnawa.mvcinema.insang.model.dto.TheaterSitDTO;
+import com.comnawa.mvcinema.insang.model.dto.TheaterSitEmptyDTO;
+import com.comnawa.mvcinema.insang.service.Insang_MovieService;
+import com.comnawa.mvcinema.insang.service.TheaterService;
 import com.comnawa.mvcinema.sungwon.model.ticket.dto.TicketDTO;
 import com.comnawa.mvcinema.sungwon.service.ticket.TicketService;
 
@@ -22,6 +27,10 @@ public class TicketController {
 
 	@Inject
 	TicketService ticketService;
+	@Inject
+	TheaterService theaterService;
+	@Inject
+	Insang_MovieService movieService;
 	
 	@RequestMapping("movie_ticket_page.do")
 	public ModelAndView quickticket_page(@RequestParam(defaultValue="0") int movie_idx,ModelAndView mav){
@@ -39,6 +48,42 @@ public class TicketController {
 	
 	@RequestMapping("select_seat_page.do")
 	public ModelAndView select_seat(@RequestParam String screen_idx , ModelAndView mav){
+		//영화관 좌석 로드
+		int idx = movieService.getScheduleDetail(Integer.parseInt(screen_idx)).getTheater_idx();
+		for (TheaterDTO foo: theaterService.getTheaterList()){
+		      if (foo.getIdx() == idx){
+		        mav.addObject("dto", foo);
+		      }
+		    }
+		    int max=0;
+		    for (TheaterSitDTO dto: theaterService.getTheaterSitList()){
+		      max= (max < dto.getSeat_row()) ? dto.getSeat_row() : max ;
+		    }
+		    for (TheaterSitDTO foo: theaterService.getTheaterSitList()){
+		      if (foo.getIdx() == idx){
+		        mav.addObject("theaterSitDTO", foo);
+		      }
+		    }
+		    List<TheaterSitEmptyDTO> listEmpty= theaterService.getTheaterSitEmpty();
+		    String theaterSitResult="";
+		    for (TheaterSitEmptyDTO dto: listEmpty){
+		      if (dto.getIdx()== idx){
+		        theaterSitResult+= dto.getSeat_empty()+",";
+		      }
+		    }
+		    if (!theaterSitResult.equals("")){
+		      theaterSitResult= theaterSitResult.substring(0, theaterSitResult.length()-1);
+		    }
+		    mav.addObject("theater_sit_empty", listEmpty);
+		    mav.addObject("theater_sit_empty_result", theaterSitResult.equals("null") ? "" : theaterSitResult);
+		    mav.addObject("theaterSitMax", max);
+		    mav.addObject("idx", idx);
+		    
+		//이미 예매된 좌석 로드
+		    List<TicketDTO> list = ticketService.soldout_seat(Integer.parseInt(screen_idx));
+		    mav.addObject("list",list);
+		    
+		//페이지 이동
 		mav.setViewName("sungwon/ticket/select_seat_people");
 		mav.addObject("screen_idx",screen_idx);
 		return mav;
@@ -81,4 +126,14 @@ public class TicketController {
 		System.out.println("실행2:" +dto.toString());
 		return dto;
 	}
+	
+	@ResponseBody
+	@RequestMapping("select_movieTime.do")
+	public TicketDTO selectMovieTime(@RequestParam String screen_idx){
+		TicketDTO dto = ticketService.selectMovieTime(Integer.parseInt(screen_idx));
+		System.out.println("실행3"+dto.toString());
+		return dto;
+	}
+	
+	
 }

@@ -10,4 +10,7 @@ public interface TicketDAO {
 	public List<TicketDTO> screen_time(TicketDTO dto);
 	public TicketDTO selectMovieInfo(int movie_idx);
 	public TicketDTO selectTime(int screen_idx);
+	public TicketDTO selectMovieTime(int screen_idx); 
+	public List<TicketDTO> soldout_seat(int screen_idx);
+
 }

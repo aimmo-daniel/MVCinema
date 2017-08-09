@@ -23,6 +23,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from screen_info s, theater t
 		where  s.theater_idx=t.idx  and screen_idx=#{screen_idx}
 	</select>
+	<select id="select_movieTime" resultType="TicketDTO">
+		select start_time,t.name t_name,m.age age,m.title title,img_url,t.price
+		from screen_info s, theater t, movie m
+		where  s.theater_idx=t.idx and s.movie_idx=m.idx and screen_idx=#{screen_idx}
+	</select>
+	<select id="soldout_seat" resultType="TicketDTO">
+		select seat_out from soldout_seat where screen_idx=#{screen_idx}
+	</select>
 </mapper>
 
 

@@ -36,4 +36,14 @@ public class TIcketDAOImpl implements TicketDAO {
 		return sqlSession.selectOne("ticket.selectTime",screen_idx);
 	}
 
+	@Override
+	public TicketDTO selectMovieTime(int screen_idx) {
+		return sqlSession.selectOne("ticket.select_movieTime",screen_idx);
+	}
+
+	@Override
+	public List<TicketDTO> soldout_seat(int screen_idx) {
+		return sqlSession.selectList("ticket.soldout_seat",screen_idx);
+	}
+
 }
