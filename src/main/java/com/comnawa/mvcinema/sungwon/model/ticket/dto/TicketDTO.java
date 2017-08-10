@@ -23,7 +23,18 @@ public class TicketDTO {
 	private String t_name;
 	private int seat_max;
 	private int price;
-	private String seat_out; //이미 예매된 좌석
+	private String seat_out; // 이미 예매된 좌석
+	/*-------------------티켓정보--------------------------------*/
+	private int ticket_idx;
+	private String t_userid;
+	private int t_age;
+	private String t_title;
+	private String t_theater;
+	private String t_start_time;
+	private int t_people;
+	private int t_price;
+	private String t_seat;
+	private String t_serial_num;
 
 	public int getMovie_idx() {
 		return movie_idx;
@@ -153,14 +164,6 @@ public class TicketDTO {
 		this.seat_max = seat_max;
 	}
 
-	public String getSeat_out() {
-		return seat_out;
-	}
-
-	public void setSeat_out(String seat_out) {
-		this.seat_out = seat_out;
-	}
-
 	public int getPrice() {
 		return price;
 	}
@@ -169,13 +172,103 @@ public class TicketDTO {
 		this.price = price;
 	}
 
+	public String getSeat_out() {
+		return seat_out;
+	}
+
+	public void setSeat_out(String seat_out) {
+		this.seat_out = seat_out;
+	}
+
+	public int getTicket_idx() {
+		return ticket_idx;
+	}
+
+	public void setTicket_idx(int ticket_idx) {
+		this.ticket_idx = ticket_idx;
+	}
+
+	public String getT_userid() {
+		return t_userid;
+	}
+
+	public void setT_userid(String t_userid) {
+		this.t_userid = t_userid;
+	}
+
+	public int getT_age() {
+		return t_age;
+	}
+
+	public void setT_age(int t_age) {
+		this.t_age = t_age;
+	}
+
+	public String getT_title() {
+		return t_title;
+	}
+
+	public void setT_title(String t_title) {
+		this.t_title = t_title;
+	}
+
+	public String getT_theater() {
+		return t_theater;
+	}
+
+	public void setT_theater(String t_theater) {
+		this.t_theater = t_theater;
+	}
+
+	public String getT_start_time() {
+		return t_start_time;
+	}
+
+	public void setT_start_time(String t_start_time) {
+		this.t_start_time = t_start_time;
+	}
+
+	public int getT_people() {
+		return t_people;
+	}
+
+	public void setT_people(int t_people) {
+		this.t_people = t_people;
+	}
+
+	public int getT_price() {
+		return t_price;
+	}
+
+	public void setT_price(int t_price) {
+		this.t_price = t_price;
+	}
+
+	public String getT_seat() {
+		return t_seat;
+	}
+
+	public void setT_seat(String t_seat) {
+		this.t_seat = t_seat;
+	}
+
+	public String getT_serial_num() {
+		return t_serial_num;
+	}
+
+	public void setT_serial_num(String t_serial_num) {
+		this.t_serial_num = t_serial_num;
+	}
+
 	public TicketDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public TicketDTO(int movie_idx, String title, int age, int people, Date release_date, int runtime, String img_url,
 			int theater_idx, Date start_time, String start_date, String end_date, int empty_sit, int screen_idx,
-			int t_idx, String t_name, int seat_max, String seat_out, int price) {
+			int t_idx, String t_name, int seat_max, int price, String seat_out, int ticket_idx, String t_userid,
+			int t_age, String t_title, String t_theater, String t_start_time, int t_people, int t_price, String t_seat,
+			String t_serial_num) {
 		super();
 		this.movie_idx = movie_idx;
 		this.title = title;
@@ -193,8 +286,18 @@ public class TicketDTO {
 		this.t_idx = t_idx;
 		this.t_name = t_name;
 		this.seat_max = seat_max;
-		this.seat_out = seat_out;
 		this.price = price;
+		this.seat_out = seat_out;
+		this.ticket_idx = ticket_idx;
+		this.t_userid = t_userid;
+		this.t_age = t_age;
+		this.t_title = t_title;
+		this.t_theater = t_theater;
+		this.t_start_time = t_start_time;
+		this.t_people = t_people;
+		this.t_price = t_price;
+		this.t_seat = t_seat;
+		this.t_serial_num = t_serial_num;
 	}
 
 	@Override
@@ -203,7 +306,10 @@ public class TicketDTO {
 				+ ", release_date=" + release_date + ", runtime=" + runtime + ", img_url=" + img_url + ", theater_idx="
 				+ theater_idx + ", start_time=" + start_time + ", start_date=" + start_date + ", end_date=" + end_date
 				+ ", empty_sit=" + empty_sit + ", screen_idx=" + screen_idx + ", t_idx=" + t_idx + ", t_name=" + t_name
-				+ ", seat_max=" + seat_max + ", seat_out=" + seat_out + ", price=" + price + "]";
+				+ ", seat_max=" + seat_max + ", price=" + price + ", seat_out=" + seat_out + ", ticket_idx="
+				+ ticket_idx + ", t_userid=" + t_userid + ", t_age=" + t_age + ", t_title=" + t_title + ", t_theater="
+				+ t_theater + ", t_start_time=" + t_start_time + ", t_people=" + t_people + ", t_price=" + t_price
+				+ ", seat=" + t_seat + ", t_serial_num=" + t_serial_num + "]";
 	}
 
 }

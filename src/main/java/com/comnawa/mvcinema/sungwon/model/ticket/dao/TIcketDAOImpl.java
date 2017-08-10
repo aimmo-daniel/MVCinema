@@ -46,4 +46,9 @@ public class TIcketDAOImpl implements TicketDAO {
 		return sqlSession.selectList("ticket.soldout_seat",screen_idx);
 	}
 
+	@Override
+	public int insertTicket(TicketDTO dto) {
+		return sqlSession.insert("ticket.insertTicket",dto);
+	}
+
 }
