@@ -11,7 +11,7 @@ public class ContactDTO {
   private Date post_date;
   private String content;
   private String img_url;
-  private String admin_contact;
+  private String admin_content;
   private Date admin_post_date;
 
   public ContactDTO() {
@@ -20,7 +20,7 @@ public class ContactDTO {
   }
 
   public ContactDTO(int idx, String userid, String title, Date post_date, String content, String img_url, String name, int age,
-      Date admin_post_date, String admin_contact) {
+      Date admin_post_date, String admin_content) {
     super();
     this.idx = idx;
     this.userid = userid;
@@ -30,14 +30,14 @@ public class ContactDTO {
     this.img_url = img_url;
     this.name = name;
     this.age = age;
-    this.admin_contact = admin_contact;
+    this.admin_content = admin_content;
     this.admin_post_date = admin_post_date;
   }
 
   @Override
   public String toString() {
     return "ContactDTO [idx=" + idx + ", userid=" + userid + ", title=" + title + ", post_date=" + post_date + ", content="
-        + content + ", img_url=" + img_url + ", name=" + name + ", age=" + age + ", admin_contact=" + admin_contact
+        + content + ", img_url=" + img_url + ", name=" + name + ", age=" + age + ", admin_content=" + admin_content
         + ", admin_post_date=" + admin_post_date + "]";
   }
 
@@ -105,16 +105,16 @@ public class ContactDTO {
     return name;
   }
   
-  public void setAdmin_contact(String admin_contact) {
-    this.admin_contact = admin_contact;
+  public void setAdmin_content(String admin_content) {
+    this.admin_content = admin_content;
   }
   
   public void setAdmin_post_date(Date admin_post_date) {
     this.admin_post_date = admin_post_date;
   }
   
-  public String getAdmin_contact() {
-    return admin_contact;
+  public String getAdmin_content() {
+    return admin_content;
   }
   
   public Date getAdmin_post_date() {

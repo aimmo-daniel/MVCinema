@@ -12,17 +12,19 @@
 
   <div>
     <label for="sub_theater_subject">
-      <p class="wow fadeIn" data-wow-delay="0s" id="sub_theater_subject">현재 상영관</p>
+      <p class="wow fadeIn lab" data-wow-delay="0s" id="sub_theater_subject" style="font-size: 20px; margin: 10px 20px 20px 20px;">
+        현재 상영관</p>
     </label>
-  </div>
 
-  <c:if test="${theaterList == null}">
-    <label for="sub_theater_add_theaternull">
-      <p id="sub_theater_add_theaternull">
-        등록된 상영관이 없습니다.
-      </p>
-    </label>
-  </c:if>
+
+    <c:if test="${theaterList == null}">
+      <label for="sub_theater_add_theaternull">
+        <p id="sub_theater_add_theaternull" class="wow fadeIn lab" data-wow-delay="0s">
+          등록된 상영관이 없습니다.
+        </p>
+      </label>
+    </c:if>
+  </div>
   
   <%
   char row_en= 'A';
