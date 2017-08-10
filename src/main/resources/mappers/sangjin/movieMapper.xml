@@ -7,17 +7,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="movie">
 
 	<select id="movie_list" resultType="com.comnawa.mvcinema.sangjin.model.dto.MovieDTO" parameterType="String">
-		select idx, img_url, age, title, release_date from movie
-		order by ${value}
+		select idx, img_url, age, title, release_date, (select round(avg(score),1)*2 from memo where idx=m.idx) ord
+		from movie m order by ${value} desc nulls last
+	</select>
+	
+	<select id="Sort_grade" resultType="com.comnawa.mvcinema.sangjin.model.dto.MovieDTO">
+		select idx, img_url, age, title, release_date,
+		(select round(avg(score),1)*2 from memo where idx=m.idx) ord
+		from movie m order by ord desc nulls last
 	</select>
 	
 	<select id="scdmovie_list" resultType="com.comnawa.mvcinema.sangjin.model.dto.MovieDTO">
-		select idx, img_url, age, title, release_date from movie
+		select idx, img_url, age, title, release_date,
+		(select round(avg(score),1)*2 from memo where idx=m.idx) ord
+		from movie m
 		where release_date > CURRENT_DATE order by release_date
 	</select>
 	
 	<select id="movie_detail" resultType="com.comnawa.mvcinema.sangjin.model.dto.MovieDTO">
-		select * from movie where idx=#{idx}
+		select idx, title, age, director, actors, content, genre,
+		release_date, runtime, img_url, preview, rank, people, act_img_url,
+		(select round(avg(score),1)*2 from memo where idx=m.idx) ord
+		from movie m where idx=#{idx}
 	</select>
 
 

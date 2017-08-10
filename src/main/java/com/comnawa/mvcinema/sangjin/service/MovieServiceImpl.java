@@ -29,4 +29,9 @@ public class MovieServiceImpl implements MovieService {
 		return movieDao.movie_view(idx);
 	}
 
+	@Override
+	public List<MovieDTO> Sort_grade() {
+		return movieDao.Sort_grade();
+	}
+
 }

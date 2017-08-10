@@ -32,19 +32,35 @@ li {
 		if (order_type == undefined) {
 			order_type = String("rank");
 		}
-		$.ajax({
-			type : "get",
-			url : "${path}/sort.do?order_type=" + order_type,
-			success : function(result) {
-				$("#listMovie").html(result);
-				$("#order_type").show();
-				$("#btnSearch").show();
-				$("#expand").show();
-				$("#hr_name").html("무비차트");
-				$("#on_2").removeClass("on");
-				$("#on_1").addClass("on");
-			}
-		});
+		if (order_type == 'grade'){
+			$.ajax({
+				type : "get",
+				url : "${path}/sort2.do?order_type=" + order_type,
+				success : function(result) {
+					$("#listMovie").html(result);
+					$("#order_type").show();
+					$("#btnSearch").show();
+					$("#expand").show();
+					$("#hr_name").html("무비차트");
+					$("#on_2").removeClass("on");
+					$("#on_1").addClass("on");
+				}
+			});		
+		}else{
+			$.ajax({
+				type : "get",
+				url : "${path}/sort.do?order_type=" + order_type,
+				success : function(result) {
+					$("#listMovie").html(result);
+					$("#order_type").show();
+					$("#btnSearch").show();
+					$("#expand").show();
+					$("#hr_name").html("무비차트");
+					$("#on_2").removeClass("on");
+					$("#on_1").addClass("on");
+				}
+			});
+		}
 	}
 	
 	function scheduleMovie() {
@@ -77,7 +93,7 @@ li {
 			<div class="submenu">
 				<ul>
 					<li id="on_1" class="on"><a href='javascript:void(0);' onclick='listMovie();'>무비차트</a></li>
-					<li id="on_1"><a href='javascript:void(0);' onclick='scheduleMovie();'>상영예정작</a></li>
+					<li id="on_2"><a href='javascript:void(0);' onclick='scheduleMovie();'>상영예정작</a></li>
 				</ul>
 			</div>
 		</div>
