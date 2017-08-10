@@ -128,6 +128,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE theater_idx=#{idx}
   </update>
   
+  <select id="getContactList" resultType="com.comnawa.mvcinema.insang.model.dto.ContactDTO">
+    SELECT ac.userid userid, ac.idx idx, ac.title title, ac.post_date post_date, ac.content content, ac.img_url img_url, m.name, m.age
+    FROM admin_contact ac, MEMBER m
+    WHERE m.userid= ac.userid
+  </select>
+  
 </mapper>
 
 

@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<%@ include file="../../include/header.jsp" %>
 </head>
 <body>
 
@@ -13,7 +14,7 @@
         <div class="wow fadeInUp col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-4" data-wow-delay="0.1s">
           <a href="#member_contact">
             <label for="zzo_addTheater1" onmouseover="sub_theater('sub_sub_mouseOver', 'over', 'sub_theater_1')"
-              onmouseout="sub_theater('sub_sub_mouseOver','out','sub_theater_1')" onclick="sub_tong_loadSub('contact')"
+              onmouseout="sub_theater('sub_sub_mouseOver','out','sub_theater_1')" onclick="loadSub_memb('contact')"
               id="zzo_addTheater1_label">
               <div class="project-info" id="zzo_addTheater1">
                 <h4 id="sub_theater_1">1:1문의 답변</h4>
@@ -25,7 +26,7 @@
           </a>
           <a href="#member_faq">
             <label for="zzo_addTheater2" onmouseover="sub_theater('sub_sub_mouseOver','over','sub_theater_2')"
-              onmouseout="sub_theater('sub_sub_mouseOver','out','sub_theater_2')" onclick="sub_tong_loadSub('faq')"
+              onmouseout="sub_theater('sub_sub_mouseOver','out','sub_theater_2')" onclick="loadSub_memb('faq')"
               id="zzo_addTheater2_label">
               <div class="project-info" id="zzo_addTheater2">
                 <h4 id="sub_theater_2">FAQ 관리</h4>
@@ -36,17 +37,27 @@
             </label>
           </a>
         </div>
+        
+        <div class="wow fadeInUp col-md-8 col-sm-8" data-wow-delay="0.3s" id="sub_memb_content">
+        
+          <div id='my-spinner'>
+            <div>
+              <span><img src='${path}/admin/resources/adminImages/loader.gif'></span>
+            </div>
+          </div>
+          
+        </div>
 
 <script>
-function sub_movie_loadSub(choice){
+function loadSub_memb(choice){
   var param= choice=='contact'?'contact':'faq';
   console.log(choice);
   $("#my-spinner").show();
   $.ajax({
-    url: "/mvcinema/subMenu/movie/"+param+".do",
+    url: "${path}/subMenu/member/"+param+".do",
     success: function(result){
       $("#my-spinner").hide();
-      $("#sub_movie_contents").html(result);
+      $("#sub_memb_content").html(result);
     }
   })
 }
