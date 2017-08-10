@@ -15,4 +15,24 @@ public class SupportController {
 		return "sangjin/support/main";
 	}
 	
+	@RequestMapping("news")
+	public String news(){
+		return "sangjin/support/news";
+	}
+	
+	@RequestMapping("faq")
+	public String faq(){
+		return "sangjin/support/faq";
+	}
+	
+	@RequestMapping("one_to_one")
+	public String one_to_one(){
+		return "sangjin/support/one_to_one";
+	}
+	
+	@RequestMapping("write")
+	public String write(){
+		return "sangjin/support/write";
+	}
+	
 }

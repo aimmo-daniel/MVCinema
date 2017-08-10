@@ -46,7 +46,6 @@ public class InfoController {
 		mav.setViewName("sangjin/info/detail");
 		mav.addObject("dto", movieService.movie_view(idx));
 		mav.addObject("map", map);
-		System.out.println(map.toString());
 		return mav;
 	}
 	
