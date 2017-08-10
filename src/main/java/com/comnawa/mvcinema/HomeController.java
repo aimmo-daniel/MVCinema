@@ -41,7 +41,18 @@ public class HomeController {
 		mav.setViewName("sangjin/home/movielist");
 		Map<String, Object> map = new HashMap<>();
 		map.put("list", list); //영화 목록
-		map.put("order_type", order_type); //예매율순, 평점순, 관람객순
+		map.put("order_type", order_type); //예매율순, 관람객순
+		mav.addObject("map", map);
+		return mav;
+	}
+	
+	@RequestMapping("sort2.do")
+	public ModelAndView sort2(String order_type, ModelAndView mav){
+		List<MovieDTO> list=movieService.Sort_grade();
+		mav.setViewName("sangjin/home/movielist");
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list); //영화 목록
+		map.put("order_type", order_type);
 		mav.addObject("map", map);
 		return mav;
 	}

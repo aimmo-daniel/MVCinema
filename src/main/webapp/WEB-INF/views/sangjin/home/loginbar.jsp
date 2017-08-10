@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script> 
+<!-- <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script> -->
 <%@ include file="../../sangjin/sj_include/sangjincss.jsp"%>
 <div class="nav-container">
 	<nav class="nav-inner transparent">
@@ -23,12 +23,14 @@
 		<li class="topMenuLi"><a class="menuLink" href="${path}">무비차트</a></li>
 		<li class="topMenuLi"><a class="menuLink" href="${path}/ticket/movie_ticket_page.do">예매</a>	</li>
 		<li class="topMenuLi"><a class="menuLink" href="${path}">극장</a></li>
-		<li class="topMenuLi"><a class="menuLink" href="${path}">고객센터</a></li>
+		<li class="topMenuLi"><a class="menuLink" href="${path}/support/main">고객센터</a></li>
 		<li style="margin-left: 210px;" >
 			<c:choose>
 				<c:when test="${sessionScope.dto.userid == null}">
 					<a class="btn btn-default" role="button"
-						href="${path}/member/login_page.do">로그인</a>
+						href="${path}/member/login_page.do">로그인</a>&nbsp;
+					<a class="btn btn-default" role="button"
+						href="${path}/member/signup_page.do">회원가입</a>
 				</c:when>
 				<c:when test="${sessionScope.dto.userid != null}">
 					<b style="color: white;"><a href="${path}/member/myaccount_page.do" style="color: white;">${sessionScope.dto.name}</a>&nbsp;님&nbsp;&nbsp;</b>

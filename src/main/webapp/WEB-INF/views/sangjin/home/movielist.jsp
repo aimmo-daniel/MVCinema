@@ -91,7 +91,7 @@
 					<span class="txt-info"> 
 					<strong> <!-- 개봉일자 --> 
 						<fmt:formatDate	value="${row.release_date}" pattern="yyyy.MM.dd" /> 
-						<span>개봉</span>
+						<span>개봉</span> <b style="color:red">(★${row.ord}평점)</b>
 					</strong>
 					</span>
 				</div>

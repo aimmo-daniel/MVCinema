@@ -179,6 +179,18 @@ function update_set(comment_num, score){
 	}
 }
 
+//로그인팝업
+function detail_page(idx){
+	var uri = '${path}/memo/login_page.do?movie_idx='+idx;
+    var width = 600;
+    var height = 290;
+    var top = (screen.availHeight - height) / 2;
+    var left = (screen.availWidth - width) / 2;
+    var strFeature;
+    strFeature = 'height=' + height + ',width=' + width + ',menubar=no,toolbar=no,location=no,resizable=no,status=no,scrollbars=no,top=' + top + ',left=' + left;
+	window.open(uri, 'popup', strFeature);
+}
+
 //한줄평 수정
 function update_memo(comment_num, idx, star){
 	var memo=$("#memo2"+comment_num).val();
@@ -258,7 +270,7 @@ function list(page) {
 		</c:if>
  		<c:if test="${sessionScope.dto.userid == null}">
 			<td><textarea style="width:750px; height:85px;
-						 resize: none;" id="memo" name="memo" readonly="readonly" placeholder="로그인 후 이용 가능한 서비스입니다."></textarea></td>
+						 resize: none;" id="memo" name="memo" readonly="readonly" placeholder="로그인 후 이용 가능한 서비스입니다." onclick="detail_page('${dto.idx}');"></textarea></td>
 			<td><input type="submit" disabled="disabled" value="등록" style="width:85px;
 						 height:85px;" class="btn btn-primary"></td>
 		</c:if>

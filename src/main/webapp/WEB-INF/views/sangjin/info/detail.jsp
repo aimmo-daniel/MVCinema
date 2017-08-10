@@ -108,14 +108,15 @@ function buy_ticket(idx){
 			</div>
 			<div style="position: relative; left: 250px; top: -250px;">
 				<input id="movie_idx" type="hidden" value="${dto.idx}"/>
-				<h2>[ ${dto.title} ]</h2>
+				<h2>[ ${dto.title} ] <br></h2>
+				<span style="color: red; font-size: 18pt;">★${dto.ord}</span>
 				<hr>
 				<b>개봉 :</b> <fmt:formatDate value="${dto.release_date}" pattern="yyyy.MM.dd" /><br> 
-				<b>감독 :</b> ${dto.director} <br>
-				<b>출연 :</b> ${dto.actors} <br>
-				<b>장르 :</b> ${dto.genre} <br> 
+				<b>감독 :</b> ${dto.director}<br>
+				<b>출연 :</b> ${dto.actors}<br>
+				<b>장르 :</b> ${dto.genre}<br> 
 				<b>기본 :	${dto.age}</b>세 이상 / ${dto.runtime}분<br>
-				<b>누적관객 :</b> <fmt:formatNumber value="${dto.people}" type="number"/>명 (<%=today%> 기준) &nbsp;&nbsp;&nbsp;
+				<b>누적관객 :</b> <fmt:formatNumber value="${dto.people}" type="number"/>명 (<%=today%> 기준)
 			</div>
 		</div>
 		<!-- ajax탭 -->

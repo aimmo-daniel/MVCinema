@@ -6,7 +6,7 @@ public class MovieDTO {
 	private int idx; // 영화번호
 	private String title; // 제목
 	private int age; // 관람 나이 제한
-	private double grade; // 평점
+	private double ord; // 평점
 	private double rank; // 예매율
 	private int people; // 관람객
 	private String director; // 감독
@@ -23,14 +23,14 @@ public class MovieDTO {
 		super();
 	}
 
-	public MovieDTO(int idx, String title, int age, double grade, double rank, int people, String director,
+	public MovieDTO(int idx, String title, int age, double ord, double rank, int people, String director,
 			String actors, String content, String genre, Date release_date, int runtime, String img_url, String preview,
 			String act_img_url) {
 		super();
 		this.idx = idx;
 		this.title = title;
 		this.age = age;
-		this.grade = grade;
+		this.ord = ord;
 		this.rank = rank;
 		this.people = people;
 		this.director = director;
@@ -68,12 +68,12 @@ public class MovieDTO {
 		this.age = age;
 	}
 
-	public double getGrade() {
-		return grade;
+	public double getord() {
+		return ord;
 	}
 
-	public void setGrade(double grade) {
-		this.grade = grade;
+	public void setord(double ord) {
+		this.ord = ord;
 	}
 
 	public double getRank() {
@@ -166,7 +166,7 @@ public class MovieDTO {
 
 	@Override
 	public String toString() {
-		return "MovieDTO [idx=" + idx + ", title=" + title + ", age=" + age + ", grade=" + grade + ", rank=" + rank
+		return "MovieDTO [idx=" + idx + ", title=" + title + ", age=" + age + ", ord=" + ord + ", rank=" + rank
 				+ ", people=" + people + ", director=" + director + ", actors=" + actors + ", content=" + content
 				+ ", genre=" + genre + ", release_date=" + release_date + ", runtime=" + runtime + ", img_url="
 				+ img_url + ", preview=" + preview + ", act_img_url=" + act_img_url + "]";
