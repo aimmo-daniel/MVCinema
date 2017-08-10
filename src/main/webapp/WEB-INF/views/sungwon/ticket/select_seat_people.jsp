@@ -21,7 +21,7 @@ $(function(){
 	$.ajax({
 		type:"get",
 		url:"${path}/ticket/select_movieTime.do?screen_idx="+${screen_idx},
-		success:function(result){
+		success: function(result) {
 			//영화 나이제한 저장&등록
 			age= result.age;
 			if(age == 0 ){
@@ -173,23 +173,94 @@ function reservation(){
 		}
 	}
 	//로그인 검사
-	if( ${sessionSocpe.dto.userid == null } ){
+	if( ${sessionScope.dto.userid == null } == true ){
 		alert("로그인후  예매 가능합니다.");
 		return;
 	}
 	//나이제한 검사
-	if( ${sessionSocpe.dto.age < age } ){
+	if( ${sessionScope.dto.age < age } ){
 		alert("이영화는 "+age+"세 이상만 예매 가능합니다.");
 		return;
 	}
-	alert("모든 조건 충족");
+	
+	$.ajax({
+		type:"post",
+		url:"${path}/ticket/payment_page.do",
+		success: function(result){
+			$("#seat_info").html(result);
+			$("#btn_reservation").css("display",'none');
+		}
+	});
 }
 
+function card_type(){
+	$("#test").css("display",'none');
+	var IMP = window.IMP; // 생략가능
+	IMP.init('imp25851792');
+	
+	IMP.request_pay({
+	    pg : 'html5_inicis', // version 1.1.0부터 지원.
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : title,
+	    amount : total_price,
+	    buyer_email : '${sessionScope.dto.email}',
+	    buyer_name : '${sessionScope.dto.name}',
+	    /* buyer_tel : '010-1234-5678', */ 
+	    /* buyer_addr : '서울특별시 강남구 삼성동', */
+	    /* buyer_postcode : '123-456', */
+	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	        var msg = '결제가 완료되었습니다.';
+	        msg += '고유ID : ' + rsp.imp_uid;
+	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+	        msg += '결제 금액 : ' + rsp.paid_amount;
+	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        history.back();
+	        msg +=  rsp.error_msg;
+	    }
+	    alert(msg);
+	});
+	
+}
+function test_type(){
+	$("#test").css("display",'block');
+}
 
+function final_payment(){
+	if($("#phone_type").val() == "-" || $("#phone_type").val() == "" || $("#phone_type").val() == null){
+		alert("통신사를 선택해주세요");
+		return;
+	}
+	if($("#phone_no1").val() != '010' || $("#phone_no2").val().length < 3 || $("#phone_no3").val().length != 4){
+		alert("핸드폰번호가 양식에 맞지 않습니다.")
+		return;
+	}
+	if($("#phone_ssn").val() == "" || $("#phone_ssn").val() == null || $("#phone_ssn").val().length !=6 ){
+		alert("생년월일 양식이 맞지않습니다.");
+		return;
+	}
+	var param = "t_userid=${sessionScope.dto.userid}"+"&t_title="+title
+	+"&t_age="+age+"&t_start_time="+select_date+"&t_theater="+theater_name
+	+"&t_people="+people+"&t_seat="+seat+"&t_price="+total_price; 
+	alert(param);
+	$.ajax({
+		type:"post",
+		url:"${path}/ticket/payment.do",
+		data:param,
+		success: function(result){
+			alert(result.message);
+		}
+	});
+}
 </script>
 </head>
 <body>
 	<%@include file="../../sangjin/home/loginbar.jsp"%>
+	<div id="seat_info">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6">
@@ -300,6 +371,7 @@ function reservation(){
 		</div>
 	</div>
 	<hr>
+	</div>
 	<div class="container" style="width: 100%; height: 150px; background-color:gray">
 		<div class="row">
 		<div class="col-md-2" id="btn_prevPage" style="margin-left:100px; margin-top:60px;">

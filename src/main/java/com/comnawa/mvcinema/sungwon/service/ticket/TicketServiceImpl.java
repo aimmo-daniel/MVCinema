@@ -50,4 +50,9 @@ public class TicketServiceImpl implements TicketService {
 		return ticketDao.soldout_seat(screen_idx);
 	}
 
+	@Override
+	public int insertTicket(TicketDTO dto) {
+		return ticketDao.insertTicket(dto);
+	}
+
 }

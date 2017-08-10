@@ -3,6 +3,7 @@ package com.comnawa.mvcinema.sungwon.controller.ticket;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +32,7 @@ public class TicketController {
 	TheaterService theaterService;
 	@Inject
 	Insang_MovieService movieService;
+	
 	
 	@RequestMapping("movie_ticket_page.do")
 	public ModelAndView quickticket_page(@RequestParam(defaultValue="0") int movie_idx,ModelAndView mav){
@@ -135,5 +137,62 @@ public class TicketController {
 		return dto;
 	}
 	
+	@RequestMapping("payment.do")
+	public ModelAndView payment(HttpServletRequest request, ModelAndView mav){
+		
+	TicketDTO dto = new TicketDTO();	
 	
+	String t_userid = request.getParameter("t_userid");
+	String t_title = request.getParameter("t_title");
+	int t_age = Integer.parseInt(request.getParameter("t_age"));
+	String t_start_time =	request.getParameter("t_start_time");
+	String t_theater = request.getParameter("t_theater");
+	int t_people = Integer.parseInt(request.getParameter("t_people"));
+	String t_seat[] = request.getParameterValues("t_seat");
+	int t_price = Integer.parseInt(request.getParameter("t_price"));
+	
+	System.out.println(t_title);
+	
+	String tmpRnd ="";
+	Random rnd = new Random();
+	for(int i=0; i<4; i++){
+		tmpRnd += (char)(rnd.nextInt(25)+65);
+	}
+	for(int i=0; i<6; i++){
+		tmpRnd += rnd.nextInt(10);
+	}
+	System.out.println(tmpRnd);
+	dto.setT_userid(t_userid);
+	dto.setT_title(t_title);
+	dto.setT_age(t_age);
+	dto.setT_start_time(t_start_time);
+	dto.setT_theater(t_theater);
+	dto.setT_people(t_people);
+	dto.setT_price(t_price);
+	String t_seat_str = "";
+	for(int  i=0; i<t_seat.length; i++){
+		t_seat_str += t_seat[i];
+		if(i+1 < t_seat.length ){
+			t_seat_str += ",";
+		}
+	}
+	dto.setT_seat(t_seat_str);
+	dto.setT_serial_num(tmpRnd);
+	System.out.println(dto.toString());
+	int result = ticketService.insertTicket(dto);
+	if(result > 0){
+		mav.addObject("message","success");
+	}else{
+		mav.addObject("message","fail");
+	}
+	mav.setViewName("sungwon/ticket/select_seat_people");
+	
+	
+	return mav;
+	}
+	
+	@RequestMapping("payment_page.do")
+	public String payment_page(){
+		return "/sungwon/ticket/payment";
+	}
 }
