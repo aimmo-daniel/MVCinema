@@ -18,6 +18,7 @@ li {
 <%@ include file="include/header.jsp"%>
 <%@ include file="include/template.jsp"%>
 <%@ include file="sangjin/sj_include/sangjincss.jsp"%>
+<%@ include file="sangjin/sj_include/Top.jsp" %>
 <script>
 	$(document).ready(function() {
 		$("#expand").click(function() {
@@ -102,10 +103,16 @@ li {
 		
 	</div>
 	<div class="wrap-movie-chart"
-		style="padding-right: 200px; padding-left: 200px;">
-		<div class="tit-heading-wrap" style="margin-top: 0px;">
-			<a style="margin-top: 20px; float: right;" id="expand"><span>+더보기</span></a>
+		style="padding-right: 200px; padding-left: 200px; padding-bottom:7px;">
+		<div class="tit-heading-wrap" style="height:10px; margin-top:1px;">
 		</div>
 	</div>
+	<div style="padding-right: 200px; padding-left: 200px;">
+		<button type="button" style="float:right;" class="btn btn-default btn" id="expand">
+			  		<span class="glyphicon glyphicon-plus" style="color:#23527c" aria-hidden="true"></span>
+			  		<span style="color:#23527c">더보기</span>
+		</button>
+	</div>
+	<br><br><br>
 </body>
 </html>

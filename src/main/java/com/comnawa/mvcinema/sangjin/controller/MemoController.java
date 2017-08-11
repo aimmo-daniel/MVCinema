@@ -59,7 +59,6 @@ public class MemoController {
 		dto.setUserid(userid);
 		dto.setIdx(idx);
 		String checkid = detailService.checkUserid(dto);
-		System.out.print("체크아이디임:"+checkid);
 		MemoDTO dto2=new MemoDTO();
 		dto2.setUserid(checkid);
 		return dto2;
