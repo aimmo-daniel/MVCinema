@@ -62,7 +62,7 @@ public class MovieController {
   //신규영화 추가
   @RequestMapping("/movie/addMovie.do")
   public String add_newMovie(HttpServletRequest request, MultipartFile filePreview, MultipartFile filePoster, Model model,
-      HttpSession session) throws Exception {
+      HttpSession session, @RequestParam MultipartFile[] multipartFile) throws Exception {
 
     /*
      * form에서 넘어온 데이터 가공 후 dto에 넣기
@@ -133,9 +133,28 @@ public class MovieController {
     FtpClient ftpSender = new FtpClient("");
     ftpSender.upload(fPreview, "/video/" + previewName);
     ftpSender.upload(fPoster, "/img/" + posterName);
+    
+    //스틸컷 작업
+    //multipart파일을 가공하여
+    //ftpclient를 이용해 서버에 스틸컷이미지 업로드
+    File[] stillcut= new File[multipartFile.length];
+    String[] stillcutName= new String[multipartFile.length];
+    for (int i=0; i<multipartFile.length; i++){
+      stillcutName[i]= primarykey+"_"+"stillcut"+(i+1)+multipartFile[i].getOriginalFilename().substring(multipartFile[i].getOriginalFilename().lastIndexOf("."));
+      stillcut[i]= new File(stillcutName[i]);
+      multipartFile[i].transferTo(stillcut[i]);
+      ftpSender.upload(stillcut[i], "/stillcut/"+stillcutName[i]);
+    }
+    
 
+    int addedIdx= movieService.nowAddedMovieIDX(); //방금등록한 영화의 고유번호 가져오기
+    Map<String, Object> map= new HashMap<>();
+    map.put("idx", addedIdx);
+    map.put("img_url", stillcutName);
     //모든 작업 완료 후 db에 신규영화 정보 등록
     movieService.insertMovie(dto);
+    //stillcut정보 등록
+    movieService.insertStillcut(map);
     
     //상태결과값 담아 포워딩
     model.addAttribute("result", "addMovie");

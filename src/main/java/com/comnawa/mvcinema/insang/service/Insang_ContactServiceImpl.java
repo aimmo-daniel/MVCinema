@@ -58,4 +58,14 @@ public class Insang_ContactServiceImpl implements Insang_ContactService{
     contactDao.insertFaq(map);
   }
   
+  @Override
+  public boolean deleteFaq(int idx) {
+    return contactDao.deleteFaq(idx);
+  }
+  
+  @Override
+  public boolean deleteCategory(int idx) {
+    return contactDao.deleteCategory(idx);
+  }
+  
 }

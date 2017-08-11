@@ -22,7 +22,7 @@
           <td style="width: 30%; border-right: 1px solid lightgray;">
             <label>카테고리</label>
           </td>
-          <td style="width: 70%;">
+          <td style="width: 70%;" colspan="2">
             <label>질문</label>
           </td>
         </tr>
@@ -34,9 +34,12 @@
             <td>
               <label>${row.question}</label>
             </td>
+            <td style="width: 10%;">
+              <input type="button" class="btn btn-danger" value="삭제" style="float: right; width: 100%;" onclick="faq_delAsk('${row.idx}')">
+            </td>
           </tr>
           <tr id="ask${row.idx}" style="display: none;">
-            <td colspan="2">
+            <td colspan="3">
               <label style="font-size: 20px; color: green; padding: 10px;">
                 ${row.ask}
               </label>
@@ -54,7 +57,7 @@
       <!-- category -->
       <table class="table table-default">
         <tr>
-          <td style="text-align: center;" colspan="2">
+          <td style="text-align: center;" colspan="3">
             <label style="font-size: 17px;">카테고리명</label>
           </td>
         </tr>
@@ -65,6 +68,9 @@
             </td>
             <td style="text-align: center; width: 70%;">
               <label style="font-size: 20px; color: green;">${row.category}</label>
+            </td>
+            <td>
+              <input type="button" value="삭제" class="btn btn-danger" onclick="faq_delCategory('${row.idx}')">
             </td>
           </tr>
         </c:forEach>
@@ -120,9 +126,41 @@
   </div>
   
 <script>
+
+function faq_delCategory(idx){
+  if (confirm("카테고리 삭제시 이 카테고리가 적용되어있는 faq또한 삭제됩니다.\n진행하시겠습니까?")){
+    $.ajax({
+      type: "get",
+      url: "${path}/subMenu/member/deleteCategory.do?idx="+idx,
+      success: function(result){
+        if (result=='success'){
+          alert("삭제 성공");
+          faq_submenu('category');
+        }
+      }
+    })
+  }
+}
+
+function faq_delAsk(idx){
+  if (confirm("삭제하시겠습니까?")){
+    $.ajax({
+      type: "get",
+      url: "${path}/subMenu/member/deleteFaq.do?idx="+idx,
+      success: function(result){
+        if (result=='success'){
+          alert("삭제 성공");
+          faq_submenu('faq');
+        }
+      }
+    })
+  }
+}
+
 function faq_showAsk(idx){
   $("#ask"+idx).toggle();
 }
+
 $("#insert_category").click(function(){
   var value= $("#category_name").val();
   $.ajax({
@@ -136,6 +174,7 @@ $("#insert_category").click(function(){
     }
   })
 });
+
 $("#insert_faq2").click(function(){
   var question= $("#faq_question").val();
   var ask= $("#faq_ask").val();
@@ -153,6 +192,7 @@ $("#insert_faq2").click(function(){
     }
   })
 });
+
 </script>
 </body>
 </html>

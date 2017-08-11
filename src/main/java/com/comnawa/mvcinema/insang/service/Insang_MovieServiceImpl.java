@@ -63,4 +63,14 @@ public class Insang_MovieServiceImpl implements Insang_MovieService {
     movieDao.delMovie(idx);
   }
   
+  @Override
+  public int nowAddedMovieIDX() {
+    return movieDao.nowAddedMovieIDX();
+  }
+  
+  @Override
+  public void insertStillcut(Map<String, Object> map) {
+    movieDao.insertStillcut(map);
+  }
+  
 }

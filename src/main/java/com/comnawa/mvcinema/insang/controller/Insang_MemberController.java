@@ -113,4 +113,26 @@ public class Insang_MemberController {
     return "success";
   }
   
+  //faq 삭제
+  @ResponseBody
+  @RequestMapping("deleteFaq.do")
+  public String deleteFaq(@RequestParam String idx){
+    if (contactService.deleteFaq(Integer.parseInt(idx))){
+      return "success";
+    } else {
+      return "fail";
+    }
+  }
+  
+  //category 삭제
+  @ResponseBody
+  @RequestMapping("deleteCategory.do")
+  public String deleteCategory(@RequestParam String idx){
+    if (contactService.deleteCategory(Integer.parseInt(idx))){
+      return "success";
+    } else {
+      return "fail";
+    }
+  }
+  
 }

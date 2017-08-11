@@ -16,4 +16,6 @@ public interface Insang_ContactDAO {
   public List<Insang_CategoryDTO> getCategoryList();
   public void insertCategory(String category);
   public void insertFaq(Map<String, Object> map);
+  public boolean deleteFaq(int idx);
+  public boolean deleteCategory(int idx);
 }

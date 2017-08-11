@@ -28,6 +28,16 @@
   display: none;
 }
 </style>
+<script>
+function loadThumb(value){
+  var reader = new FileReader();
+  reader.onload= function(e){
+    //이미지 추가 코드
+    //$('#LoadImg').attr('src', e.target.result);
+  }
+  reader.readAsDataURL(value.files[0]);
+}
+</script>
 </head>
 <body>
 
@@ -85,6 +95,29 @@
           <td>영화 포스터</td>
           <td><input type="file" name="filePoster" id="filePoster"></td>
         </tr>
+        <tr>
+          <td>출연진 사진</td>
+          <td>
+            <input type="file" name="" id="">
+          </td>
+        </tr>
+        <tr>
+          <td>영화 썸네일</td>
+          <td>
+            <input type="file" name="multipartFile" id="img_thumb" onchange="onImageThumb();" multiple>
+            <br><label> ( 여러파일 동시선택 가능 ) </label>
+          </td>
+        </tr>
+        <tr id="thumbResult" style="display:none;">
+          <td colspan="3">
+            <table class="table table-default" style="border: none; width: 100%;" border="">
+              <tr>
+                <td>b</td>
+                <td>a</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
         <tr align="center">
           <td colspan="2" style="padding-top: 30px;"><input type="button" id="btnCancel" value="작성취소" class="btn btn-defulat"
             style="color: white;"> &nbsp; <input type="button" id="btnReset" value="다시작성하기" class="btn btn-defulat"
@@ -96,8 +129,9 @@
 
   <div>
     <label for="sub_movie_mod_lab">
-      <p class="wow fadeIn lab" data-wow-delay="0s" id="sub_movie_mod_lab" style="font-size: 20px; margin: 40px 20px 20px 20px;">영화
-        관리</p>
+      <p class="wow fadeIn lab" data-wow-delay="0s" id="sub_movie_mod_lab" style="font-size: 20px; margin: 40px 20px 2px 20px;">
+        영화 관리
+      </p>
     </label>
   </div>
   
@@ -184,6 +218,16 @@
   <!-- ===================== ㅅㅋ리트 ㄱ가 -->
   <!-- ===================== ㅡㅡㅂㅡ ㅜㄴ -->
   <script>
+  
+  function onImageThumb(){
+    $("#thumbResult").show();
+	var files= document.getElementById("img_thumb").files;
+	for (var i=0; i<files.length; i++){
+	  alert(files[i].name);
+	}
+	
+  }
+  
   function showModForm(idx) {
     /*
      * 영화관리창 영화 상세정보 페이지 벨류 등록

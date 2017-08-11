@@ -17,4 +17,6 @@ public interface Insang_MovieDAO {
   public ScreenInfoDTO getScheduleDetail(int idx);
   public void modSchedule(Map<String, Object> map);
   public void delMovie(int idx);
+  public int nowAddedMovieIDX();
+  public void insertStillcut(Map<String, Object> map);
 }

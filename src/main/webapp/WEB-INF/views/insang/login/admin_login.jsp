@@ -22,12 +22,14 @@
 <!-- Google web font --> 
 <link href='${path}/admin/resources/template/css/fontSansPro.css' rel='stylesheet' type='text/css'>
 <script>
-$(function(){
+$(function(){ //페이지가 새로 로딩되면
+  //주소창에 admin hash 달기
   document.location.href=document.location.href.split('#')[0]+"#admin";
+  //스크롤 리셋 함수 실행
   scrollReset();
 })
 
-$(window).bind('hashchange',function(){
+$(window).bind('hashchange',function(){ //해시가 바뀌었을시 콜백함수
   var menuName= document.location.hash.split('#')[1];
   if (menuName.indexOf('Theater_detailTheater')!= -1){
     var idx= menuName.split('?')[1];

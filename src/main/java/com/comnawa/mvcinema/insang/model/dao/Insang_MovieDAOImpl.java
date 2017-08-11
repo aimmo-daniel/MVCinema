@@ -1,5 +1,6 @@
 package com.comnawa.mvcinema.insang.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,6 +62,23 @@ public class Insang_MovieDAOImpl implements Insang_MovieDAO{
   @Override
   public void delMovie(int idx) {
     sqlSession.delete("admin.delMovie", idx);
+  }
+  
+  @Override
+  public int nowAddedMovieIDX() {
+    return sqlSession.selectOne("admin.nowAddedIDX");
+  }
+  
+  @Override
+  public void insertStillcut(Map<String, Object> map) {
+    String[] img_urls= (String[])map.get("img_url");
+    int idx= (int)map.get("idx");
+    for (String t: img_urls){
+      Map<String, Object> map1= new HashMap<>();
+      map1.put("img_url", t);
+      map1.put("idx", idx);
+      sqlSession.insert("admin.insertStillcut", map1);
+    }
   }
   
 }
