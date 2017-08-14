@@ -48,6 +48,9 @@
   <tr style="text-align: right;">
     <td colspan="2">
       <input type="button" value="수정 완료!!" class="btn btn-success" id="btnModSchedule">
+      <label id="insang_spinner" style="display: none;">
+        <img style="width: 30px;" src='${path}/admin/resources/adminImages/loader.gif'>
+      </label>
       <input type="hidden" value="${dto.screen_idx}" id="screenIDX">
     </td>
   </tr>
@@ -66,6 +69,8 @@ $("#btnModSchedule").click(function(screen_idx){
     return;
   }
   if (confirm("이 내용으로 상영일정을 수정하시겠습니까?")){
+    $("#btnModSchedule").hide();
+    $("#insang_spinner").show();
     var theaterIDX= $("#theaterIDX option:selected").val();
     var starttime= $("#sDate").val()+$("#sTime").val();
     var movieIDX= $("#movieIDX option:selected").val();

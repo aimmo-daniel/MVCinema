@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.comnawa.mvcinema.insang.model.dto.GenreDTO;
 import com.comnawa.mvcinema.insang.model.dto.Insang_MovieDTO;
 import com.comnawa.mvcinema.insang.model.dto.ScreenInfoDTO;
+import com.comnawa.mvcinema.sangjin.model.dto.StillcutDTO;
 
 @Repository
 public class Insang_MovieDAOImpl implements Insang_MovieDAO{
@@ -79,6 +80,16 @@ public class Insang_MovieDAOImpl implements Insang_MovieDAO{
       map1.put("idx", idx);
       sqlSession.insert("admin.insertStillcut", map1);
     }
+  }
+  
+  @Override
+  public List<StillcutDTO> getStillCut(int idx) {
+    return sqlSession.selectList("admin.getStillCut", idx);
+  }
+  
+  @Override
+  public void deleteStillcut(int idx) {
+    sqlSession.delete("admin.deleteStillCut", idx);
   }
   
 }

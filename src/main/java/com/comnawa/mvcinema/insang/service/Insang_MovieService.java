@@ -6,6 +6,7 @@ import java.util.Map;
 import com.comnawa.mvcinema.insang.model.dto.GenreDTO;
 import com.comnawa.mvcinema.insang.model.dto.Insang_MovieDTO;
 import com.comnawa.mvcinema.insang.model.dto.ScreenInfoDTO;
+import com.comnawa.mvcinema.sangjin.model.dto.StillcutDTO;
 
 public interface Insang_MovieService {
   public List<GenreDTO> getGenreList();
@@ -19,4 +20,6 @@ public interface Insang_MovieService {
   public void delMovie(int idx);
   public int nowAddedMovieIDX();
   public void insertStillcut(Map<String, Object> map);
+  public List<StillcutDTO> getStillCut(int idx);
+  public void deleteStillcut(int idx);
 }

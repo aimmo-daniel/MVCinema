@@ -40,6 +40,8 @@ $(function(){
       $("#addTheater_preview").focus();
       return;
     }
+    $("#btnAddTheaterDetail").hide();
+    $("#insang_spinner").show();
     document.form1.submit();
   })
 })
@@ -82,7 +84,11 @@ $(function(){
           <td colspan="2"><textarea id="addTheater_preview" name="preview"></textarea></td>
         </tr>
         <tr>
-          <td colspan="3" align="right"><button type="button" id="btnAddTheaterDetail">등록 긔긔</button></td>
+          <td colspan="3" align="right"><button type="button" id="btnAddTheaterDetail">등록 긔긔</button>
+          <label id="insang_spinner" style="display: none;">
+            <img style="width: 30px;" src='${path}/admin/resources/adminImages/loader.gif'>
+          </label>
+          </td>
         </tr>
       </table>
     </form>

@@ -11,6 +11,7 @@ import com.comnawa.mvcinema.insang.model.dao.Insang_MovieDAO;
 import com.comnawa.mvcinema.insang.model.dto.GenreDTO;
 import com.comnawa.mvcinema.insang.model.dto.Insang_MovieDTO;
 import com.comnawa.mvcinema.insang.model.dto.ScreenInfoDTO;
+import com.comnawa.mvcinema.sangjin.model.dto.StillcutDTO;
 
 @Service
 public class Insang_MovieServiceImpl implements Insang_MovieService {
@@ -71,6 +72,16 @@ public class Insang_MovieServiceImpl implements Insang_MovieService {
   @Override
   public void insertStillcut(Map<String, Object> map) {
     movieDao.insertStillcut(map);
+  }
+  
+  @Override
+  public List<StillcutDTO> getStillCut(int idx) {
+    return movieDao.getStillCut(idx);
+  }
+  
+  @Override
+  public void deleteStillcut(int idx) {
+    movieDao.deleteStillcut(idx);
   }
   
 }

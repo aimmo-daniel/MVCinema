@@ -58,6 +58,9 @@
     <p style="font-weight: bold; color: red;">
       <input type="text" disabled style="width: 80%;" name="add_seat_empty" id="add_seat_empty" value="${theater_sit_empty_result}">
       <input type="button" value="저장" style="float: right;" class="btn btn-success" id="btn_save">
+      <label id="insang_spinner" style="display: none;">
+        <img style="width: 30px;" src='${path}/admin/resources/adminImages/loader.gif'>
+      </label>
       <input type="hidden" value="${idx}" id="idxx">
     </p>
   </div>
@@ -82,6 +85,8 @@
   }
   
   $("#btn_save").click(function(){
+    $("#btn_save").hide();
+    $("#insang_spinner").show();
     var param= "sit="+$("#add_seat_empty").val()+"&idx="+$("#idxx").val();
     $.ajax({
       type: "get",

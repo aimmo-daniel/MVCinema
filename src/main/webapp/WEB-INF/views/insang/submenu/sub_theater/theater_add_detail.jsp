@@ -24,6 +24,8 @@ $(function(){
   
   $("#btnDelTheater").click(function(){
     if (confirm('정말 삭제하시겠습니까?')){
+      $("#btnDelTheater").hide();
+      $("#insang_spinner").show();
       $.ajax({
         type:"get",
         url: "${path}/subMenu/theater_delTheater.do?idx="+$("#primaryIDX").val(),
@@ -56,6 +58,8 @@ $(function(){
       $("#addTheater_preview").focus();
       return;
     }
+    $("#btnAddTheaterDetail").hide();
+    $("#insang_spinner").show();
     document.form1.submit();
   })
 })
@@ -105,6 +109,9 @@ $(function(){
           <td colspan="3" align="right">
             <input type="button" value="삭제 긔긔" class="btn btn-danger" style="margin-right: 20px;" id="btnDelTheater">
             <button type="button" id="btnAddTheaterDetail" class="btn btn-success">수정 긔긔</button>
+            <label id="insang_spinner" style="display: none;">
+              <img style="width: 30px;" src='${path}/admin/resources/adminImages/loader.gif'>
+            </label>
           </td>
         </tr>
       </table>

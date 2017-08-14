@@ -28,16 +28,6 @@
   display: none;
 }
 </style>
-<script>
-function loadThumb(value){
-  var reader = new FileReader();
-  reader.onload= function(e){
-    //이미지 추가 코드
-    //$('#LoadImg').attr('src', e.target.result);
-  }
-  reader.readAsDataURL(value.files[0]);
-}
-</script>
 </head>
 <body>
 
@@ -98,7 +88,7 @@ function loadThumb(value){
         <tr>
           <td>출연진 사진</td>
           <td>
-            <input type="file" name="" id="">
+            <input type="file" name="fileActors" id="fileActors">
           </td>
         </tr>
         <tr>
@@ -111,9 +101,7 @@ function loadThumb(value){
         <tr id="thumbResult" style="display:none;">
           <td colspan="3">
             <table class="table table-default" style="border: none; width: 100%;" border="">
-              <tr>
-                <td>b</td>
-                <td>a</td>
+              <tr id="thumb_resultt1">
               </tr>
             </table>
           </td>
@@ -121,7 +109,11 @@ function loadThumb(value){
         <tr align="center">
           <td colspan="2" style="padding-top: 30px;"><input type="button" id="btnCancel" value="작성취소" class="btn btn-defulat"
             style="color: white;"> &nbsp; <input type="button" id="btnReset" value="다시작성하기" class="btn btn-defulat"
-            style="color: white;"> &nbsp; <input type="button" id="btnOk" value="작성완료" class="btn btn-success"></td>
+            style="color: white;"> &nbsp; <input type="button" id="btnOk" value="작성완료" class="btn btn-success">
+            <label id="insang_spinner" style="display: none;">
+              <img style="width: 30px;" src='${path}/admin/resources/adminImages/loader.gif'>
+            </label>
+          </td>
         </tr>
       </table>
     </form>
@@ -202,11 +194,37 @@ function loadThumb(value){
             <td style="width: 120px;"><img src="ad.png" id="mod_img"></td>
             <td><input type="hidden" name="img_url" id="mod_img_url" value=""></td>
           </tr>
+          <tr>
+          <td>출연진 사진</td>
+          <td>
+            <input type="file" name="fileActors" id="mod_fileActors" onchange="$('#mod_act_img_url').val($('#mod_fileActors').val())">
+          </td>
+          <td style="width: 300px; height: auto;">
+            <img src="ad.png" id="mod_act_img_url">
+            <input type="hidden" name="act_img_url" id="mod_act_img_url_hidden">
+          </td>
+          </tr>
+          <tr>
+            <td>영화 스틸컷</td>
+            <td colspan="2">
+              <input type="file" name="multipartFile" id="mod_img_thumb" onchange="mod_onImageThumb();" multiple>
+              <br><label> ( 여러파일 동시선택 가능 ) </label>
+            </td>
+          </tr>
+          <tr id="mod_thumbResult" style="display:none;">
+            <td colspan="3">
+              <table class="table table-default" style="border: none; width: 100%;" border="">
+              </table>
+            </td>
+          </tr>
           <tr align="center">
             <td colspan="2" style="padding-top: 30px;">
               <input type="button" id="mod_btnCancel" value="수정취소" class="btn btn-defulat" style="color: white;"> &nbsp; 
               <input type="button" id="mod_btnDel" value="영화삭제" class="btn btn-danger" onclick="delMovie()"> &nbsp; 
-              <input type="button" id="mod_btnOk" value="수정완료" class="btn btn-success" onclick="modMovie()"> 
+              <input type="button" id="mod_btnOk" value="수정완료" class="btn btn-success" onclick="modMovie()">
+              <label id="mod_insang_spinner" style="display: none;">
+                <img style="width: 30px;" src='${path}/admin/resources/adminImages/loader.gif'>
+              </label>
               <input type="hidden" name="mod_idx" id="mod_idx" value="0">
             </td>
           </tr>
@@ -217,15 +235,55 @@ function loadThumb(value){
 
   <!-- ===================== ㅅㅋ리트 ㄱ가 -->
   <!-- ===================== ㅡㅡㅂㅡ ㅜㄴ -->
+  
+  
   <script>
   
   function onImageThumb(){
     $("#thumbResult").show();
 	var files= document.getElementById("img_thumb").files;
+	var nodeIdx=1;
 	for (var i=0; i<files.length; i++){
-	  alert(files[i].name);
-	}
-	
+	  $("#thumbResult td table tr").html("");
+	  if (i != 0 && i % 4  == 0){
+	    nodeIdx++;
+	    $("#thumbResult td table").append("<tr id='thumb_resultt"+nodeIdx+"'></tr>");
+	  }
+	  addThumb(files[i], nodeIdx);
+	}	  
+  }
+  
+  function addThumb(file, idx){
+    var node= $("#thumb_resultt"+idx);
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+  	reader.onload= function(){
+      node.append("<td align='center'><img src='"+reader.result+"' style='width: 120px; height: 100px;'></td>");
+    }
+  }
+  
+  function mod_onImageThumb(){
+    $("#mod_thumbResult td table").html("");
+    $("#mod_thumbResult td table").append("<tr id='mod_thumb_resultt1'></tr>");
+    $("#mod_thumbResult").show();
+	var files= document.getElementById("mod_img_thumb").files;
+	var nodeIdx=1;
+	for (var i=0; i<files.length; i++){
+	  if (i != 0 && i % 4  == 0){
+	    nodeIdx++;
+	    $("#mod_thumbResult td table").append("<tr id='mod_thumb_resultt"+nodeIdx+"'></tr>");
+	  }
+	  mod_addThumb(files[i], nodeIdx);
+	}	  
+  }
+  
+  function mod_addThumb(file, idx){
+    var node= $("#mod_thumb_resultt"+idx);
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+  	reader.onload= function(){
+      node.append("<td align='center'><img src='"+reader.result+"' style='width: 120px; height: 100px;'></td>");
+    }
   }
   
   function showModForm(idx) {
@@ -250,8 +308,10 @@ function loadThumb(value){
         $("#mod_video").html((result.dto.preview != null) ? result.dto.preview : '영상없음');
         $("#mod_img").attr("src",
             "http://192.168.0.69/mvcinema/img/" + result.dto.img_url);
+        $("#mod_act_img_url").attr("src","${act_img_ad}/"+result.dto.act_img_url);
         $("#mod_img_url").val(result.dto.img_url);
         $("#mod_preview").val(result.dto.preview);
+        $("#mod_act_img_url_hidden").val(result.dto.act_img_url);
 
         var genres = [];
         genres = result.dto.genre.split(',');
@@ -262,9 +322,35 @@ function loadThumb(value){
             }
           }
         }
+        
+        $("#mod_thumbResult td table").html("");
+        
+        var stillcutRow;
+        if ((result.stillcut.length/4) %1 == 0){
+          stillcutRow= result.stillcut.length/4;
+        } else {
+          stillcutRow= parseInt((result.stillcut.length/4)+1);
+        }
+        for (var i=0; i<stillcutRow; i++){
+          $("#mod_thumbResult td table").append("<tr id='mod_thumb_resultt"+(i+1)+"'></tr>");
+        }
+        
+        var stillcutLength= result.stillcut.length;
+        var stillrow= 1;
+        var aCount=0;
+        for (var k=0; k<stillcutLength; k++){
+          if (aCount != 0 && aCount % 4 == 0){
+            stillrow++;
+          }
+          $("#mod_thumb_resultt"+stillrow).append("<td align='center'><img src='${stc}/"+result.stillcut[k].img_url+"' style='width: 100%; height: auto;'></td>");
+          aCount++;
+        }
+        
+        $("#mod_thumbResult").show();
         fnMove();
       }
     });
+	    
   }
 
   function changeDate(date) {
@@ -281,6 +367,8 @@ function loadThumb(value){
   function delMovie(){
     var idx= $("#mod_idx").val();
     if (confirm("정말 삭제하시겠습니까?")){
+      $("#mod_btnDel").hide();
+      $("#mod_insang_spinner").show();
       $.ajax({
         type: "get",
         url: "${path}/subMenu/movie/delMovie.do",
@@ -315,6 +403,10 @@ function loadThumb(value){
     var content = $("#mod_content").val();
     var release_date = $("#mod_release_date").val();
     var runtime = $("#mod_runtime").val();
+    var act_img= $("#mod_act_img_url").val();
+    if (act_img==""){
+      
+    }
     var filePreview = ($("#mod_filePreview").val() == '') ? $("#mod_img_url")
         .val() : $("#mod_filePreview").val();
     var filePoster = ($("#mod_filePoster").val() == '') ? $("#mod_preview").val()
@@ -356,6 +448,8 @@ function loadThumb(value){
       alert("입력하지 않은 항목이 있습니다.");
       return;
     }
+    $("#btn_modOk").hide();
+    $("#mod_insang_spinner").show();
     // -- end
     document.form2.submit();
   }
@@ -482,6 +576,8 @@ function loadThumb(value){
               return;
             }
             // -- end
+            $("#btnOk").hide();
+            $("#insang_spinner").show();
             document.form1.submit();
           });
   </script>

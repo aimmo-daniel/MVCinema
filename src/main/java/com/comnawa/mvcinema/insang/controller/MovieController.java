@@ -27,6 +27,7 @@ import com.comnawa.mvcinema.insang.model.dto.Insang_MovieDTO;
 import com.comnawa.mvcinema.insang.model.dto.TheaterDTO;
 import com.comnawa.mvcinema.insang.service.Insang_MovieService;
 import com.comnawa.mvcinema.insang.service.TheaterService;
+import com.comnawa.mvcinema.sangjin.model.dto.StillcutDTO;
 
 /*
  * 영화관련기능 컨트롤러
@@ -62,7 +63,7 @@ public class MovieController {
   //신규영화 추가
   @RequestMapping("/movie/addMovie.do")
   public String add_newMovie(HttpServletRequest request, MultipartFile filePreview, MultipartFile filePoster, Model model,
-      HttpSession session, @RequestParam MultipartFile[] multipartFile) throws Exception {
+      HttpSession session, @RequestParam MultipartFile[] multipartFile, MultipartFile fileActors) throws Exception {
 
     /*
      * form에서 넘어온 데이터 가공 후 dto에 넣기
@@ -146,13 +147,21 @@ public class MovieController {
       ftpSender.upload(stillcut[i], "/stillcut/"+stillcutName[i]);
     }
     
+    //출연진 사진 작업
+    String act_img_url= primarykey+"_"+fileActors.getOriginalFilename().substring(fileActors.getOriginalFilename().lastIndexOf("."));
+    File fileAct_img_url= new File(act_img_url);
+    fileActors.transferTo(fileAct_img_url);
+    ftpSender.upload(fileAct_img_url, "/act_img/"+act_img_url);
+    
+    dto.setAct_img_url(act_img_url);
 
+    //작업 완료 후 db에 신규영화 정보 등록
+    movieService.insertMovie(dto);
+    
     int addedIdx= movieService.nowAddedMovieIDX(); //방금등록한 영화의 고유번호 가져오기
     Map<String, Object> map= new HashMap<>();
     map.put("idx", addedIdx);
     map.put("img_url", stillcutName);
-    //모든 작업 완료 후 db에 신규영화 정보 등록
-    movieService.insertMovie(dto);
     //stillcut정보 등록
     movieService.insertStillcut(map);
     
@@ -175,6 +184,10 @@ public class MovieController {
     }
     //수정을위한 장르리스트 map에 저장
     map.put("genreList", movieService.getGenreList());
+    
+    //stillcut받아와서 담기
+    map.put("stillcut", movieService.getStillCut(idx));
+    
     //자료 리턴
     return map;
   }
@@ -189,19 +202,22 @@ public class MovieController {
   //영화 수정
   @RequestMapping("/movie/modMovie.do")
   public String modMovie(HttpServletRequest request, MultipartFile filePreview, MultipartFile filePoster, Model model,
-      HttpSession session) throws Exception {
-
+      HttpSession session, @RequestParam MultipartFile[] multipartFile) throws Exception {
+    
     FtpClient ftpSender = new FtpClient("");
 
     // db에 등록된 파일명 null처리
     String originImg = "";
     String originVid = "";
+    String originAct = "";
     for (Insang_MovieDTO foo : movieService.getMovieList()) {
       if (foo.getIdx() == Integer.parseInt(request.getParameter("mod_idx"))) {
         originImg = ( foo.getImg_url()==null || foo.getImg_url().equals("null") ) ?
         		"null" : foo.getImg_url();
         originVid = ( foo.getPreview()==null || foo.getPreview().equals("null") ) ?
         		"null" : foo.getPreview();
+        originAct = ( foo.getAct_img_url()==null || foo.getAct_img_url().equals("null"))?
+            "null" : foo.getAct_img_url();
         break;
       }
     }
@@ -209,6 +225,7 @@ public class MovieController {
     //신규등록한 파일이 있을경우 경로를 제외하고 파일명만 뽑아서 변수에 저장
     String re_preview= request.getParameter("preview");
     String re_img_url= request.getParameter("img_url");
+    String re_act_img= request.getParameter("act_img_url");
     if (re_preview.indexOf("C:\\fakepath\\")!= -1){
       int start=request.getParameter("preview").lastIndexOf("\\")+1;
       re_preview = request.getParameter("preview").substring(start);
@@ -217,16 +234,22 @@ public class MovieController {
       int start= request.getParameter("img_url").lastIndexOf("\\")+1;
       re_img_url = request.getParameter("img_url").substring(start);
     }
-
+    if (re_act_img.indexOf("C:\\fakepath\\")!= -1){
+      int start= request.getParameter("act_img_url").lastIndexOf("\\")+1;
+      re_act_img= request.getParameter("act_img_url").substring(start);
+    }
+    
     /*
      * form에서 넘어온 데이터 가공 후 dto에 넣기
      */
     long primarykey = System.currentTimeMillis();
     String previewName="";
     String posterName="";
+    String act_imgName="";
     //db에 등록된 파일명과 새로 넘어온 파일명이 같을경우 처리
     previewName = (originImg.equals(re_preview)) ? originVid : re_preview;
     posterName = (originVid.equals(re_img_url)) ? originImg : re_img_url;
+    act_imgName= (originAct.equals(re_act_img)) ? originAct : re_act_img;
     //dto를 만들어 자료를 저
     Insang_MovieDTO dto = new Insang_MovieDTO();
     dto.setIdx(Integer.parseInt(request.getParameter("mod_idx")));
@@ -247,6 +270,7 @@ public class MovieController {
     dto.setRelease_date(release_date);
     dto.setPreview(previewName);
     dto.setImg_url(posterName);
+    dto.setAct_img_url(act_imgName);
 
     /*
      * MultipartFile 동영상 디렉토리에 복사
@@ -277,6 +301,7 @@ public class MovieController {
     //파일객체 선언 후 위에 선언한 이름으로 객체에 파일 넣기
     File fPreview = new File(previewName);
     File fPoster = new File(posterName);
+    File fActimg= new File(act_imgName);
     FileOutputStream fos = new FileOutputStream(fPreview);
     fos.write(filePreview.getBytes());
     fos.flush();
@@ -285,8 +310,12 @@ public class MovieController {
     fos.write(filePoster.getBytes());
     fos.flush();
     fos.close();
+    fos = new FileOutputStream(fActimg);
+    fos.write(filePoster.getBytes());
+    fos.flush();
+    fos.close();
 
-    // 이미지 혹은 영상이 바뀌었다면 기존파일 삭제
+    // 이미지 혹은 영상이 바뀌었다면 기존파일 삭제후 재업로드
     if (!originImg.equals(re_img_url)) {
       ftpSender.delete("/img/" + originImg);
       ftpSender.upload(fPoster, "/img/" + posterName);
@@ -294,6 +323,38 @@ public class MovieController {
     if (!originVid.equals(re_preview)) {
       ftpSender.delete("/video/" + originVid);
       ftpSender.upload(fPreview, "/video/" + previewName);
+    }
+    if (!originAct.equals(re_act_img)){
+      ftpSender.delete("/video/" + originAct);
+      ftpSender.upload(fActimg, "/act_img/"+act_imgName);
+    }
+    
+    //스틸컷 작업
+    //multipart파일을 가공하여
+    //ftpclient를 이용해 서버에 스틸컷이미지 업로드
+    String[] mod_stillcutName;
+    if (!multipartFile[0].getOriginalFilename().equals("")) {
+      //기존이미지 삭제
+      for (StillcutDTO foo: movieService.getStillCut(Integer.parseInt(request.getParameter("mod_idx")))){
+        ftpSender.delete("/stillcut/"+foo.getImg_url());
+      }
+      //이미지 업로드
+      File[] stillcut = new File[multipartFile.length];
+      String[] stillcutName = new String[multipartFile.length];
+      for (int i = 0; i < multipartFile.length; i++) {
+        stillcutName[i] = primarykey + "_" + "stillcut" + (i + 1)
+            + multipartFile[i].getOriginalFilename().substring(multipartFile[i].getOriginalFilename().lastIndexOf("."));
+        stillcut[i] = new File(stillcutName[i]);
+        multipartFile[i].transferTo(stillcut[i]);
+        ftpSender.upload(stillcut[i], "/stillcut/" + stillcutName[i]);
+      }
+      Map<String, Object> map= new HashMap<>();
+      map.put("idx", Integer.parseInt(request.getParameter("mod_idx")));
+      map.put("img_url", stillcutName);
+      //db에서 기존 스틸컷 정보 삭제
+      movieService.deleteStillcut(Integer.parseInt(request.getParameter("mod_idx")));
+      //stillcut정보 등록
+      movieService.insertStillcut(map);
     }
 
     //모든작업 완료 후 update

@@ -17,6 +17,7 @@ public class Insang_MovieDTO {
   int runtime; // 영화시간
   String img_url; // 포스터이미지 링크
   String preview; // 예고편 링크
+  String act_img_url;
 
   public Insang_MovieDTO() {
     super();
@@ -24,7 +25,7 @@ public class Insang_MovieDTO {
   }
 
   public Insang_MovieDTO(int idx, String title, int age, double grade, double rank, int people, String director, String actors,
-      String content, String genre, Date release_date, int runtime, String img_url, String preview) {
+      String content, String genre, Date release_date, int runtime, String img_url, String preview, String act_img_url) {
     super();
     this.idx = idx;
     this.title = title;
@@ -40,6 +41,7 @@ public class Insang_MovieDTO {
     this.runtime = runtime;
     this.img_url = img_url;
     this.preview = preview;
+    this.act_img_url= act_img_url;
   }
 
   @Override
@@ -159,6 +161,14 @@ public class Insang_MovieDTO {
 
   public void setPreview(String preview) {
     this.preview = preview;
+  }
+  
+  public void setAct_img_url(String act_img_url) {
+    this.act_img_url = act_img_url;
+  }
+  
+  public String getAct_img_url() {
+    return act_img_url;
   }
 
 }

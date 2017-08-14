@@ -45,7 +45,12 @@
     </td>
   </tr>
   <tr style="text-align: right;">
-    <td colspan="2"><input type="button" value="등록 완료!!" class="btn btn-success" id="btnAddSchedule"></td>
+    <td colspan="2">
+      <input type="button" value="등록 완료!!" class="btn btn-success" id="btnAddSchedule">
+      <label id="insang_spinner" style="display: none;">
+        <img style="width: 30px;" src='${path}/admin/resources/adminImages/loader.gif'>
+      </label>
+    </td>
   </tr>
 </table>
 
@@ -61,6 +66,8 @@ $("#btnAddSchedule").click(function(){
     $("#sDate").focus();
     return;
   }
+    $("#btnAddSchedule").hide();
+    $("#insang_spinner").show();
   if (confirm("이 내용으로 상영일정을 등록하시겠습니까?")){
     var theaterIDX= $("#theaterIDX option:selected").val();
     var starttime= $("#sDate").val()+$("#sTime").val();

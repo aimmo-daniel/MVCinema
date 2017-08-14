@@ -73,13 +73,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </insert>
   
   <insert id="insertMovie">
-    INSERT INTO movie (idx, title, age, director, actors, content, genre, release_date, runtime, img_url, preview)
+    INSERT INTO movie (idx, title, age, director, actors, content, genre, release_date, runtime, img_url, preview, act_img_url)
     values (movie_idx_seq.nextval, #{title}, #{age}, #{director}, #{actors}, #{content}, #{genre}, #{release_date}, #{runtime}
-    , #{img_url}, #{preview})
+    , #{img_url}, #{preview}, #{act_img_url})
   </insert>
   
   <select id="nowAddedIDX" resultType="int">
     select max(idx) from movie
+  </select>
+  
+  <delete id="deleteStillCut">
+    delete from stillcut where idx= #{idx}
+  </delete>
+  
+  <select id="getStillCut" resultType="com.comnawa.mvcinema.sangjin.model.dto.StillcutDTO">
+    select img_url from stillcut where idx= #{idx}
   </select>
   
   <select id="movieList" resultType="com.comnawa.mvcinema.insang.model.dto.Insang_MovieDTO">
