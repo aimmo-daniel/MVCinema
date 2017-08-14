@@ -18,7 +18,7 @@ public class ContactDAOImpl implements ContactDAO {
 
 	@Override
 	public void insert(ContactDTO dto) {
-		sqlSession.insert("contact.insert", dto);
+		sqlSession.insert("support.insert", dto);
 	}
 
 	@Override
@@ -27,32 +27,32 @@ public class ContactDAOImpl implements ContactDAO {
 		map.put("userid", userid);
 		map.put("start", start);
 		map.put("end", end);
-		return sqlSession.selectList("contact.oto_list", map);
+		return sqlSession.selectList("support.oto_list", map);
 	}
 
 	@Override
 	public ContactDTO oto_view(int idx) {
-		return sqlSession.selectOne("contact.oto_view", idx);
+		return sqlSession.selectOne("support.oto_view", idx);
 	}
 
 	@Override
 	public int countOto(String userid) {
-		return sqlSession.selectOne("contact.countOto", userid);
+		return sqlSession.selectOne("support.countOto", userid);
 	}
 
 	@Override
 	public MemberDTO userInfo(String userid) {
-		return sqlSession.selectOne("contact.userInfo", userid);
+		return sqlSession.selectOne("support.userInfo", userid);
 	}
 
 	@Override
 	public void DeleteAll(String userid) {
-		sqlSession.delete("contact.deleteAll", userid);
+		sqlSession.delete("support.deleteAll", userid);
 	}
 
 	@Override
 	public void DeleteOne(int idx) {
-		sqlSession.delete("contact.deleteOne", idx);
+		sqlSession.delete("support.deleteOne", idx);
 	}
 
 }

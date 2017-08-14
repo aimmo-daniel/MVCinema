@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
-<mapper namespace="contact">
+<mapper namespace="support">
 	
 	<select id="oto_view" resultType="com.comnawa.mvcinema.sangjin.model.dto.ContactDTO">
 		select idx, c.userid, name, m.email, c.title, c.content, c.admin_content, c.admin_post_date
@@ -16,8 +16,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from admin_contact where userid=#{userid}
 	</select>
 	
+	<select id="countfaq" resultType="int">
+		select count(*) from faq
+	</select>
+	
 	<select id="userInfo" resultType="com.comnawa.mvcinema.sungwon.model.member.dto.MemberDTO">
 		select userid, name, email from member where userid=#{userid}
+	</select>
+	
+	<select id="notice" resultType="com.comnawa.mvcinema.sangjin.model.dto.NoticeDTO">
+		select * from notice
 	</select>
 
 	<select id="oto_list" resultType="com.comnawa.mvcinema.sangjin.model.dto.ContactDTO">
