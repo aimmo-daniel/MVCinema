@@ -51,4 +51,44 @@ public class TIcketDAOImpl implements TicketDAO {
 		return sqlSession.insert("ticket.insertTicket",dto);
 	}
 
+	@Override
+	public int updatepeople(TicketDTO dto) {
+		return sqlSession.update("ticket.updatepeople",dto);
+	}
+
+	@Override
+	public int discount_seat(TicketDTO dto) {
+		return sqlSession.update("ticket.discountseat",dto);
+	}
+
+	@Override
+	public int updateSeat(TicketDTO dto) {
+		return sqlSession.insert("ticket.update_outseat",dto);
+	}
+
+	@Override
+	public List<TicketDTO> myTicketList(String t_userid) {
+		return sqlSession.selectList("ticket.myTicketList",t_userid);
+	}
+
+	@Override
+	public int cancelTicket(int ticket_idx) {
+		return sqlSession.delete("ticket.cancel_ticket",ticket_idx);
+	}
+
+	@Override
+	public int cancelSeat(TicketDTO dto) {
+		return sqlSession.delete("ticket.cancel_seat",dto);
+	}
+
+	@Override
+	public int plus_seat(TicketDTO dto) {
+		return sqlSession.update("ticket.plus_seat",dto);
+	}
+
+	@Override
+	public int minus_people(TicketDTO dto) {
+		return sqlSession.update("ticket.minus_people",dto);
+	}
+
 }
