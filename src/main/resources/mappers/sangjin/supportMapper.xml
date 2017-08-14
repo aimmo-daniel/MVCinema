@@ -16,8 +16,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from admin_contact where userid=#{userid}
 	</select>
 	
-	<select id="countfaq" resultType="int">
-		select count(*) from faq
+	<select id="countFaq" resultType="int" parameterType="java.lang.String">
+		select count(*)
+		from faq f, faq_category c 
+		where f.category_idx=c.idx and c.category='${value}'
+	</select>
+	
+	<select id="faq_view" resultType="com.comnawa.mvcinema.sangjin.model.dto.FaqDTO">
+		select * from faq where idx=#{idx}
+	</select>
+	
+	<select id="list_faq" resultType="com.comnawa.mvcinema.sangjin.model.dto.FaqDTO">
+		<include refid="paging_header" />
+		select f.idx, category, question
+		from faq f, faq_category c
+		where f.category_idx=c.idx and c.category='${keyword}'
+		<include refid="paging_footer" />
 	</select>
 	
 	<select id="userInfo" resultType="com.comnawa.mvcinema.sungwon.model.member.dto.MemberDTO">
