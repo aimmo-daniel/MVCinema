@@ -245,14 +245,20 @@ function final_payment(){
 	}
 	var param = "t_userid=${sessionScope.dto.userid}"+"&t_title="+title
 	+"&t_age="+age+"&t_start_time="+select_date+"&t_theater="+theater_name
-	+"&t_people="+people+"&t_seat="+seat+"&t_price="+total_price; 
-	alert(param);
+	+"&t_people="+people+"&t_seat="+seat+"&t_price="+total_price+"&screen_idx="+${screen_idx}; 
+	/* alert(param); */
 	$.ajax({
 		type:"post",
 		url:"${path}/ticket/payment.do",
 		data:param,
 		success: function(result){
-			alert(result.message);
+			if(result.message == 'fail'){
+				alert("예매에 실패하였습니다. 잠시후 다시시 도해주세요");
+				return;
+			}else{
+				alert("예매가 완료되었습니다.\n 예매내역은 myPage에서 확인가능합니다.");
+				document.location.href="${path}";
+			}
 		}
 	});
 }

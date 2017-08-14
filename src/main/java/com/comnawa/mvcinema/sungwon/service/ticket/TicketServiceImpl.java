@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.comnawa.mvcinema.sungwon.model.ticket.dao.TicketDAO;
 import com.comnawa.mvcinema.sungwon.model.ticket.dto.TicketDTO;
@@ -49,10 +50,42 @@ public class TicketServiceImpl implements TicketService {
 	public List<TicketDTO> soldout_seat(int screen_idx) {
 		return ticketDao.soldout_seat(screen_idx);
 	}
-
+	
+	@Transactional
 	@Override
 	public int insertTicket(TicketDTO dto) {
+		ticketDao.discount_seat(dto);
+		ticketDao.updatepeople(dto);
+		String tmp_seat = dto.getT_seat();
+		String out_seat[] = tmp_seat.split(",");
+		for(int i=0; i<out_seat.length; i++){
+			dto.setSeat_out(out_seat[i]);
+			ticketDao.updateSeat(dto);
+		}
 		return ticketDao.insertTicket(dto);
+	}
+
+	@Override
+	public List<TicketDTO> myTicketList(String t_userid) {
+		return ticketDao.myTicketList(t_userid);
+	}
+	
+	@Transactional
+	@Override
+	public int cancel(TicketDTO dto) {
+		int ticket_idx = dto.getTicket_idx(); 
+		int result = ticketDao.cancelTicket(ticket_idx);
+		TicketDTO dto2 = new TicketDTO();
+		String seat_out[] = dto.getT_seat().split(",");
+		for(int i=0; i<seat_out.length; i++){
+			dto2.setScreen_idx(dto.getScreen_idx());
+			dto2.setSeat_out(seat_out[i]);
+			result = ticketDao.cancelSeat(dto2);
+		}
+		dto.setT_people(seat_out.length);
+		result = ticketDao.plus_seat(dto);
+		result = ticketDao.minus_people(dto);
+		return result;
 	}
 
 }

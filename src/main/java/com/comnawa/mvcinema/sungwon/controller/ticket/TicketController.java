@@ -8,6 +8,7 @@ import java.util.Random;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -137,9 +138,11 @@ public class TicketController {
 		return dto;
 	}
 	
+	@ResponseBody
 	@RequestMapping("payment.do")
-	public ModelAndView payment(HttpServletRequest request, ModelAndView mav){
+	public JSONObject payment(HttpServletRequest request, ModelAndView mav){
 		
+	JSONObject json = new JSONObject();	
 	TicketDTO dto = new TicketDTO();	
 	
 	String t_userid = request.getParameter("t_userid");
@@ -150,6 +153,7 @@ public class TicketController {
 	int t_people = Integer.parseInt(request.getParameter("t_people"));
 	String t_seat[] = request.getParameterValues("t_seat");
 	int t_price = Integer.parseInt(request.getParameter("t_price"));
+	int screen_idx = Integer.parseInt(request.getParameter("screen_idx"));
 	
 	System.out.println(t_title);
 	
@@ -169,6 +173,7 @@ public class TicketController {
 	dto.setT_theater(t_theater);
 	dto.setT_people(t_people);
 	dto.setT_price(t_price);
+	dto.setScreen_idx(screen_idx);
 	String t_seat_str = "";
 	for(int  i=0; i<t_seat.length; i++){
 		t_seat_str += t_seat[i];
@@ -181,18 +186,46 @@ public class TicketController {
 	System.out.println(dto.toString());
 	int result = ticketService.insertTicket(dto);
 	if(result > 0){
-		mav.addObject("message","success");
+		json.put("message","success");
 	}else{
-		mav.addObject("message","fail");
+		json.put("message","fail");
 	}
-	mav.setViewName("sungwon/ticket/select_seat_people");
 	
 	
-	return mav;
+	return json;
 	}
 	
 	@RequestMapping("payment_page.do")
 	public String payment_page(){
 		return "/sungwon/ticket/payment";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("myTicketList.do")
+	public JSONObject myTicketList(String t_userid){
+		System.out.println("아이디:"+t_userid);
+		JSONObject json = new JSONObject();
+		List<TicketDTO> list = ticketService.myTicketList(t_userid+"");
+		json.put("list", list);
+		System.out.println(list.toString());
+		return json;
+	}
+	@ResponseBody
+	@RequestMapping("cancel.do")
+	public JSONObject cancel(String ticket_idx,String screen_idx,String t_seat,String t_title){
+		JSONObject json = new JSONObject();
+			TicketDTO dto = new TicketDTO();
+			dto.setTicket_idx(Integer.parseInt(ticket_idx));
+			dto.setScreen_idx(Integer.parseInt(screen_idx));	
+			dto.setT_seat(t_seat);
+			dto.setT_title(t_title);
+			int result = ticketService.cancel(dto);
+			if(result > 0){
+				json.put("message", "success");
+			}else{
+				json.put("message", "fail");
+			}
+		return json;
 	}
 }
