@@ -5,45 +5,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="movie">
-
-	<select id="movie_list" resultType="com.comnawa.mvcinema.sangjin.model.dto.MovieDTO" parameterType="String">
-		select idx, img_url, age, title, release_date, (select round(avg(score),1)*2 from memo where idx=m.idx) ord
-		from movie m order by ${value} desc nulls last
-	</select>
 	
-	<select id="Sort_grade" resultType="com.comnawa.mvcinema.sangjin.model.dto.MovieDTO">
+	<!-- 오늘날짜 기준으로 45일 전까지 개봉한 영화만 출력-->
+	<select id="movie_list" resultType="com.comnawa.mvcinema.sangjin.model.dto.MovieDTO" parameterType="String">
 		select idx, img_url, age, title, release_date,
-		(select round(avg(score),1)*2 from memo where idx=m.idx) ord
-		from movie m order by ord desc nulls last
+		(select round(avg(score),1)*2 from memo where idx=m.idx) grade
+		from movie m
+		where release_date > current_date-45
+		order by ${value} desc nulls last
 	</select>
 	
 	<select id="scdmovie_list" resultType="com.comnawa.mvcinema.sangjin.model.dto.MovieDTO">
 		select idx, img_url, age, title, release_date,
-		(select round(avg(score),1)*2 from memo where idx=m.idx) ord
+		(select round(avg(score),1)*2 from memo where idx=m.idx) grade
 		from movie m
 		where release_date > CURRENT_DATE order by release_date
 	</select>
 	
 	<select id="movie_detail" resultType="com.comnawa.mvcinema.sangjin.model.dto.MovieDTO">
 		select idx, title, age, director, actors, content, genre,
-		release_date, runtime, img_url, preview, rank, people, act_img_url,
-		(select round(avg(score),1)*2 from memo where idx=m.idx) ord
+		release_date, runtime, img_url, preview, people, act_img_url,
+		(select round(avg(score),1)*2 from memo where idx=m.idx) grade
 		from movie m where idx=#{idx}
 	</select>
 
 
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

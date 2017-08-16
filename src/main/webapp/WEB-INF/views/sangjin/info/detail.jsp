@@ -109,7 +109,7 @@ function buy_ticket(idx){
 			<div style="position: relative; left: 250px; top: -250px;">
 				<input id="movie_idx" type="hidden" value="${dto.idx}"/>
 				<h2>[ ${dto.title} ] <br></h2>
-				<span style="color: red; font-size: 18pt;">★${dto.ord}</span>
+				<span style="color: red; font-size: 18pt;">★${dto.grade}</span>
 				<hr>
 				<b>개봉 :</b> <fmt:formatDate value="${dto.release_date}" pattern="yyyy.MM.dd" /><br> 
 				<b>감독 :</b> ${dto.director}<br>

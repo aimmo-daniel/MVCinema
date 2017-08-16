@@ -31,37 +31,21 @@ li {
 	function listMovie() {
 		var order_type = $("#order_type").val();
 		if (order_type == undefined) {
-			order_type = String("rank");
+			order_type = String("grade");
 		}
-		if (order_type == 'grade'){
-			$.ajax({
-				type : "get",
-				url : "${path}/sort2.do?order_type=" + order_type,
-				success : function(result) {
-					$("#listMovie").html(result);
-					$("#order_type").show();
-					$("#btnSearch").show();
-					$("#expand").show();
-					$("#hr_name").html("무비차트");
-					$("#on_2").removeClass("on");
-					$("#on_1").addClass("on");
-				}
-			});		
-		}else{
-			$.ajax({
-				type : "get",
-				url : "${path}/sort.do?order_type=" + order_type,
-				success : function(result) {
-					$("#listMovie").html(result);
-					$("#order_type").show();
-					$("#btnSearch").show();
-					$("#expand").show();
-					$("#hr_name").html("무비차트");
-					$("#on_2").removeClass("on");
-					$("#on_1").addClass("on");
-				}
-			});
-		}
+		$.ajax({
+			type : "get",
+			url : "${path}/sort.do?order_type=" + order_type,
+			success : function(result) {
+				$("#listMovie").html(result);
+				$("#order_type").show();
+				$("#btnSearch").show();
+				$("#expand").show();
+				$("#hr_name").html("무비차트");
+				$("#on_2").removeClass("on");
+				$("#on_1").addClass("on");
+			}
+		});		
 	}
 	
 	function scheduleMovie() {
