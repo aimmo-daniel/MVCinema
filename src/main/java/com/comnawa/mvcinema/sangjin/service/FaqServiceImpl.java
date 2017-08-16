@@ -23,10 +23,4 @@ public class FaqServiceImpl implements FaqService {
 	public List<FaqDTO> list_faq(int start, int end, String keyword) throws Exception {
 		return faqDao.list_faq(start, end, keyword);
 	}
-
-	@Override
-	public FaqDTO faq_view(int idx) {
-		return faqDao.faq_view(idx);
-	}
-
 }

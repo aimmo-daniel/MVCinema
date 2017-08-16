@@ -72,7 +72,6 @@ public class MemoController {
 		dto.setMemo(memo);
 		dto.setUserid(userid);
 		detailService.insert(dto);
-		System.out.println("디티오임~~~:"+dto);
 		return "redirect:/info/detail/"+dto.getIdx();
 	}
 
@@ -90,7 +89,6 @@ public class MemoController {
 		dto.setMemo(memo);
 		dto.setScore(score);
 		dto.setComment_num(comment_num);
-		System.out.println("디티오임:"+dto);
 		detailService.update(dto);
 		return "redirect:/info/detail/"+dto.getIdx();
 	}

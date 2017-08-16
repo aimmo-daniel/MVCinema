@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>MVCINEMA</title>
 <%@ include file="../../include/header.jsp"%>
+<%@ include file="../../sangjin/sj_include/session_check.jsp"%>
 <%@ include file="../../include/template.jsp"%>
 <%@ include file="../../sangjin/sj_include/sangjincss.jsp"%>
 <script>

@@ -2,11 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../../include/header.jsp"%>
 <script>
-//글읽기
-function view(idx){
-	location.href="${path}/support/faq_view?idx="+idx;
-}
-
 $("select").on("change",(function(){
 	var keyword = $("#keyword").val();
 	$.ajax({
@@ -17,6 +12,17 @@ $("select").on("change",(function(){
 		}
 	});
 }));
+
+function faq_showAsk(idx){
+	if($("#ask"+idx).prop("hidden")==true){
+		$("[id^=ask]").hide();
+		$("#ask"+idx).show();
+		$("#ask"+idx).prop("hidden", false);
+	}else{
+		$("#ask"+idx).hide();
+		$("#ask"+idx).prop("hidden", true);
+	}
+}
 
 //페이지넘기기
 function faq_list(page) {
@@ -75,13 +81,24 @@ function faq_list(page) {
 		<tr style="background: #0082bf; color:white;">
 			<th style="width:10%; text-align:center;">번호</th>
 			<th style="width:20%; text-align:center;">분류</th>
-			<th style="width:70%; text-align:center;">제목</th>
+			<th style="width:70%; text-align:center;">질문</th>
 		</tr>
 		<c:forEach var="row" items="${map.list}">
 			<tr>
 				<td style="text-align: center;">${row.idx}</td>
-				<td style="text-align: center;">${row.category}</td>
-				<td><a href="javascript:view('${row.idx}')">${row.question}</a></td>
+				<td style="text-align: center;"><b style="color: green;">${row.category}</b></td>
+				<td onclick="faq_showAsk('${row.idx}');"><b style="color:#0082bf;">${row.question}</b></td>
+			</tr>
+         	<%
+				pageContext.setAttribute("newLineChar", "\n");
+			%>
+			<!-- 공백문자 처리 -->
+			<c:set var="str" value="${fn:replace(row.ask,'  ','&nbsp;&nbsp;')}" />
+			<tr id="ask${row.idx}" hidden="hidden">
+				<td colspan="4" style="text-align:right;">
+					<b><textarea style="resize: none;" readonly="readonly"
+						id="content" name="content" rows="15" cols="75"><%="\n\n"%>${str}</textarea></b>
+				</td>
 			</tr>
 		</c:forEach>
 		<!-- 페이지 네비게이션 -->
