@@ -16,7 +16,7 @@ response.setHeader("Expires", "0"); // Proxies. %>
 					<div class="brand">
 						<a href="${path}">MVCINEMA</a>
 					</div>
-				</div>
+				</div> 
 			</div>
 		</div>
 	</nav>
