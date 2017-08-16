@@ -79,7 +79,7 @@ function video() {
 		}
 	});
 }
-
+ 
 //예매하기버튼 하이퍼링크
 function buy_ticket(idx){
 	location.href="${path}/ticket/movie_ticket_page.do?movie_idx="+idx;
