@@ -22,6 +22,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     select * from notice
   </select>
   
+  <delete id="delSchedule">
+    delete from screen_info where screen_idx= #{idx}
+  </delete>
+  
   <update id="modifyNotice">
     update notice set title= #{title}, content= #{content}, post_date= sysdate
   </update>
@@ -55,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   
   <insert id="addTheater1">
-    insert into theater values(#{idx}, #{name}, #{max}, 0, #{price}, #{preview}, #{max})
+    insert into theater values(#{idx}, #{name}, #{max}, #{price}, #{preview}, #{max})
   </insert>
   
   <insert id="addTheater2">
@@ -63,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </insert>
   
   <update id="updateTheater1">
-    update theater set idx=#{idx}, name= #{name}, seat_max= #{max}, seat_out= 0, price= #{price}, preview= #{preview}
+    update theater set idx=#{idx}, name= #{name}, seat_max= #{max}, price= #{price}, preview= #{preview}
     where name= #{primaryName} 
   </update>
   

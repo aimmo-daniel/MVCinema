@@ -444,6 +444,12 @@ public class MovieController {
     model.addAttribute("movieList", movieService.getMovieList());
     return "/insang/submenu/sub_movie/movie_batch_mod";
   }
+  
+  @ResponseBody
+  @RequestMapping("/movie/delSchedulePage.do")
+  public boolean delSchedulePage(String idx){
+    return movieService.delSchedule(Integer.parseInt(idx));
+  }
 
   //상영시간표 수정
   @RequestMapping("/movie/modSchedule.do")

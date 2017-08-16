@@ -39,7 +39,7 @@
   </div>
 
   <div style="display: none;" id="sub_movie_addMovie_div" class="sub_sub_lab">
-    <form name="form1" method="post" action="${path}/subMenu/movie/addMovie.do" enctype="multipart/form-data">
+    <form name="form1" method="post" id="form1" action="${path}/subMenu/movie/addMovie.do" enctype="multipart/form-data">
       <table class="table table-default">
         <tr>
           <td>영화제목</td>
@@ -220,7 +220,6 @@
           <tr align="center">
             <td colspan="2" style="padding-top: 30px;">
               <input type="button" id="mod_btnCancel" value="수정취소" class="btn btn-defulat" style="color: white;"> &nbsp; 
-              <input type="button" id="mod_btnDel" value="영화삭제" class="btn btn-danger" onclick="delMovie()"> &nbsp; 
               <input type="button" id="mod_btnOk" value="수정완료" class="btn btn-success" onclick="modMovie()">
               <label id="mod_insang_spinner" style="display: none;">
                 <img style="width: 30px;" src='${path}/admin/resources/adminImages/loader.gif'>

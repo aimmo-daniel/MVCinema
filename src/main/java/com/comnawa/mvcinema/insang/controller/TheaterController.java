@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.comnawa.mvcinema.insang.model.dto.TheaterDTO;
@@ -38,8 +39,9 @@ public class TheaterController {
   }
   
   //상영관 추가
+  @ResponseBody
   @RequestMapping("theater_addTheaterDetail")
-  public String theater_addTheaterDetail(HttpServletRequest request, Model model){
+  public boolean theater_addTheaterDetail(HttpServletRequest request, Model model){
     //입력된 상영관 상세자료를 가공 후 map에 담음 
     Map<String, Object> map= new HashMap<>();
     map.put("idx", request.getParameter("idx"));
@@ -51,15 +53,14 @@ public class TheaterController {
     map.put("max", Integer.parseInt(request.getParameter("rows")) * Integer.parseInt(request.getParameter("cols")));
     //모델에 자료 삽입 요청
     theaterService.addTheater(map);
-    //결과값 model객체에 저장
-    model.addAttribute("result","addTheater");
     //결과반환
-    return "/insang/login/admin_login";
+    return true;
   }
   
   //상영관 상세정보, 수정
+  @ResponseBody
   @RequestMapping("theater_updateTheater.do")
-  public String theater_updateTheater(HttpServletRequest request, Model model){
+  public boolean theater_updateTheater(HttpServletRequest request, Model model){
     //수정된 자료를 가공 후 map에 담음
     Map<String, Object> map= new HashMap<>();
     map.put("primaryIDX", request.getParameter("primaryIDX"));
@@ -73,9 +74,8 @@ public class TheaterController {
     map.put("max", Integer.parseInt(request.getParameter("rows")) * Integer.parseInt(request.getParameter("cols")));
     //모델에 자료 수정 요청
     theaterService.updateTheater(map);
-    //결과값 셋팅 후 반환
-    model.addAttribute("result", "modTheater");
-    return "/insang/login/admin_login";
+    //결과 반환
+    return true;
   }
   
   //상영관 삭제
@@ -161,13 +161,14 @@ public class TheaterController {
   }
   
   //사용할수 없는 좌석정보 상세페이지( 수정 및 추가 )
+  @ResponseBody
   @RequestMapping("/theater/updateSit.do")
-  public String updateSit(HttpServletRequest request){
+  public boolean updateSit(HttpServletRequest request){
     //사용할 수 없는 좌석정보 의 길이, 몇개를 사용할수없는지, 상영관 고유번호 를 받아와 자료 가공 후
     //모델에 update 요청후 빈페이지 반환
     int sitCount= String.valueOf(request.getParameter("sit")).split(",").length;
     theaterService.updateSit(String.valueOf(request.getParameter("sit")), Integer.parseInt(request.getParameter("idx")), sitCount);
-    return "/insang/test";
+    return true;
   }
   
   //상영관 추가 중간 페이지

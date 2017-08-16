@@ -84,4 +84,9 @@ public class Insang_MovieServiceImpl implements Insang_MovieService {
     movieDao.deleteStillcut(idx);
   }
   
+  @Override
+  public boolean delSchedule(int idx) {
+    return movieDao.delSchedule(idx);
+  }
+  
 }

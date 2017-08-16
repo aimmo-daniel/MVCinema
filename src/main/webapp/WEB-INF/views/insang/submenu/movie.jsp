@@ -14,7 +14,7 @@
     <div class="container" style="margin-bottom: 20px; transition: color 1s;" >
       <div class="row">
         <div class="wow fadeInUp col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-4" data-wow-delay="0.1s">
-          <a href="#theater_add">
+          <a href="#movie_add">
             <label for="zzo_addTheater1" onmouseover="sub_theater('sub_sub_mouseOver', 'over', 'sub_theater_1')"
               onmouseout="sub_theater('sub_sub_mouseOver','out','sub_theater_1')" onclick="sub_movie_loadSub('sub_movie_1')"
               id="zzo_addTheater1_label">
@@ -26,7 +26,7 @@
               </div>
             </label>
           </a>
-          <a href="#theater_sit">
+          <a href="#movie_schedule">
             <label for="zzo_addTheater2" onmouseover="sub_theater('sub_sub_mouseOver','over','sub_theater_2')"
               onmouseout="sub_theater('sub_sub_mouseOver','out','sub_theater_2')" onclick="sub_movie_loadSub('sub_theater_2')"
               id="zzo_addTheater2_label">

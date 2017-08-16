@@ -24,7 +24,7 @@
 <script>
 $(function(){ //페이지가 새로 로딩되면
   //주소창에 admin hash 달기
-  document.location.href=document.location.href.split('#')[0]+"#admin";
+  location.hash="admin";
   //스크롤 리셋 함수 실행
   scrollReset();
 })
@@ -210,9 +210,9 @@ $(window).bind('hashchange',function(){ //해시가 바뀌었을시 콜백함수
             <li>
               <a href="#member" id="section_member"><b>고객센터 관리</b></a>
             </li>
-            <li>
+            <!-- <li>
               <a href="#option" id="section_option"><b>통계</b></a>
-            </li>
+            </li> -->
           </ul>
         </c:if>
       </div>
@@ -243,6 +243,6 @@ $(window).bind('hashchange',function(){ //해시가 바뀌었을시 콜백함수
   <!-- insang Javascript -->
   <script src="${path}/subMenu/resources/template/js/zzo_main.js?v1" charset="utf-8"></script>
   <script src="${path}/subMenu/resources/template/js/zzo_main_theater.js?v2" charset="utf-8"></script>
-  <script src="${path}/subMenu/resources/template/js/zzo_main_movie.js?v3" charset="utf-8"></script>
+  <script src="${path}/subMenu/resources/template/js/zzo_main_movie.js?v5" charset="utf-8"></script>
 </body>
 </html>

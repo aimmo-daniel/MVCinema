@@ -92,4 +92,9 @@ public class Insang_MovieDAOImpl implements Insang_MovieDAO{
     sqlSession.delete("admin.deleteStillCut", idx);
   }
   
+  @Override
+  public boolean delSchedule(int idx) {
+    return sqlSession.delete("admin.delSchedule", idx) > 0 ? true : false;
+  }
+  
 }
