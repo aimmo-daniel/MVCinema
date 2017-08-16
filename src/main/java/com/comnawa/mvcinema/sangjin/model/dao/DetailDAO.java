@@ -13,4 +13,5 @@ public interface DetailDAO {
 	public void delete(int comment_num);
 	public void update(MemoDTO dto);
 	public String checkUserid(MemoDTO dto);
+	public int signoutMemo(String userid);
 }

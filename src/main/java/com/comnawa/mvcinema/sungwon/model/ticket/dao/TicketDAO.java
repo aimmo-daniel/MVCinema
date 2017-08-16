@@ -20,4 +20,7 @@ public interface TicketDAO {
 	public int cancelSeat(TicketDTO dto);
 	public int plus_seat(TicketDTO dto);
 	public int minus_people(TicketDTO dto);
+	public int delete_ticket(String t_serial_num);
+	public List<TicketDTO> date_screen_time(TicketDTO dto);
+	public TicketDTO date_selectTime(int screen_idx);
 }

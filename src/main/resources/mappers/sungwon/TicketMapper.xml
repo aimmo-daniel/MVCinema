@@ -21,6 +21,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		movie_idx=#{movie_idx}
 		order by start_time
 	</select>
+	<select id="date_screenTime" resultType="TicketDTO">
+		select
+		screen_idx,m.title,m.age,start_time,t.name t_name,empty_sit
+		from screen_info s, theater t, movie m
+		where s.theater_idx=t.idx and movie_idx= m.idx and  
+		start_time > to_date(#{start_date},'yyyy-MM-dd')
+		and to_date(#{end_date},'yyyy-MM-dd') > start_time 
+		order by start_time
+	</select>
 	<select id="selectMovie" resultType="TicketDTO">
 		select title,age,img_url
 		from movie where idx=#{movie_idx}
@@ -89,6 +98,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update movie set people= people-#{t_people} where
 		title=#{t_title}
 	</update>
+	<delete id="delete_ticket">
+		delete from ticket where t_serial_num=#{t_serial_num}
+	</delete>
+	<select id="date_selectTime" resultType="TicketDTO">
+		select s.screen_idx ,start_time,t.name t_name,m.img_url,m.TITLE,m.AGE
+		from screen_info s, theater t, movie m
+		where s.theater_idx=t.idx and m.idx = s.movie_idx and s.screen_idx=#{screen_idx}
+	</select>
 </mapper>
 
 

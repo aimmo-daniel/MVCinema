@@ -82,7 +82,7 @@
 										+ result.list[i].t_serial_num
 										+ '<b></td></tr>'
 										+ '</table></td></tr>'
-										+ '<tr><td colspan="2" align="right"><input class="btn btn-danger" type="button" value="삭제" onclick=""></td></tr>'
+										+ '<tr><td colspan="2" align="right"><input class="btn btn-danger" type="button" value="삭제" onclick="t_delete(\''+result.list[i].t_serial_num+'\')"></td></tr>'
 										+ '</table>'
 							} else if (m_time > tmp_today) {
 								notyet += '<table class="table table-default"><tr>'
@@ -145,7 +145,6 @@
 											+ '\',\''
 											+ result.list[i].t_title
 											+ '\')"></td></tr>'
-									console.log(notyet);
 								}
 								+'</table>'
 							}
@@ -166,10 +165,13 @@
 		$("#myInfo").css("display", 'block');
 		$("#changePwd").css("display", 'none');
 	}
+	
+	//비밀번호 수정시 비밀번호 체크 폼
 	function checkPwd() {
 		$("#myInfo").css("display", 'none');
 		$("#modalPwd").modal();
 	}
+	//비밀번호 수정
 	function changePwd() {
 		var nowpwd = $("#now_pwd").val();
 		var param = "userid=${sessionScope.dto.userid}&passwd=" + nowpwd;
@@ -181,7 +183,6 @@
 			success : function(result) {
 				if (result.result == 'fail') {
 					$("#checkpwd_result").css("display", 'block');
-					alert("실패");
 				} else {
 					$("#now_pwd").val("");
 					$("#checkpwd_result").css("display", 'none');
@@ -294,12 +295,43 @@
 			});
 		}
 	}
+	//회원 탈퇴 폼
+	function check_signOut() {
+		if(confirm("정말로 탈퇴하시겠습니까?")){
+		$("#changePwd").css("display", 'none');
+		$("#myInfo").css("display", 'block');
+		$("#modalOut").modal();
+		}
+	}
+	//회원 탈퇴
+	function signOut(){
+		var nowpwd2 = $("#now_pwd2").val();
+		var param = "userid=${sessionScope.dto.userid}&passwd=" + nowpwd2;
+		console.log(param);
+		$.ajax({
+			type : "post",
+			url : "${path}/member/signout.do",
+			data : param,
+			success : function(result) {
+				if (result.message == 'fail') {
+					alert("회원 탈퇴에 실패하였습니다. \n\n비밀번호를 확인해주세요");
+					$("#now_pwd2").val("");
+				} else {
+					alert("회원 탈퇴 되었습니다.");
+					$("#now_pwd2").val("");
+					$("#now_pwd2").modal('hide');
+					document.location.href="${path}/logout.do";
+				}
+			}
+		});
+	}
 
 	function changeString(date) {
 		var tmp_time = new Date(date);
 		return tmp_time;
 	}
 	function t_cancel(t_idx, s_idx, t_seat, t_title) {
+		if(confirm("정말로 예매를 취소하시겠습니까?")){
 		$.ajax({
 			type : "get",
 			url : "${path}/ticket/cancel.do?ticket_idx=" + t_idx + "&screen_idx="
@@ -309,10 +341,27 @@
 					alert("예매가 취소 되었습니다.");
 					document.location.reload();
 				} else {
-					alert("예매가 취소에 실패하였습니다. 잠시 후 다시 시도해주세요");
+					alert("예매 취소에 실패하였습니다. 잠시 후 다시 시도해주세요");
 				} 
 			}
 		});
+		}
+	}
+	function t_delete(serial){
+		if(confirm("정말로 예매내역을 삭제하시겠습니까?")){
+			$.ajax({
+				type : "get",
+				url : "${path}/ticket/delete.do?t_serial_num="+serial ,
+				success : function(result) {
+					 if (result.message == 'success') {
+						alert("삭제가 완료 되었습니다.");
+						document.location.reload();
+					} else {
+						alert("삭제에 실패하였습니다. 잠시 후 다시 시도해주세요");
+					} 
+				}
+			});
+		}
 	}
 </script>
 </head>
@@ -334,7 +383,7 @@
 					<br>
 					<div class="project-info">
 						<input type="button" class="btn btn-warning" value="회원 탈퇴"
-							style="width: 100%">
+							style="width: 100%" onclick="check_signOut()">
 					</div>
 				</div>
 				<!-- 내정보 -->
@@ -412,7 +461,7 @@
 		</div>
 	</section>
 
-	<!-- 비밀번호 확인 modal -->
+	<!-- 비밀번호 변경 확인 modal -->
 	<div class="modal fade" id="modalPwd">
 		<div class="modal-dialog" style="width: 400px;">
 			<div class="modal-content" style="width: 400px;">
@@ -435,7 +484,29 @@
 			</div>
 		</div>
 	</div>
-
+	<!-- 회원 탈퇴 확인 modal -->
+	<div class="modal fade" id="modalOut">
+		<div class="modal-dialog" style="width: 400px;">
+			<div class="modal-content" style="width: 400px;">
+				<div class="modal-header" style="width: 400px;">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">비밀번호 확인</h4>
+				</div>
+				<div class="modal-body" style="width: 400px;">
+					<label>현재 비밀번호를 입력해주세요</label>
+					<input type="password" class="form-control" id="now_pwd2" placeholder="비밀번호">
+					<p id="checkout_result" style="color: red; display: none;">비밀번호가 일치하지
+						않습니다.</p>
+				</div>
+				<div class="modal-footer" style="width: 400px;">
+					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-primary" onclick="signOut()">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

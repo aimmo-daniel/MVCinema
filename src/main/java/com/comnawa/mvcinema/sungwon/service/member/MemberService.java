@@ -14,4 +14,5 @@ public interface MemberService {
 	public String findid(MemberDTO dto);
 	public String findpwd(MemberDTO dto);
 	public int changePwd(String userid, String passwd);
+	public int signout(String userid, String passwd);
 }

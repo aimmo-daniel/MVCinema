@@ -2,9 +2,12 @@ package com.comnawa.mvcinema.sungwon.service.member;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
+import javax.xml.soap.Detail;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.comnawa.mvcinema.sangjin.model.dao.DetailDAO;
 import com.comnawa.mvcinema.sungwon.model.member.dao.MemberDAO;
 import com.comnawa.mvcinema.sungwon.model.member.dto.MemberDTO;
 import com.comnawa.mvcinema.sungwon.service.SHA256;
@@ -18,7 +21,8 @@ public class MemberServiceImpl implements MemberService {
 	MemberDAO memberDao;
 	@Inject
 	SHA256 sha256;
-	
+	@Inject
+	DetailDAO detailDao;
 	
 	
 	@Override //아이디 중복확인
@@ -104,6 +108,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public String checkpwd(MemberDTO dto) {
+		System.out.println("비번확인"+dto.toString());
 		try {
 			String shapwd = sha256.getSha256(dto.getPasswd().getBytes());
 			System.out.println(shapwd);
@@ -115,4 +120,22 @@ public class MemberServiceImpl implements MemberService {
 		return name;
 	}
 
+
+	@Transactional
+	@Override
+	public int signout(String userid, String passwd) {
+		MemberDTO dto = new MemberDTO();
+		dto.setUserid(userid);
+		dto.setPasswd(passwd);
+		String name = checkpwd(dto);
+		System.out.println("이름:"+name);
+		int result = 0;
+		if(name == null){
+			return 0;
+		}else{
+			result = detailDao.signoutMemo(userid);
+			result = memberDao.signout(userid);
+		}
+		return result;
+	}
 }
