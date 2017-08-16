@@ -7,7 +7,7 @@
 <%@ include file="../../include/header.jsp"%>
 <%@ include file="../../include/template.jsp"%>
 <%@ include file="../../sangjin/sj_include/sangjincss.jsp"%>
-<title>1:1문의</title>
+<title>MVCINEMA</title>
 <style>
 th {
 	width: 80px;

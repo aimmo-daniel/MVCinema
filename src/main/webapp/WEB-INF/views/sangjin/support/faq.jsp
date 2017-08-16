@@ -4,20 +4,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>자주찾는질문</title>
+<title>MVCINEMA</title>
 <%@ include file="../../include/header.jsp"%>
 <%@ include file="../../include/template.jsp"%>
 <%@ include file="../../sangjin/sj_include/sangjincss.jsp"%>
 <script>
 $(document).ready(function() {
-	list_faq();
+	basic_set();
 });
 
-function list_faq(){
-	var keyword = $("#keyword").val();
-	if (keyword == undefined) {
-		keyword = String("all");
-	}
+function basic_set(){
+	var keyword = String("all");
 	$.ajax({
 		type : "get",
 		url : "${path}/support/list_faq?keyword=" + keyword,

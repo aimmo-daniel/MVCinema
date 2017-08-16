@@ -23,7 +23,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="faq_view" resultType="com.comnawa.mvcinema.sangjin.model.dto.FaqDTO">
-		select * from faq where idx=#{idx}
+		select c.category, question, ask
+		from faq f, faq_category c 
+		where f.category_idx=c.idx and f.idx=#{idx}
 	</select>
 	
 	<select id="list_faq" resultType="com.comnawa.mvcinema.sangjin.model.dto.FaqDTO">
@@ -31,6 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select f.idx, category, question
 		from faq f, faq_category c
 		where f.category_idx=c.idx and c.category='${keyword}'
+		order by idx
 		<include refid="paging_footer" />
 	</select>
 	

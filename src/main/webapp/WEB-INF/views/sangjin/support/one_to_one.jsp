@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>1:1문의 내역</title>
+<title>MVCINEMA</title>
 <%@ include file="../../include/header.jsp"%>
 <%@ include file="../../include/template.jsp"%>
 <%@ include file="../../sangjin/sj_include/sangjincss.jsp"%>

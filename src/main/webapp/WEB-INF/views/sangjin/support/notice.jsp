@@ -8,7 +8,7 @@
 <%@ include file="../../include/header.jsp"%>
 <%@ include file="../../include/template.jsp"%>
 <%@ include file="../../sangjin/sj_include/sangjincss.jsp"%>
-<title>공지사항</title>
+<title>MVCINEMA</title>
 </head>
 <body>
 	<%@ include file="../../sangjin/home/loginbar.jsp"%>
@@ -28,7 +28,7 @@
 			<tr>
 				<td>
 					<textarea style="resize: none;" readonly="readonly"
-							id="content" name="content" rows="15" cols="100">${str}</textarea>
+							id="content" name="content" rows="15" cols="100"><%="\n\n"%>${str}</textarea>
 				</td>
 			</tr>
 		</table>

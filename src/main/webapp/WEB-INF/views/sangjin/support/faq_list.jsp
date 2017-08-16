@@ -7,6 +7,17 @@ function view(idx){
 	location.href="${path}/support/faq_view?idx="+idx;
 }
 
+$("select").on("change",(function(){
+	var keyword = $("#keyword").val();
+	$.ajax({
+		type : "get",
+		url : "${path}/support/list_faq?keyword=" + keyword,
+		success : function(result) {
+			$("#faqlist").html(result);
+		}
+	});
+}));
+
 //페이지넘기기
 function faq_list(page) {
 	var keyword=$("#keyword").val();
@@ -28,8 +39,9 @@ function faq_list(page) {
 		</div>
 	</div>
 	<div class="sect-sorting" style="width:900px; height: auto; margin-left: 320px; margin-top: 50px;">
+	카테고리 : 
 	<label for="keyword" class="hidden">정렬</label>
-	 <select id="keyword" name="keyword" style="width: auto; height: 30px;">
+	 <select id="keyword" name="keyword" style="border:2px solid; width: auto; height: 30px;">
 		<c:choose>
 			<c:when test="${map.keyword == 'all' }">
 				<option value="all" selected>전체</option>
@@ -57,9 +69,6 @@ function faq_list(page) {
 			</c:otherwise>
 		</c:choose>
 	</select>
-	<button class="btn btn-primary" type="button" id="btnSearch" onclick="list_faq()">
-		<span>GO</span>
-	</button>
 	</div>
 	<div class="faq" style="width:900px; height: auto; margin-left: 320px;">
 	<table class="table table-bordered" style="width:900px;">

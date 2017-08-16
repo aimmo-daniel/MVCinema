@@ -91,7 +91,7 @@ function buy_ticket(idx){
 <!-- 메뉴바 -->
 <%@ include file="../../sangjin/home/loginbar.jsp"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>영화 상세정보</title>
+<title>MVCINEMA</title>
 </head>
 <body>
 	<!-- 영화 상세정보 표시 -->
