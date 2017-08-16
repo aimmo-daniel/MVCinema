@@ -86,7 +86,7 @@
 						<span class="label label-primary">${row.age}</span><b>${row.title}</b>
 					</c:if> 
 					<c:if test="${row.age == 0 }">
-						<span class="label label-success">전체이용가</span><b>${row.title}</b>
+						<span class="label label-success">전체</span><b>${row.title}</b>
 					</c:if>
 					<span class="txt-info"> 
 					<strong> <!-- 개봉일자 --> 

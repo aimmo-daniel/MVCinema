@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.comnawa.mvcinema.insang.model.dto.TheaterSitDTO;
+import com.comnawa.mvcinema.insang.service.TheaterService;
 import com.comnawa.mvcinema.sangjin.model.dto.MovieDTO;
 import com.comnawa.mvcinema.sangjin.service.MovieService;
 
@@ -27,6 +29,8 @@ import com.comnawa.mvcinema.sangjin.service.MovieService;
 public class HomeController {
 	@Inject
 	MovieService movieService;
+	@Inject
+	TheaterService theaterService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -43,6 +47,20 @@ public class HomeController {
 		map.put("list", list); //영화 목록
 		map.put("order_type", order_type); //예매율순, 관람객순
 		mav.addObject("map", map);
+		return mav;
+	}
+	
+	@RequestMapping("theater")
+	public ModelAndView theater(ModelAndView mav){
+	    mav.addObject("theaterList",theaterService.getTheaterList());
+	    mav.addObject("theaterSitList", theaterService.getTheaterSitList());
+	    mav.addObject("theater_sit_empty", theaterService.getTheaterSitEmpty());
+	    int max=0;
+	    for (TheaterSitDTO dto: theaterService.getTheaterSitList()){
+	      max= (max < dto.getSeat_row()) ? dto.getSeat_row() : max ;
+	    }
+	    mav.addObject("theaterSitMax", max);
+	    mav.setViewName("/sangjin/theater/theater");
 		return mav;
 	}
 	

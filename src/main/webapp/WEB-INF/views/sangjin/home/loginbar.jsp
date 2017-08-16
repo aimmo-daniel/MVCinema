@@ -1,3 +1,6 @@
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+response.setHeader("Expires", "0"); // Proxies. %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -11,7 +14,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="brand">
-						<a href="${path}">MVCinema</a>
+						<a href="${path}">MVCINEMA</a>
 					</div>
 				</div>
 			</div>
@@ -22,7 +25,7 @@
 	<ul>
 		<li class="topMenuLi"><a class="menuLink" href="${path}">무비차트</a></li>
 		<li class="topMenuLi"><a class="menuLink" href="${path}/ticket/movie_ticket_page.do">예매</a>	</li>
-		<li class="topMenuLi"><a class="menuLink" href="${path}">극장</a></li>
+		<li class="topMenuLi"><a class="menuLink" href="${path}/theater">상영관</a></li>
 		<li class="topMenuLi"><a class="menuLink" href="${path}/support/main">고객센터</a></li>
 		<li style="margin-left: 210px;" >
 			<c:choose>
