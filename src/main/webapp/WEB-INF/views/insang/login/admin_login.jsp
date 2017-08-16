@@ -109,7 +109,7 @@ $(window).bind('hashchange',function(){ //해시가 바뀌었을시 콜백함수
           <div class="row">
 
             <div class="brand">
-              <a href="${path}/admin/resources/loginpage.do">ADMIN PAGE</a>
+              <a href="${path}/admin/">ADMIN PAGE</a>
             </div>
 
             <div class="navicon">

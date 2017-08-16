@@ -18,6 +18,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     select * from theater_sit order by name
   </select>
   
+  <select id="getNotice" resultType="com.comnawa.mvcinema.sangjin.model.dto.NoticeDTO">
+    select * from notice
+  </select>
+  
+  <update id="modifyNotice">
+    update notice set title= #{title}, content= #{content}, post_date= sysdate
+  </update>
+  
   <delete id="delTheater">
     delete from theater where idx=#{idx}
   </delete>

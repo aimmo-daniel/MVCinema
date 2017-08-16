@@ -42,7 +42,19 @@ $(function(){
     }
     $("#btnAddTheaterDetail").hide();
     $("#insang_spinner").show();
-    document.form1.submit();
+    var idx= document.form1.idx.value;
+    var name
+    $.ajax({
+      type: "post",
+      url: "${path}/subMenu/theater_addTheaterDetail.do",
+      data: param,
+      success: function(result){
+        if (result){
+          alert("상영관 추가에 성공하였습니다.");
+          sub_theater_loadSub('sub_theater_1')
+        }
+      }
+    })
   })
 })
 </script>

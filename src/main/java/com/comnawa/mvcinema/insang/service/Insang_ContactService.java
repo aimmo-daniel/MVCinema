@@ -6,6 +6,7 @@ import java.util.Map;
 import com.comnawa.mvcinema.insang.model.dto.ContactDTO;
 import com.comnawa.mvcinema.insang.model.dto.Insang_CategoryDTO;
 import com.comnawa.mvcinema.insang.model.dto.Insang_FaqDTO;
+import com.comnawa.mvcinema.sangjin.model.dto.NoticeDTO;
 
 public interface Insang_ContactService {
   public List<ContactDTO> getContactList();
@@ -18,4 +19,6 @@ public interface Insang_ContactService {
   public void insertFaq(Map<String, Object> map);
   public boolean deleteFaq(int idx);
   public boolean deleteCategory(int idx);
+  public NoticeDTO getNotice();
+  public boolean modifyNotice(Map<String, Object> map);
 }
