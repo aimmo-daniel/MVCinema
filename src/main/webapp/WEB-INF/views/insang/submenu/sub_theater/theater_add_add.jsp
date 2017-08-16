@@ -42,7 +42,27 @@ $(function(){
     }
     $("#btnAddTheaterDetail").hide();
     $("#insang_spinner").show();
-    document.form1.submit();
+    var idx= document.form1.idx.value;
+    var name= document.form1.name.value;
+    var cols= document.form1.cols.value;
+    var rows= document.form1.rows.value;
+    var price= document.form1.price.value;
+    var preview= document.form1.preview.value;
+    var param= "idx="+idx+"&name="+name+"&cols="+cols+"&rows="+rows+"&price="+price+"&preview="+preview;
+    $.ajax({
+      type: "post",
+      url: "${path}/subMenu/theater_addTheaterDetail.do",
+      data: param,
+      success: function(result){
+        if (result){
+          alert("상영관 추가에 성공하였습니다.");
+          sub_theater_loadSub('sub_theater_1')
+        } else {
+          alert("상영관 추가에 실패하였습니다 다시 시도해주세요");
+          sub_theater_loadSub('sub_theater_1')
+        }
+      }
+    })
   })
 })
 </script>

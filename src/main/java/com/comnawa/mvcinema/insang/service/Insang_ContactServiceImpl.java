@@ -11,6 +11,7 @@ import com.comnawa.mvcinema.insang.model.dao.Insang_ContactDAO;
 import com.comnawa.mvcinema.insang.model.dto.ContactDTO;
 import com.comnawa.mvcinema.insang.model.dto.Insang_CategoryDTO;
 import com.comnawa.mvcinema.insang.model.dto.Insang_FaqDTO;
+import com.comnawa.mvcinema.sangjin.model.dto.NoticeDTO;
 
 @Service
 public class Insang_ContactServiceImpl implements Insang_ContactService{
@@ -66,6 +67,16 @@ public class Insang_ContactServiceImpl implements Insang_ContactService{
   @Override
   public boolean deleteCategory(int idx) {
     return contactDao.deleteCategory(idx);
+  }
+  
+  @Override
+  public NoticeDTO getNotice() {
+    return contactDao.getNotice();
+  }
+  
+  @Override
+  public boolean modifyNotice(Map<String, Object> map) {
+    return contactDao.modifyNotice(map);
   }
   
 }

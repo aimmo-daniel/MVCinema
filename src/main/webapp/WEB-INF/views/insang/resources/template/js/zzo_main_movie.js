@@ -19,8 +19,10 @@ function sub_movie_addMovie_div(value){
   var now=$('#'+value).css('display');
   if (now=='none'){
     $('#'+value).css('display','block')
+    location.hash="movie_add_NewAndMod";
   } else if (now== 'block'){
     $('#'+value).css('display','none');
+    location.hash="movie_add";
   }
   $("#zzo__modMovie_div").css('display','none');
 }

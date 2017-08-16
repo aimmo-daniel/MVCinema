@@ -3,6 +3,17 @@
 <html lang="en">
 <head>
 <%@ include file="../../include/header.jsp" %>
+<style>
+#zzo_addTheater1:hover {
+  transition: color 0.5s
+}
+#zzo_addTheater2:hover {
+  transition: color 0.5s
+}
+#zzo_addTheater3:hover {
+  transition: color 0.5s
+}
+</style>
 </head>
 <body>
 
@@ -13,9 +24,8 @@
       <div class="row">
         <div class="wow fadeInUp col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-4" data-wow-delay="0.1s">
           <a href="#member_contact">
-            <label for="zzo_addTheater1" onmouseover="sub_theater('sub_sub_mouseOver', 'over', 'sub_theater_1')"
-              onmouseout="sub_theater('sub_sub_mouseOver','out','sub_theater_1')" onclick="loadSub_memb('contact')"
-              id="zzo_addTheater1_label">
+            <label for="zzo_addTheater1" onmouseover="$('#sub_theater_1').css('color','green')"
+            onclick="loadSub_memb('contact')" onmouseout="$('#sub_theater_1').css('color','black')" id="zzo_addTheater1_label">
               <div class="project-info" id="zzo_addTheater1">
                 <h4 id="sub_theater_1">1:1문의 답변</h4>
                 <p>
@@ -25,11 +35,21 @@
             </label>
           </a>
           <a href="#member_faq">
-            <label for="zzo_addTheater2" onmouseover="sub_theater('sub_sub_mouseOver','over','sub_theater_2')"
-              onmouseout="sub_theater('sub_sub_mouseOver','out','sub_theater_2')" onclick="loadSub_memb('faq')"
-              id="zzo_addTheater2_label">
+            <label for="zzo_addTheater2" class="zzo_hover" onmouseover="$('#sub_theater_2').css('color','green')"
+            onclick="loadSub_memb('faq')" onmouseout="$('#sub_theater_2').css('color','black')" id="zzo_addTheater2_label">
               <div class="project-info" id="zzo_addTheater2">
                 <h4 id="sub_theater_2">FAQ 관리</h4>
+                <p>
+                  FAQ.
+                </p>
+              </div>
+            </label>
+          </a>
+          <a href="#member_notice">
+            <label for="zzo_addTheater2" class="zzo_hover" onmouseover="$('#sub_theater_3').css('color','green')"
+            onmouseout="$('#sub_theater_3').css('color','black')" onclick="loadSub_memb('notice')" id="zzo_addTheater2_label">
+              <div class="project-info" id="zzo_addTheater3">
+                <h4 id="sub_theater_3">공지사항 등록</h4>
                 <p>
                   FAQ.
                 </p>
@@ -50,7 +70,7 @@
 
 <script>
 function loadSub_memb(choice){
-  var param= choice=='contact'?'contact':'faq';
+  var param= choice;
   console.log(choice);
   $("#my-spinner").show();
   $.ajax({

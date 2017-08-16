@@ -131,7 +131,7 @@ $("#btn_okAnswer").click(function(){
       if (result == 'insertok'){
         alert("답변달기 완료");
         modifyFinish();
-        contactDetail('${contactDetail.idx}');
+        loadSub_memb('contact');
       }
     }
   })
@@ -147,7 +147,7 @@ $("#btn_modAnswer").click(function(){
       if (result == 'modifyok'){
         alert("답변 수정 완료");
         modifyFinish();
-        contactDetail('${contactDetail.idx}');
+        loadSub_memb('contact');
       }
     }
   })

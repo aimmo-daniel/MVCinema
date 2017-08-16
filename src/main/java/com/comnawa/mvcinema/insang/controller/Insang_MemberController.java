@@ -40,6 +40,21 @@ public class Insang_MemberController {
     return "/insang/submenu/sub_member/member_faq";
   }
   
+  @RequestMapping("notice.do")
+  public String notice(Model model){
+    model.addAttribute("notice", contactService.getNotice());
+    return "/insang/submenu/sub_member/member_notice";
+  }
+  
+  @ResponseBody
+  @RequestMapping("noticeModify.do")
+  public boolean noticeModify(String title, String content){
+    Map<String, Object> map= new HashMap<>();
+    map.put("title", title);
+    map.put("content", content);
+    return contactService.modifyNotice(map);
+  }
+  
   //간략 1:1문의내역확인 후 답변하기 클릭시 index값을 받아와 자료검색후 답변페이지로 이동
   @RequestMapping("contactDetail.do")
   public String contactDetail(@RequestParam String idx, Model model){

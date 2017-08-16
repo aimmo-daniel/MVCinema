@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.comnawa.mvcinema.insang.model.dto.ContactDTO;
 import com.comnawa.mvcinema.insang.model.dto.Insang_CategoryDTO;
 import com.comnawa.mvcinema.insang.model.dto.Insang_FaqDTO;
+import com.comnawa.mvcinema.sangjin.model.dto.NoticeDTO;
 
 @Repository
 public class Insang_ContactDAOImpl implements Insang_ContactDAO{
@@ -72,6 +73,16 @@ public class Insang_ContactDAOImpl implements Insang_ContactDAO{
       return true;
     }
     return false;
+  }
+  
+  @Override
+  public NoticeDTO getNotice() {
+    return sqlSession.selectOne("admin.getNotice");
+  }
+  
+  @Override
+  public boolean modifyNotice(Map<String, Object> map) {
+    return sqlSession.update("admin.modifyNotice", map) > 0 ? true : false;
   }
   
 }

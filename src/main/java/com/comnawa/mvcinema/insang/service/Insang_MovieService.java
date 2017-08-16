@@ -22,4 +22,5 @@ public interface Insang_MovieService {
   public void insertStillcut(Map<String, Object> map);
   public List<StillcutDTO> getStillCut(int idx);
   public void deleteStillcut(int idx);
+  public boolean delSchedule(int idx);
 }

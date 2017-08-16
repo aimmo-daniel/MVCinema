@@ -31,7 +31,7 @@ $(function(){
         url: "${path}/subMenu/theater_delTheater.do?idx="+$("#primaryIDX").val(),
         success: function(){
           alert("영화관 삭제가 완료되었습니다.");
-          location.href="${path}/admin";
+          sub_theater_loadSub('sub_theater_1')
         }
       })
     }
@@ -60,7 +60,29 @@ $(function(){
     }
     $("#btnAddTheaterDetail").hide();
     $("#insang_spinner").show();
-    document.form1.submit();
+    var idx= document.form1.idx.value;
+    var name= document.form1.name.value;
+    var primaryIDX= document.form1.primaryIDX.value;
+    var primaryName= document.form1.primaryName.value;
+    var cols= document.form1.cols.value;
+    var rows= document.form1.rows.value;
+    var price= document.form1.price.value;
+    var preview= document.form1.preview.value;
+    var param= "idx="+idx+"&name="+name+"&primaryIDX="+primaryIDX+"&primaryName="+primaryName+"&cols="+cols+"&rows="+rows+"&price="+price+"&preview="+preview;
+    $.ajax({
+      type: "post",
+      url: "${path}/subMenu/theater_updateTheater.do",
+      data: param,
+      success: function(result){
+        if (result){
+          alert("상영관 수정 성공!");
+          sub_theater_loadSub('sub_theater_1');
+        } else {
+          alert("상영관 수정에 실패하였습니다. 다시 시도해주세요.");
+          sub_theater_loadSub('sub_theater_1')
+        }
+      }
+    })
   })
 })
 </script>

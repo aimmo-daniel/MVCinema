@@ -55,6 +55,9 @@
 
 <script>
 $("#btn_search").click(function(){
+  detailPage();
+});
+function detailPage(){
   var param= "idx="+$("#theaterIDX option:selected").val()+"&date="+$("#selectDate").val();
   $.ajax({
     type: "post",
@@ -62,9 +65,10 @@ $("#btn_search").click(function(){
     url: "${path}/subMenu/movie/searchBatch.do",
     success: function(result){
       $("#insang_batch_searchResult").html(result);
+      location.hash="movie_schedule_search";
     }
   });
-});
+}
 $("#insang_batch_addSchedule").click(function(){
   $.ajax({
     url: "${path}/subMenu/movie/addBatch.do",
@@ -79,8 +83,24 @@ function modMovieSchedule(idx){
     url: "${path}/subMenu/movie/modSchedulePage.do?idx="+idx,
     success: function(result){
       $("#insang_batch_searchResult").html(result);
+      location.hash="movie_schedule_modify"
     }
   }); 
+}
+function delMovieSchedule(idx){
+  $.ajax({
+    type: 'get',
+    url: '${path}/subMenu/movie/delSchedulePage.do?idx='+idx,
+    success: function(result){
+      if (result){
+        alert("상영시간표 삭제 성공!");
+        detailPage();
+      } else {
+        alert("상영시간표 삭제에 실패하였습니다. 다시 시도해주세요");
+        detailPage();
+      }
+    }
+  });
 }
 </script>
   

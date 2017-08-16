@@ -91,9 +91,16 @@
     $.ajax({
       type: "get",
       url: "${path}/subMenu/theater/updateSit.do?"+param,
-      success: function(){
-        alert("좌석 배치에 성공하였습니다.");
-        location.href="${path}/admin";
+      success: function(result){
+        if (result){
+          alert("좌석배치 성공!");
+          sub_theater_loadSub('sub_theater_2');
+          location.hash= "theater_sit";
+        } else {
+          alert("좌석배치에 실패하였습니다. 다시 시도해주세요");
+          sub_theater_loadSub('sub_theater_2');
+          location.hash= "theater_sit";
+        }
       }
     })
   })

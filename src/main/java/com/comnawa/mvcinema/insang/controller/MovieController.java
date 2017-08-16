@@ -332,7 +332,6 @@ public class MovieController {
     //스틸컷 작업
     //multipart파일을 가공하여
     //ftpclient를 이용해 서버에 스틸컷이미지 업로드
-    String[] mod_stillcutName;
     if (!multipartFile[0].getOriginalFilename().equals("")) {
       //기존이미지 삭제
       for (StillcutDTO foo: movieService.getStillCut(Integer.parseInt(request.getParameter("mod_idx")))){
@@ -444,6 +443,12 @@ public class MovieController {
     model.addAttribute("theaterList", theaterService.getTheaterList());
     model.addAttribute("movieList", movieService.getMovieList());
     return "/insang/submenu/sub_movie/movie_batch_mod";
+  }
+  
+  @ResponseBody
+  @RequestMapping("/movie/delSchedulePage.do")
+  public boolean delSchedulePage(String idx){
+    return movieService.delSchedule(Integer.parseInt(idx));
   }
 
   //상영시간표 수정
