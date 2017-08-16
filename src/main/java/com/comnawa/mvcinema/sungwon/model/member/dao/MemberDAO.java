@@ -16,4 +16,5 @@ public interface MemberDAO {
 	public String findid(MemberDTO dto);
 	public String findpwd(MemberDTO dto);
 	public int changePwd(MemberDTO dto);
+	public int signout(String userid);
 }

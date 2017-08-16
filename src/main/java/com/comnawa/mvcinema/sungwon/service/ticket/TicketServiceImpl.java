@@ -88,4 +88,23 @@ public class TicketServiceImpl implements TicketService {
 		return result;
 	}
 
+	@Override
+	public int delete_ticket(String t_serial_num) {
+		return ticketDao.delete_ticket(t_serial_num);
+	}
+
+	@Override
+	public List<TicketDTO> date_screen_time(String start_date, String end_date) {
+		TicketDTO dto = new TicketDTO();
+		dto.setStart_date(start_date);;
+		dto.setEnd_date(end_date);
+		System.out.println("서비스"+dto.toString());
+		return ticketDao.date_screen_time(dto);
+	}
+
+	@Override
+	public TicketDTO date_selectTime(int screen_idx) {
+		return ticketDao.date_selectTime(screen_idx);
+	}
+
 }

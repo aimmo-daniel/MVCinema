@@ -91,4 +91,20 @@ public class TIcketDAOImpl implements TicketDAO {
 		return sqlSession.update("ticket.minus_people",dto);
 	}
 
+	@Override
+	public int delete_ticket(String t_serial_num) {
+		return sqlSession.delete("ticket.delete_ticket",t_serial_num);
+	}
+
+	@Override
+	public List<TicketDTO> date_screen_time(TicketDTO dto) {
+		System.out.println("디에이오"+dto.toString());
+		return sqlSession.selectList("ticket.date_screenTime",dto);
+	}
+
+	@Override
+	public TicketDTO date_selectTime(int screen_idx) {
+		return sqlSession.selectOne("ticket.date_selectTime",screen_idx);
+	}
+
 }

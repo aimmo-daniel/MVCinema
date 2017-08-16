@@ -30,6 +30,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="change_pwd">
 		update member set passwd=#{passwd} where userid=#{userid}
 	</update>
+	<delete id="signout">
+		delete from member where userid=#{userid}
+	</delete>
 </mapper>
 
 

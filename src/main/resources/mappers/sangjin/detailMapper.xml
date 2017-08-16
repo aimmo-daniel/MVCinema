@@ -40,7 +40,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*)
 		from memo where idx=#{idx}
 	</select>
-
+	<delete id="memo_signout_memo">
+		delete from memo where userid=#{userid}
+	</delete>
 
 	<sql id="paging_header">
 		select *
