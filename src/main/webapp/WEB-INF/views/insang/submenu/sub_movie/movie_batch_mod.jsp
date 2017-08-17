@@ -18,7 +18,7 @@
     <td>
       <select id="mod_theaterIDX">
         <c:forEach var="th_rows" items="${theaterList}" varStatus="status">
-          <option value="${th_rows.idx}" <c:if test="${dto.theater_idx==th_rows.idx}">selected</c:if>>${th_rows.name}${th_rows.idx}</option>
+          <option value="${th_rows.idx}" <c:if test="${dto.theater_idx==th_rows.idx}">selected</c:if>>${th_rows.name}</option>
         </c:forEach>
       </select>
     </td>
@@ -75,7 +75,6 @@ $("#btnModSchedule").click(function(screen_idx){
     var starttime= $("#mod_sDate").val()+$("#mod_sTime").val();
     var movieIDX= $("#mod_movieIDX option:selected").val();
     var screenIDX= $("#mod_screenIDX").val();
-    alert("theaterIDX"+theaterIDX);
     var param= "theaterIDX="+theaterIDX+"&starttime="+starttime+"&movieIDX="+movieIDX+"&screenIDX="+screenIDX;
     $.ajax({
       type: "get",
