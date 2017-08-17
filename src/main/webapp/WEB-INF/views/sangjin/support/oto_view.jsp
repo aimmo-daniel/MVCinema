@@ -78,16 +78,15 @@ th {
 				<c:if test="${ac != ''}">
 					<td>
 						<textarea style="resize: none;" readonly="readonly" id="content"
-							name="content" rows="15" cols="100">문의내용 :<%="\n\n"%>${uc}<%="\n\n"
+							name="content" rows="15" cols="100"><%="\n"%>${uc}<%="\n\n"
 						+"========================================================"
-						+"===============\n\n"%>문의하신 질문에 대한 답변입니다. [ <fmt:formatDate value="${dto.admin_post_date}" pattern="yyyy-MM-dd HH:mm" /> ]<%="\n\n"%>${ac}</textarea>
+						+"===============\n\n"%>안녕하세요 MVCINEMA입니다. [ <fmt:formatDate value="${dto.admin_post_date}" pattern="yyyy-MM-dd HH:mm" /> ]<%="\n\n"%>${ac}</textarea>
 					</td>
 				</c:if>
 				<c:if test="${ac == ''}">
 					<td>
 						<textarea style="resize: none;" readonly="readonly"
-							id="content" name="content" rows="15" cols="100">문의내용 :<%="\n"%>${uc}
-						</textarea>
+							id="content" name="content" rows="15" cols="100"><%="\n"%>${uc}</textarea>
 					</td>
 				</c:if>
 			</tr>

@@ -115,7 +115,7 @@ function check_star(score2, comment_num){
 //한줄평 작성
 function insert_memo(){
 	var score=$("input[name=star-input]:checked").val();
-	var memo=document.form1.memo.value;
+	var memo=document.form1.memo.value.replace(/(<([^>]+)>)/ig,"");
 	var idx=$('#mv_idx').val();
 	var userid=$('#userid').val();
 	var param="userid="+userid+"&idx="+idx;
