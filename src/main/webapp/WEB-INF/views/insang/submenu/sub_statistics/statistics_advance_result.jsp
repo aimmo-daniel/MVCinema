@@ -41,31 +41,5 @@ function drawChart() {
 
 <div id="chart_result"></div>
 
-<table>
-  <tr>
-    <td>
-      <div id="default1"></div>
-    </td>
-    <td>
-      <div id="default2"></div>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <div id="default3"></div>
-    </td>
-    <td>
-      <div id="default4"></div>
-    </td>
-  </tr>
-</table>
-
-<script>
-  function defaultChart(){
-    
-  }
-  defaultChart();
-</script>
-
 </body>
 </html>
