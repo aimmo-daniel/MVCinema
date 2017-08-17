@@ -16,6 +16,10 @@ var people; //인원수
 var seat; //좌석 번호 (배열)
 var theater_price; //상영관 가격
 var total_price; //결제 금액
+var  checkMail = false;
+var rndNum; 
+var email;
+
 
 $(function(){
 	$.ajax({
@@ -172,15 +176,9 @@ function reservation(){
 			return;
 		}
 	}
-	//나이제한 검사
-	if( "${sessionScope.dto.age}" < age ){
-		alert("이영화는 "+age+"세 이상만 예매 가능합니다.");
-		return;
-	}
-	
 	$.ajax({
 		type:"post",
-		url:"${path}/ticket/payment_page.do",
+		url:"${path}/ticket/guest_payment_page.do",
 		success: function(result){
 			$("#seat_info").html(result);
 			$("#btn_reservation").css("display",'none');
@@ -199,8 +197,8 @@ function card_type(){
 	    merchant_uid : 'merchant_' + new Date().getTime(),
 	    name : title,
 	    amount : total_price,
-	    buyer_email : '${sessionScope.dto.email}',
-	    buyer_name : '${sessionScope.dto.name}',
+	    buyer_email : email,
+	    buyer_name : '비회원',
 	    /* buyer_tel : '010-1234-5678', */ 
 	    /* buyer_addr : '서울특별시 강남구 삼성동', */
 	    /* buyer_postcode : '123-456', */
@@ -226,6 +224,23 @@ function test_type(){
 }
 
 function final_payment(){
+	var guestage = $("#phone_ssn").val();
+	guestage = guestage.substring(0,2);
+	thisyear = new Date()
+	thisyear = thisyear.getFullYear();
+	thisyear = thisyear.toString();
+	thisyear = thisyear.substring(2,4);
+	
+	if((thisyear - guestage) < 0 ){
+		guestage = (thisyear - guestage) + 100;
+	}else{
+		guestage = (thisyear - guestage)
+	}
+	
+	if(checkMail == false){
+		alert("이메일이 인증 되지 않았습니다.");
+		return;
+	}
 	if($("#phone_type").val() == "-" || $("#phone_type").val() == "" || $("#phone_type").val() == null){
 		alert("통신사를 선택해주세요");
 		return;
@@ -238,9 +253,13 @@ function final_payment(){
 		alert("생년월일 양식이 맞지않습니다.");
 		return;
 	}
-	var param = "t_userid=${sessionScope.dto.userid}"+"&t_title="+title
+	if(guestage < age ){
+		alert("영화등급을 확인해주세요");
+		return;
+	}
+	var param = "t_userid=guest"+"&t_title="+title
 	+"&t_age="+age+"&t_start_time="+select_date+"&t_theater="+theater_name
-	+"&t_people="+people+"&t_seat="+seat+"&t_price="+total_price+"&screen_idx="+${screen_idx}+"&email=${sessionScope.dto.email}"; 
+	+"&t_people="+people+"&t_seat="+seat+"&t_price="+total_price+"&screen_idx="+${screen_idx}+"&email="+email; 
 	/* alert(param); */
 	$.ajax({
 		type:"post",
@@ -251,12 +270,50 @@ function final_payment(){
 				alert("예매에 실패하였습니다. 잠시후 다시시 도해주세요");
 				return;
 			}else{
-				alert("예매가 완료되었습니다.\n 예매내역은 myPage또는 이메일에서 확인가능합니다.");
+				alert("예매가 완료되었습니다.\n 비회원 예매내역은 이메일에서만 확인가능합니다.");
 				document.location.href="${path}";
 			}
 		}
 	});
 }
+
+
+function check_mail(){
+	email= $("#guest_email").val();
+	if (email == "") {
+		alert("이메일을 입력해주세요");
+		return;
+	}
+	if (!/^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/.test(email)) {
+		alert("이메일 형식이 아닙니다.");
+		return;
+	}
+	$("#check_rndNum").prop("hidden",false);
+	alert("메일 이 발송되었습니다.");
+	var param = "email="+email;
+	$.ajax({
+		type : "post",
+		url : "${path}/mail/guestMail.do",
+		data : param,
+		success : function(result) {
+			rndNum = result;
+		}
+	});
+}
+
+function rnd_check(){
+	var userNum = $("#guest_num").val();
+	if(userNum == rndNum){
+		 $("#guest_email").prop("disabled",'disabled');
+		 alert("인증이 완료되었습니다.");
+		 checkMail = true;
+	}else{
+		alert("인증번호가 일치 하지않습니다."+rndNum);
+		 checkMail = false;
+		 return;
+	}
+}
+
 </script>
 </head>
 <body>
@@ -415,5 +472,6 @@ function final_payment(){
 			</div>
 		</div>
 	</div>
+	
 </body>
 </html>

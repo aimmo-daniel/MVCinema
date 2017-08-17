@@ -33,5 +33,12 @@ public class EmailController {
 		return rndNum;
 	}
 
+	@ResponseBody
+	@RequestMapping("guestMail.do")
+	public String guestMail(@RequestParam String email) throws Exception {
+		String rndNum = emailService.guestMail(email);
+		System.out.println("요청메일"+email);
+		return rndNum;
+	}
 
 }
