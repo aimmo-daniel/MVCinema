@@ -15,7 +15,7 @@
 
   <c:choose>
     <c:when test="${result == 'faq'}">
-    
+      <c:set var="faqListSize" value="${fn:length(faqList)}"/>
       <!-- faq -->
       <table class="table table-default">
         <tr style="text-align: center;">
@@ -26,8 +26,8 @@
             <label>질문</label>
           </td>
         </tr>
-        <c:forEach var="row" items="${faqList}">
-          <tr onclick="faq_showAsk('${row.idx}')">
+        <c:forEach var="row" items="${faqList}" varStatus="status">
+          <tr onclick="faq_showAsk('${status.count}')">
             <td style="text-align: center; border-right: 1px solid lightgray;">
               <label>${row.category}</label>
             </td>
@@ -38,7 +38,7 @@
               <input type="button" class="btn btn-danger" value="삭제" style="float: right; width: 100%;" onclick="faq_delAsk('${row.idx}')">
             </td>
           </tr>
-          <tr id="ask${row.idx}" style="display: none;">
+          <tr id="ask${status.count}" style="display: none;">
             <td colspan="3">
               <label style="font-size: 20px; color: green; padding: 10px;">
                 ${row.ask}
@@ -158,6 +158,12 @@ function faq_delAsk(idx){
 }
 
 function faq_showAsk(idx){
+  for (var i=1; i<=${faqListSize}; i++){
+    if (i==idx){
+      continue;
+    }
+    $("#ask"+i).hide();
+  }
   $("#ask"+idx).toggle();
 }
 

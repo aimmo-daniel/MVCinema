@@ -80,7 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	<select id="myTicketList" resultType="TicketDTO">
 		select
-		ticket_idx,screen_idx,m.img_url img_url, t_age,t_title, t_people, t_seat ,t_start_time, t_price, t_serial_num 
+		ticket_idx,screen_idx,m.img_url img_url, t_age,t_title, t_people, t_seat ,t_start_time, t_price, t_serial_num, t_price 
 		from movie m ,ticket
 		where m.title = t_title and t_userid=#{t_userid} order by t_start_time
 	</select>

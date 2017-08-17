@@ -2,11 +2,9 @@ package com.comnawa.mvcinema.insang.controller;
 
 import javax.inject.Inject;
 
-import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.comnawa.mvcinema.insang.service.Insang_MovieService;
 import com.comnawa.mvcinema.insang.service.TheaterService;
@@ -31,12 +29,10 @@ public class StatisticsController {
     return "/insang/submenu/sub_statistics/statistics_advance";
   }
   
-  //예매율 검색을위한 자료값 검색후 반환
-  @ResponseBody
-  @RequestMapping("/yeame/getChartData.do")
-  public JSONObject getChartData(){
-  
-    return null;
+  @RequestMapping("yeame2.do")
+  public String yeame2(Model model){
+    model.addAttribute("movieList", movieService.getMovieList());
+    return "/insang/submenu/sub_statistics/statistics_sales";
   }
   
 }
