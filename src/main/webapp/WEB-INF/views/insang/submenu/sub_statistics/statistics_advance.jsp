@@ -63,5 +63,42 @@
   
   <div id="chart_div"></div>
   
+  <table>
+    <tr>
+      <td>
+        <div id="default1"></div>
+      </td>
+      <td>
+        <div id="default2"></div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div id="default3"></div>
+      </td>
+      <td>
+        <div id="default4"></div>
+      </td>
+    </tr>
+  </table>
+  
+  <script>
+    function defaultChart(){
+      /* for (var i=1; i<=3; i++){
+        $.ajax({
+          url: "${path}/tong/default"+i+".do",
+          success: function(result){
+			$("#default"+i).html(result);            
+          }
+        })
+      } */
+      $.ajax({
+        url: "${path}/tong/default"+1+".do",
+        success: function(result){
+		$("#default"+1).html(result);            
+      }
+    }
+  </script>
+  
 </body>
 </html>

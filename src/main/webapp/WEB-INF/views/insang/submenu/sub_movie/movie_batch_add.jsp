@@ -15,7 +15,7 @@
   <tr>
     <td><label>상영관 선택</label></td>
     <td>
-      <select id="theaterIDX">
+      <select id="add_theaterIDX">
         <c:forEach var="th_rows" items="${theaterList}" varStatus="status">
           <option value="${th_rows.idx}">${th_rows.name}</option>
         </c:forEach>
@@ -25,19 +25,19 @@
   <tr>
     <td><label>상영 시작날짜</label></td>
     <td>
-      <input type="date" id="sDate">
+      <input type="date" id="add_sDate">
     </td>
   </tr>
   <tr>
     <td><label>상영 시작시간</label></td>
     <td>
-      <input type="time" id="sTime">
+      <input type="time" id="add_sTime">
     </td>
   </tr>
   <tr>
     <td><label>영화선택</label></td>
     <td>
-      <select id="movieIDX">
+      <select id="add_movieIDX">
         <c:forEach var="mv_rows" items="${movieList}" varStatus="status">
           <option value="${mv_rows.idx}">${mv_rows.title}</option>
         </c:forEach>
@@ -56,22 +56,22 @@
 
 <script>
 $("#btnAddSchedule").click(function(){
-  if ($("#sTime").val() == ""){
+  if ($("#add_sTime").val() == ""){
     alert('상영시작시간을 입력하지 않으셨습니다.');
-    $("#sTime").focus();
+    $("#add_sTime").focus();
     return;
   }
-  if ($("#sDate").val() == ""){
+  if ($("#add_sDate").val() == ""){
     alert("상영시작날짜를 선택하지 않으셨습니다.");
-    $("#sDate").focus();
+    $("#add_sDate").focus();
     return;
   }
     $("#btnAddSchedule").hide();
     $("#insang_spinner").show();
   if (confirm("이 내용으로 상영일정을 등록하시겠습니까?")){
-    var theaterIDX= $("#theaterIDX option:selected").val();
-    var starttime= $("#sDate").val()+$("#sTime").val();
-    var movieIDX= $("#movieIDX option:selected").val();
+    var theaterIDX= $("#add_theaterIDX option:selected").val();
+    var starttime= $("#add_sDate").val()+$("#sTime").val();
+    var movieIDX= $("#add_movieIDX option:selected").val();
     var param= "theaterIDX="+theaterIDX+"&starttime="+starttime+"&movieIDX="+movieIDX;
     $.ajax({
       type: "get",
