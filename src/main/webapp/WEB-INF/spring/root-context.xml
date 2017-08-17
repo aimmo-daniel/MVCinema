@@ -50,7 +50,7 @@
 				<prop key="mail.debug">true</prop>
 			</props>
 		</property>
-	</bean>
+	</bean> 
 
 	<!-- 트랜잭션 처리를 위한 bean -->
 	<bean id="transactionManager"

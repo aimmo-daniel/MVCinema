@@ -5,12 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="insang_chart">
 
-  <select id="ticketGuest" resultType="TicketDTO">
-    select * from ticket where= 'guest'
+  <select id="ticketGuest" resultType="com.comnawa.mvcinema.insang.model.dto.Insang_TicketDTO">
+    SELECT ticket_idx, t_userid, t_age, t_title, t_theater, t_start_time, t_people, t_seat, t_price, t_serial_num, screen_idx, m.age m_age
+FROM MEMBER m, stats s WHERE s.t_userid= m.userid and t_userid= 'guest'
   </select>
   
-  <select id="ticketMember" resultType="TicketDTO">
-    select * from ticket where!= 'guest'
+  <select id="ticketMember" resultType="com.comnawa.mvcinema.insang.model.dto.Insang_TicketDTO">
+    SELECT ticket_idx, t_userid, t_age, t_title, t_theater, t_start_time, t_people, t_seat, t_price, t_serial_num, screen_idx, m.age m_age
+FROM MEMBER m, stats s WHERE s.t_userid= m.userid and t_userid!= 'guest'
   </select>
   
 </mapper>

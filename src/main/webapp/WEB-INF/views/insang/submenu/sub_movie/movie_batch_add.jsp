@@ -70,7 +70,7 @@ $("#btnAddSchedule").click(function(){
     $("#insang_spinner").show();
   if (confirm("이 내용으로 상영일정을 등록하시겠습니까?")){
     var theaterIDX= $("#add_theaterIDX option:selected").val();
-    var starttime= $("#add_sDate").val()+$("#sTime").val();
+    var starttime= $("#add_sDate").val()+$("#add_sTime").val();
     var movieIDX= $("#add_movieIDX option:selected").val();
     var param= "theaterIDX="+theaterIDX+"&starttime="+starttime+"&movieIDX="+movieIDX;
     $.ajax({

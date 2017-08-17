@@ -2,9 +2,9 @@ package com.comnawa.mvcinema.insang.model.dao;
 
 import java.util.List;
 
-import com.comnawa.mvcinema.sungwon.model.ticket.dto.TicketDTO;
+import com.comnawa.mvcinema.insang.model.dto.Insang_TicketDTO;
 
 public interface GetTicketData {
-  public List<TicketDTO> getGuestData();
-  public List<TicketDTO> getMemberData();
+  public List<Insang_TicketDTO> getGuestData();
+  public List<Insang_TicketDTO> getMemberData();
 }

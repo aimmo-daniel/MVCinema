@@ -30,31 +30,28 @@ public class StatisticsController {
   //예매율 검색 페이지
   @RequestMapping("yeame1.do")
   public String yeame1(Model model){
+    model.addAttribute("chart_member", chartService.getChartData("member"));
+    model.addAttribute("chart_age", chartService.getChartData("age"));
+    model.addAttribute("chart_movie", chartService.getChartData("movie"));
     model.addAttribute("movieList", movieService.getMovieList());
     return "/insang/submenu/sub_statistics/statistics_advance";
   }
   
   @RequestMapping("yeame2.do")
   public String yeame2(Model model){
-    model.addAttribute("movieList", movieService.getMovieList());
-    return "/insang/submenu/sub_statistics/statistics_sales";
-  }
-  
-  @ResponseBody
-  @RequestMapping("default1.do")
-  public JSONObject default1(){
-    return chartService.getChartData("member");
-  }
-  
-  @ResponseBody
-  @RequestMapping("default2.do")
-  public JSONObject default2(){
     return null;
   }
   
+  @RequestMapping("default.do")
+  public String default1(String action, Model model){
+    model.addAttribute("selected", action);
+    return "/insang/submenu/sub_statistics/statistics_advance_result";
+  }
+  
   @ResponseBody
-  @RequestMapping("default3.do")
-  public JSONObject default3(){
+  @RequestMapping("searchDetail.do")
+  public JSONObject searchDetail(String member, String age, String movie){
+//    return chartService.getSearchDetail(member, Integer.parseInt(age), Integer.parseInt(movie));
     return null;
   }
   
