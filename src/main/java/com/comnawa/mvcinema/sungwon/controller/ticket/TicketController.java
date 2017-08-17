@@ -21,6 +21,7 @@ import com.comnawa.mvcinema.insang.model.dto.TheaterSitEmptyDTO;
 import com.comnawa.mvcinema.insang.service.Insang_MovieService;
 import com.comnawa.mvcinema.insang.service.TheaterService;
 import com.comnawa.mvcinema.sungwon.model.ticket.dto.TicketDTO;
+import com.comnawa.mvcinema.sungwon.service.email.EmailService;
 import com.comnawa.mvcinema.sungwon.service.ticket.TicketService;
 
 @Controller
@@ -33,6 +34,8 @@ public class TicketController {
 	TheaterService theaterService;
 	@Inject
 	Insang_MovieService movieService;
+	@Inject
+	EmailService emailService;
 
 	@RequestMapping("movie_ticket_page.do")
 	public ModelAndView quickticket_page(@RequestParam(defaultValue = "0") int movie_idx, ModelAndView mav) {
@@ -191,7 +194,8 @@ public class TicketController {
 		String t_seat[] = request.getParameterValues("t_seat");
 		int t_price = Integer.parseInt(request.getParameter("t_price"));
 		int screen_idx = Integer.parseInt(request.getParameter("screen_idx"));
-
+		String email = request.getParameter("email");
+		
 		System.out.println(t_title);
 
 		String tmpRnd = "";
@@ -203,6 +207,8 @@ public class TicketController {
 			tmpRnd += rnd.nextInt(10);
 		}
 		System.out.println(tmpRnd);
+		
+		dto.setEmail(email);
 		dto.setT_userid(t_userid);
 		dto.setT_title(t_title);
 		dto.setT_age(t_age);
@@ -224,6 +230,7 @@ public class TicketController {
 		int result = ticketService.insertTicket(dto);
 		if (result > 0) {
 			json.put("message", "success");
+			emailService.ticketMail(dto);
 		} else {
 			json.put("message", "fail");
 		}
@@ -234,6 +241,10 @@ public class TicketController {
 	@RequestMapping("payment_page.do")
 	public String payment_page() {
 		return "/sungwon/ticket/payment";
+	}
+	@RequestMapping("guest_payment_page.do")
+	public String guest_payment_page() {
+		return "/sungwon/ticket/guest_payment";
 	}
 
 	@ResponseBody
@@ -283,5 +294,48 @@ public class TicketController {
 		TicketDTO dto = ticketService.date_selectTime(Integer.parseInt(screen_idx));
 		System.out.println("테스트"+dto.toString());
 		return dto;
+	}
+	
+	@RequestMapping("guest_seat_page.do")
+	public ModelAndView guest_seat(@RequestParam String screen_idx, ModelAndView mav) {
+		// 영화관 좌석 로드
+		int idx = movieService.getScheduleDetail(Integer.parseInt(screen_idx)).getTheater_idx();
+		for (TheaterDTO foo : theaterService.getTheaterList()) {
+			if (foo.getIdx() == idx) {
+				mav.addObject("dto", foo);
+			}
+		}
+		int max = 0;
+		for (TheaterSitDTO dto : theaterService.getTheaterSitList()) {
+			max = (max < dto.getSeat_row()) ? dto.getSeat_row() : max;
+		}
+		for (TheaterSitDTO foo : theaterService.getTheaterSitList()) {
+			if (foo.getIdx() == idx) {
+				mav.addObject("theaterSitDTO", foo);
+			}
+		}
+		List<TheaterSitEmptyDTO> listEmpty = theaterService.getTheaterSitEmpty();
+		String theaterSitResult = "";
+		for (TheaterSitEmptyDTO dto : listEmpty) {
+			if (dto.getIdx() == idx) {
+				theaterSitResult += dto.getSeat_empty() + ",";
+			}
+		}
+		if (!theaterSitResult.equals("")) {
+			theaterSitResult = theaterSitResult.substring(0, theaterSitResult.length() - 1);
+		}
+		mav.addObject("theater_sit_empty", listEmpty);
+		mav.addObject("theater_sit_empty_result", theaterSitResult.equals("null") ? "" : theaterSitResult);
+		mav.addObject("theaterSitMax", max);
+		mav.addObject("idx", idx);
+
+		// 이미 예매된 좌석 로드
+		List<TicketDTO> list = ticketService.soldout_seat(Integer.parseInt(screen_idx));
+		mav.addObject("list", list);
+
+		// 페이지 이동
+		mav.setViewName("sungwon/ticket/guest_seat_people");
+		mav.addObject("screen_idx", screen_idx);
+		return mav;
 	}
 }

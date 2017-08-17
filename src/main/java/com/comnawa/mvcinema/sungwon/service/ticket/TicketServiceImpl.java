@@ -62,7 +62,8 @@ public class TicketServiceImpl implements TicketService {
 			dto.setSeat_out(out_seat[i]);
 			ticketDao.updateSeat(dto);
 		}
-		return ticketDao.insertTicket(dto);
+		ticketDao.insertTicket(dto);
+		return ticketDao.insertStats(dto);
 	}
 
 	@Override
@@ -75,6 +76,7 @@ public class TicketServiceImpl implements TicketService {
 	public int cancel(TicketDTO dto) {
 		int ticket_idx = dto.getTicket_idx(); 
 		int result = ticketDao.cancelTicket(ticket_idx);
+		
 		TicketDTO dto2 = new TicketDTO();
 		String seat_out[] = dto.getT_seat().split(",");
 		for(int i=0; i<seat_out.length; i++){
@@ -85,6 +87,7 @@ public class TicketServiceImpl implements TicketService {
 		dto.setT_people(seat_out.length);
 		result = ticketDao.plus_seat(dto);
 		result = ticketDao.minus_people(dto);
+		ticketDao.cancelStats(ticket_idx);
 		return result;
 	}
 

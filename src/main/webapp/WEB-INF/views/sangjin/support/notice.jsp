@@ -28,10 +28,12 @@
 			<tr>
 				<td>
 					<textarea style="resize: none;" readonly="readonly"
-							id="content" name="content" rows="15" cols="100"><%="\n\n"%>${str}</textarea>
+							id="content" name="content" rows="15" cols="130"><%="\n\n"%>${str}</textarea>
 				</td>
 			</tr>
 		</table>
 	</div>
+	<div style="height: 350px;"></div>
+	<%@ include file="../../insang/footer/footer.jsp" %>
 </body>
 </html>

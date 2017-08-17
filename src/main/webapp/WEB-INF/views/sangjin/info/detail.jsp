@@ -133,5 +133,6 @@ function buy_ticket(idx){
 		<!-- 댓글폼 -->
 		<div style="margin-left: 50px;"><%@ include file="../../sangjin/info/memo.jsp"%></div>
 	</div>
+	<%@ include file="../../insang/footer/footer.jsp" %>
 </body>
 </html>

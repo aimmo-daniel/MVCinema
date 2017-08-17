@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>MVCinema</title>
 <%@include file="../../include/header.jsp"%>
 <%@include file="../sw_include/template.jsp"%>
 <script src="${path}/sungwon/etc/js/myCalendar2.js?v=2"></script>
@@ -205,10 +205,6 @@
 	</div>
 	<script>
 		myCalendar2('myCalendar2');
-		var hash = document.location.href;
-		if (hash.indexOf('?movie_idx=') != -1) {
-			selectMovie('${idx}');
-		}
 	</script>
 </body>
 </html>	

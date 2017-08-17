@@ -11,7 +11,7 @@ public interface TicketDAO {
 	public TicketDTO selectTime(int screen_idx);
 	public TicketDTO selectMovieTime(int screen_idx); 
 	public List<TicketDTO> soldout_seat(int screen_idx);
-	public int insertTicket(TicketDTO dto);
+	public void insertTicket(TicketDTO dto);
 	public int updatepeople(TicketDTO dto);
 	public int discount_seat(TicketDTO dto );
 	public int updateSeat(TicketDTO dto);
@@ -23,4 +23,6 @@ public interface TicketDAO {
 	public int delete_ticket(String t_serial_num);
 	public List<TicketDTO> date_screen_time(TicketDTO dto);
 	public TicketDTO date_selectTime(int screen_idx);
+	public void cancelStats(int ticket_idx);
+	public int insertStats(TicketDTO dto);
 }

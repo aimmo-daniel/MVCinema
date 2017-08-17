@@ -82,7 +82,7 @@
 											<c:if test="${message == 'success' }">
 												<script>
 												window.close();
-												opener.location.href="${path}/support/main";
+												opener.location.href="${path}/support/one_to_one";
 												</script>
 											</c:if>
 											</td>

@@ -9,12 +9,27 @@
 <ul class="list-group" style="overflow: auto; height: 400px;">
 	<c:if test="${map.list != null }">
 		<c:forEach var="row" items="${map.list}" varStatus="status">
-			<li id="t_${row.screen_idx}" class="list-group-item" onclick="selectTime('t_${row.screen_idx}')"><b><fmt:formatDate
-						value="${row.start_time}" pattern="HH:mm" /></b>
-						<b style="margin-left: 96px;">${row.t_name }</b> 
-						<span class="badge" style="margin-right: 20px;">${row.empty_sit}</span></li>
+			<jsp:useBean id="now" class="java.util.Date" />
+			<c:set var="count" value="0"></c:set>
+			<c:if test="${row.start_time >  now }">
+				<li id="t_${row.screen_idx}" class="list-group-item"
+					onclick="selectTime('t_${row.screen_idx}')"><b><fmt:formatDate
+							value="${row.start_time}" pattern="HH:mm" /></b> <b
+					style="margin-left: 96px;">${row.t_name }</b> <span class="badge"
+					style="margin-right: 20px;">${row.empty_sit}</span> <c:set var="count"
+						value="${count +1 }"></c:set></li>
+			</c:if>
 			<c:set var="i" value="${status.index}"></c:set>
 		</c:forEach>
+		<c:if test="${count <= 0 }">
+			<c:forEach var="i" begin="1" end="8">
+				<li class="list-group-item">&nbsp;</li>
+				<c:if test="${i == 2 }">
+					<li class="list-group-item" style="text-align: center;"><b
+						style="color: red;">해당일에 상영중인 시간이 없습니다.</b></li>
+				</c:if>
+			</c:forEach>
+		</c:if>
 		<c:if test="${i < 7  }">
 			<c:forEach var="i" begin="${i}" end="7">
 				<li class="list-group-item">&nbsp;</li>
