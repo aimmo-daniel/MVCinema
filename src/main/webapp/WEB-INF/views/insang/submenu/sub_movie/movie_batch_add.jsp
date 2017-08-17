@@ -78,7 +78,7 @@ $("#btnAddSchedule").click(function(){
       url: "${path}/subMenu/movie/addSchedule.do?"+param,
       success: function(result){
         alert('상영일정 추가가 완료되었습니다.');
-        location.href="${path}/admin";
+        sub_movie_loadSub('sub_theater_2');
       }
     });
   }

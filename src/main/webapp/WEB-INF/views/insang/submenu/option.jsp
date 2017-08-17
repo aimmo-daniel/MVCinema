@@ -14,14 +14,26 @@
     <div class="container" style="margin-bottom: 20px; transition: color 1s;" >
       <div class="row">
         <div class="wow fadeInUp col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-4" data-wow-delay="0.1s">
-          <a href="#tong_statistics1">
+          <a href="#tong_statistics_memb">
             <label for="zzo_addTheater1" onmouseover="sub_theater('sub_sub_mouseOver', 'over', 'sub_theater_1')"
               onmouseout="sub_theater('sub_sub_mouseOver','out','sub_theater_1')" onclick="sub_tong_loadSub('yeame1')"
               id="zzo_addTheater1_label">
               <div class="project-info" id="zzo_addTheater1">
-                <h4 id="sub_theater_1">예매율 확인</h4>
+                <h4 id="sub_theater_1">예매율</h4>
                 <p>
                   Advance rate.
+                </p>
+              </div>
+            </label>
+          </a>
+          <a href="#tong_statistics_guest">
+            <label for="zzo_addTheater2" onmouseover="sub_theater('sub_sub_mouseOver', 'over', 'sub_theater_2')"
+              onmouseout="sub_theater('sub_sub_mouseOver','out','sub_theater_2')" onclick="sub_tong_loadSub('yeame2')"
+              id="zzo_addTheater2_label">
+              <div class="project-info" id="zzo_addTheater1">
+                <h4 id="sub_theater_2">매출</h4>
+                <p>
+                  Sales rate.
                 </p>
               </div>
             </label>
@@ -42,8 +54,7 @@
 
 <script>
 function sub_tong_loadSub(choice){
-  var param= choice=='yeame1'?'yeame1':'yeame2';
-  console.log(choice);
+  var param= choice;
   $("#my-spinner").show();
   $.ajax({
     url: "/mvcinema/tong/"+param+".do",

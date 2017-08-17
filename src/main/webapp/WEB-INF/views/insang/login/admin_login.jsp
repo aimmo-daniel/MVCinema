@@ -210,9 +210,9 @@ $(window).bind('hashchange',function(){ //해시가 바뀌었을시 콜백함수
             <li>
               <a href="#member" id="section_member"><b>고객센터 관리</b></a>
             </li>
-            <!-- <li>
+            <li>
               <a href="#option" id="section_option"><b>통계</b></a>
-            </li> -->
+            </li>
           </ul>
         </c:if>
       </div>
