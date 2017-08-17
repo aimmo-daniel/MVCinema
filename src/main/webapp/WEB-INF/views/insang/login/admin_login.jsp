@@ -223,17 +223,7 @@ $(window).bind('hashchange',function(){ //해시가 바뀌었을시 콜백함수
   </div>
 
   <!-- Footer section -->
-  <footer>
-    <div class="container">
-      <div class="row">
-
-        <div class="col-md-12 col-sm-12">
-          <p class="wow fadeInUp" data-wow-delay="0.3s">Copyright © 2016 Your Company Name - Designed by Tooplate</p>
-        </div>
-
-      </div>
-    </div>
-  </footer>
+  <%@ include file="../footer/footer.jsp" %>
 
   <!-- Javascript -->
   <script src="${path}/admin/resources/template/js/jquery.js"></script>
