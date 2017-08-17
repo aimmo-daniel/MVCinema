@@ -3,20 +3,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <%@ include file="../../../include/header.jsp" %>
-<c:set var="insang_aCount" value="0"/>
+<title>Insert title here</title>
 <script>
 var movieName= [];
 var movieCount= [];
 </script>
+<c:set var="insang_aCount" value="0"/>
 <c:forEach var="item" items="${chart_movie.movieName}" varStatus="status">
   <script>
   	movieName[${status.index}]= '${chart_movie.movieName[status.index]}';
   	movieCount[${status.index}]= '${chart_movie.movieCount[status.index]}';
   </script>
 </c:forEach>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="${path}/admin/resources/template/js/chart.js"></script>
 <script type="text/javascript">
         google.charts.load('current', {'packages':['corechart']});
         function drawChart(action) {
@@ -150,6 +150,7 @@ var movieCount= [];
   
   
   <script>
+  google.charts.load('current', {'packages':['corechart']});
   function searchSetting(){
     var memb= $("#searchMemb option:selected").val();
     var age= $("#searchAge option:selected").val();
