@@ -35,7 +35,7 @@ $(function(){
 				$("#m_age").html('<label class="label label-warning">'+result.age+'세 이용가</label>');
 			}else if(age >= 19){
 				$("#sm_age").html('<label class="label label-danger">'+result.age+'세 이용가</label>');					
-				$("#m_age").html('<label class="label label-primary">'+result.age+'세 이용가</label>');
+				$("#m_age").html('<label class="label label-danger">'+result.age+'세 이용가</label>');
 			}
 			//영화저장 저장&등록
 			title = result.title;
