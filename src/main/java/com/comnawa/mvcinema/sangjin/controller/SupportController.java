@@ -158,6 +158,10 @@ public class SupportController {
 	public String write_oto(@RequestParam String title, @RequestParam String content, HttpSession session) {
 		ContactDTO dto = new ContactDTO();
 		String userid = ((MemberDTO) session.getAttribute("dto")).getUserid();
+		content=content.replace("<","");
+		content=content.replace(">","");
+		title=title.replace("<","");
+		title=title.replace(">","");
 		dto.setContent(content);
 		dto.setTitle(title);
 		dto.setUserid(userid);

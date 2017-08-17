@@ -9,13 +9,17 @@
 <%@ include file="../../sangjin/sj_include/sangjincss.jsp"%>
 </head>
 <body>
-<%@ include file="../../sangjin/home/loginbar.jsp"%>
-<br>
-<br>
-&nbsp;&nbsp;&nbsp;<h2>이용에 불편을 드려 죄송합니다.</h2>
-&nbsp;&nbsp;&nbsp;<p>
-잠시 후에 다시 한번 시도해 주시기 바랍니다.
-동일한 문제가 지속적으로 발생할 경우 고객센터로 문의하여 주십시오.
-</p>
+	<%@ include file="../../sangjin/home/loginbar.jsp"%>
+	<div style="margin-left: 500px; padding-top:90px;">
+		<h2>
+			<b><span style="color: red;" class="glyphicon glyphicon-ban-circle"></span>
+			이용에 불편을 드려 죄송합니다</b>
+		</h2>
+		<br><br>
+		<p>
+			<b>잠시 후에 다시 한번 시도해 주시기 바랍니다.<br>
+			동일한 문제가 지속적으로 발생할 경우 고객센터로 문의하여 주십시오.</b>
+		</p>
+	</div>
 </body>
 </html>
