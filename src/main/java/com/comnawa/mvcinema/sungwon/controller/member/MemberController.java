@@ -172,5 +172,18 @@ public class MemberController {
 		}
 		return json;
 	}
+	@ResponseBody
+	@RequestMapping("signout.do")
+	public JSONObject signout(@RequestParam String userid, @RequestParam String passwd){
+		JSONObject json = new JSONObject();
+		System.out.println("유저아이디"+userid);
+		int result = memberService.signout(userid, passwd);
+		if(result <= 0 ){
+			json.put("message", "fail");
+		}else{
+			json.put("message", "success");
+		}
+		return json;
+	}
 	
 }

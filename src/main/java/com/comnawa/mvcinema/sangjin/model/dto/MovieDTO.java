@@ -6,8 +6,7 @@ public class MovieDTO {
 	private int idx; // 영화번호
 	private String title; // 제목
 	private int age; // 관람 나이 제한
-	private double ord; // 평점
-	private double rank; // 예매율
+	private double grade; // 평점
 	private int people; // 관람객
 	private String director; // 감독
 	private String actors; // 출연배우
@@ -17,21 +16,20 @@ public class MovieDTO {
 	private int runtime; // 영화시간
 	private String img_url; // 포스터이미지 링크
 	private String preview; // 예고편 링크
-	private String act_img_url; //배우사진
+	private String act_img_url; // 배우사진
 
 	public MovieDTO() {
 		super();
 	}
 
-	public MovieDTO(int idx, String title, int age, double ord, double rank, int people, String director,
-			String actors, String content, String genre, Date release_date, int runtime, String img_url, String preview,
+	public MovieDTO(int idx, String title, int age, double grade, int people, String director, String actors,
+			String content, String genre, Date release_date, int runtime, String img_url, String preview,
 			String act_img_url) {
 		super();
 		this.idx = idx;
 		this.title = title;
 		this.age = age;
-		this.ord = ord;
-		this.rank = rank;
+		this.grade = grade;
 		this.people = people;
 		this.director = director;
 		this.actors = actors;
@@ -68,20 +66,12 @@ public class MovieDTO {
 		this.age = age;
 	}
 
-	public double getord() {
-		return ord;
+	public double getGrade() {
+		return grade;
 	}
 
-	public void setord(double ord) {
-		this.ord = ord;
-	}
-
-	public double getRank() {
-		return rank;
-	}
-
-	public void setRank(double rank) {
-		this.rank = rank;
+	public void setGrade(double grade) {
+		this.grade = grade;
 	}
 
 	public int getPeople() {
@@ -166,10 +156,10 @@ public class MovieDTO {
 
 	@Override
 	public String toString() {
-		return "MovieDTO [idx=" + idx + ", title=" + title + ", age=" + age + ", ord=" + ord + ", rank=" + rank
-				+ ", people=" + people + ", director=" + director + ", actors=" + actors + ", content=" + content
-				+ ", genre=" + genre + ", release_date=" + release_date + ", runtime=" + runtime + ", img_url="
-				+ img_url + ", preview=" + preview + ", act_img_url=" + act_img_url + "]";
+		return "MovieDTO [idx=" + idx + ", title=" + title + ", age=" + age + ", grade=" + grade + ", people=" + people
+				+ ", director=" + director + ", actors=" + actors + ", content=" + content + ", genre=" + genre
+				+ ", release_date=" + release_date + ", runtime=" + runtime + ", img_url=" + img_url + ", preview="
+				+ preview + ", act_img_url=" + act_img_url + "]";
 	}
 
 }

@@ -29,9 +29,4 @@ public class MovieDAOImpl implements MovieDAO {
 		return sqlSession.selectOne("movie.movie_detail", idx);
 	}
 
-	@Override
-	public List<MovieDTO> Sort_grade() {
-		return sqlSession.selectList("movie.Sort_grade");
-	}
-
 }

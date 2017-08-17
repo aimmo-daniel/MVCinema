@@ -40,12 +40,12 @@ public class HomeController {
 	}
 	
 	@RequestMapping("sort.do")
-	public ModelAndView sort(@RequestParam(defaultValue = "rank") String order_type, ModelAndView mav) {
+	public ModelAndView sort(@RequestParam(defaultValue = "grade") String order_type, ModelAndView mav) {
 		List<MovieDTO> list = movieService.movieList(order_type);
 		mav.setViewName("sangjin/home/movielist");
 		Map<String, Object> map = new HashMap<>();
 		map.put("list", list); //영화 목록
-		map.put("order_type", order_type); //예매율순, 관람객순
+		map.put("order_type", order_type);
 		mav.addObject("map", map);
 		return mav;
 	}
@@ -64,17 +64,6 @@ public class HomeController {
 		return mav;
 	}
 	
-	@RequestMapping("sort2.do")
-	public ModelAndView sort2(String order_type, ModelAndView mav){
-		List<MovieDTO> list=movieService.Sort_grade();
-		mav.setViewName("sangjin/home/movielist");
-		Map<String, Object> map = new HashMap<>();
-		map.put("list", list); //영화 목록
-		map.put("order_type", order_type);
-		mav.addObject("map", map);
-		return mav;
-	}
-	
 	@RequestMapping("schedule.do")
 	public ModelAndView schedule(ModelAndView mav) {
 		List<MovieDTO> list = movieService.ScdmovieList();
@@ -84,7 +73,6 @@ public class HomeController {
 		mav.addObject("map", map);
 		return mav;
 	}
-	
 	
 	@RequestMapping("admin")
 	public String admin(){

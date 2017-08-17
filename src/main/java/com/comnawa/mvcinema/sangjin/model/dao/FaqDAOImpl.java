@@ -30,9 +30,4 @@ public class FaqDAOImpl implements FaqDAO {
 		return sqlSession.selectList("support.list_faq", map);
 	}
 
-	@Override
-	public FaqDTO faq_view(int idx) {
-		return sqlSession.selectOne("support.faq_view", idx);
-	}
-
 }

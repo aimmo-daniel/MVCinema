@@ -112,15 +112,6 @@ public class SupportController {
 		mav.addObject("map", map);
 		return mav;
 	}
-	
-	// 문의내역상세보기
-	@RequestMapping("faq_view")
-	public ModelAndView faq_view(@RequestParam int idx, ModelAndView mav) {
-		FaqDTO dto = faqService.faq_view(idx);
-		mav.setViewName("sangjin/support/faq_view");
-		mav.addObject("dto", dto);
-		return mav;
-	}
 
 	// 문의내역리스트
 	@RequestMapping("one_to_one/{userid}")

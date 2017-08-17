@@ -70,4 +70,10 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 
+	@Override
+	public int signout(String userid) {
+		return sqlSession.delete("member.signout",userid);
+	}
+
+
 }

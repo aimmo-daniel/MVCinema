@@ -55,4 +55,9 @@ public class DetailDAOImpl implements DetailDAO {
 		return sqlSession.selectOne("detail.memo_just_one", dto);
 	}
 
+	@Override
+	public int signoutMemo(String userid) {
+		return sqlSession.delete("detail.memo_signout_memo",userid);
+	}
+
 }

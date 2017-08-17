@@ -22,15 +22,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where f.category_idx=c.idx and c.category='${value}'
 	</select>
 	
-	<select id="faq_view" resultType="com.comnawa.mvcinema.sangjin.model.dto.FaqDTO">
-		select c.category, question, ask
-		from faq f, faq_category c 
-		where f.category_idx=c.idx and f.idx=#{idx}
-	</select>
-	
 	<select id="list_faq" resultType="com.comnawa.mvcinema.sangjin.model.dto.FaqDTO">
 		<include refid="paging_header" />
-		select f.idx, category, question
+		select f.idx, category, question, ask
 		from faq f, faq_category c
 		where f.category_idx=c.idx and c.category='${keyword}'
 		order by idx

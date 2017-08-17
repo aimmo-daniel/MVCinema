@@ -27,7 +27,7 @@
       <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.2s" style="padding: 20px 10px 10px 10px;"
         class="nav-inner transparent">
         <div class="blog-thumb">
-            <div style="height: ${theaterSitMax * 28}px; border: 1px solid rgba(250,190,230,.4); text-align: center; padding-top: 10px;"
+            <div style="height: ${theaterSitMax * 25}px; border: 1px solid rgba(250,190,230,.4); text-align: center;"
               id="zzo_theaterThumbDiv">
                 <label for="zzo_theaterThumb">
                   <table style="width:100%;" id="zzo_theaterThumb">

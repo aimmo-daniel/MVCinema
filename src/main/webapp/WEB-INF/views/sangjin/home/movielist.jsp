@@ -24,20 +24,13 @@
 	 <select id="order_type" name="order_type" style="width: auto; height: 30px;">
 		<c:choose>
 			<c:when test="${map.order_type == 'grade' }">
-				<option value="rank">예매율순</option>
 				<option value="grade" selected>평점순</option>
 				<option value="people">관람객순</option>
 			</c:when>
 			<c:when test="${map.order_type == 'people' }">
-				<option value="rank">예매율순</option>
 				<option value="grade">평점순</option>
 				<option value="people" selected>관람객순</option>
 			</c:when>
-			<c:otherwise>
-				<option value="rank" selected>예매율순</option>
-				<option value="grade">평점순</option>
-				<option value="people">관람객순</option>
-			</c:otherwise>
 		</c:choose>
 	</select>
 	<button class="btn btn-primary" type="button" id="btnSearch" onclick="listMovie()">
@@ -91,7 +84,7 @@
 					<span class="txt-info"> 
 					<strong> <!-- 개봉일자 --> 
 						<fmt:formatDate	value="${row.release_date}" pattern="yyyy.MM.dd" /> 
-						<span>개봉</span> <b style="color:red">(★${row.ord}평점)</b>
+						<span>개봉</span> <b style="color:red">(★${row.grade}평점)</b>
 					</strong>
 					</span>
 				</div>
