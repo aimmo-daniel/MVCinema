@@ -40,6 +40,10 @@
 			document.login_form.submit();
 		
 	}
+	function guest_page(){
+		window.close();
+		opener.location.href="${path}/ticket/guest_seat_page.do?screen_idx="+${screen_idx};
+	}	
 	
 	function signup_page(){
 		window.close();
@@ -97,6 +101,8 @@
 			</div>
 		</div>
 		<div align="center" class="wow fadeInUp" data-wow-delay="0.5s">
+			<a href="javascript:guest_page()" class="btn btn-danger" role="button"><span
+				class="glyphicon glyphicon-film" aria-hidden="true"></span>&nbsp;비회원 예매</a>
 			<a href="javascript:signup_page()" class="btn btn-default" role="button">
 			<span class="glyphicon glyphicon-user"></span>&nbsp;회원가입</a> 
 			<a href="javascript:findaccount_page()" class="btn btn-default" role="button"><span

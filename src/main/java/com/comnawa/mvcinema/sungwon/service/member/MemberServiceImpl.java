@@ -120,7 +120,7 @@ public class MemberServiceImpl implements MemberService {
 		return name;
 	}
 
-
+	//회원 탈퇴
 	@Transactional
 	@Override
 	public int signout(String userid, String passwd) {

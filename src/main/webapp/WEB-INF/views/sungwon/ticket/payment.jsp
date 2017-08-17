@@ -20,7 +20,7 @@
 				</label></td>
 				<td align="center"><label class="radio-inline"> <input
 							type="radio" name="inlineRadioOptions" id="card_way" value="card"
-							onclick="card_type()">신용카드 결제
+							onclick="card_type()">휴대폰 소액결제(다날)
 				</label></td>
 
 			</tr>
@@ -41,7 +41,7 @@
 	<div id="test" style="display: block;" class="col-md-6">
 		<div class="table_wrap card_default" id="card_default">
 			<table class="table table-default"
-				style="width: 50%; margin-left: 5%; margin-top: 20px;">
+				style="width: 70%; margin-left: 5%; margin-top: 20px;">
 				<tbody>
 					<tr>
 						<th scope="row"><label for="lp_card_type">통신사</label></th>

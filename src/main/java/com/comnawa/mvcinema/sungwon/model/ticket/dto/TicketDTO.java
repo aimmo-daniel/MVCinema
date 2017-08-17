@@ -35,6 +35,15 @@ public class TicketDTO {
 	private int t_price;
 	private String t_seat;
 	private String t_serial_num;
+	private String email;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public int getMovie_idx() {
 		return movie_idx;

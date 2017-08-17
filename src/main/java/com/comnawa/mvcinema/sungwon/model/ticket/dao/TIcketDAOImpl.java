@@ -47,8 +47,8 @@ public class TIcketDAOImpl implements TicketDAO {
 	}
 
 	@Override
-	public int insertTicket(TicketDTO dto) {
-		return sqlSession.insert("ticket.insertTicket",dto);
+	public void insertTicket(TicketDTO dto) {
+		 sqlSession.insert("ticket.insertTicket",dto);
 	}
 
 	@Override
@@ -98,13 +98,22 @@ public class TIcketDAOImpl implements TicketDAO {
 
 	@Override
 	public List<TicketDTO> date_screen_time(TicketDTO dto) {
-		System.out.println("디에이오"+dto.toString());
 		return sqlSession.selectList("ticket.date_screenTime",dto);
 	}
 
 	@Override
 	public TicketDTO date_selectTime(int screen_idx) {
 		return sqlSession.selectOne("ticket.date_selectTime",screen_idx);
+	}
+
+	@Override
+	public void cancelStats(int ticket_idx) {
+		sqlSession.delete("ticket.cancel_stats",ticket_idx);
+	}
+
+	@Override
+	public int insertStats(TicketDTO dto) {
+		return sqlSession.insert("ticket.insertStats",dto);
 	}
 
 }

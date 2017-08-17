@@ -66,6 +66,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{t_people}, #{t_seat}, #{t_price},
 		#{t_serial_num},#{screen_idx} )
 	</insert>
+	<insert id="insertStats">
+		insert into
+		stats( ticket_idx, t_userid, t_title,
+		t_age, t_theater, t_start_time, t_people, t_seat,
+		t_price,
+		t_serial_num,screen_idx )
+		values(seq_ticket_idx.currval, #{t_userid},
+		#{t_title}, #{t_age},
+		#{t_theater}, to_date(#{t_start_time},'yyyy-MM-dd
+		hh24:mi'),
+		#{t_people}, #{t_seat}, #{t_price},
+		#{t_serial_num},#{screen_idx} )
+	</insert>
 	<update id="updatepeople">
 		update movie set people= people+#{t_people} where
 		title=#{t_title}
@@ -80,12 +93,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	<select id="myTicketList" resultType="TicketDTO">
 		select
-		ticket_idx,screen_idx,m.img_url img_url, t_age,t_title, t_people, t_seat ,t_start_time, t_price, t_serial_num, t_price 
+		ticket_idx,screen_idx,m.img_url img_url, t_age,t_title, t_people, t_seat ,t_start_time, t_price, t_serial_num 
 		from movie m ,ticket
-		where m.title = t_title and t_userid=#{t_userid} order by t_start_time
+		where m.title = t_title and t_userid=#{t_userid} order by t_start_time desc
 	</select>
 	<delete id="cancel_ticket">
 		delete from ticket where ticket_idx=#{ticket_idx}
+	</delete>
+	<delete id="cancel_stats">
+		delete from stats where ticket_idx=#{ticket_idx}
 	</delete>
 	<delete id="cancel_seat">
 		delete from soldout_seat where screen_idx=#{screen_idx} and seat_out=#{seat_out}
@@ -107,6 +123,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where s.theater_idx=t.idx and m.idx = s.movie_idx and s.screen_idx=#{screen_idx}
 	</select>
 </mapper>
+
+
+
+
+
+
 
 
 
