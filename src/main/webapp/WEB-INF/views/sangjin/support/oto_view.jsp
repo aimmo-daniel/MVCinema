@@ -17,18 +17,17 @@ th {
 }
 </style>
 <script>
-	function delete_one(userid) {
+	function delete_one() {
 		var idx = $("#idx").val();
 		if (confirm('문의내역을 삭제하시겠습니까?')) {
-			location.href = "${path}/support/deleteOne?idx=" + idx + "&userid="
-					+ userid;
+			location.href = "${path}/support/deleteOne?idx=" + idx;
 		} else {
 			return false;
 		}
 	}
 
-	function list(userid) {
-		location.href = "${path}/support/one_to_one/" + userid;
+	function list() {
+		location.href = "${path}/support/one_to_one";
 	}
 </script>
 </head>
@@ -99,10 +98,10 @@ th {
 		style="padding-right: 200px; padding-left: 200px; text-align: center;">
 		<button style="width: 120px; height: 50px; font-size: 15pt;"
 			type="button" id="btnWrite" class="btn btn-info"
-			onclick="list('${sessionScope.dto.userid}');">목록</button>
+			onclick="list();">목록</button>
 		<button style="width: 120px; height: 50px; font-size: 15pt;"
 			type="button" id="btnWrite" class="btn btn-danger"
-			onclick="delete_one('${sessionScope.dto.userid}');">삭제</button>
+			onclick="delete_one();">삭제</button>
 	</div>
 </body>
 </html>

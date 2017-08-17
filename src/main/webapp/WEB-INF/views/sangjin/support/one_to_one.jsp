@@ -17,7 +17,7 @@ function view(idx){
 
 //글쓰기
 function userInfo(userid){
-	location.href="${path}/support/write?userid="+userid;
+	location.href="${path}/support/write";
 }
 
 //글 전체삭제
@@ -32,7 +32,7 @@ function deleteAll(userid){
 				alert('삭제할 문의내역이 없습니다.')
 			}else{
 				if(confirm('모든 문의내역을 삭제하시겠습니까?')){
-					location.href="${path}/support/deleteAll?userid="+userid;
+					location.href="${path}/support/deleteAll";
 				}else{
 					return false;
 				}
@@ -42,8 +42,8 @@ function deleteAll(userid){
 }
 
 //페이지넘기기
-function list(userid,page) {
-	location.href="${path}/support/one_to_one/"+userid+"?page="+page;
+function list(page) {
+	location.href="${path}/support/one_to_one?page="+page;
 }
 </script>
 </head>
@@ -99,10 +99,10 @@ function list(userid,page) {
 		<tr>
 			<td colspan="5" align="center">
 				<c:if test="${map.pager.curBlock > 1}">
-					<a href="javascript:list('${sessionScope.dto.userid}','1')"> [처음]</a>
+					<a href="javascript:list('1')"> [처음]</a>
 				</c:if> 
 				<c:if test="${map.pager.curBlock > 1 }">
-					<a href="javascript:list('${sessionScope.dto.userid}','${map.pager.prevPage}')">[이전]</a>
+					<a href="javascript:list('${map.pager.prevPage}')">[이전]</a>
 				</c:if> 
 				<c:forEach var="num" begin="${map.pager.blockBegin}" end="${map.pager.blockEnd}">
 					<c:choose>
@@ -111,16 +111,16 @@ function list(userid,page) {
 							<span style="color: red">${num}</span>&nbsp;
 						</c:when>
 						<c:otherwise>
-							<a href="javascript:list('${sessionScope.dto.userid}', '${num}')"> ${num}</a>&nbsp;
+							<a href="javascript:list('${num}')"> ${num}</a>&nbsp;
 						</c:otherwise>
 					</c:choose>
 				</c:forEach> 
 				<!-- 전체페이지블록 개수가 현재페이지 블록이거나 더 크면 [다음] -->
 				<c:if test="${map.pager.curBlock <= map.pager.totBlock}">
-					<a href="javascript:list('${sessionScope.dto.userid}','${map.pager.nextPage}')"> [다음]</a>
+					<a href="javascript:list('${map.pager.nextPage}')"> [다음]</a>
 				</c:if> 
 				<c:if test="${map.pager.curPage <= map.pager.totPage}">
-					<a href="javascript:list('${sessionScope.dto.userid}','${map.pager.totPage}')"> [끝]</a>
+					<a href="javascript:list('${map.pager.totPage}')"> [끝]</a>
 				</c:if>
 			</td>
 		</tr>

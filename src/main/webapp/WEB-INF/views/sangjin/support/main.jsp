@@ -29,7 +29,7 @@ function one_to_one(userid){
 		window.open(uri, 'popup', strFeature);
 		return;
 	}
-	location.href="${path}/support/one_to_one/"+userid;
+	location.href="${path}/support/one_to_one";
 }
 </script>
 </head>

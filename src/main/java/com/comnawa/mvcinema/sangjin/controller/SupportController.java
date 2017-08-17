@@ -114,9 +114,10 @@ public class SupportController {
 	}
 
 	// 문의내역리스트
-	@RequestMapping("one_to_one/{userid}")
-	public ModelAndView one_to_one(@PathVariable String userid, @RequestParam(defaultValue = "1") int page,
+	@RequestMapping("one_to_one")
+	public ModelAndView one_to_one(@RequestParam(defaultValue = "1") int page, HttpSession session,
 			ModelAndView mav) {
+		String userid=((MemberDTO) session.getAttribute("dto")).getUserid();
 		// 레코드 갯수 계산
 		int count = contactService.countOto(userid);
 		// 페이지의 시작번호,끝번호 계산
@@ -144,7 +145,8 @@ public class SupportController {
 
 	// 문의작성페이지로
 	@RequestMapping("write")
-	public ModelAndView write(@RequestParam String userid, ModelAndView mav) {
+	public ModelAndView write(HttpSession session, ModelAndView mav) {
+		String userid = ((MemberDTO) session.getAttribute("dto")).getUserid();
 		MemberDTO dto = contactService.userInfo(userid);
 		mav.setViewName("sangjin/support/write");
 		mav.addObject("dto", dto);
@@ -160,21 +162,22 @@ public class SupportController {
 		dto.setTitle(title);
 		dto.setUserid(userid);
 		contactService.insert(dto);
-		return "redirect:/support/one_to_one/" + userid;
+		return "redirect:/support/one_to_one";
 	}
 
 	// 문의내역 삭제
 	@RequestMapping("deleteOne")
-	public String delete(@RequestParam int idx, @RequestParam String userid) {
+	public String delete(@RequestParam int idx) {
 		contactService.DeleteOne(idx);
-		return "redirect:/support/one_to_one/" + userid;
+		return "redirect:/support/one_to_one";
 	}
 
 	// 문의내역 전체삭제
 	@RequestMapping("deleteAll")
-	public String deleteAll(@RequestParam String userid) {
+	public String deleteAll(HttpSession session) {
+		String userid = ((MemberDTO) session.getAttribute("dto")).getUserid();
 		contactService.DeleteAll(userid);
-		return "redirect:/support/one_to_one/" + userid;
+		return "redirect:/support/one_to_one";
 	}
 
 	// 문의내역이 있는지 확인

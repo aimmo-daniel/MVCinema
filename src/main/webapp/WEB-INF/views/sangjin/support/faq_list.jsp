@@ -87,7 +87,7 @@ function faq_list(page) {
 			<tr>
 				<td style="text-align: center;">${row.idx}</td>
 				<td style="text-align: center;"><b style="color: green;">${row.category}</b></td>
-				<td onclick="faq_showAsk('${row.idx}');"><b style="color:#0082bf;">${row.question}</b></td>
+				<td><a href="javascript:faq_showAsk('${row.idx}')"><b style="color:#0082bf;">${row.question}</b></a></td>
 			</tr>
          	<%
 				pageContext.setAttribute("newLineChar", "\n");
