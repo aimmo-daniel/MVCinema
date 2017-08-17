@@ -28,5 +28,7 @@ function basic_set(){
 <body>
 	<%@ include file="../../sangjin/home/loginbar.jsp"%>
 	<div id="faqlist"></div>
+	<div style="height:300px;"></div>
+	<%@ include file="../../insang/footer/footer.jsp" %>
 </body>
 </html>

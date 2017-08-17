@@ -63,12 +63,12 @@ function write_oto(){
 				</tr>
 				<tr>
 					<th>제목</th>
-					<td><input style="width: 740px;" id="title" name="title"></td>
+					<td><input style="width: 747px;" id="title" name="title"></td>
 				</tr>
 				<tr>
 					<th>내용</th>
 					<td><textarea style="resize: none;" id="content"
-							name="content" rows="15" cols="100"></textarea></td>
+							name="content" rows="15" cols="130"></textarea></td>
 				</tr>
 			</table>
 		</form>
@@ -79,5 +79,7 @@ function write_oto(){
 		<button style="width: 120px; height: 50px; font-size: 15pt;"
 			type="button" id="btnWrite" class="btn btn-success" onclick="write_oto();">등록</button>
 	</div>
+	<div style="height: 350px;"></div>
+	<%@ include file="../../insang/footer/footer.jsp" %>
 </body>
 </html>

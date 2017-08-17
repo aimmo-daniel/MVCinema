@@ -39,7 +39,7 @@ function one_to_one(userid){
 		<div class="tit-heading-wrap">
 			<h3>고객 센터</h3>
 		</div>
-		<div style="padding-top: 80px; padding-left: 130px;" class="support_button">
+		<div style="padding-top: 80px; padding-left: 130px; height: 550px;" class="support_button">
 			<button type="button" class="btn btn-info btn-xl" style="width: 270px; height:270px;" onclick="notice();">
 		  		<span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="font-size:70pt;"></span><br><br>
 		  		<span style="font-size:15pt;">이벤트/공지사항</span><br>
@@ -59,5 +59,6 @@ function one_to_one(userid){
 			</button>
 		</div>
 	</div>
+	<%@ include file="../../insang/footer/footer.jsp" %>
 </body>
 </html>

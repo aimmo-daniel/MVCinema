@@ -126,5 +126,7 @@ function list(page) {
 		</tr>
 	</table>
 </div>
+<div style="height: 350px;"></div>
+<%@ include file="../../insang/footer/footer.jsp" %>
 </body>
 </html>

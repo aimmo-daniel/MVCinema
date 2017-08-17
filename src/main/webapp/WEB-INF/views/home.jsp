@@ -91,12 +91,12 @@ li {
 		<div class="tit-heading-wrap" style="height:10px; margin-top:1px;">
 		</div>
 	</div>
-	<div style="padding-right: 200px; padding-left: 200px;">
+	<div style="padding-right: 200px; padding-left: 200px; height:250px;">
 		<button type="button" style="float:right;" class="btn btn-default btn" id="expand">
 			  		<span class="glyphicon glyphicon-plus" style="color:#23527c" aria-hidden="true"></span>
 			  		<span style="color:#23527c">더보기</span>
 		</button>
 	</div>
-	<br><br><br>
+	<%@ include file="insang/footer/footer.jsp" %>
 </body>
 </html>
