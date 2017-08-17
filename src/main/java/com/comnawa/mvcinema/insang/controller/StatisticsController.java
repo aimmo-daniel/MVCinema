@@ -51,8 +51,8 @@ public class StatisticsController {
   @ResponseBody
   @RequestMapping("searchDetail.do")
   public JSONObject searchDetail(String member, String age, String movie){
-//    return chartService.getSearchDetail(member, Integer.parseInt(age), Integer.parseInt(movie));
-    return null;
+    //resultCount, resultAllCount
+    return chartService.getSearchDetail(member, Integer.parseInt(age), Integer.parseInt(movie));
   }
   
 }

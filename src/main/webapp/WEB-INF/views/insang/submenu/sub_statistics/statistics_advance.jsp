@@ -99,7 +99,7 @@ var movieCount= [];
         <td><label>영화제목</label></td>
         <td>
           <select id="searchMovie">
-            <option>모든영화</option>
+            <option value="0">모든영화</option>
             <c:forEach var="row" items="${movieList}">
               <option value="${row.idx}">${row.title}</option>
             </c:forEach>
@@ -115,6 +115,17 @@ var movieCount= [];
     </table>
   </div>
   <hr>
+  
+  <table style="display: none;" id="searchSet">
+    <tr>
+      <td><label>검색 결과 통계</label></td>
+    </tr>
+    <tr>
+      <td>
+        <div id="searchResult"></div>
+      </td>
+    </tr>
+  </table>
   
   <table style="display: none;" id="defaultSet">
     <tr>
@@ -137,22 +148,39 @@ var movieCount= [];
     </tr>
   </table>
   
+  
   <script>
   function searchSetting(){
     var memb= $("#searchMemb option:selected").val();
     var age= $("#searchAge option:selected").val();
     var movie= $("#searchMovie option:selected").val();
-    var param= "member="+member+"&age="+age+"&movie="+movie;
+    var param= "member="+memb+"&age="+age+"&movie="+movie;
+    var resultCount;
+    var resultAllCount;
     $.ajax({
       type: "post",
       data: param,
       url: "${path}/tong/searchDetail.do",
       async: false,
       success: function(result){
-        
+        resultCount= result.resultCount;
+        resultAllCount= result.resultAllCount;
       }
-    })
+    });
     
+    var data = new google.visualization.DataTable();
+  	data.addColumn('string', 'Topping');
+  	data.addColumn('number', 'Slices');
+  	data.addRows([
+	  [$("#searchMemb option:selected").text()+" / "+$("#searchAge option:selected").text()+" / "+$("#searchMovie option:selected").text(), resultCount],
+      ['그외', resultAllCount-resultCount],
+	]);
+    var options = {'title':'검색값',
+                   'width':800,
+                   'height':300};
+    var chart = new google.visualization.PieChart(document.getElementById('searchResult'));
+    chart.draw(data, options);
+    $("#searchSet").show();
   }
   function defaultSetting(){
     google.charts.setOnLoadCallback(drawChart("member"));
