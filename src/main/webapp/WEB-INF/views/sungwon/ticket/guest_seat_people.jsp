@@ -7,6 +7,26 @@
 <title>MVCinema</title>
 <%@include file="../../include/header.jsp"%>
 <%@include file="../sw_include/template.jsp"%>
+<style>
+.loader {
+  border: 12px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 12px solid #3498db;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+</style>
 <script>
 var title; //영화제목
 var age; //영화 나이제한
@@ -236,7 +256,6 @@ function final_payment(){
 	}else{
 		guestage = (thisyear - guestage)
 	}
-	
 	if(checkMail == false){
 		alert("이메일이 인증 되지 않았습니다.");
 		return;
@@ -257,6 +276,9 @@ function final_payment(){
 		alert("영화등급을 확인해주세요");
 		return;
 	}
+	$("#seat_info").css("display",'none');
+	$("#loading").css("display",'block');
+	
 	var param = "t_userid=guest"+"&t_title="+title
 	+"&t_age="+age+"&t_start_time="+select_date+"&t_theater="+theater_name
 	+"&t_people="+people+"&t_seat="+seat+"&t_price="+total_price+"&screen_idx="+${screen_idx}+"&email="+email; 
@@ -266,6 +288,8 @@ function final_payment(){
 		url:"${path}/ticket/payment.do",
 		data:param,
 		success: function(result){
+			$("#loading").css("display",'none');
+			$("#seat_info").css("display",'block');
 			if(result.message == 'fail'){
 				alert("예매에 실패하였습니다. 잠시후 다시시 도해주세요");
 				return;
@@ -429,6 +453,10 @@ function rnd_check(){
 		</div>
 	</div>
 	<hr>
+	</div>
+	<div id="loading" style="width: 100%; height: 250px; display: none; text-align: center;" >
+	<div class="loader" style="margin-left: 49%; margin-top:17%"></div>
+	<br><b>&nbsp;&nbsp;&nbsp;결제가 진행중입니다. 잠시만 기다려주세요</b>
 	</div>
 	<div class="container" style="width: 100%; height: 150px; background-color:gray">
 		<div class="row">
