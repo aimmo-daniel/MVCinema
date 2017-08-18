@@ -92,7 +92,7 @@ function myCalendar2(id, date) {
 	calendar2 += '				  <th style="text-align:center;" class="wed" scope="row"><h3><label class="label label-success">수</label></h3></th>';
 	calendar2 += '				  <th style="text-align:center;" class="thu" scope="row"><h3><label class="label label-success">목</label></h3></th>';
 	calendar2 += '				  <th style="text-align:center;" class="fri" scope="row"><h3><label class="label label-success">금</label></h3></th>';
-	calendar2 += '				  <th style="text-align:center;" class="sat" scope="row"><h3><label class="label label-primary">일</label></h3></th>';
+	calendar2 += '				  <th style="text-align:center;" class="sat" scope="row"><h3><label class="label label-primary">토</label></h3></th>';
 	calendar2 += '				</tr>';
 	calendar2 += '			</thead>';
 	calendar2 += '			<tbody id="cal_body">';

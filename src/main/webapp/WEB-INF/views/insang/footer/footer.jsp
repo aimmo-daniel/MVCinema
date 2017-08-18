@@ -9,8 +9,6 @@
 <meta name="description" content="">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${path}/admin/resources/template/css/zzo_style_login.css">
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="${path}/admin/resources/template/css/bootstrap.min.css">
 <!-- Animate CSS -->
 <link rel="stylesheet" href="${path}/admin/resources/template/css/animate.min.css">
 <!-- Font Icons CSS -->

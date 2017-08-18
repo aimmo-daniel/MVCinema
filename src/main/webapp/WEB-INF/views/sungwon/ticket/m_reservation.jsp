@@ -7,7 +7,7 @@
 <title>MVCinema</title>
 <%@include file="../../include/header.jsp"%>
 <%@include file="../sw_include/template.jsp"%>
-<script src="${path}/sungwon/etc/js/myCalendar.js?v=3"></script>
+<script src="${path}/sungwon/etc/js/myCalendar.js?v=4"></script>
 <link rel="stylesheet" href="${path}/sungwon/etc/css/sw_style.css?v=2">
 
 <style>
