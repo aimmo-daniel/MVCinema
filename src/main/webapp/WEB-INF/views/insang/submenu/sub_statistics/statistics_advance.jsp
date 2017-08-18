@@ -104,7 +104,7 @@ var movieCount= [];
             <option value="0">모든영화</option>
             <c:forEach var="row" items="${movieList}">
               <fmt:formatDate var="nowDate" value="${toDay}" pattern="yyyy-MM-dd"/>
-              <fmt:formatDate var="releaseDate" value="${mv_rows.release_date}" pattern="yyyy-MM-dd"/>
+              <fmt:formatDate var="releaseDate" value="${row.release_date}" pattern="yyyy-MM-dd"/>
                 <c:if test="${releaseDate < nowDate}">
                   <option value="${row.idx}">${row.title}</option>
                 </c:if>

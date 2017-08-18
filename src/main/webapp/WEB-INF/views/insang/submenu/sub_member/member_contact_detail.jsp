@@ -63,6 +63,18 @@
       <tr>
         <td>
           <label>
+            질문 내용
+          </label>
+        </td>
+        <td>
+          <label style="color: #dd7777;">
+            ${contactDetail.content}
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>
             답변 상태
           </label>
         </td>
