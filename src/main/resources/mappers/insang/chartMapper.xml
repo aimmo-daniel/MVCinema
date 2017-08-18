@@ -15,6 +15,11 @@ FROM MEMBER m, stats s WHERE s.t_userid= m.userid and t_userid= 'guest'
 FROM MEMBER m, stats s WHERE s.t_userid= m.userid and t_userid!= 'guest'
   </select>
   
+  <select id="monthlySales" resultType="int">
+    SELECT nvl(sum(t_price),0) FROM stats 
+    WHERE t_start_time > to_date('${s_year}-${s_month}','yyyy-MM') AND to_date('${e_year}-${e_month}','yyyy-MM') > t_start_time
+  </select>
+  
 </mapper>
 
 

@@ -118,7 +118,7 @@ var movieCount= [];
   
   <table style="display: none;" id="searchSet">
     <tr>
-      <td><label>검색 결과 통계</label></td>
+      <td><label style="font-size: x-large;">검색 결과 통계</label></td>
     </tr>
     <tr>
       <td>
@@ -182,12 +182,14 @@ var movieCount= [];
     var chart = new google.visualization.PieChart(document.getElementById('searchResult'));
     chart.draw(data, options);
     $("#searchSet").show();
+    $("#defaultSet").hide();
   }
   function defaultSetting(){
     google.charts.setOnLoadCallback(drawChart("member"));
     google.charts.setOnLoadCallback(drawChart("age"));
     google.charts.setOnLoadCallback(drawChart("movie"));
-    $("#defaultSet").toggle();
+    $("#defaultSet").show();
+    $("#searchSet").hide();
   }
   </script>
   

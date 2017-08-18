@@ -1,5 +1,9 @@
 package com.comnawa.mvcinema.insang.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.json.simple.JSONObject;
@@ -38,8 +42,8 @@ public class StatisticsController {
   }
   
   @RequestMapping("yeame2.do")
-  public String yeame2(Model model){
-    return null;
+  public String yeame2(){
+    return "/insang/submenu/sub_statistics/statistics_sales";
   }
   
   @RequestMapping("default.do")
@@ -53,6 +57,28 @@ public class StatisticsController {
   public JSONObject searchDetail(String member, String age, String movie){
     //resultCount, resultAllCount
     return chartService.getSearchDetail(member, Integer.parseInt(age), Integer.parseInt(movie));
+  }
+  
+  @ResponseBody
+  @RequestMapping("monthlySalesChart.do")
+  public List<Map<String, Object>> monthlySalesChart(String start_year, String start_month, String end_year, String end_month){
+    int s_year= Integer.parseInt(start_year);
+    int s_month= Integer.parseInt(start_month);
+    int e_year= Integer.parseInt(end_year);
+    int e_month= Integer.parseInt(end_month);
+    List<Map<String, Object>> result= new ArrayList<>();
+    while (true){
+      result.add(chartService.getSales(s_year, s_month, e_year, e_month));
+      if (s_month==e_month && s_year==e_year){
+        break;
+      }
+      s_month++;
+      if (s_month==13){
+        s_month=1;
+        s_year++;
+      }
+    }
+    return result;
   }
   
 }

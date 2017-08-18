@@ -1,6 +1,8 @@
 package com.comnawa.mvcinema.insang.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -610,6 +612,15 @@ public class ChartServiceImpl implements ChartService{
       result.put("resultCount", aCount);
     }
     return result;
+  }
+  
+  @Override
+  public Map<String, Object> getSales(int s_year, int s_month, int e_year, int e_month) {
+    Map<String, Object> map= new HashMap<>();
+    String str= s_month<10?"0"+s_month : ""+s_month;
+    map.put("month", (s_year+"."+str).substring(2));
+    map.put("sale", ticketData.getMonthlySales(s_year, s_month, e_year, e_month));
+    return map;
   }
   
 }

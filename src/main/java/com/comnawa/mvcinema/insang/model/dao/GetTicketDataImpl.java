@@ -1,7 +1,8 @@
 package com.comnawa.mvcinema.insang.model.dao;
 
-import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -26,11 +27,28 @@ public class GetTicketDataImpl implements GetTicketData{
     return sqlSession.selectList("insang_chart.ticketMember");
   }
   
-  private int getLastDay(String year, String month, String date){
-    Calendar calendar = Calendar.getInstance();
-    calendar.set(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(date)); 
-    int chkdd = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-    return chkdd;
+  @Override
+  public int getMonthlySales(int s_year, int s_month, int e_year, int e_month) {
+    int start_month= s_month;
+    int end_month= s_month+1;
+    int start_year= s_year;
+    int end_year= s_year;
+    if (start_month==12){
+      end_year++;
+    }
+    if (start_month==13){
+      start_month=1;
+      start_year++;
+    }
+    if (end_month==13){
+      end_month=1;
+    }
+    Map<String, Integer> map= new HashMap<>();
+    map.put("s_year", start_year);
+    map.put("s_month", start_month);
+    map.put("e_year", end_year);
+    map.put("e_month", end_month);
+    return sqlSession.selectOne("insang_chart.monthlySales", map);
   }
   
 }
