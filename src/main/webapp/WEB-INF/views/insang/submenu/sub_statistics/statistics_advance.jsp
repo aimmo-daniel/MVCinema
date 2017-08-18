@@ -62,6 +62,8 @@ var movieCount= [];
       </script>
 </head>
 <body>
+<jsp:useBean id="toDay" class="java.util.Date" />
+<c:set var="now" value="${java.string.date}"/>
   <div>
     <label for="sub_theater_subject">
       <p class="wow fadeIn" data-wow-delay="0s" id="sub_theater_subject">예매율 통계</p>
@@ -101,7 +103,11 @@ var movieCount= [];
           <select id="searchMovie">
             <option value="0">모든영화</option>
             <c:forEach var="row" items="${movieList}">
-              <option value="${row.idx}">${row.title}</option>
+              <fmt:formatDate var="nowDate" value="${toDay}" pattern="yyyy-MM-dd"/>
+              <fmt:formatDate var="releaseDate" value="${mv_rows.release_date}" pattern="yyyy-MM-dd"/>
+                <c:if test="${releaseDate < nowDate}">
+                  <option value="${row.idx}">${row.title}</option>
+                </c:if>
             </c:forEach>
           </select>
         </td>
