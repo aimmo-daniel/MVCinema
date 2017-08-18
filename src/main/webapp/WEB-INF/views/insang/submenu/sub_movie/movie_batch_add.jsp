@@ -7,7 +7,8 @@
 <%@ include file="../../../include/header.jsp" %>
 </head>
 <body>
-
+<jsp:useBean id="toDay" class="java.util.Date" />
+<c:set var="now" value="${java.string.date}"/>
 <h1 style="color: #ff8888; text-align: center;'">상영시간표 등록</h1>
     <br>
 
@@ -39,7 +40,11 @@
     <td>
       <select id="add_movieIDX">
         <c:forEach var="mv_rows" items="${movieList}" varStatus="status">
-          <option value="${mv_rows.idx}">${mv_rows.title}</option>
+          <fmt:formatDate var="nowDate" value="${toDay}" pattern="yyyy-MM-dd"/>
+          <fmt:formatDate var="releaseDate" value="${mv_rows.release_date}" pattern="yyyy-MM-dd"/>
+          <c:if test="${releaseDate < nowDate}">
+            <option value="${mv_rows.idx}">${mv_rows.title}</option>
+          </c:if>
         </c:forEach>
       </select>
     </td>
