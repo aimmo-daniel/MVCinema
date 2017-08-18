@@ -8,6 +8,7 @@
 <%@include file="../../sangjin/home/loginbar.jsp"%>
 <%@include file="../../include/header.jsp"%>
 <%@include file="../sw_include/template.jsp"%>
+<%@ include file="../../sangjin/sj_include/Top.jsp" %>
 <link rel="stylesheet" href="${path}/sungwon/etc/css/sw_style.css?v=4">
 <script>
 	var pwd_rule = false;

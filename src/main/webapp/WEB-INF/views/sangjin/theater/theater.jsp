@@ -9,6 +9,7 @@
 <%@ include file="../../include/header.jsp"%>
 <%@ include file="../../include/template.jsp"%>
 <%@ include file="../../sangjin/sj_include/sangjincss.jsp"%>
+<%@ include file="../../sangjin/sj_include/Top.jsp" %>
 </head>
 <body>
 	<%@ include file="../../sangjin/home/loginbar.jsp"%>
