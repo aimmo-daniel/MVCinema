@@ -11,11 +11,17 @@ img {
 		<li data-target="#myCarousel" data-slide-to="1"></li>
 		<li data-target="#myCarousel" data-slide-to="2"></li>
 		<li data-target="#myCarousel" data-slide-to="3"></li>
+		<li data-target="#myCarousel" data-slide-to="5"></li>
+		<li data-target="#myCarousel" data-slide-to="6"></li>
 	</ol>
 
 	<div class="carousel-inner" style="width: 85%; margin: 0 auto;"role="listbox">
 		<div class="item active">
-			<img src="${path}/sangjin/resource/image/img4.jpg">
+			<img src="${path}/sangjin/resource/image/img6.jpg">
+		</div>
+
+		<div class="item">
+			<img src="${path}/sangjin/resource/image/img7.jpg">
 		</div>
 
 		<div class="item">
@@ -23,11 +29,15 @@ img {
 		</div>
 
 		<div class="item">
-			<img src="${path}/sangjin/resource/image/img1.jpg">
+			<img src="${path}/sangjin/resource/image/img4.jpg">
 		</div>
-
+		
 		<div class="item">
-			<img src="${path}/sangjin/resource/image/img2.jpg">
+			<img src="${path}/sangjin/resource/image/img8.jpg">
+		</div>
+		
+		<div class="item">
+			<img src="${path}/sangjin/resource/image/img9.jpg">
 		</div>
 	</div>
 
