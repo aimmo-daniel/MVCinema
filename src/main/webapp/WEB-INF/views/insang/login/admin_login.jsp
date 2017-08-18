@@ -8,6 +8,7 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 <title>MVCinema AdminPage</title>
+<%@ include file="../../sangjin/sj_include/Top.jsp" %>
 <!-- insang include css -->
 <link rel="stylesheet" href="${path}/admin/resources/template/css/zzo_style_login.css">
 <!-- Bootstrap CSS -->
