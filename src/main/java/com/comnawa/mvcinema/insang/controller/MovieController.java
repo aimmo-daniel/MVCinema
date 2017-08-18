@@ -202,7 +202,7 @@ public class MovieController {
   //영화 수정
   @RequestMapping("/movie/modMovie.do")
   public String modMovie(HttpServletRequest request, MultipartFile filePreview, MultipartFile filePoster, Model model,
-      HttpSession session, @RequestParam MultipartFile[] multipartFile) throws Exception {
+      HttpSession session, @RequestParam MultipartFile[] multipartFile, MultipartFile fileActors) throws Exception {
     
     FtpClient ftpSender = new FtpClient("");
 
@@ -311,7 +311,7 @@ public class MovieController {
     fos.flush();
     fos.close();
     fos = new FileOutputStream(fActimg);
-    fos.write(filePoster.getBytes());
+    fos.write(fileActors.getBytes());
     fos.flush();
     fos.close();
 
