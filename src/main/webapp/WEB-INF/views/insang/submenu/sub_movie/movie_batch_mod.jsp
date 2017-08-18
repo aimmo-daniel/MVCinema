@@ -47,7 +47,7 @@
   </tr>
   <tr style="text-align: right;">
     <td colspan="2">
-      <input type="button" value="수정 완료!!" class="btn btn-success" id="btnModSchedule">
+      <input type="button" value="수정" class="btn btn-success" id="btnModSchedule">
       <label id="insang_spinner" style="display: none;">
         <img style="width: 30px;" src='${path}/admin/resources/adminImages/loader.gif'>
       </label>

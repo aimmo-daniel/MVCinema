@@ -104,7 +104,7 @@ $(function(){
           <td colspan="2"><textarea id="addTheater_preview" name="preview"></textarea></td>
         </tr>
         <tr>
-          <td colspan="3" align="right"><button type="button" id="btnAddTheaterDetail">등록 긔긔</button>
+          <td colspan="3" align="right"><button type="button" id="btnAddTheaterDetail" class="btn btn-success">등록</button>
           <label id="insang_spinner" style="display: none;">
             <img style="width: 30px;" src='${path}/admin/resources/adminImages/loader.gif'>
           </label>

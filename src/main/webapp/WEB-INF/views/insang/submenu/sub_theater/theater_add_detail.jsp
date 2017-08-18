@@ -130,7 +130,7 @@ $(function(){
         <tr>
           <td colspan="3" align="right">
             <input type="button" value="삭제 긔긔" class="btn btn-danger" style="margin-right: 20px;" id="btnDelTheater">
-            <button type="button" id="btnAddTheaterDetail" class="btn btn-success">수정 긔긔</button>
+            <button type="button" id="btnAddTheaterDetail" class="btn btn-success">수정</button>
             <label id="insang_spinner" style="display: none;">
               <img style="width: 30px;" src='${path}/admin/resources/adminImages/loader.gif'>
             </label>

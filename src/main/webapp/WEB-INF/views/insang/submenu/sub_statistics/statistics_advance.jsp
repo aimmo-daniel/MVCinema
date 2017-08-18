@@ -42,7 +42,7 @@ var movieCount= [];
             	['50대 (50~59)', Number('${chart_age.size5}')],
             	['60대 이상', Number('${chart_age.size6+chart_age.size7+chart_age.size8+chart_age.size9}')],
         	]);
-          	var options = {'title':'<font color="green">연령별 예매</font>',
+          	var options = {'title':'연령별 예매',
                          'width':800,
                          'height':300};
           	var chart = new google.visualization.PieChart(document.getElementById('default2'));
