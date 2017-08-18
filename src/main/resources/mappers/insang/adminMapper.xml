@@ -109,7 +109,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <update id="updateMovie">
     update movie
     set title= #{title}, age= #{age}, director= #{director}, actors= #{actors},
-      content= #{content}, genre= #{genre}, runtime= #{runtime}, img_url= #{img_url}, preview= #{preview} 
+      content= #{content}, genre= #{genre}, runtime= #{runtime}, img_url= #{img_url}, preview= #{preview}, act_img_url=#{act_img_url} 
     where idx=#{idx}
   </update>
   

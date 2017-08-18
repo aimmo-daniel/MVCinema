@@ -325,7 +325,7 @@ public class MovieController {
       ftpSender.upload(fPreview, "/video/" + previewName);
     }
     if (!originAct.equals(re_act_img)){
-      ftpSender.delete("/video/" + originAct);
+      ftpSender.delete("/act_img/" + originAct);
       ftpSender.upload(fActimg, "/act_img/"+act_imgName);
     }
     

@@ -197,7 +197,7 @@
           <tr>
           <td>출연진 사진</td>
           <td>
-            <input type="file" name="fileActors" id="mod_fileActors" onchange="$('#mod_act_img_url').val($('#mod_fileActors').val())">
+            <input type="file" name="fileActors" id="mod_fileActors" onchange="$('#mod_act_img_url_hidden').val($('#mod_fileActors').val())">
           </td>
           <td style="width: 300px; height: auto;">
             <img src="ad.png" id="mod_act_img_url">
