@@ -1,15 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@ include file="../../../include/header.jsp" %>
+<%@ include file="../../../include/header.jsp"%>
 <title>Insert title here</title>
 <script>
 var movieName= [];
 var movieCount= [];
 </script>
-<c:set var="insang_aCount" value="0"/>
+<c:set var="insang_aCount" value="0" />
 <c:forEach var="item" items="${chart_movie.movieName}" varStatus="status">
   <script>
   	movieName[${status.index}]= '${chart_movie.movieName[status.index]}';
@@ -62,30 +62,27 @@ var movieCount= [];
       </script>
 </head>
 <body>
-<jsp:useBean id="toDay" class="java.util.Date" />
-<c:set var="now" value="${java.string.date}"/>
+  <jsp:useBean id="toDay" class="java.util.Date" />
+  <c:set var="now" value="${java.string.date}" />
   <div>
     <label for="sub_theater_subject">
       <p class="wow fadeIn" data-wow-delay="0s" id="sub_theater_subject">예매율 통계</p>
     </label>
   </div>
-  
+
   <div>
     <table class="table table-default">
       <tr>
         <td><label>회원구분</label></td>
-        <td>
-          <select id="searchMemb">
+        <td><select id="searchMemb">
             <option value="all">모든예매</option>
             <option value="member">회원예매</option>
             <option value="guest">비회원예매</option>
-          </select>
-        </td>
+        </select></td>
       </tr>
       <tr>
         <td><label>통계치 연령</label></td>
-        <td>
-          <select id="searchAge">
+        <td><select id="searchAge">
             <option value="100">모든 연령</option>
             <option value="0">10대 미만</option>
             <option value="1">10~19</option>
@@ -94,34 +91,29 @@ var movieCount= [];
             <option value="4">40~49</option>
             <option value="5">50~59</option>
             <option value="6">60대 이상</option>
-          </select>
-        </td>
-      </tr>  
-      <tr>
-        <td><label>영화제목</label></td>
-        <td>
-          <select id="searchMovie">
-            <option value="0">모든영화</option>
-            <c:forEach var="row" items="${movieList}">
-              <fmt:formatDate var="nowDate" value="${toDay}" pattern="yyyy-MM-dd"/>
-              <fmt:formatDate var="releaseDate" value="${row.release_date}" pattern="yyyy-MM-dd"/>
-                <c:if test="${releaseDate < nowDate}">
-                  <option value="${row.idx}">${row.title}</option>
-                </c:if>
-            </c:forEach>
-          </select>
-        </td>
+        </select></td>
       </tr>
       <tr>
-        <td colspan="2" align="right">
-          <input type="button" class="btn btn-primary" value="기본 통계" onclick="defaultSetting();">
-          <input type="button" class="btn btn-success" value="검색" onclick="searchSetting();">
-        </td>
+        <td><label>영화제목</label></td>
+        <td><select id="searchMovie">
+            <option value="0">모든영화</option>
+            <c:forEach var="row" items="${movieList}">
+              <fmt:formatDate var="nowDate" value="${toDay}" pattern="yyyy-MM-dd" />
+              <fmt:formatDate var="releaseDate" value="${row.release_date}" pattern="yyyy-MM-dd" />
+              <c:if test="${releaseDate < nowDate}">
+                <option value="${row.idx}">${row.title}</option>
+              </c:if>
+            </c:forEach>
+        </select></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="right"><input type="button" class="btn btn-primary" value="기본 통계" onclick="defaultSetting();">
+          <input type="button" class="btn btn-success" value="검색" onclick="searchSetting();"></td>
       </tr>
     </table>
   </div>
   <hr>
-  
+
   <table style="display: none;" id="searchSet">
     <tr>
       <td><label style="font-size: x-large;">검색 결과 통계</label></td>
@@ -132,7 +124,7 @@ var movieCount= [];
       </td>
     </tr>
   </table>
-  
+
   <table style="display: none;" id="defaultSet">
     <tr>
       <td style="font-size: x-large;"><label>기본 통계</label></td>
@@ -153,8 +145,8 @@ var movieCount= [];
       </td>
     </tr>
   </table>
-  
-  
+
+
   <script>
   google.charts.load('current', {'packages':['corechart']});
   function searchSetting(){
@@ -198,6 +190,6 @@ var movieCount= [];
     $("#searchSet").hide();
   }
   </script>
-  
+
 </body>
 </html>
