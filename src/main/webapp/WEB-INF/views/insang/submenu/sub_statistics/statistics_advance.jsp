@@ -105,6 +105,7 @@ var movieCount= [];
               </c:if>
             </c:forEach>
         </select></td>
+
       </tr>
       <tr>
         <td colspan="2" align="right"><input type="button" class="btn btn-primary" value="기본 통계" onclick="defaultSetting();">
