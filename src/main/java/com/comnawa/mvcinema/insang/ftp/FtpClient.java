@@ -10,6 +10,7 @@ import org.apache.commons.net.ftp.FTPReply;
 
 public class FtpClient {
 
+  //서버아이피
   private String svrIp = "192.168.0.69";
   private String path;
 
