@@ -48,14 +48,37 @@ li {
 		});		
 	}
 	
+ 	function searchMovie(){
+		var keyword = document.getElementById("keyword").value;
+		var param="keyword="+keyword;
+		$.ajax({
+			type : "post",
+			url : "${path}/searchMovie.do",
+			data: param,
+			success : function(result) {
+				$("#listMovie").html(result);
+				$("#order_type_div").hide();
+				$("#hr_name").html("무비차트");
+				$("#on_2").removeClass("on");
+				$("#on_1").addClass("on");
+			}
+		});
+	}
+ 	
+ 	function enterkey() {
+        if (window.event.keyCode == 13) {
+ 			searchMovie();
+        }
+	}
+	
 	function scheduleMovie() {
 		$.ajax({
 			type : "get",
 			url : "${path}/schedule.do",
 			success : function(result) {
 				$("#listMovie").html(result);
-				$("#order_type").hide();
-				$("#btnSearch").hide();
+				$("#order_type_div").hide();
+				$("#search_form_div").hide();
 				$("#expand").hide();
 				$("#hr_name").html("상영예정작");
 				$("#on_1").removeClass("on");
@@ -66,9 +89,6 @@ li {
 </script>
 </head>
 <body>
-	<div class="preloader">
-		<div class="sk-spinner sk-spinner-pulse"></div>
-	</div>
 	<%@ include file="sangjin/home/loginbar.jsp"%>
 	<%@ include file="sangjin/sj_include/carousel.jsp"%>
 	<!-- ajax방식으로 영화목록 출력 -->

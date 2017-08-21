@@ -29,4 +29,9 @@ public class MovieServiceImpl implements MovieService {
 		return movieDao.movie_view(idx);
 	}
 
+	@Override
+	public List<MovieDTO> searchMovie(String keyword) {
+		return movieDao.searchMovie(keyword);
+	}
+
 }

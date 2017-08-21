@@ -19,7 +19,7 @@
 		location.href="${path}/ticket/movie_ticket_page.do?movie_idx="+idx;
 	}
 </script>
-<div class="sect-sorting">
+<div class="sect-sorting" id="order_type_div">
 	<label for="order_type" class="hidden">정렬</label>
 	 <select id="order_type" name="order_type" style="width: auto; height: 30px;">
 		<c:choose>
@@ -33,11 +33,20 @@
 			</c:when>
 		</c:choose>
 	</select>
-	<button class="btn btn-primary" type="button" id="btnSearch" onclick="listMovie()">
+	
+	<button class="btn btn-primary" type="button" onclick="listMovie()">
 		<span>GO</span>
 	</button>
 </div>
-<div class="sect-movie-chart"> 
+		<div id="search_form_div" style="float: right; padding-top:10px;">
+			<input name="keyword" id="keyword" onkeyup="enterkey();" placeholder="제목/감독/배우">
+			<button class="btn btn-primary btn" type="button" id="btnSearch" onclick="searchMovie();">
+				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+			</button>
+		</div>
+<div class="sect-movie-chart">
+	<c:choose>
+	<c:when test="${map.list[0] != null}">
 	<ol>
 		<!-- 영화 7건만 표시 -->
 		<c:forEach var="row" items="${map.list}" varStatus="status">
@@ -91,4 +100,11 @@
 			</li>
 		</c:forEach>
 	</ol>
+	</c:when>
+	<c:when test="${map.list[0] == null }">
+		<div style="width:500px; height:500px; text-align:right;">
+		<br><br><br><br><br><br><br><br><br>
+		<b>검색 결과가 없습니다.</b></div>
+	</c:when>
+	</c:choose>
 </div>

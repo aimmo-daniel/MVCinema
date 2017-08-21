@@ -29,4 +29,9 @@ public class MovieDAOImpl implements MovieDAO {
 		return sqlSession.selectOne("movie.movie_detail", idx);
 	}
 
+	@Override
+	public List<MovieDTO> searchMovie(String keyword) {
+		return sqlSession.selectList("movie.search_movie", keyword);
+	}
+
 }

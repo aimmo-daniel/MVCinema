@@ -16,6 +16,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by ${value} desc nulls last
 	</select>
 	
+	<select id="search_movie" resultType="com.comnawa.mvcinema.sangjin.model.dto.MovieDTO" parameterType="String">
+		select idx, img_url, age, title, release_date from movie 
+		where title like '%'|| '${value}' || '%'
+		or director like '%'|| '${value}' || '%'
+		or actors like '%'|| '${value}' || '%'
+	</select>
+	
 	<select id="scdmovie_list" resultType="com.comnawa.mvcinema.sangjin.model.dto.MovieDTO">
 		select idx, img_url, age, title, release_date,
 		(select round(avg(score),1)*2 from memo where idx=m.idx) grade
@@ -29,6 +36,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select round(avg(score),1)*2 from memo where idx=m.idx) grade
 		from movie m where idx=#{idx}
 	</select>
-
 
 </mapper>

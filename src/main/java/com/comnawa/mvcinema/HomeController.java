@@ -50,6 +50,17 @@ public class HomeController {
 		return mav;
 	}
 	
+	@RequestMapping("searchMovie.do")
+	public ModelAndView searchMovie(@RequestParam String keyword, ModelAndView mav){
+		List<MovieDTO> list = movieService.searchMovie(keyword);
+		mav.setViewName("sangjin/home/movielist");
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("keyword", keyword);
+		mav.addObject("map", map);
+		return mav;
+	}
+	
 	@RequestMapping("theater")
 	public ModelAndView theater(ModelAndView mav){
 	    mav.addObject("theaterList",theaterService.getTheaterList());
