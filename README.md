@@ -1,12 +1,12 @@
-# DoWhat 일정관리 안드로이드 앱
+# MVCinema 영화관 예매 웹사이트
 
-<ul># DoWhat 안드로이드 프로젝트</ul>
- <li>진행기간 : 17.06.15 ~ 17.07.03</li>
+<ul># MVCinema 영화관 웹 프로젝트</ul>
+ <li>진행기간 : 17.08.01 ~ 17.08.18</li>
  <li>진행인원 : 4명</li>
  <li>개발환경 : Windows10, Mac OS Sierra</li>
  <br>
 
-![Comnawa image](readme/dowhat.jpg)
+![Comnawa image](readme/mvcinema.jpg)
 
 ### 팀원정보
 
@@ -31,14 +31,8 @@
   <tr>
   <td><img src="readme/7.png" width="300px"></td>
   <td><img src="readme/8.png" width="300px"></td>
-  <td><img src="readme/9.png" width="300px"></td>
  </tr>
-  <tr>
-  <td><img src="readme/10.png" width="300px"></td>
-  <td><img src="readme/11.png" width="300px"></td>
-  <td><img src="readme/12.png" width="300px"></td>
- </tr>
- </table>
+</table>
  
 
 [ghsangjin]: https://github.com/sangjin0309
