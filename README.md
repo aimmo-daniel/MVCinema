@@ -2,7 +2,7 @@
 
 <ul># MVCinema 영화관 웹 프로젝트</ul>
  <li>진행기간 : 17.08.01 ~ 17.08.18</li>
- <li>진행인원 : 4명</li>
+ <li>진행인원 : 3명</li>
  <li>개발환경 : Windows10, Mac OS Sierra</li>
  <br>
 
@@ -13,7 +13,6 @@
 *<li>조인상 [GitHub][ghinsang] , [StackOverFlow][sfinsang]</li>*
 *<li>예상진 [GitHub][ghsangjin]</li>*
 *<li>이성원 [GitHub][ghsungwon]</li>*
-*<li>이관우 ..</li>*
 
 ### <li>핵심화면</li>
 
