@@ -6,7 +6,7 @@
  <li>개발환경 : Windows10, Mac OS Sierra</li>
  <br>
 
-![Comnawa image](readme/mvcinema.jpg)
+![Comnawa image](readme/mvcinema.png)
 
 ### 팀원정보
 
@@ -30,7 +30,6 @@
  </tr>
   <tr>
   <td><img src="readme/7.png" width="300px"></td>
-  <td><img src="readme/8.png" width="300px"></td>
  </tr>
 </table>
  
